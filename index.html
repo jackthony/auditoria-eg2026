@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Monitor EG2026 · Auditoría Técnica</title>
+<meta name="description" content="Monitor técnico-estadístico del escrutinio de las Elecciones Generales 2026 del Perú. Data pública, hashes SHA-256, reproducible.">
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+<style>
+  :root{
+    --navy:#0B2A4A; --accent:#C8A24B; --text:#1A1A1A; --muted:#5C6770;
+    --bg-soft:#F4F1EA; --bg:#FFFFFF; --line:#D6D6D6;
+    --red:#B4332B; --orange:#C77B1E; --green:#2E6B3F;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;font-family:-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif;
+       color:var(--text);background:var(--bg);line-height:1.5}
+  header{background:var(--navy);color:#fff;padding:1.2rem 1.5rem;border-bottom:4px solid var(--accent)}
+  header h1{margin:0;font-size:1.4rem}
+  header .sub{opacity:.85;font-size:.9rem;margin-top:.25rem}
+  .grid{display:grid;gap:1rem;padding:1.5rem;max-width:1200px;margin:0 auto}
+  @media(min-width:900px){.grid-main{grid-template-columns:2fr 1fr}}
+  .card{border:1px solid var(--line);border-radius:8px;padding:1rem 1.2rem;background:#fff}
+  .card h2{margin:0 0 .6rem;font-size:1.05rem;color:var(--navy)}
+  .kpi-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:.8rem}
+  .kpi{border-left:4px solid var(--accent);padding:.6rem .9rem;background:var(--bg-soft)}
+  .kpi .lbl{font-size:.78rem;color:var(--muted);text-transform:uppercase;letter-spacing:.04em}
+  .kpi .val{font-size:1.5rem;font-weight:700;color:var(--navy);margin-top:.2rem}
+  .kpi .delta{font-size:.8rem;margin-top:.2rem}
+  .delta.up{color:var(--red)}.delta.down{color:var(--green)}.delta.neutral{color:var(--muted)}
+  .alert{padding:.8rem 1rem;border-radius:6px;margin:.4rem 0;font-size:.92rem;border-left:4px solid}
+  .alert.critical{background:#FDEEEC;border-color:var(--red);color:#6B1D17}
+  .alert.warning{background:#FFF4E5;border-color:var(--orange);color:#6B3D10}
+  .alert.info{background:#EEF4FB;border-color:var(--navy);color:var(--navy)}
+  table{width:100%;border-collapse:collapse;font-size:.88rem}
+  th,td{padding:.5rem .6rem;border-bottom:1px solid var(--line);text-align:left}
+  th{background:var(--navy);color:#fff;font-weight:600}
+  tr:nth-child(even) td{background:#F8F9FB}
+  .tag{display:inline-block;padding:.12rem .5rem;border-radius:3px;font-size:.72rem;font-weight:700;color:#fff}
+  .tag.crit{background:var(--red)}.tag.med{background:var(--orange)}.tag.info{background:var(--navy)}
+  footer{padding:1.5rem;text-align:center;color:var(--muted);font-size:.85rem;border-top:1px solid var(--line);margin-top:2rem}
+  a{color:var(--navy)}
+  .chart-wrap{position:relative;height:320px}
+  .mono{font-family:Consolas,Monaco,monospace;font-size:.85rem}
+  .right{text-align:right}
+  .updated{font-size:.8rem;color:var(--muted);margin-top:.5rem}
+</style>
+</head>
+<body>
+<header>
+  <h1>Monitor técnico-estadístico · Elecciones Generales 2026 Perú</h1>
+  <div class="sub">Aporte ciudadano · data pública · hashes SHA-256 · reproducible ·
+    <a href="https://github.com/neuracode/auditoria-eg2026" style="color:#fff" target="_blank">repo</a> ·
+    <a href="MEMORIAL_TECNICO_FISCAL.pdf" style="color:#fff;background:var(--accent);padding:.2rem .6rem;border-radius:3px;font-weight:600" target="_blank">📄 Memorial técnico al Fiscal de la Nación</a></div>
+</header>
+
+<div class="grid" style="padding-bottom:0">
+  <section class="card" style="border-left:6px solid var(--accent);background:#FDF9F0">
+    <h2 style="margin-top:0">Memorial técnico ciudadano — Fiscal de la Nación</h2>
+    <p style="margin:.3rem 0">
+      Solicitud formal de <strong>peritaje forense informático y medidas cautelares técnicas</strong>
+      sobre el proceso de escrutinio, basada en los hechos estadísticos reproducibles de este dashboard.
+    </p>
+    <p style="margin:.3rem 0">
+      <strong>NO imputa delito.</strong> Solicita entrega obligatoria de 10 variables de trazabilidad
+      (logs SIRE-DMS, código fuente, contrato ONPE-CALAG, detalle por acta, etc.) y 5 medidas cautelares
+      que preserven la integridad probatoria hasta el pronunciamiento del JNE.
+    </p>
+    <p style="margin:.6rem 0 0">
+      <a href="MEMORIAL_TECNICO_FISCAL.pdf" target="_blank" style="background:var(--navy);color:#fff;padding:.5rem 1rem;border-radius:4px;text-decoration:none;font-weight:600">📄 Descargar Memorial (PDF)</a>
+      &nbsp;
+      <a href="https://github.com/neuracode/auditoria-eg2026/blob/main/docs/MEMORIAL_TECNICO_FISCAL.md" target="_blank">Ver en Markdown</a>
+    </p>
+  </section>
+</div>
+
+<div class="grid">
+
+  <section class="card">
+    <h2>Estado del escrutinio</h2>
+    <div class="kpi-grid">
+      <div class="kpi"><div class="lbl">Escrutinio oficial</div><div class="val" id="kpi-pct">—</div><div class="updated" id="kpi-pct-ts"></div></div>
+      <div class="kpi"><div class="lbl">Keiko Fujimori</div><div class="val" id="kpi-fuji">—</div><div class="delta neutral" id="kpi-fuji-d"></div></div>
+      <div class="kpi"><div class="lbl">Roberto Sánchez</div><div class="val" id="kpi-sanch">—</div><div class="delta neutral" id="kpi-sanch-d"></div></div>
+      <div class="kpi"><div class="lbl">López Aliaga</div><div class="val" id="kpi-rla">—</div><div class="delta neutral" id="kpi-rla-d"></div></div>
+      <div class="kpi"><div class="lbl">Margen Sánchez − RLA</div><div class="val" id="kpi-margen">—</div><div class="delta neutral" id="kpi-margen-d"></div></div>
+      <div class="kpi"><div class="lbl">Actas impugnadas (JEE)</div><div class="val" id="kpi-jee">—</div></div>
+    </div>
+  </section>
+
+  <div class="grid grid-main" style="padding:0;margin-top:0">
+    <section class="card">
+      <h2>Serie temporal — 5 candidatos</h2>
+      <div class="chart-wrap"><canvas id="chart-time"></canvas></div>
+      <div class="updated">Fuente: snapshots ONPE vía proxy. Timestamps UTC.</div>
+    </section>
+
+    <section class="card">
+      <h2>Alertas en vivo</h2>
+      <div id="alerts"></div>
+    </section>
+  </div>
+
+  <section class="card">
+    <h2>Hallazgos al corte</h2>
+    <table id="findings">
+      <thead><tr><th>ID</th><th>Severidad</th><th>Hallazgo</th></tr></thead>
+      <tbody></tbody>
+    </table>
+  </section>
+
+  <section class="card" id="forecast-card" style="display:none">
+    <h2>Proyección bayesiana — P(2° lugar)</h2>
+    <p style="font-size:.9rem;color:var(--muted)">
+      Modelo jerárquico bayesiano Dirichlet-Multinomial con prior Beta sobre tasa de integración
+      de actas JEE (10,000 simulaciones). Metodología basada en Linzer (2013) JASA + NYT Election Needle.
+    </p>
+    <div class="kpi-grid" id="forecast-kpis" style="margin-bottom:1rem"></div>
+    <table>
+      <thead><tr><th>Escenario</th><th class="right">Tasa integración JEE</th><th class="right">P(RLA supera Sánchez)</th><th class="right">Margen p5</th><th class="right">Margen p50</th><th class="right">Margen p95</th></tr></thead>
+      <tbody id="forecast-scenarios"></tbody>
+    </table>
+    <div class="chart-wrap" style="height:240px;margin-top:1rem"><canvas id="chart-forecast"></canvas></div>
+    <p style="font-size:.82rem;color:var(--muted);margin-top:.8rem">
+      Interpretación: el margen final depende crucialmente de cuántas actas impugnadas se integran
+      al conteo (vs se anulan). En los tres escenarios considerados, la probabilidad de que
+      López Aliaga pase a 2ª vuelta está entre <strong id="forecast-range">37-49%</strong> — empate técnico estadístico.
+      <br/>Referencias: <em>Linzer D. (2013) JASA</em> · <em>Cohn N. (NYT Upshot)</em> · <em>Gelman & Hill (2007)</em>.
+    </p>
+  </section>
+
+  <section class="card">
+    <h2>Regiones pivote (forecast)</h2>
+    <p style="font-size:.9rem;color:var(--muted)">
+      Top 10 regiones con mayor impacto esperado en el margen, ordenadas por
+      <span class="mono">votos_fuera × (share_Sánchez − share_RLA)</span>.
+    </p>
+    <table id="tbl-pivote">
+      <thead><tr><th>Región</th><th class="right">Actas fuera</th><th class="right">Votos fuera</th><th class="right">Share S</th><th class="right">Share RLA</th><th class="right">Δ esperado</th></tr></thead>
+      <tbody></tbody>
+    </table>
+  </section>
+
+  <section class="card">
+    <h2>Proyección contrafactual por región</h2>
+    <p style="font-size:.9rem;color:var(--muted)">
+      Ganancia / pérdida neta RLA vs Sánchez si todas las actas impugnadas y pendientes
+      se resuelven al ratio regional actual.
+    </p>
+    <table id="contrafactual">
+      <thead><tr><th>Región</th><th class="right">Actas fuera</th><th class="right">RLA %</th><th class="right">Sánch %</th><th class="right">Δ RLA−S</th></tr></thead>
+      <tbody></tbody>
+    </table>
+  </section>
+
+  <section class="card">
+    <h2>Contexto — "Teoría morrocoy" (comparada)</h2>
+    <p>
+      <strong>Hipótesis comparada.</strong> En el contexto venezolano se ha denominado "morrocoy"
+      (tortuga, lento) a la estrategia de extender deliberadamente el conteo electoral para
+      disipar la atención pública, facilitar impugnaciones masivas, y generar
+      agotamiento en la contraparte. Se atribuye a los procesos que consolidaron a Hugo Chávez
+      y Nicolás Maduro. Es una <em>hipótesis con antecedentes comparados</em>, no una demostración.
+    </p>
+    <p>
+      <strong>Qué dice la data peruana al corte.</strong> Actas pendientes: 780. Impugnadas: 5,554.
+      Plazo legal JEE para audiencia: 2 días hábiles (Res. 0180-2025-JNE). Runoff: 2026-06-07.
+      Hasta que el conteo llegue a 100% y todas las actas sean resueltas, no es posible
+      discriminar entre "demora logística razonable" y "dilación estratégica". Se requiere
+      evidencia directa (logs, testimonios firmados, comunicaciones internas), que esta
+      auditoría <strong>no tiene</strong>.
+    </p>
+  </section>
+
+  <section class="card">
+    <h2>Metodología</h2>
+    <ul>
+      <li>Captura atómica endpoints públicos ONPE con SHA-256 inmediato.</li>
+      <li>Cadena de custodia documentada (MANIFEST.jsonl con IP, hostname, git commit).</li>
+      <li>Tests: reconciliación Σ regional↔nacional, z-score impugnación, z-test Lima vs resto,
+          Benford gl=8, serie temporal 116 cortes, simulación contrafactual.</li>
+      <li>Todo el código y data son reproducibles por terceros:
+        <span class="mono">py src/analysis/run_all.py</span></li>
+    </ul>
+  </section>
+
+</div>
+
+<footer>
+  <p><strong>Autoría:</strong> Neuracode — Jack Aguilar · Aporte ciudadano independiente. Sin afiliación política.</p>
+  <p>Código: MIT · Documentos: CC-BY-4.0 · <a href="https://github.com/neuracode/auditoria-eg2026" target="_blank">GitHub</a></p>
+</footer>
+
+<script>
+const FMT_INT = new Intl.NumberFormat('es-PE');
+const FMT_PCT = n => (n==null?'—':n.toFixed(3)+'%');
+
+async function load() {
+  try {
+    const r = await fetch('data.json?t=' + Date.now());
+    const d = await r.json();
+    render(d);
+  } catch (e) {
+    document.getElementById('alerts').innerHTML =
+      '<div class="alert critical">No se pudo cargar data.json — ¿ya corriste el pipeline?</div>';
+  }
+}
+
+function render(d) {
+  // KPIs
+  const s = d.state;
+  document.getElementById('kpi-pct').textContent = s.pct.toFixed(3) + '%';
+  document.getElementById('kpi-pct-ts').textContent = 'corte: ' + s.ts_human;
+  document.getElementById('kpi-fuji').textContent = FMT_PCT(s.fujimori);
+  document.getElementById('kpi-sanch').textContent = FMT_PCT(s.sanchez);
+  document.getElementById('kpi-rla').textContent = FMT_PCT(s.rla);
+  document.getElementById('kpi-margen').textContent =
+    (s.margen_sanch_rla >= 0 ? '+' : '') + FMT_INT.format(s.margen_sanch_rla);
+  document.getElementById('kpi-jee').textContent = FMT_INT.format(s.actas_jee);
+
+  // Deltas vs corte anterior
+  if (d.delta) {
+    setDelta('kpi-fuji-d', d.delta.fujimori);
+    setDelta('kpi-sanch-d', d.delta.sanchez, true);  // Sánchez sube es malo para RLA
+    setDelta('kpi-rla-d', d.delta.rla, false);       // RLA sube es bueno
+    const m = d.delta.margen_sanch_rla;
+    const md = document.getElementById('kpi-margen-d');
+    md.textContent = (m >= 0 ? '↑' : '↓') + ' ' + FMT_INT.format(Math.abs(m)) + ' vs corte previo';
+    md.className = 'delta ' + (m > 0 ? 'up' : m < 0 ? 'down' : 'neutral');
+  }
+
+  // Chart
+  const ctx = document.getElementById('chart-time').getContext('2d');
+  new Chart(ctx, {
+    type: 'line',
+    data: {
+      labels: d.series.map(p => p.ts.substring(5, 16)),
+      datasets: [
+        {label:'Fujimori', data: d.series.map(p=>p.fujimori), borderColor:'#E85D3D', tension:.3, pointRadius:0},
+        {label:'RLA',      data: d.series.map(p=>p.rla),      borderColor:'#0B2A4A', tension:.3, pointRadius:0},
+        {label:'Nieto',    data: d.series.map(p=>p.nieto),    borderColor:'#7D4F9F', tension:.3, pointRadius:0},
+        {label:'Belmont',  data: d.series.map(p=>p.belmont),  borderColor:'#4E7A4E', tension:.3, pointRadius:0},
+        {label:'Sánchez',  data: d.series.map(p=>p.sanchez),  borderColor:'#C77B1E', tension:.3, pointRadius:0},
+      ]
+    },
+    options: {
+      responsive:true, maintainAspectRatio:false,
+      interaction:{mode:'index',intersect:false},
+      scales:{ y:{title:{display:true,text:'% votos válidos'}} },
+      plugins:{ legend:{position:'bottom'} }
+    }
+  });
+
+  // Alerts
+  const al = document.getElementById('alerts');
+  al.innerHTML = d.alerts.map(a =>
+    `<div class="alert ${a.level}"><strong>[${a.level.toUpperCase()}]</strong> ${a.msg}</div>`
+  ).join('');
+
+  // Findings
+  document.querySelector('#findings tbody').innerHTML = d.findings.map(f =>
+    `<tr><td><strong>${f.id}</strong></td>
+         <td><span class="tag ${f.severity==='CRÍTICO'?'crit':f.severity==='MEDIA'?'med':'info'}">${f.severity}</span></td>
+         <td>${f.title}</td></tr>`
+  ).join('');
+
+  // Forecast bayesiano (si existe)
+  if (d.forecast) renderForecast(d.forecast);
+
+  // Contrafactual
+  document.querySelector('#contrafactual tbody').innerHTML = d.contrafactual.map(r => {
+    const c = r.delta > 0 ? 'var(--green)' : (r.delta < -1000 ? 'var(--red)' : 'var(--muted)');
+    const sign = r.delta >= 0 ? '+' : '';
+    return `<tr><td>${r.name}</td>
+      <td class="right">${FMT_INT.format(r.actas_fuera)}</td>
+      <td class="right">${r.rla.toFixed(2)}</td>
+      <td class="right">${r.sanch.toFixed(2)}</td>
+      <td class="right" style="color:${c};font-weight:600">${sign}${FMT_INT.format(Math.round(r.delta))}</td></tr>`;
+  }).join('');
+}
+
+function renderForecast(f) {
+  document.getElementById('forecast-card').style.display = '';
+  const sc = f.escenarios;
+  const mix = f.escenario_mixto;
+
+  // KPIs del forecast
+  const pCentral = sc.central.p_rla_supera_sanchez;
+  const pMix = mix.p_rla_supera_sanchez;
+  const kpis = document.getElementById('forecast-kpis');
+  kpis.innerHTML = `
+    <div class="kpi"><div class="lbl">P(RLA supera Sánchez) · central</div>
+      <div class="val">${(pCentral*100).toFixed(1)}%</div>
+      <div class="updated">tasa integración JEE 50%</div></div>
+    <div class="kpi"><div class="lbl">P(RLA supera Sánchez) · mixto</div>
+      <div class="val">${(pMix*100).toFixed(1)}%</div>
+      <div class="updated">incertidumbre máxima sobre JEE</div></div>
+    <div class="kpi"><div class="lbl">Margen final p50 (central)</div>
+      <div class="val">${(sc.central.margen_final.p50>=0?'+':'')+FMT_INT.format(Math.round(sc.central.margen_final.p50))}</div>
+      <div class="updated">mediana de 10k simulaciones</div></div>
+    <div class="kpi"><div class="lbl">Banda 90% margen (central)</div>
+      <div class="val" style="font-size:1.1rem">${FMT_INT.format(Math.round(sc.central.margen_final.p5))} — ${FMT_INT.format(Math.round(sc.central.margen_final.p95))}</div>
+      <div class="updated">p5 — p95</div></div>
+  `;
+
+  // Tabla escenarios
+  const rows = Object.entries(sc).map(([k, v]) => {
+    const m = v.margen_final;
+    const p = v.p_rla_supera_sanchez;
+    const color = p > 0.45 ? 'var(--red)' : p > 0.30 ? 'var(--orange)' : 'var(--green)';
+    return `<tr><td><strong>${k}</strong></td>
+      <td class="right">${(v.beta_params.mean_integration*100).toFixed(0)}%</td>
+      <td class="right" style="color:${color};font-weight:700">${(p*100).toFixed(1)}%</td>
+      <td class="right">${FMT_INT.format(Math.round(m.p5))}</td>
+      <td class="right"><strong>${(m.p50>=0?'+':'')+FMT_INT.format(Math.round(m.p50))}</strong></td>
+      <td class="right">${FMT_INT.format(Math.round(m.p95))}</td></tr>`;
+  }).join('');
+  document.getElementById('forecast-scenarios').innerHTML = rows;
+
+  // Rango P(cruce)
+  const ps = Object.values(sc).map(v => v.p_rla_supera_sanchez);
+  const lo = Math.min(...ps)*100, hi = Math.max(...ps)*100;
+  document.getElementById('forecast-range').textContent = `${lo.toFixed(0)}-${hi.toFixed(0)}%`;
+
+  // Histograma del margen (escenario central)
+  const ctx = document.getElementById('chart-forecast').getContext('2d');
+  const h = f.histograma_central;
+  new Chart(ctx, {
+    type: 'bar',
+    data: {
+      labels: h.map(p => FMT_INT.format(Math.round(p.center))),
+      datasets: [{
+        label: 'Margen Sánchez − RLA (10k simulaciones, central)',
+        data: h.map(p => p.count),
+        backgroundColor: h.map(p => p.center >= 0 ? '#0B2A4A' : '#B4332B'),
+      }]
+    },
+    options: {
+      responsive: true, maintainAspectRatio: false,
+      scales: { x: { ticks: { maxRotation: 45, minRotation: 45 } }, y: { title: { display: true, text: 'frecuencia' } } },
+      plugins: { legend: { display: false },
+        annotation: {} },
+    }
+  });
+
+  // Tabla regiones pivote
+  if (f.regiones_pivote) {
+    document.querySelector('#tbl-pivote tbody').innerHTML = f.regiones_pivote.map(r => {
+      const d = Math.round(r.delta_esperado);
+      const c = d > 0 ? 'var(--green)' : d < 0 ? 'var(--red)' : 'var(--muted)';
+      const sign = d >= 0 ? '+' : '';
+      return `<tr><td>${r.region}</td>
+        <td class="right">${FMT_INT.format(r.actas_fuera)}</td>
+        <td class="right">${FMT_INT.format(r.votos_fuera)}</td>
+        <td class="right">${(r.share_sanch*100).toFixed(1)}%</td>
+        <td class="right">${(r.share_rla*100).toFixed(1)}%</td>
+        <td class="right" style="color:${c};font-weight:700">${sign}${FMT_INT.format(d)}</td></tr>`;
+    }).join('');
+  }
+}
+
+function setDelta(id, v, inverted) {
+  const e = document.getElementById(id);
+  if (v == null) { e.textContent = ''; return; }
+  const sign = v >= 0 ? '↑' : '↓';
+  e.textContent = sign + ' ' + (Math.abs(v)).toFixed(3) + 'pp';
+  const good = inverted ? v < 0 : v > 0;
+  e.className = 'delta ' + (v===0 ? 'neutral' : (good ? 'down' : 'up'));
+}
+
+load();
+// Auto-refresh cada 5 min
+setInterval(load, 5 * 60 * 1000);
+</script>
+
+</body>
+</html>
