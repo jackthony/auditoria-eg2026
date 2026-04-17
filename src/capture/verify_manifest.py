@@ -18,7 +18,10 @@ import hashlib
 import json
 import sys
 from pathlib import Path
-
+import sys
+if sys.platform == "win32":
+    sys.stdout.reconfigure(encoding="utf-8")
+    sys.stderr.reconfigure(encoding="utf-8")
 
 def sha256_of(path: Path) -> str:
     h = hashlib.sha256()

@@ -1,0 +1,1564 @@
+{
+  "state": {
+    "ts": "2026-04-16T09:58:54.317000+00:00",
+    "ts_human": "2026-04-16 09:58 UTC",
+    "pct": 92.909,
+    "fujimori": 17.058,
+    "sanchez": 11.987,
+    "rla": 11.915,
+    "nieto": 11.075,
+    "belmont": 10.155,
+    "margen_sanch_rla": 5773,
+    "votos_sanchez": 1881625,
+    "votos_rla": 1875852,
+    "actas_jee": 4959,
+    "contabilizadas": 86188
+  },
+  "delta": {
+    "fujimori": 0.004000000000001336,
+    "sanchez": -0.023999999999999133,
+    "rla": 0.01699999999999946,
+    "margen_sanch_rla": -6445
+  },
+  "alerts": [
+    {
+      "level": "critical",
+      "msg": "Modelo bayesiano: P(RLA supera Sánchez) = 43% en escenario central. Empate técnico estadístico."
+    },
+    {
+      "level": "warning",
+      "msg": "Margen estrecho: |Sánchez−RLA| = 5,773 votos. Cualquier movimiento material de actas puede voltear el 2° lugar."
+    },
+    {
+      "level": "warning",
+      "msg": "Variación relevante vs corte anterior: el margen redujo en 6,445 votos."
+    },
+    {
+      "level": "info",
+      "msg": "Escrutinio aún incompleto (92.91%). Faltan cortes."
+    }
+  ],
+  "findings": [
+    {
+      "severity": "INFO",
+      "id": "R1",
+      "title": "Reconciliación Σ regional vs nacional: coincide dentro de redondeo",
+      "detail": "Diferencias entre la suma de votos por región y el total nacional publicado: todas menores a 0.01%. Descarta hipótesis de manipulación agregada entre niveles."
+    },
+    {
+      "severity": "MEDIA",
+      "id": "A1",
+      "title": "Regiones con tasa de impugnación anómala (|z|>2): Extranjero (24.11%, z=+3.66)",
+      "detail": "1 región(es) fuera de ±2σ respecto al promedio regional de 7.05% (σ=4.66%)."
+    },
+    {
+      "severity": "MEDIA",
+      "id": "A2",
+      "title": "Diferencia de tasa de impugnación Lima+Callao vs resto del país",
+      "detail": "Lima+Callao: 4.13% · Resto: 6.94% · Diferencia: -2.81pp (z=-17.17, p=0). Estadísticamente significativa al 1%. La asimetría NO es perjudicial para candidatos con mayor votación en Lima+Callao."
+    },
+    {
+      "severity": "INFO",
+      "id": "C1",
+      "title": "Benford (primer dígito, agregado) conforme",
+      "detail": "Pool de 5 candidatos × 26 regiones (n=130): χ²=11.64, p=0.168. No se rechaza H0 de conformidad con Benford. Recordar: este test tiene limitaciones en datos electorales."
+    },
+    {
+      "severity": "INFO",
+      "id": "D1",
+      "title": "Artefactos técnicos de caché en tracking: 72 eventos",
+      "detail": "Se detectaron 72 oscilaciones donde pct baja y sube al mismo valor. Es condición de carrera típica del proxy caché, NO movimiento real de la data ONPE primaria. Se documenta para evitar mala interpretación pública."
+    },
+    {
+      "severity": "INFO",
+      "id": "D2",
+      "title": "Sin saltos anómalos en el conteo temporal",
+      "detail": "Ningún delta entre cortes consecutivos supera 0.5pp para ningún candidato en 116 cortes analizados."
+    },
+    {
+      "severity": "INFO",
+      "id": "D3",
+      "title": "Cruce Sánchez↔RLA único, consistente con flujo natural",
+      "detail": "Se registró 1 cambio de signo entre Sánchez y RLA, atribuible al ingreso progresivo de actas rurales (donde Sánchez tiene ventaja) posterior al procesamiento inicial de Lima y extranjero (donde RLA tiene ventaja)."
+    },
+    {
+      "severity": "CRÍTICO",
+      "id": "E1",
+      "title": "Pase a 2ª vuelta depende de la resolución del JEE",
+      "detail": "Margen Sánchez−RLA (+5,898 votos, +0.038pp) es aproximadamente 195× menor que los votos contenidos en actas impugnadas + pendientes (~1,152,069). Bajo distribución proporcional al nacional, el margen final sería +6,336. Para empatar, RLA requiere 51.07% del subgrupo RLA+Sánchez en disputa (vs 49.92% histórico)."
+    },
+    {
+      "id": "G1",
+      "severity": "MEDIA",
+      "title": "Asociación positiva entre tasa_impugnación y share_RLA por región (Pearson r=0.477, p=0.0138). Si TODAS las actas fuera se integran al ratio regional actual, margen final proyectado = +64 votos (vs margen actual +5,773). Empate estadístico. NOTA: correlación sensible a outliers (Spearman r=0.20 p=0.34 NO significativo; bootstrap CI95 incluye 0). La asociación es real en media pero está dominada por Lima y Extranjero."
+    },
+    {
+      "id": "H1",
+      "severity": "MEDIA",
+      "title": "Cambio significativo en velocidad de acumulación de actas JEE alrededor del cruce Sánchez>RLA (ventana ±6h): +182.6 actas/h antes vs +92.4 después (Mann-Whitney p=0.0127). La inflexión puede reflejar procesamiento natural o cambio de política de impugnaciones; requiere explicación formal."
+    },
+    {
+      "id": "H2",
+      "severity": "MEDIA",
+      "title": "Velocidad de acumulación de actas JEE desaceleró tras el cruce (ventana ±12h): +169.0/h antes vs +76.4/h después (ratio 0.45x). Acumuladas pre-cruce: +1522 actas; post-cruce: +556 actas."
+    },
+    {
+      "id": "F1",
+      "severity": "CRÍTICO",
+      "title": "Modelo bayesiano: P(RLA supera Sánchez) = 42.6% central / 42.2% mixto (n=10,000 simulaciones)"
+    }
+  ],
+  "series": [
+    {
+      "ts": "2026-04-14T17:10:54.080000+00:00",
+      "fujimori": 16.88,
+      "sanchez": 10.251,
+      "rla": 12.741,
+      "nieto": 11.804,
+      "belmont": 10.016
+    },
+    {
+      "ts": "2026-04-14T18:19:47.073000+00:00",
+      "fujimori": 16.875,
+      "sanchez": 10.324,
+      "rla": 12.709,
+      "nieto": 11.778,
+      "belmont": 10.023
+    },
+    {
+      "ts": "2026-04-14T18:59:17.292000+00:00",
+      "fujimori": 16.867,
+      "sanchez": 10.382,
+      "rla": 12.687,
+      "nieto": 11.759,
+      "belmont": 10.029
+    },
+    {
+      "ts": "2026-04-14T19:55:43.959000+00:00",
+      "fujimori": 16.872,
+      "sanchez": 10.469,
+      "rla": 12.65,
+      "nieto": 11.731,
+      "belmont": 10.034
+    },
+    {
+      "ts": "2026-04-14T20:18:59.921000+00:00",
+      "fujimori": 16.875,
+      "sanchez": 10.498,
+      "rla": 12.636,
+      "nieto": 11.722,
+      "belmont": 10.036
+    },
+    {
+      "ts": "2026-04-14T20:49:17.487000+00:00",
+      "fujimori": 16.88,
+      "sanchez": 10.533,
+      "rla": 12.623,
+      "nieto": 11.711,
+      "belmont": 10.035
+    },
+    {
+      "ts": "2026-04-14T21:20:05.394000+00:00",
+      "fujimori": 16.885,
+      "sanchez": 10.572,
+      "rla": 12.608,
+      "nieto": 11.7,
+      "belmont": 10.032
+    },
+    {
+      "ts": "2026-04-14T21:48:33.811000+00:00",
+      "fujimori": 16.888,
+      "sanchez": 10.615,
+      "rla": 12.59,
+      "nieto": 11.688,
+      "belmont": 10.035
+    },
+    {
+      "ts": "2026-04-14T22:09:43.720000+00:00",
+      "fujimori": 16.888,
+      "sanchez": 10.644,
+      "rla": 12.578,
+      "nieto": 11.682,
+      "belmont": 10.037
+    },
+    {
+      "ts": "2026-04-14T22:38:33.231000+00:00",
+      "fujimori": 16.886,
+      "sanchez": 10.703,
+      "rla": 12.548,
+      "nieto": 11.663,
+      "belmont": 10.045
+    },
+    {
+      "ts": "2026-04-14T23:08:45.051000+00:00",
+      "fujimori": 16.884,
+      "sanchez": 10.735,
+      "rla": 12.531,
+      "nieto": 11.65,
+      "belmont": 10.048
+    },
+    {
+      "ts": "2026-04-14T23:38:57.295000+00:00",
+      "fujimori": 16.88,
+      "sanchez": 10.813,
+      "rla": 12.491,
+      "nieto": 11.62,
+      "belmont": 10.061
+    },
+    {
+      "ts": "2026-04-15T00:08:32.948000+00:00",
+      "fujimori": 16.884,
+      "sanchez": 10.859,
+      "rla": 12.465,
+      "nieto": 11.599,
+      "belmont": 10.066
+    },
+    {
+      "ts": "2026-04-15T00:50:49.409000+00:00",
+      "fujimori": 16.886,
+      "sanchez": 10.897,
+      "rla": 12.446,
+      "nieto": 11.583,
+      "belmont": 10.068
+    },
+    {
+      "ts": "2026-04-15T01:23:07.787000+00:00",
+      "fujimori": 16.892,
+      "sanchez": 10.961,
+      "rla": 12.411,
+      "nieto": 11.557,
+      "belmont": 10.071
+    },
+    {
+      "ts": "2026-04-15T01:51:28.381000+00:00",
+      "fujimori": 16.888,
+      "sanchez": 10.99,
+      "rla": 12.396,
+      "nieto": 11.544,
+      "belmont": 10.076
+    },
+    {
+      "ts": "2026-04-15T02:28:45.971000+00:00",
+      "fujimori": 16.879,
+      "sanchez": 11.04,
+      "rla": 12.372,
+      "nieto": 11.521,
+      "belmont": 10.085
+    },
+    {
+      "ts": "2026-04-15T02:48:13.749000+00:00",
+      "fujimori": 16.878,
+      "sanchez": 11.074,
+      "rla": 12.355,
+      "nieto": 11.505,
+      "belmont": 10.091
+    },
+    {
+      "ts": "2026-04-15T03:08:43.449000+00:00",
+      "fujimori": 16.871,
+      "sanchez": 11.115,
+      "rla": 12.332,
+      "nieto": 11.485,
+      "belmont": 10.102
+    },
+    {
+      "ts": "2026-04-15T03:39:57.141000+00:00",
+      "fujimori": 16.86,
+      "sanchez": 11.166,
+      "rla": 12.307,
+      "nieto": 11.464,
+      "belmont": 10.11
+    },
+    {
+      "ts": "2026-04-15T03:40:06.296000+00:00",
+      "fujimori": 16.86,
+      "sanchez": 11.166,
+      "rla": 12.307,
+      "nieto": 11.464,
+      "belmont": 10.11
+    },
+    {
+      "ts": "2026-04-15T03:40:48.064000+00:00",
+      "fujimori": 16.86,
+      "sanchez": 11.166,
+      "rla": 12.307,
+      "nieto": 11.464,
+      "belmont": 10.11
+    },
+    {
+      "ts": "2026-04-15T03:40:52.880000+00:00",
+      "fujimori": 16.86,
+      "sanchez": 11.166,
+      "rla": 12.307,
+      "nieto": 11.464,
+      "belmont": 10.11
+    },
+    {
+      "ts": "2026-04-15T03:42:14.666000+00:00",
+      "fujimori": 16.86,
+      "sanchez": 11.166,
+      "rla": 12.307,
+      "nieto": 11.464,
+      "belmont": 10.11
+    },
+    {
+      "ts": "2026-04-15T03:42:32.189000+00:00",
+      "fujimori": 16.857,
+      "sanchez": 11.221,
+      "rla": 12.284,
+      "nieto": 11.444,
+      "belmont": 10.115
+    },
+    {
+      "ts": "2026-04-15T03:42:32.377000+00:00",
+      "fujimori": 16.86,
+      "sanchez": 11.166,
+      "rla": 12.307,
+      "nieto": 11.464,
+      "belmont": 10.11
+    },
+    {
+      "ts": "2026-04-15T03:43:17.816000+00:00",
+      "fujimori": 16.86,
+      "sanchez": 11.166,
+      "rla": 12.307,
+      "nieto": 11.464,
+      "belmont": 10.11
+    },
+    {
+      "ts": "2026-04-15T03:43:24.568000+00:00",
+      "fujimori": 16.857,
+      "sanchez": 11.221,
+      "rla": 12.284,
+      "nieto": 11.444,
+      "belmont": 10.115
+    },
+    {
+      "ts": "2026-04-15T03:43:59.018000+00:00",
+      "fujimori": 16.86,
+      "sanchez": 11.166,
+      "rla": 12.307,
+      "nieto": 11.464,
+      "belmont": 10.11
+    },
+    {
+      "ts": "2026-04-15T03:44:45.394000+00:00",
+      "fujimori": 16.857,
+      "sanchez": 11.221,
+      "rla": 12.284,
+      "nieto": 11.444,
+      "belmont": 10.115
+    },
+    {
+      "ts": "2026-04-15T03:44:51.069000+00:00",
+      "fujimori": 16.86,
+      "sanchez": 11.166,
+      "rla": 12.307,
+      "nieto": 11.464,
+      "belmont": 10.11
+    },
+    {
+      "ts": "2026-04-15T03:45:18.152000+00:00",
+      "fujimori": 16.857,
+      "sanchez": 11.221,
+      "rla": 12.284,
+      "nieto": 11.444,
+      "belmont": 10.115
+    },
+    {
+      "ts": "2026-04-15T03:45:52.897000+00:00",
+      "fujimori": 16.86,
+      "sanchez": 11.166,
+      "rla": 12.307,
+      "nieto": 11.464,
+      "belmont": 10.11
+    },
+    {
+      "ts": "2026-04-15T03:46:37.192000+00:00",
+      "fujimori": 16.857,
+      "sanchez": 11.221,
+      "rla": 12.284,
+      "nieto": 11.444,
+      "belmont": 10.115
+    },
+    {
+      "ts": "2026-04-15T03:46:47.667000+00:00",
+      "fujimori": 16.86,
+      "sanchez": 11.166,
+      "rla": 12.307,
+      "nieto": 11.464,
+      "belmont": 10.11
+    },
+    {
+      "ts": "2026-04-15T03:47:01.997000+00:00",
+      "fujimori": 16.857,
+      "sanchez": 11.221,
+      "rla": 12.284,
+      "nieto": 11.444,
+      "belmont": 10.115
+    },
+    {
+      "ts": "2026-04-15T03:47:42.300000+00:00",
+      "fujimori": 16.857,
+      "sanchez": 11.221,
+      "rla": 12.284,
+      "nieto": 11.444,
+      "belmont": 10.115
+    },
+    {
+      "ts": "2026-04-15T03:48:14.532000+00:00",
+      "fujimori": 16.857,
+      "sanchez": 11.221,
+      "rla": 12.284,
+      "nieto": 11.444,
+      "belmont": 10.115
+    },
+    {
+      "ts": "2026-04-15T03:58:08.083000+00:00",
+      "fujimori": 16.856,
+      "sanchez": 11.269,
+      "rla": 12.263,
+      "nieto": 11.426,
+      "belmont": 10.12
+    },
+    {
+      "ts": "2026-04-15T04:09:10.172000+00:00",
+      "fujimori": 16.857,
+      "sanchez": 11.314,
+      "rla": 12.244,
+      "nieto": 11.41,
+      "belmont": 10.123
+    },
+    {
+      "ts": "2026-04-15T04:09:57.650000+00:00",
+      "fujimori": 16.857,
+      "sanchez": 11.314,
+      "rla": 12.244,
+      "nieto": 11.41,
+      "belmont": 10.123
+    },
+    {
+      "ts": "2026-04-15T04:11:32.822000+00:00",
+      "fujimori": 16.853,
+      "sanchez": 11.373,
+      "rla": 12.216,
+      "nieto": 11.387,
+      "belmont": 10.131
+    },
+    {
+      "ts": "2026-04-15T04:12:03.858000+00:00",
+      "fujimori": 16.853,
+      "sanchez": 11.373,
+      "rla": 12.216,
+      "nieto": 11.387,
+      "belmont": 10.131
+    },
+    {
+      "ts": "2026-04-15T04:12:45.470000+00:00",
+      "fujimori": 16.853,
+      "sanchez": 11.373,
+      "rla": 12.216,
+      "nieto": 11.387,
+      "belmont": 10.131
+    },
+    {
+      "ts": "2026-04-15T04:13:31.941000+00:00",
+      "fujimori": 16.853,
+      "sanchez": 11.373,
+      "rla": 12.216,
+      "nieto": 11.387,
+      "belmont": 10.131
+    },
+    {
+      "ts": "2026-04-15T04:14:00.957000+00:00",
+      "fujimori": 16.857,
+      "sanchez": 11.314,
+      "rla": 12.244,
+      "nieto": 11.41,
+      "belmont": 10.123
+    },
+    {
+      "ts": "2026-04-15T04:14:33.898000+00:00",
+      "fujimori": 16.853,
+      "sanchez": 11.373,
+      "rla": 12.216,
+      "nieto": 11.387,
+      "belmont": 10.131
+    },
+    {
+      "ts": "2026-04-15T04:14:46.178000+00:00",
+      "fujimori": 16.853,
+      "sanchez": 11.373,
+      "rla": 12.216,
+      "nieto": 11.387,
+      "belmont": 10.131
+    },
+    {
+      "ts": "2026-04-15T04:14:48.322000+00:00",
+      "fujimori": 16.853,
+      "sanchez": 11.373,
+      "rla": 12.216,
+      "nieto": 11.387,
+      "belmont": 10.131
+    },
+    {
+      "ts": "2026-04-15T04:15:38.875000+00:00",
+      "fujimori": 16.853,
+      "sanchez": 11.373,
+      "rla": 12.216,
+      "nieto": 11.387,
+      "belmont": 10.131
+    },
+    {
+      "ts": "2026-04-15T04:15:40.953000+00:00",
+      "fujimori": 16.857,
+      "sanchez": 11.314,
+      "rla": 12.244,
+      "nieto": 11.41,
+      "belmont": 10.123
+    },
+    {
+      "ts": "2026-04-15T04:16:55.595000+00:00",
+      "fujimori": 16.853,
+      "sanchez": 11.373,
+      "rla": 12.216,
+      "nieto": 11.387,
+      "belmont": 10.131
+    },
+    {
+      "ts": "2026-04-15T04:17:24.444000+00:00",
+      "fujimori": 16.857,
+      "sanchez": 11.314,
+      "rla": 12.244,
+      "nieto": 11.41,
+      "belmont": 10.123
+    },
+    {
+      "ts": "2026-04-15T04:18:12.762000+00:00",
+      "fujimori": 16.853,
+      "sanchez": 11.373,
+      "rla": 12.216,
+      "nieto": 11.387,
+      "belmont": 10.131
+    },
+    {
+      "ts": "2026-04-15T04:30:19.865000+00:00",
+      "fujimori": 16.85,
+      "sanchez": 11.394,
+      "rla": 12.208,
+      "nieto": 11.38,
+      "belmont": 10.134
+    },
+    {
+      "ts": "2026-04-15T04:38:58.296000+00:00",
+      "fujimori": 16.844,
+      "sanchez": 11.421,
+      "rla": 12.198,
+      "nieto": 11.368,
+      "belmont": 10.137
+    },
+    {
+      "ts": "2026-04-15T04:39:08.506000+00:00",
+      "fujimori": 16.844,
+      "sanchez": 11.421,
+      "rla": 12.198,
+      "nieto": 11.368,
+      "belmont": 10.137
+    },
+    {
+      "ts": "2026-04-15T04:39:25.744000+00:00",
+      "fujimori": 16.844,
+      "sanchez": 11.421,
+      "rla": 12.198,
+      "nieto": 11.368,
+      "belmont": 10.137
+    },
+    {
+      "ts": "2026-04-15T04:39:47.377000+00:00",
+      "fujimori": 16.844,
+      "sanchez": 11.421,
+      "rla": 12.198,
+      "nieto": 11.368,
+      "belmont": 10.137
+    },
+    {
+      "ts": "2026-04-15T04:40:32.469000+00:00",
+      "fujimori": 16.844,
+      "sanchez": 11.421,
+      "rla": 12.198,
+      "nieto": 11.368,
+      "belmont": 10.137
+    },
+    {
+      "ts": "2026-04-15T04:41:37.268000+00:00",
+      "fujimori": 16.844,
+      "sanchez": 11.421,
+      "rla": 12.198,
+      "nieto": 11.368,
+      "belmont": 10.137
+    },
+    {
+      "ts": "2026-04-15T04:41:53.950000+00:00",
+      "fujimori": 16.844,
+      "sanchez": 11.421,
+      "rla": 12.198,
+      "nieto": 11.368,
+      "belmont": 10.137
+    },
+    {
+      "ts": "2026-04-15T04:42:02.695000+00:00",
+      "fujimori": 16.837,
+      "sanchez": 11.48,
+      "rla": 12.175,
+      "nieto": 11.347,
+      "belmont": 10.142
+    },
+    {
+      "ts": "2026-04-15T04:42:28.267000+00:00",
+      "fujimori": 16.844,
+      "sanchez": 11.421,
+      "rla": 12.198,
+      "nieto": 11.368,
+      "belmont": 10.137
+    },
+    {
+      "ts": "2026-04-15T04:42:39.308000+00:00",
+      "fujimori": 16.844,
+      "sanchez": 11.421,
+      "rla": 12.198,
+      "nieto": 11.368,
+      "belmont": 10.137
+    },
+    {
+      "ts": "2026-04-15T04:42:47.950000+00:00",
+      "fujimori": 16.844,
+      "sanchez": 11.421,
+      "rla": 12.198,
+      "nieto": 11.368,
+      "belmont": 10.137
+    },
+    {
+      "ts": "2026-04-15T04:43:08.615000+00:00",
+      "fujimori": 16.837,
+      "sanchez": 11.48,
+      "rla": 12.175,
+      "nieto": 11.347,
+      "belmont": 10.142
+    },
+    {
+      "ts": "2026-04-15T04:43:51.209000+00:00",
+      "fujimori": 16.844,
+      "sanchez": 11.421,
+      "rla": 12.198,
+      "nieto": 11.368,
+      "belmont": 10.137
+    },
+    {
+      "ts": "2026-04-15T04:44:21.248000+00:00",
+      "fujimori": 16.844,
+      "sanchez": 11.421,
+      "rla": 12.198,
+      "nieto": 11.368,
+      "belmont": 10.137
+    },
+    {
+      "ts": "2026-04-15T04:45:09.537000+00:00",
+      "fujimori": 16.844,
+      "sanchez": 11.421,
+      "rla": 12.198,
+      "nieto": 11.368,
+      "belmont": 10.137
+    },
+    {
+      "ts": "2026-04-15T04:45:19.476000+00:00",
+      "fujimori": 16.844,
+      "sanchez": 11.421,
+      "rla": 12.198,
+      "nieto": 11.368,
+      "belmont": 10.137
+    },
+    {
+      "ts": "2026-04-15T04:45:45.099000+00:00",
+      "fujimori": 16.837,
+      "sanchez": 11.48,
+      "rla": 12.175,
+      "nieto": 11.347,
+      "belmont": 10.142
+    },
+    {
+      "ts": "2026-04-15T04:46:15.145000+00:00",
+      "fujimori": 16.844,
+      "sanchez": 11.421,
+      "rla": 12.198,
+      "nieto": 11.368,
+      "belmont": 10.137
+    },
+    {
+      "ts": "2026-04-15T04:46:41.726000+00:00",
+      "fujimori": 16.837,
+      "sanchez": 11.48,
+      "rla": 12.175,
+      "nieto": 11.347,
+      "belmont": 10.142
+    },
+    {
+      "ts": "2026-04-15T04:47:08.311000+00:00",
+      "fujimori": 16.837,
+      "sanchez": 11.48,
+      "rla": 12.175,
+      "nieto": 11.347,
+      "belmont": 10.142
+    },
+    {
+      "ts": "2026-04-15T04:48:15.889000+00:00",
+      "fujimori": 16.837,
+      "sanchez": 11.48,
+      "rla": 12.175,
+      "nieto": 11.347,
+      "belmont": 10.142
+    },
+    {
+      "ts": "2026-04-15T04:59:06.314000+00:00",
+      "fujimori": 16.836,
+      "sanchez": 11.508,
+      "rla": 12.163,
+      "nieto": 11.336,
+      "belmont": 10.144
+    },
+    {
+      "ts": "2026-04-15T05:18:23.635000+00:00",
+      "fujimori": 16.845,
+      "sanchez": 11.571,
+      "rla": 12.131,
+      "nieto": 11.305,
+      "belmont": 10.148
+    },
+    {
+      "ts": "2026-04-15T05:38:24.792000+00:00",
+      "fujimori": 16.848,
+      "sanchez": 11.616,
+      "rla": 12.112,
+      "nieto": 11.286,
+      "belmont": 10.149
+    },
+    {
+      "ts": "2026-04-15T06:09:13.067000+00:00",
+      "fujimori": 16.861,
+      "sanchez": 11.721,
+      "rla": 12.072,
+      "nieto": 11.24,
+      "belmont": 10.152
+    },
+    {
+      "ts": "2026-04-15T06:38:50.949000+00:00",
+      "fujimori": 16.866,
+      "sanchez": 11.748,
+      "rla": 12.06,
+      "nieto": 11.227,
+      "belmont": 10.155
+    },
+    {
+      "ts": "2026-04-15T07:08:25.985000+00:00",
+      "fujimori": 16.878,
+      "sanchez": 11.798,
+      "rla": 12.042,
+      "nieto": 11.205,
+      "belmont": 10.155
+    },
+    {
+      "ts": "2026-04-15T07:39:03.189000+00:00",
+      "fujimori": 16.9,
+      "sanchez": 11.831,
+      "rla": 12.021,
+      "nieto": 11.185,
+      "belmont": 10.155
+    },
+    {
+      "ts": "2026-04-15T10:31:59.632000+00:00",
+      "fujimori": 16.931,
+      "sanchez": 11.96,
+      "rla": 11.951,
+      "nieto": 11.123,
+      "belmont": 10.16
+    },
+    {
+      "ts": "2026-04-15T11:18:46.716000+00:00",
+      "fujimori": 16.939,
+      "sanchez": 11.971,
+      "rla": 11.944,
+      "nieto": 11.118,
+      "belmont": 10.161
+    },
+    {
+      "ts": "2026-04-15T12:08:30.193000+00:00",
+      "fujimori": 16.951,
+      "sanchez": 11.985,
+      "rla": 11.936,
+      "nieto": 11.115,
+      "belmont": 10.161
+    },
+    {
+      "ts": "2026-04-15T13:18:50.193000+00:00",
+      "fujimori": 16.962,
+      "sanchez": 12.021,
+      "rla": 11.913,
+      "nieto": 11.099,
+      "belmont": 10.165
+    },
+    {
+      "ts": "2026-04-15T14:29:24.310000+00:00",
+      "fujimori": 16.987,
+      "sanchez": 12.044,
+      "rla": 11.892,
+      "nieto": 11.084,
+      "belmont": 10.164
+    },
+    {
+      "ts": "2026-04-15T15:58:37.342000+00:00",
+      "fujimori": 17.011,
+      "sanchez": 12.059,
+      "rla": 11.872,
+      "nieto": 11.073,
+      "belmont": 10.162
+    },
+    {
+      "ts": "2026-04-15T17:48:34.929000+00:00",
+      "fujimori": 17.041,
+      "sanchez": 12.065,
+      "rla": 11.854,
+      "nieto": 11.059,
+      "belmont": 10.156
+    },
+    {
+      "ts": "2026-04-16T00:00:11.447000+00:00",
+      "fujimori": 17.042,
+      "sanchez": 12.069,
+      "rla": 11.851,
+      "nieto": 11.058,
+      "belmont": 10.151
+    },
+    {
+      "ts": "2026-04-16T02:59:12.283000+00:00",
+      "fujimori": 17.049,
+      "sanchez": 12.055,
+      "rla": 11.86,
+      "nieto": 11.058,
+      "belmont": 10.151
+    },
+    {
+      "ts": "2026-04-16T07:18:04.013000+00:00",
+      "fujimori": 17.05,
+      "sanchez": 12.05,
+      "rla": 11.863,
+      "nieto": 11.06,
+      "belmont": 10.15
+    },
+    {
+      "ts": "2026-04-16T07:18:09.551000+00:00",
+      "fujimori": 17.05,
+      "sanchez": 12.05,
+      "rla": 11.863,
+      "nieto": 11.06,
+      "belmont": 10.15
+    },
+    {
+      "ts": "2026-04-16T07:19:09.214000+00:00",
+      "fujimori": 17.05,
+      "sanchez": 12.05,
+      "rla": 11.863,
+      "nieto": 11.06,
+      "belmont": 10.15
+    },
+    {
+      "ts": "2026-04-16T07:19:29.786000+00:00",
+      "fujimori": 17.05,
+      "sanchez": 12.05,
+      "rla": 11.863,
+      "nieto": 11.06,
+      "belmont": 10.15
+    },
+    {
+      "ts": "2026-04-16T07:19:56.369000+00:00",
+      "fujimori": 17.05,
+      "sanchez": 12.05,
+      "rla": 11.863,
+      "nieto": 11.06,
+      "belmont": 10.15
+    },
+    {
+      "ts": "2026-04-16T07:20:11.222000+00:00",
+      "fujimori": 17.05,
+      "sanchez": 12.05,
+      "rla": 11.863,
+      "nieto": 11.06,
+      "belmont": 10.15
+    },
+    {
+      "ts": "2026-04-16T07:20:36.430000+00:00",
+      "fujimori": 17.054,
+      "sanchez": 12.011,
+      "rla": 11.898,
+      "nieto": 11.066,
+      "belmont": 10.155
+    },
+    {
+      "ts": "2026-04-16T07:21:15.953000+00:00",
+      "fujimori": 17.05,
+      "sanchez": 12.05,
+      "rla": 11.863,
+      "nieto": 11.06,
+      "belmont": 10.15
+    },
+    {
+      "ts": "2026-04-16T07:21:54.797000+00:00",
+      "fujimori": 17.05,
+      "sanchez": 12.05,
+      "rla": 11.863,
+      "nieto": 11.06,
+      "belmont": 10.15
+    },
+    {
+      "ts": "2026-04-16T07:22:18.805000+00:00",
+      "fujimori": 17.05,
+      "sanchez": 12.05,
+      "rla": 11.863,
+      "nieto": 11.06,
+      "belmont": 10.15
+    },
+    {
+      "ts": "2026-04-16T07:22:21.362000+00:00",
+      "fujimori": 17.05,
+      "sanchez": 12.05,
+      "rla": 11.863,
+      "nieto": 11.06,
+      "belmont": 10.15
+    },
+    {
+      "ts": "2026-04-16T07:22:29.999000+00:00",
+      "fujimori": 17.05,
+      "sanchez": 12.05,
+      "rla": 11.863,
+      "nieto": 11.06,
+      "belmont": 10.15
+    },
+    {
+      "ts": "2026-04-16T07:23:04.191000+00:00",
+      "fujimori": 17.05,
+      "sanchez": 12.05,
+      "rla": 11.863,
+      "nieto": 11.06,
+      "belmont": 10.15
+    },
+    {
+      "ts": "2026-04-16T07:23:40.824000+00:00",
+      "fujimori": 17.05,
+      "sanchez": 12.05,
+      "rla": 11.863,
+      "nieto": 11.06,
+      "belmont": 10.15
+    },
+    {
+      "ts": "2026-04-16T07:24:11.908000+00:00",
+      "fujimori": 17.054,
+      "sanchez": 12.011,
+      "rla": 11.898,
+      "nieto": 11.066,
+      "belmont": 10.155
+    },
+    {
+      "ts": "2026-04-16T07:24:34.238000+00:00",
+      "fujimori": 17.05,
+      "sanchez": 12.05,
+      "rla": 11.863,
+      "nieto": 11.06,
+      "belmont": 10.15
+    },
+    {
+      "ts": "2026-04-16T07:25:06.836000+00:00",
+      "fujimori": 17.05,
+      "sanchez": 12.05,
+      "rla": 11.863,
+      "nieto": 11.06,
+      "belmont": 10.15
+    },
+    {
+      "ts": "2026-04-16T07:25:38.477000+00:00",
+      "fujimori": 17.05,
+      "sanchez": 12.05,
+      "rla": 11.863,
+      "nieto": 11.06,
+      "belmont": 10.15
+    },
+    {
+      "ts": "2026-04-16T07:25:49.072000+00:00",
+      "fujimori": 17.05,
+      "sanchez": 12.05,
+      "rla": 11.863,
+      "nieto": 11.06,
+      "belmont": 10.15
+    },
+    {
+      "ts": "2026-04-16T07:26:00.087000+00:00",
+      "fujimori": 17.05,
+      "sanchez": 12.05,
+      "rla": 11.863,
+      "nieto": 11.06,
+      "belmont": 10.15
+    },
+    {
+      "ts": "2026-04-16T07:26:36.879000+00:00",
+      "fujimori": 17.05,
+      "sanchez": 12.05,
+      "rla": 11.863,
+      "nieto": 11.06,
+      "belmont": 10.15
+    },
+    {
+      "ts": "2026-04-16T07:26:54.037000+00:00",
+      "fujimori": 17.05,
+      "sanchez": 12.05,
+      "rla": 11.863,
+      "nieto": 11.06,
+      "belmont": 10.15
+    },
+    {
+      "ts": "2026-04-16T07:26:59.547000+00:00",
+      "fujimori": 17.054,
+      "sanchez": 12.011,
+      "rla": 11.898,
+      "nieto": 11.066,
+      "belmont": 10.155
+    },
+    {
+      "ts": "2026-04-16T09:58:54.317000+00:00",
+      "fujimori": 17.058,
+      "sanchez": 11.987,
+      "rla": 11.915,
+      "nieto": 11.075,
+      "belmont": 10.155
+    }
+  ],
+  "contrafactual": [
+    {
+      "name": "Lima",
+      "actas_fuera": 1449,
+      "rla": 19.935,
+      "sanch": 3.267,
+      "delta": 50361.70452600907
+    },
+    {
+      "name": "Extranjero",
+      "actas_fuera": 804,
+      "rla": 25.955,
+      "sanch": 2.497,
+      "delta": 23201.44744851064
+    },
+    {
+      "name": "Callao",
+      "actas_fuera": 134,
+      "rla": 14.99,
+      "sanch": 3.005,
+      "delta": 3209.9115034732276
+    },
+    {
+      "name": "Ica",
+      "actas_fuera": 230,
+      "rla": 9.414,
+      "sanch": 7.706,
+      "delta": 777.6421350203341
+    },
+    {
+      "name": "Arequipa",
+      "actas_fuera": 90,
+      "rla": 10.634,
+      "sanch": 10.049,
+      "delta": 110.01348327272743
+    },
+    {
+      "name": "Tumbes",
+      "actas_fuera": 59,
+      "rla": 5.918,
+      "sanch": 6.872,
+      "delta": -98.8590408376963
+    },
+    {
+      "name": "Moquegua",
+      "actas_fuera": 29,
+      "rla": 5.815,
+      "sanch": 12.816,
+      "delta": -401.4574885974499
+    },
+    {
+      "name": "Tacna",
+      "actas_fuera": 52,
+      "rla": 6.216,
+      "sanch": 11.889,
+      "delta": -626.2117818806875
+    },
+    {
+      "name": "Lambayeque",
+      "actas_fuera": 169,
+      "rla": 8.586,
+      "sanch": 10.642,
+      "delta": -647.8197632738963
+    },
+    {
+      "name": "La Libertad",
+      "actas_fuera": 389,
+      "rla": 8.229,
+      "sanch": 9.4,
+      "delta": -802.8779664889076
+    },
+    {
+      "name": "Pasco",
+      "actas_fuera": 55,
+      "rla": 6.501,
+      "sanch": 18.736,
+      "delta": -975.1827312583669
+    },
+    {
+      "name": "Junín",
+      "actas_fuera": 171,
+      "rla": 7.607,
+      "sanch": 12.221,
+      "delta": -1362.7293670738634
+    },
+    {
+      "name": "Loreto",
+      "actas_fuera": 424,
+      "rla": 6.765,
+      "sanch": 9.931,
+      "delta": -1709.01487866256
+    },
+    {
+      "name": "Madre de Dios",
+      "actas_fuera": 54,
+      "rla": 3.398,
+      "sanch": 23.226,
+      "delta": -1710.6101451655625
+    },
+    {
+      "name": "Ucayali",
+      "actas_fuera": 188,
+      "rla": 5.685,
+      "sanch": 12.907,
+      "delta": -1966.9706936627908
+    },
+    {
+      "name": "Apurímac",
+      "actas_fuera": 47,
+      "rla": 3.155,
+      "sanch": 40.877,
+      "delta": -2708.63830880315
+    },
+    {
+      "name": "Piura",
+      "actas_fuera": 428,
+      "rla": 6.687,
+      "sanch": 11.35,
+      "delta": -3333.2836617185244
+    },
+    {
+      "name": "Amazonas",
+      "actas_fuera": 81,
+      "rla": 3.722,
+      "sanch": 36.077,
+      "delta": -3359.930518421052
+    },
+    {
+      "name": "Áncash",
+      "actas_fuera": 257,
+      "rla": 6.022,
+      "sanch": 14.936,
+      "delta": -3587.845545499222
+    },
+    {
+      "name": "Huancavelica",
+      "actas_fuera": 65,
+      "rla": 2.348,
+      "sanch": 43.38,
+      "delta": -3631.070454966888
+    },
+    {
+      "name": "Ayacucho",
+      "actas_fuera": 92,
+      "rla": 2.739,
+      "sanch": 31.291,
+      "delta": -3928.6838199999997
+    },
+    {
+      "name": "San Martín",
+      "actas_fuera": 162,
+      "rla": 5.886,
+      "sanch": 23.777,
+      "delta": -4466.684709637438
+    },
+    {
+      "name": "Puno",
+      "actas_fuera": 105,
+      "rla": 1.921,
+      "sanch": 24.82,
+      "delta": -4614.583247114217
+    },
+    {
+      "name": "Huánuco",
+      "actas_fuera": 212,
+      "rla": 5.98,
+      "sanch": 29.436,
+      "delta": -7310.224906341005
+    },
+    {
+      "name": "Cusco",
+      "actas_fuera": 352,
+      "rla": 4.895,
+      "sanch": 22.027,
+      "delta": -10645.986164472597
+    },
+    {
+      "name": "Cajamarca",
+      "actas_fuera": 240,
+      "rla": 3.24,
+      "sanch": 41.702,
+      "delta": -14062.553363999998
+    }
+  ],
+  "forecast": {
+    "methodology": {
+      "model": "Bayesian hierarchical Dirichlet-Multinomial with Beta prior on JEE integration rate",
+      "references": [
+        "Linzer, D. (2013) JASA — Dynamic Bayesian Forecasting of Presidential Elections",
+        "Cohn, N. (NYT) — Election Needle methodology",
+        "Gelman & Hill (2007) — Multilevel Hierarchical Models",
+        "AP Elections Research — Race Call protocol"
+      ],
+      "n_simulations": 10000,
+      "seed": 20260417
+    },
+    "estado_actual": {
+      "sanchez": 1881625,
+      "rla": 1875852,
+      "margen": 5773,
+      "actas_fuera": 6338,
+      "votos_fuera_estimado": 1073620
+    },
+    "escenarios": {
+      "pesimista": {
+        "beta_params": {
+          "a": 2.0,
+          "b": 5.0,
+          "mean_integration": 0.2857142857142857
+        },
+        "p_rla_supera_sanchez": 0.3697,
+        "p_sanchez_mantiene": 0.6303000000000001,
+        "margen_final": {
+          "p5": -21770.707354341623,
+          "p25": -5390.434515500441,
+          "p50": 5337.78459631966,
+          "p75": 14586.291839558398,
+          "p95": 26330.997329910584,
+          "mean": 4112.070889460019,
+          "std": 14620.584893953725
+        }
+      },
+      "central": {
+        "beta_params": {
+          "a": 5.0,
+          "b": 5.0,
+          "mean_integration": 0.5
+        },
+        "p_rla_supera_sanchez": 0.4259,
+        "p_sanchez_mantiene": 0.5741,
+        "margen_final": {
+          "p5": -19684.95625147277,
+          "p25": -7030.474227615516,
+          "p50": 2736.519272132078,
+          "p75": 12480.259559712838,
+          "p95": 25463.897696739023,
+          "mean": 2752.5218736004585,
+          "std": 13790.33416456757
+        }
+      },
+      "optimista": {
+        "beta_params": {
+          "a": 5.0,
+          "b": 2.0,
+          "mean_integration": 0.7142857142857143
+        },
+        "p_rla_supera_sanchez": 0.4922,
+        "p_sanchez_mantiene": 0.5078,
+        "margen_final": {
+          "p5": -20697.828864905205,
+          "p25": -9140.66983664973,
+          "p50": 300.1357559738681,
+          "p75": 10871.10568176664,
+          "p95": 27923.84601914784,
+          "mean": 1459.9461891787475,
+          "std": 14737.085005234347
+        }
+      }
+    },
+    "escenario_mixto": {
+      "descripcion": "Mezcla uniforme de pesimista/central/optimista (máxima incertidumbre sobre tasa JEE)",
+      "p_rla_supera_sanchez": 0.42244224422442245,
+      "p_sanchez_mantiene": 0.5775577557755776,
+      "margen_final": {
+        "p5": -20401.486732667243,
+        "p25": -7126.586890382343,
+        "p50": 2914.8641324304044,
+        "p75": 12887.828092059353,
+        "p95": 26238.17138918621,
+        "mean": 2903.3596437726037,
+        "std": 14240.598739946663
+      }
+    },
+    "regiones_pivote": [
+      {
+        "region": "Lima",
+        "actas_fuera": 1449,
+        "votos_fuera": 302146,
+        "share_sanch": 0.0327,
+        "share_rla": 0.1993,
+        "delta_esperado": -50360.0
+      },
+      {
+        "region": "Extranjero",
+        "actas_fuera": 804,
+        "votos_fuera": 98906,
+        "share_sanch": 0.025,
+        "share_rla": 0.2596,
+        "delta_esperado": -23202.0
+      },
+      {
+        "region": "Cajamarca",
+        "actas_fuera": 240,
+        "votos_fuera": 36562,
+        "share_sanch": 0.417,
+        "share_rla": 0.0324,
+        "delta_esperado": 14063.0
+      },
+      {
+        "region": "Cusco",
+        "actas_fuera": 352,
+        "votos_fuera": 62140,
+        "share_sanch": 0.2203,
+        "share_rla": 0.049,
+        "delta_esperado": 10646.0
+      },
+      {
+        "region": "Huánuco",
+        "actas_fuera": 212,
+        "votos_fuera": 31165,
+        "share_sanch": 0.2944,
+        "share_rla": 0.0598,
+        "delta_esperado": 7310.0
+      },
+      {
+        "region": "Puno",
+        "actas_fuera": 105,
+        "votos_fuera": 20151,
+        "share_sanch": 0.2482,
+        "share_rla": 0.0192,
+        "delta_esperado": 4615.0
+      },
+      {
+        "region": "San Martín",
+        "actas_fuera": 162,
+        "votos_fuera": 24966,
+        "share_sanch": 0.2378,
+        "share_rla": 0.0589,
+        "delta_esperado": 4467.0
+      },
+      {
+        "region": "Ayacucho",
+        "actas_fuera": 92,
+        "votos_fuera": 13759,
+        "share_sanch": 0.3129,
+        "share_rla": 0.0274,
+        "delta_esperado": 3929.0
+      },
+      {
+        "region": "Huancavelica",
+        "actas_fuera": 65,
+        "votos_fuera": 8849,
+        "share_sanch": 0.4338,
+        "share_rla": 0.0235,
+        "delta_esperado": 3631.0
+      },
+      {
+        "region": "Áncash",
+        "actas_fuera": 257,
+        "votos_fuera": 40249,
+        "share_sanch": 0.1494,
+        "share_rla": 0.0602,
+        "delta_esperado": 3588.0
+      }
+    ],
+    "histograma_central": [
+      {
+        "center": -45243.784739409704,
+        "count": 1
+      },
+      {
+        "center": -42885.44885674812,
+        "count": 1
+      },
+      {
+        "center": -40527.112974086514,
+        "count": 3
+      },
+      {
+        "center": -38168.77709142491,
+        "count": 7
+      },
+      {
+        "center": -35810.441208763325,
+        "count": 17
+      },
+      {
+        "center": -33452.10532610172,
+        "count": 19
+      },
+      {
+        "center": -31093.769443440127,
+        "count": 34
+      },
+      {
+        "center": -28735.433560778532,
+        "count": 52
+      },
+      {
+        "center": -26377.097678116937,
+        "count": 97
+      },
+      {
+        "center": -24018.761795455343,
+        "count": 103
+      },
+      {
+        "center": -21660.425912793744,
+        "count": 163
+      },
+      {
+        "center": -19302.09003013215,
+        "count": 216
+      },
+      {
+        "center": -16943.75414747055,
+        "count": 258
+      },
+      {
+        "center": -14585.418264808954,
+        "count": 301
+      },
+      {
+        "center": -12227.082382147357,
+        "count": 354
+      },
+      {
+        "center": -9868.746499485762,
+        "count": 491
+      },
+      {
+        "center": -7510.410616824167,
+        "count": 469
+      },
+      {
+        "center": -5152.074734162572,
+        "count": 564
+      },
+      {
+        "center": -2793.7388515009734,
+        "count": 620
+      },
+      {
+        "center": -435.4029688393748,
+        "count": 704
+      },
+      {
+        "center": 1922.9329138222201,
+        "count": 641
+      },
+      {
+        "center": 4281.268796483815,
+        "count": 643
+      },
+      {
+        "center": 6639.60467914541,
+        "count": 617
+      },
+      {
+        "center": 8997.940561807005,
+        "count": 591
+      },
+      {
+        "center": 11356.276444468604,
+        "count": 508
+      },
+      {
+        "center": 13714.612327130202,
+        "count": 505
+      },
+      {
+        "center": 16072.948209791797,
+        "count": 445
+      },
+      {
+        "center": 18431.284092453396,
+        "count": 379
+      },
+      {
+        "center": 20789.61997511499,
+        "count": 318
+      },
+      {
+        "center": 23147.955857776586,
+        "count": 272
+      },
+      {
+        "center": 25506.29174043818,
+        "count": 191
+      },
+      {
+        "center": 27864.627623099776,
+        "count": 152
+      },
+      {
+        "center": 30222.963505761378,
+        "count": 87
+      },
+      {
+        "center": 32581.299388422973,
+        "count": 76
+      },
+      {
+        "center": 34939.63527108457,
+        "count": 49
+      },
+      {
+        "center": 37297.97115374616,
+        "count": 24
+      },
+      {
+        "center": 39656.30703640776,
+        "count": 14
+      },
+      {
+        "center": 42014.64291906936,
+        "count": 6
+      },
+      {
+        "center": 44372.978801730955,
+        "count": 6
+      },
+      {
+        "center": 46731.31468439255,
+        "count": 2
+      }
+    ]
+  },
+  "meta": {
+    "generated_at": "2026-04-17T14:37:43.487313+00:00",
+    "source": "ONPE vía proxy CORS + captura atómica con SHA-256",
+    "repo": "https://github.com/neuracode/auditoria-eg2026"
+  }
+}

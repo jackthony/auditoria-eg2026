@@ -19,8 +19,12 @@ import sys
 from io import StringIO
 from pathlib import Path
 
-from . import reconcile, impugnation_rates, benford, temporal, jee_simulation
+from . import reconcile, impugnation_rates, benford, temporal, jee_simulation, forecast_bayesian, impugnation_bias, impugnation_velocity
 
+import sys
+if sys.platform == "win32":
+    sys.stdout.reconfigure(encoding="utf-8")
+    sys.stderr.reconfigure(encoding="utf-8")
 
 def main():
     ROOT = Path(__file__).resolve().parents[2]
@@ -93,6 +97,54 @@ def main():
             "break_even_pct_rla": r["break_even_pct_rla"],
             "historico_pct_rla": r["historico_pct_rla"],
         }
+
+        print()
+
+        # 6. Sesgo político en impugnaciones
+        print("── Análisis de sesgo político en impugnaciones ──")
+        impugnation_bias.main()
+        bias_path = ROOT / "reports" / "impugnation_bias.json"
+        if bias_path.exists():
+            bias = json.loads(bias_path.read_text(encoding="utf-8"))
+            all_findings.extend(bias.get("findings", []))
+            all_results["impugnation_bias"] = bias["correlaciones"]
+
+        print()
+
+        # 6b. Velocidad temporal de impugnaciones
+        print("── Velocidad temporal de impugnaciones (Mann-Whitney pre/post cruce) ──")
+        impugnation_velocity.main()
+        vel_path = ROOT / "reports" / "impugnation_velocity.json"
+        if vel_path.exists():
+            vel = json.loads(vel_path.read_text(encoding="utf-8"))
+            all_findings.extend(vel.get("findings", []))
+            all_results["impugnation_velocity"] = {
+                "cruce": vel["resumen"]["cruce"],
+                "ventana_12h": next((w for w in vel["ventanas"] if w["hours"] == 12), None),
+            }
+
+        print()
+
+        # 7. Forecast bayesiano jerárquico (Dirichlet-Multinomial + Beta prior JEE)
+        print("── Forecast bayesiano (Linzer 2013 / NYT Needle) ──")
+        forecast_bayesian.main()
+        fc_path = ROOT / "reports" / "forecast.json"
+        if fc_path.exists():
+            fc = json.loads(fc_path.read_text(encoding="utf-8"))
+            p_central = fc["escenarios"]["central"]["p_rla_supera_sanchez"]
+            p_mixto = fc["escenario_mixto"]["p_rla_supera_sanchez"]
+            all_findings.append({
+                "id": "F1",
+                "severity": "CRÍTICO" if p_central > 0.30 else "MEDIA",
+                "title": f"Modelo bayesiano: P(RLA supera Sánchez) = {p_central:.1%} central / {p_mixto:.1%} mixto (n=10,000 simulaciones)",
+            })
+            all_results["forecast"] = {
+                "p_central": p_central,
+                "p_mixto": p_mixto,
+                "margen_p50_central": fc["escenarios"]["central"]["margen_final"]["p50"],
+                "margen_p5_central": fc["escenarios"]["central"]["margen_final"]["p5"],
+                "margen_p95_central": fc["escenarios"]["central"]["margen_final"]["p95"],
+            }
 
         print()
 

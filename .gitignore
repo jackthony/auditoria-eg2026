@@ -75,3 +75,9 @@ evidence/personero_copies/*.jpeg
 *.key
 *.pem
 secrets/
+
+# ──────────────────────────────────────────────────────────────
+# Claude Code — contexto interno, NO publicar
+# ──────────────────────────────────────────────────────────────
+.claude/
+

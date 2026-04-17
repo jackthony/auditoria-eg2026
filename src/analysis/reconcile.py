@@ -12,6 +12,10 @@ from pathlib import Path
 
 import pandas as pd
 
+import sys
+if sys.platform == "win32":
+    sys.stdout.reconfigure(encoding="utf-8")
+    sys.stderr.reconfigure(encoding="utf-8")
 
 def run(root: Path | None = None):
     ROOT = root or Path(__file__).resolve().parents[2]

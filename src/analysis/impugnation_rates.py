@@ -14,6 +14,11 @@ import numpy as np
 import pandas as pd
 from scipy import stats
 
+import sys
+if sys.platform == "win32":
+    sys.stdout.reconfigure(encoding="utf-8")
+    sys.stderr.reconfigure(encoding="utf-8")
+
 
 SUR_ANDINO = {
     "Apurímac", "Ayacucho", "Cusco", "Huancavelica", "Puno",
