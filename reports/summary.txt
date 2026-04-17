@@ -118,14 +118,24 @@ Spikes detectados: 1
 OK: C:\Users\jaaguilar\Documents\elecciones2026\auditoria-eg2026\reports\forecast.json
 Margen actual: +5,773 (Sánchez - RLA)
 P(RLA supera Sánchez):
-  pesimista : 37.0%  (margen p50=+5,338)
-  central   : 42.6%  (margen p50=+2,737)
-  optimista : 49.2%  (margen p50=+300)
-  mixto     : 42.2%
+  pesimista : 36.5%  (margen p50=+5,318)
+  central   : 42.3%  (margen p50=+2,815)
+  optimista : 49.1%  (margen p50=+303)
+  mixto     : 43.2%
 
 ── M1: Último dígito de vote counts (test Mebane / Beber-Scacco) ──
 
 ── M2: Autocorrelación espacial (Moran's I + permutación 999) ──
+
+── A0: Reconciliacion interna ONPE ──
+  Snapshot: 20260417T084114Z
+  totalActas  nat=92766 sum=92766 diff=+0
+  contab      nat=86438 sum=86434 diff=-4
+  enviadasJee nat=5555 sum=5538 diff=-17
+  pendientes  nat=773 sum=794 diff=+21
+  actas_movidas=21 (max|diff|), votos potenciales=4582
+  Margen Sanch-RLA: 5875
+  [MEDIA] A0 — Inconsistencia agregacion ONPE: 21 actas no reconcilian nacional vs regional (por debajo del margen)
 
 ══════════════════════════════════════════════════════════════════════
  RESUMEN DE HALLAZGOS
@@ -141,6 +151,7 @@ P(RLA supera Sánchez):
   [MEDIA  ] G1  Asociación positiva entre tasa_impugnación y share_RLA por región (Pearson r=0.477, p=0.0138). Si TODAS las actas fuera se integran al ratio regional actual, margen final proyectado = +64 votos (vs margen actual +5,773). Empate estadístico. NOTA: correlación sensible a outliers (Spearman r=0.20 p=0.34 NO significativo; bootstrap CI95 incluye 0). La asociación es real en media pero está dominada por Lima y Extranjero.
   [MEDIA  ] H1  Cambio significativo en velocidad de acumulación de actas JEE alrededor del cruce Sánchez>RLA (ventana ±6h): +182.6 actas/h antes vs +92.4 después (Mann-Whitney p=0.0127). La inflexión puede reflejar procesamiento natural o cambio de política de impugnaciones; requiere explicación formal.
   [MEDIA  ] H2  Velocidad de acumulación de actas JEE desaceleró tras el cruce (ventana ±12h): +169.0/h antes vs +76.4/h después (ratio 0.45x). Acumuladas pre-cruce: +1522 actas; post-cruce: +556 actas.
-  [CRÍTICO] F1  Modelo bayesiano: P(RLA supera Sánchez) = 42.6% central / 42.2% mixto (n=10,000 simulaciones)
+  [CRÍTICO] F1  Modelo bayesiano: P(RLA supera Sánchez) = 42.3% central / 43.2% mixto (n=10,000 simulaciones)
   [INFO   ] M1  Último dígito de vote counts regional conforme a uniforme
   [MEDIA  ] M2  Clustering espacial positivo significativo en: share_rla
+  [MEDIA  ] A0  A0 — Inconsistencia agregacion ONPE: 21 actas no reconcilian nacional vs regional (por debajo del margen)

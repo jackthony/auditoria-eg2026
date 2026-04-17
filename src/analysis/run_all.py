@@ -19,7 +19,7 @@ import sys
 from io import StringIO
 from pathlib import Path
 
-from . import reconcile, impugnation_rates, benford, temporal, jee_simulation, forecast_bayesian, impugnation_bias, impugnation_velocity, last_digit_forensic, spatial_cluster
+from . import reconcile, impugnation_rates, benford, temporal, jee_simulation, forecast_bayesian, impugnation_bias, impugnation_velocity, last_digit_forensic, spatial_cluster, reconcile_internal
 
 import sys
 if sys.platform == "win32":
@@ -179,6 +179,19 @@ def main():
             "I": sc["bivariate_share_rla_x_tasa_impug"]["morans_I_bivariate"],
             "p": sc["bivariate_share_rla_x_tasa_impug"]["permutation_p_value"],
             "verdict": sc["bivariate_share_rla_x_tasa_impug"]["verdict"],
+        }
+
+        print()
+
+        # 10. A0: Reconciliación interna ONPE (nacional vs suma desagregada)
+        ri = reconcile_internal.run(ROOT)
+        all_findings.extend(ri["findings"])
+        all_results["reconcile_internal"] = {
+            "diffs": ri["reconciliacion"]["diffs"],
+            "actas_movidas": ri["reconciliacion"]["actas_movidas"],
+            "potencial_votos_en_zona_gris": ri["reconciliacion"]["potencial_votos_en_zona_gris"],
+            "margen_sanch_rla": ri["contexto"]["margen_sanch_rla"],
+            "ratio_vs_margen": ri["contexto"]["ratio_votos_zona_gris_vs_margen"],
         }
 
         print()

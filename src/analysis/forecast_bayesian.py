@@ -52,8 +52,10 @@ import pandas as pd
 ROOT = Path(__file__).resolve().parents[2]
 OUT = ROOT / "reports" / "forecast.json"
 
-# Reproducibilidad: misma seed siempre.
-RNG = np.random.default_rng(seed=20260417)
+# Reproducibilidad: RNG independiente por escenario (fix red-team ALTO).
+# Seed base 20260417 + offset determinista por escenario para garantizar
+# resultados idénticos independientemente del orden de ejecución.
+SEED_BASE = 20260417
 
 N_SIM = 10_000
 
@@ -63,13 +65,34 @@ SCENARIOS = {
     "optimista": (5.0, 2.0),
 }
 
+# Offsets deterministas por escenario (no colisionan).
+SCENARIO_SEED_OFFSETS = {
+    "pesimista": 1,
+    "central": 2,
+    "optimista": 3,
+    "mix": 4,
+    "hist_central": 5,
+}
+
+
+def rng_for(scenario: str) -> np.random.Generator:
+    """Devuelve un Generator aislado por escenario. Orden-independiente."""
+    offset = SCENARIO_SEED_OFFSETS[scenario]
+    return np.random.default_rng(seed=SEED_BASE * 1000 + offset)
+
 CANDIDATES = ["fuji_v", "rla_v", "nieto_v", "belm_v", "sanch_v"]
 CAND_NAMES = ["Fujimori", "López Aliaga", "Nieto", "Belmont", "Sánchez"]
 
 
-def simulate(reg: pd.DataFrame, beta_a: float, beta_b: float, n_sim: int = N_SIM):
+def simulate(reg: pd.DataFrame, beta_a: float, beta_b: float,
+             n_sim: int = N_SIM, rng: np.random.Generator | None = None):
     """Corre n_sim simulaciones del modelo jerárquico y devuelve el margen
-    final Sánchez − RLA en cada simulación, más los votos totales agregados."""
+    final Sánchez − RLA en cada simulación, más los votos totales agregados.
+
+    rng: Generator aislado. Si None, usa uno fresco con seed base (no reproducible
+    entre escenarios si se llama múltiples veces sin pasar rng explícito)."""
+    if rng is None:
+        rng = np.random.default_rng(seed=SEED_BASE)
     n_reg = len(reg)
 
     # Dirichlet alpha = votos actuales por candidato + prior débil (+1 smoothing).
@@ -82,10 +105,10 @@ def simulate(reg: pd.DataFrame, beta_a: float, beta_b: float, n_sim: int = N_SIM
     # Muestrear shares regionales: shape (n_sim, n_reg, 5).
     shares = np.zeros((n_sim, n_reg, 5))
     for r in range(n_reg):
-        shares[:, r, :] = RNG.dirichlet(alphas[r], size=n_sim)
+        shares[:, r, :] = rng.dirichlet(alphas[r], size=n_sim)
 
     # Muestrear integration_rate por región y simulación: (n_sim, n_reg).
-    integration = RNG.beta(beta_a, beta_b, size=(n_sim, n_reg))
+    integration = rng.beta(beta_a, beta_b, size=(n_sim, n_reg))
 
     # Votos que entran al conteo por región y simulación.
     votos_fuera = actas_fuera * vv_acta  # (n_reg,)
@@ -157,7 +180,7 @@ def main():
 
     results = {}
     for name, (a, b) in SCENARIOS.items():
-        margen_sim, _ = simulate(reg, a, b)
+        margen_sim, _ = simulate(reg, a, b, rng=rng_for(name))
         p_cruce = float((margen_sim < 0).mean())  # P(RLA > Sánchez)
         results[name] = {
             "beta_params": {"a": a, "b": b, "mean_integration": a / (a + b)},
@@ -167,15 +190,16 @@ def main():
         }
 
     # Escenario agregado: mezcla uniforme de los tres (máxima incertidumbre).
+    rng_mix = rng_for("mix")
     margen_mix = []
     for a, b in SCENARIOS.values():
-        m, _ = simulate(reg, a, b, n_sim=N_SIM // 3)
+        m, _ = simulate(reg, a, b, n_sim=N_SIM // 3, rng=rng_mix)
         margen_mix.append(m)
     margen_mix = np.concatenate(margen_mix)
     p_cruce_mix = float((margen_mix < 0).mean())
 
     # Histograma del margen (escenario central) para gráfico.
-    margen_central, _ = simulate(reg, *SCENARIOS["central"])
+    margen_central, _ = simulate(reg, *SCENARIOS["central"], rng=rng_for("hist_central"))
     bins = np.linspace(margen_central.min(), margen_central.max(), 41)
     counts, edges = np.histogram(margen_central, bins=bins)
     hist = [
@@ -193,7 +217,8 @@ def main():
                 "AP Elections Research — Race Call protocol",
             ],
             "n_simulations": N_SIM,
-            "seed": 20260417,
+            "seed_base": SEED_BASE,
+            "seed_offsets": SCENARIO_SEED_OFFSETS,
         },
         "estado_actual": {
             "sanchez": int(reg["sanch_v"].sum()),
