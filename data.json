@@ -106,6 +106,16 @@
       "id": "F1",
       "severity": "CRÍTICO",
       "title": "Modelo bayesiano: P(RLA supera Sánchez) = 42.6% central / 42.2% mixto (n=10,000 simulaciones)"
+    },
+    {
+      "id": "M1",
+      "severity": "INFO",
+      "title": "Último dígito de vote counts regional conforme a uniforme"
+    },
+    {
+      "id": "M2",
+      "severity": "MEDIA",
+      "title": "Clustering espacial positivo significativo en: share_rla"
     }
   ],
   "series": [
@@ -1557,7 +1567,7 @@
     ]
   },
   "meta": {
-    "generated_at": "2026-04-17T14:37:43.487313+00:00",
+    "generated_at": "2026-04-17T16:10:31.616569+00:00",
     "source": "ONPE vía proxy CORS + captura atómica con SHA-256",
     "repo": "https://github.com/neuracode/auditoria-eg2026"
   }
