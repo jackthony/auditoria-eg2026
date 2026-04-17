@@ -1,0 +1,322 @@
+{
+  "findings": [
+    {
+      "severity": "INFO",
+      "id": "R1",
+      "title": "Reconciliación Σ regional vs nacional: coincide dentro de redondeo",
+      "detail": "Diferencias entre la suma de votos por región y el total nacional publicado: todas menores a 0.01%. Descarta hipótesis de manipulación agregada entre niveles."
+    },
+    {
+      "severity": "MEDIA",
+      "id": "A1",
+      "title": "Regiones con tasa de impugnación anómala (|z|>2): Extranjero (24.11%, z=+3.66)",
+      "detail": "1 región(es) fuera de ±2σ respecto al promedio regional de 7.05% (σ=4.66%)."
+    },
+    {
+      "severity": "MEDIA",
+      "id": "A2",
+      "title": "Diferencia de tasa de impugnación Lima+Callao vs resto del país",
+      "detail": "Lima+Callao: 4.13% · Resto: 6.94% · Diferencia: -2.81pp (z=-17.17, p=0). Estadísticamente significativa al 1%. La asimetría NO es perjudicial para candidatos con mayor votación en Lima+Callao."
+    },
+    {
+      "severity": "INFO",
+      "id": "C1",
+      "title": "Benford (primer dígito, agregado) conforme",
+      "detail": "Pool de 5 candidatos × 26 regiones (n=130): χ²=11.64, p=0.168. No se rechaza H0 de conformidad con Benford. Recordar: este test tiene limitaciones en datos electorales."
+    },
+    {
+      "severity": "INFO",
+      "id": "D1",
+      "title": "Artefactos técnicos de caché en tracking: 72 eventos",
+      "detail": "Se detectaron 72 oscilaciones donde pct baja y sube al mismo valor. Es condición de carrera típica del proxy caché, NO movimiento real de la data ONPE primaria. Se documenta para evitar mala interpretación pública."
+    },
+    {
+      "severity": "INFO",
+      "id": "D2",
+      "title": "Sin saltos anómalos en el conteo temporal",
+      "detail": "Ningún delta entre cortes consecutivos supera 0.5pp para ningún candidato en 116 cortes analizados."
+    },
+    {
+      "severity": "INFO",
+      "id": "D3",
+      "title": "Cruce Sánchez↔RLA único, consistente con flujo natural",
+      "detail": "Se registró 1 cambio de signo entre Sánchez y RLA, atribuible al ingreso progresivo de actas rurales (donde Sánchez tiene ventaja) posterior al procesamiento inicial de Lima y extranjero (donde RLA tiene ventaja)."
+    },
+    {
+      "severity": "CRÍTICO",
+      "id": "E1",
+      "title": "Pase a 2ª vuelta depende de la resolución del JEE",
+      "detail": "Margen Sánchez−RLA (+5,898 votos, +0.038pp) es aproximadamente 195× menor que los votos contenidos en actas impugnadas + pendientes (~1,152,069). Bajo distribución proporcional al nacional, el margen final sería +6,336. Para empatar, RLA requiere 51.07% del subgrupo RLA+Sánchez en disputa (vs 49.92% histórico)."
+    },
+    {
+      "id": "G1",
+      "severity": "MEDIA",
+      "title": "Asociación positiva entre tasa_impugnación y share_RLA por región (Pearson r=0.477, p=0.0138). Si TODAS las actas fuera se integran al ratio regional actual, margen final proyectado = +64 votos (vs margen actual +5,773). Empate estadístico. NOTA: correlación sensible a outliers (Spearman r=0.20 p=0.34 NO significativo; bootstrap CI95 incluye 0). La asociación es real en media pero está dominada por Lima y Extranjero."
+    },
+    {
+      "id": "H1",
+      "severity": "MEDIA",
+      "title": "Cambio significativo en velocidad de acumulación de actas JEE alrededor del cruce Sánchez>RLA (ventana ±6h): +182.6 actas/h antes vs +92.4 después (Mann-Whitney p=0.0127). La inflexión puede reflejar procesamiento natural o cambio de política de impugnaciones; requiere explicación formal."
+    },
+    {
+      "id": "H2",
+      "severity": "MEDIA",
+      "title": "Velocidad de acumulación de actas JEE desaceleró tras el cruce (ventana ±12h): +169.0/h antes vs +76.4/h después (ratio 0.45x). Acumuladas pre-cruce: +1522 actas; post-cruce: +556 actas."
+    },
+    {
+      "id": "F1",
+      "severity": "CRÍTICO",
+      "title": "Modelo bayesiano: P(RLA supera Sánchez) = 42.3% central / 43.2% mixto (n=10,000 simulaciones)"
+    },
+    {
+      "id": "M1",
+      "severity": "INFO",
+      "title": "Último dígito de vote counts regional conforme a uniforme"
+    },
+    {
+      "id": "M2",
+      "severity": "MEDIA",
+      "title": "Clustering espacial positivo significativo en: share_rla"
+    },
+    {
+      "id": "A0",
+      "severity": "MEDIA",
+      "title": "A0 — Inconsistencia agregacion ONPE: 21 actas no reconcilian nacional vs regional (por debajo del margen)",
+      "description": "Reconciliacion interna entre el agregado nacional publicado por ONPE y la suma desagregada de las 26 regiones (25 departamentos + Extranjero). No prueba error en conteo de votos; demuestra inconsistencia de la capa de presentacion/agregacion. Requiere explicacion formal de ONPE."
+    }
+  ],
+  "results": {
+    "reconciliation": {
+      "severe": false,
+      "rows": [
+        {
+          "candidato": "fuji",
+          "regional": 2683271,
+          "nacional": 2683310,
+          "diff": 39,
+          "pct_diff": 0.0014534287875795193,
+          "ok": true
+        },
+        {
+          "candidato": "rla",
+          "regional": 1875852,
+          "nacional": 1875875,
+          "diff": 23,
+          "pct_diff": 0.0012260944892383554,
+          "ok": true
+        },
+        {
+          "candidato": "nieto",
+          "regional": 1741060,
+          "nacional": 1741125,
+          "diff": 65,
+          "pct_diff": 0.0037332184650728695,
+          "ok": true
+        },
+        {
+          "candidato": "belm",
+          "regional": 1595652,
+          "nacional": 1595757,
+          "diff": 105,
+          "pct_diff": 0.0065799492027921545,
+          "ok": true
+        },
+        {
+          "candidato": "sanch",
+          "regional": 1881625,
+          "nacional": 1881773,
+          "diff": 148,
+          "pct_diff": 0.007864923133661711,
+          "ok": true
+        }
+      ]
+    },
+    "impugnation": {
+      "outliers": [
+        {
+          "name": "Extranjero",
+          "tasa_impugnacion": 24.105387337790013,
+          "z_score": 3.657846314933532
+        }
+      ],
+      "ztest": {
+        "lima_tasa": 4.1343910405972935,
+        "resto_tasa": 6.941488922980485,
+        "diff_pp": -2.8070978823831916,
+        "z": -17.173251350566243,
+        "p_value": 0.0,
+        "significativo_al_1pct": "True"
+      },
+      "stratum": [
+        {
+          "estrato": "Lima+Callao",
+          "actas_total": 32145,
+          "impugnadas": 1329,
+          "tasa_imp_pct": 4.1343910405972935,
+          "rla_pct": 19.50446802230436,
+          "sanch_pct": 3.24432885475801
+        },
+        {
+          "estrato": "Resto",
+          "actas_total": 42410,
+          "impugnadas": 3634,
+          "tasa_imp_pct": 8.56873378920066,
+          "rla_pct": 7.449929279847998,
+          "sanch_pct": 16.08663488053337
+        },
+        {
+          "estrato": "Sur andino",
+          "actas_total": 18211,
+          "impugnadas": 574,
+          "tasa_imp_pct": 3.151941134479161,
+          "rla_pct": 5.528268379851856,
+          "sanch_pct": 21.416262536796477
+        }
+      ]
+    },
+    "benford": {
+      "pool": {
+        "n": 130,
+        "chi2": 11.636568091773658,
+        "p_value": 0.1681707150827565,
+        "conforms": "True"
+      }
+    },
+    "jee_simulation": {
+      "margen_actual": 5898,
+      "votos_juego": 1152069,
+      "margen_proyectado": 6335.786220000038,
+      "break_even_pct_rla": 51.07093235520971,
+      "historico_pct_rla": 49.92050874403816
+    },
+    "impugnation_bias": {
+      "pearson_tasa_imp_vs_share_rla": {
+        "r": 0.47668776014211134,
+        "p_value": 0.01381325341930031,
+        "ci_95": [
+          -0.29844354340264007,
+          0.8484358255565523
+        ],
+        "significativa_05": true
+      },
+      "pearson_tasa_imp_vs_share_sanchez": {
+        "r": -0.3378962114166839,
+        "p_value": 0.091358695734678
+      },
+      "spearman_tasa_imp_vs_share_rla": {
+        "r": 0.19589743589743588,
+        "p_value": 0.3375108894172771
+      },
+      "spearman_tasa_imp_vs_share_sanchez": {
+        "r": -0.27384615384615385,
+        "p_value": 0.17582630494762727
+      }
+    },
+    "impugnation_velocity": {
+      "cruce": {
+        "ts": "2026-04-15T10:31:59.632000+00:00",
+        "hours": 17.351542222222225,
+        "pct": 89.509,
+        "jee": 4058
+      },
+      "ventana_12h": {
+        "hours": 12,
+        "before": {
+          "n": 23,
+          "rate_robusta": 168.95489041336415,
+          "mean_rate_instantanea": 187.231841518066,
+          "djee_span": 1522
+        },
+        "after": {
+          "n": 7,
+          "rate_robusta": 76.41066257046067,
+          "mean_rate_instantanea": 87.2269917260603,
+          "djee_span": 556
+        },
+        "mann_whitney": {
+          "u": 136.0,
+          "p_value": 0.001508220248849934,
+          "significant_05": true
+        }
+      }
+    },
+    "forecast": {
+      "p_central": 0.4234,
+      "p_mixto": 0.43174317431743175,
+      "margen_p50_central": 2815.244436014327,
+      "margen_p5_central": -20251.914100015118,
+      "margen_p95_central": 25050.10920354574
+    },
+    "last_digit": {
+      "Fujimori": {
+        "n": 26,
+        "chi2_p_value": 0.40255446569153086,
+        "p_round_digits": 0.5562984612747348,
+        "verdict": "CONFORME"
+      },
+      "López Aliaga (RLA)": {
+        "n": 26,
+        "chi2_p_value": 0.549721618134273,
+        "p_round_digits": 0.2807488029481551,
+        "verdict": "CONFORME"
+      },
+      "Nieto": {
+        "n": 26,
+        "chi2_p_value": 0.9544385472639344,
+        "p_round_digits": 0.9218861842322925,
+        "verdict": "CONFORME"
+      },
+      "Belmont": {
+        "n": 26,
+        "chi2_p_value": 0.23121649773399647,
+        "p_round_digits": 0.9218861842322925,
+        "verdict": "CONFORME"
+      },
+      "Sánchez": {
+        "n": 26,
+        "chi2_p_value": 0.33817474929722746,
+        "p_round_digits": 0.6948866023724733,
+        "verdict": "CONFORME"
+      }
+    },
+    "spatial_cluster": {
+      "tasa_impugnacion": {
+        "I": 0.26050201335120754,
+        "p": 0.05105105105105105,
+        "verdict": "ALEATORIO"
+      },
+      "share_rla": {
+        "I": 0.31699333998234935,
+        "p": 0.011011011011011011,
+        "verdict": "CLUSTERING_POSITIVO"
+      },
+      "share_sanch": {
+        "I": 0.026168357962292173,
+        "p": 0.8538538538538538,
+        "verdict": "ALEATORIO"
+      },
+      "pct_fuera": {
+        "I": 0.22887001292231327,
+        "p": 0.08808808808808809,
+        "verdict": "ALEATORIO"
+      },
+      "bivariate_rla_impug": {
+        "I": -0.023225502215657563,
+        "p": 0.8368368368368369,
+        "verdict": "ALEATORIO"
+      }
+    },
+    "reconcile_internal": {
+      "diffs": {
+        "totalActas": 0,
+        "contabilizadas": -4,
+        "enviadasJee": -17,
+        "pendientesJee": 21
+      },
+      "actas_movidas": 21,
+      "potencial_votos_en_zona_gris": 4582.0,
+      "margen_sanch_rla": 5875,
+      "ratio_vs_margen": 0.78
+    }
+  }
+}

@@ -1,0 +1,121 @@
+{
+  "methodology": {
+    "test": "Mann-Whitney U two-sided sobre velocidad d_jee/dt, ventanas ±{3,6,12,24}h",
+    "dedupe": "Eliminados cortes con (pct,jee) duplicados (proxy cache artifacts)",
+    "spike_threshold": "|z| > 2σ sobre d_jee/dt"
+  },
+  "resumen": {
+    "n_cortes_unicos": 44,
+    "jee_inicial": 1680,
+    "jee_final": 4959,
+    "djee_total": 3279,
+    "horas_totales": 40.800065833333335,
+    "velocidad_promedio_global": 80.36751738084409,
+    "cruce": {
+      "ts": "2026-04-15T10:31:59.632000+00:00",
+      "hours": 17.351542222222225,
+      "pct": 89.509,
+      "jee": 4058
+    },
+    "cambios_signo_flujo": 2
+  },
+  "ventanas": [
+    {
+      "hours": 3,
+      "before": {
+        "n": 1,
+        "rate_robusta": null,
+        "mean_rate_instantanea": 203.78792991959602,
+        "djee_span": 0
+      },
+      "after": {
+        "n": 4,
+        "rate_robusta": 134.4979567079209,
+        "mean_rate_instantanea": 121.64046361962049,
+        "djee_span": 374
+      },
+      "mann_whitney": null
+    },
+    {
+      "hours": 6,
+      "before": {
+        "n": 8,
+        "rate_robusta": 182.5839459955782,
+        "mean_rate_instantanea": 203.67181051575346,
+        "djee_span": 548
+      },
+      "after": {
+        "n": 6,
+        "rate_robusta": 92.39855064698887,
+        "mean_rate_instantanea": 96.94487966147676,
+        "djee_span": 503
+      },
+      "mann_whitney": {
+        "u": 43.0,
+        "p_value": 0.012654012654012654,
+        "significant_05": true
+      }
+    },
+    {
+      "hours": 12,
+      "before": {
+        "n": 23,
+        "rate_robusta": 168.95489041336415,
+        "mean_rate_instantanea": 187.231841518066,
+        "djee_span": 1522
+      },
+      "after": {
+        "n": 7,
+        "rate_robusta": 76.41066257046067,
+        "mean_rate_instantanea": 87.2269917260603,
+        "djee_span": 556
+      },
+      "mann_whitney": {
+        "u": 136.0,
+        "p_value": 0.001508220248849934,
+        "significant_05": true
+      }
+    },
+    {
+      "hours": 24,
+      "before": {
+        "n": 32,
+        "rate_robusta": 147.6239495668855,
+        "mean_rate_instantanea": 168.31231631661174,
+        "djee_span": 2136
+      },
+      "after": {
+        "n": 12,
+        "rate_robusta": 38.424594014655156,
+        "mean_rate_instantanea": 68.27948698055174,
+        "djee_span": 901
+      },
+      "mann_whitney": {
+        "u": 290.0,
+        "p_value": 0.0002489384644052629,
+        "significant_05": true
+      }
+    }
+  ],
+  "spikes": [
+    {
+      "ts": "2026-04-16T07:18:09.551000+00:00",
+      "hours": 38.12096416666667,
+      "rate": -91657.6381363475,
+      "djee": -141,
+      "pct": 92.128
+    }
+  ],
+  "findings": [
+    {
+      "id": "H1",
+      "severity": "MEDIA",
+      "title": "Cambio significativo en velocidad de acumulación de actas JEE alrededor del cruce Sánchez>RLA (ventana ±6h): +182.6 actas/h antes vs +92.4 después (Mann-Whitney p=0.0127). La inflexión puede reflejar procesamiento natural o cambio de política de impugnaciones; requiere explicación formal."
+    },
+    {
+      "id": "H2",
+      "severity": "MEDIA",
+      "title": "Velocidad de acumulación de actas JEE desaceleró tras el cruce (ventana ±12h): +169.0/h antes vs +76.4/h después (ratio 0.45x). Acumuladas pre-cruce: +1522 actas; post-cruce: +556 actas."
+    }
+  ]
+}

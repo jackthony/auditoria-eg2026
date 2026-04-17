@@ -1,0 +1,43 @@
+{
+  "method": "Reconciliacion interna ONPE nacional vs suma regiones",
+  "snapshot_dir": "20260417T084114Z",
+  "fecha": "2026-04-17",
+  "reconciliacion": {
+    "nacional": {
+      "totalActas": 92766,
+      "contabilizadas": 86438,
+      "enviadasJee": 5555,
+      "pendientesJee": 773
+    },
+    "desagregado_suma": {
+      "totalActas": 92766,
+      "contabilizadas": 86434,
+      "enviadasJee": 5538,
+      "pendientes_puras": 794
+    },
+    "diffs": {
+      "totalActas": 0,
+      "contabilizadas": -4,
+      "enviadasJee": -17,
+      "pendientesJee": 21
+    },
+    "actas_movidas": 21,
+    "diff_neto_invariante": 0,
+    "votos_prom_por_acta": 218.2,
+    "potencial_votos_en_zona_gris": 4582.0,
+    "nota_metodologica": "actas_movidas = max(|diff| por categoria). Es el minimo de actas que deben reclasificarse entre contabilizadas/JEE/pendientes para reconciliar nacional con regional. Suma ingenua de |diffs| triplicaria por dependencia algebraica."
+  },
+  "contexto": {
+    "margen_sanch_rla": 5875,
+    "ratio_votos_zona_gris_vs_margen": 0.78
+  },
+  "findings": [
+    {
+      "id": "A0",
+      "severity": "MEDIA",
+      "title": "A0 — Inconsistencia agregacion ONPE: 21 actas no reconcilian nacional vs regional (por debajo del margen)",
+      "description": "Reconciliacion interna entre el agregado nacional publicado por ONPE y la suma desagregada de las 26 regiones (25 departamentos + Extranjero). No prueba error en conteo de votos; demuestra inconsistencia de la capa de presentacion/agregacion. Requiere explicacion formal de ONPE."
+    }
+  ],
+  "caveat": "La discrepancia NO prueba error en conteo de votos (salto logico que aparecio en el post ciudadano). Puede deberse a: timestamp desalineado entre endpoint nacional y regional, categoria no contabilizada en el desagregado, o actas migrando entre estados entre calculo nacional y regional. Cualquiera sea la causa, ONPE debe explicar."
+}
