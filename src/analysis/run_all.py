@@ -19,7 +19,7 @@ import sys
 from io import StringIO
 from pathlib import Path
 
-from . import reconcile, impugnation_rates, benford, temporal, jee_simulation, forecast_bayesian, impugnation_bias, impugnation_velocity
+from . import reconcile, impugnation_rates, benford, temporal, jee_simulation, forecast_bayesian, impugnation_bias, impugnation_velocity, last_digit_forensic, spatial_cluster
 
 import sys
 if sys.platform == "win32":
@@ -145,6 +145,41 @@ def main():
                 "margen_p5_central": fc["escenarios"]["central"]["margen_final"]["p5"],
                 "margen_p95_central": fc["escenarios"]["central"]["margen_final"]["p95"],
             }
+
+        print()
+
+        # 8. Test forense M1: último dígito (Mebane 2006 / Beber-Scacco 2012)
+        print("── M1: Último dígito de vote counts (test Mebane / Beber-Scacco) ──")
+        ld = last_digit_forensic.run()
+        all_findings.append({
+            "id": ld["finding"]["id"],
+            "severity": ld["finding"]["severity"],
+            "title": ld["finding"]["description"],
+        })
+        all_results["last_digit"] = {
+            cand: {k: v for k, v in r.items() if k in ("n", "chi2_p_value", "p_round_digits", "verdict")}
+            for cand, r in ld["candidates"].items()
+        }
+
+        print()
+
+        # 9. Test forense M2: Moran's I clustering espacial
+        print("── M2: Autocorrelación espacial (Moran's I + permutación 999) ──")
+        sc = spatial_cluster.run()
+        all_findings.append({
+            "id": sc["finding"]["id"],
+            "severity": sc["finding"]["severity"],
+            "title": sc["finding"]["description"],
+        })
+        all_results["spatial_cluster"] = {
+            var: {"I": t["morans_I"], "p": t["permutation_p_value"], "verdict": t["verdict"]}
+            for var, t in sc["tests"].items()
+        }
+        all_results["spatial_cluster"]["bivariate_rla_impug"] = {
+            "I": sc["bivariate_share_rla_x_tasa_impug"]["morans_I_bivariate"],
+            "p": sc["bivariate_share_rla_x_tasa_impug"]["permutation_p_value"],
+            "verdict": sc["bivariate_share_rla_x_tasa_impug"]["verdict"],
+        }
 
         print()
 

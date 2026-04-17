@@ -123,6 +123,10 @@ P(RLA supera Sánchez):
   optimista : 49.2%  (margen p50=+300)
   mixto     : 42.2%
 
+── M1: Último dígito de vote counts (test Mebane / Beber-Scacco) ──
+
+── M2: Autocorrelación espacial (Moran's I + permutación 999) ──
+
 ══════════════════════════════════════════════════════════════════════
  RESUMEN DE HALLAZGOS
 ══════════════════════════════════════════════════════════════════════
@@ -138,3 +142,5 @@ P(RLA supera Sánchez):
   [MEDIA  ] H1  Cambio significativo en velocidad de acumulación de actas JEE alrededor del cruce Sánchez>RLA (ventana ±6h): +182.6 actas/h antes vs +92.4 después (Mann-Whitney p=0.0127). La inflexión puede reflejar procesamiento natural o cambio de política de impugnaciones; requiere explicación formal.
   [MEDIA  ] H2  Velocidad de acumulación de actas JEE desaceleró tras el cruce (ventana ±12h): +169.0/h antes vs +76.4/h después (ratio 0.45x). Acumuladas pre-cruce: +1522 actas; post-cruce: +556 actas.
   [CRÍTICO] F1  Modelo bayesiano: P(RLA supera Sánchez) = 42.6% central / 42.2% mixto (n=10,000 simulaciones)
+  [INFO   ] M1  Último dígito de vote counts regional conforme a uniforme
+  [MEDIA  ] M2  Clustering espacial positivo significativo en: share_rla

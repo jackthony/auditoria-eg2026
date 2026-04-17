@@ -1,0 +1,65 @@
+{
+  "method": "Moran's I global + permutation inference (999 perm, seed 20260417)",
+  "weight_matrix": "queen contiguity, row-standardized",
+  "n_regions": 25,
+  "excluded": [
+    "Extranjero (no geographic adjacency)"
+  ],
+  "tests": {
+    "tasa_impugnacion": {
+      "morans_I": 0.26050201335120754,
+      "I_expected_under_null": -0.041666666666666664,
+      "n_observations": 25,
+      "S0_sum_weights": 25.0,
+      "permutation_p_value": 0.05105105105105105,
+      "permutation_mean_I": -0.04075739424666797,
+      "permutation_std_I": 0.13115249242735247,
+      "verdict": "ALEATORIO"
+    },
+    "share_rla": {
+      "morans_I": 0.31699333998234935,
+      "I_expected_under_null": -0.041666666666666664,
+      "n_observations": 25,
+      "S0_sum_weights": 25.0,
+      "permutation_p_value": 0.011011011011011011,
+      "permutation_mean_I": -0.03904059392176869,
+      "permutation_std_I": 0.12338915429718818,
+      "verdict": "CLUSTERING_POSITIVO"
+    },
+    "share_sanch": {
+      "morans_I": 0.026168357962292173,
+      "I_expected_under_null": -0.041666666666666664,
+      "n_observations": 25,
+      "S0_sum_weights": 25.0,
+      "permutation_p_value": 0.8538538538538538,
+      "permutation_mean_I": -0.048769907995211886,
+      "permutation_std_I": 0.13350673090055845,
+      "verdict": "ALEATORIO"
+    },
+    "pct_fuera": {
+      "morans_I": 0.22887001292231327,
+      "I_expected_under_null": -0.041666666666666664,
+      "n_observations": 25,
+      "S0_sum_weights": 25.0,
+      "permutation_p_value": 0.08808808808808809,
+      "permutation_mean_I": -0.04297291568523453,
+      "permutation_std_I": 0.12950475414810422,
+      "verdict": "ALEATORIO"
+    }
+  },
+  "bivariate_share_rla_x_tasa_impug": {
+    "morans_I_bivariate": -0.023225502215657563,
+    "permutation_p_value": 0.8368368368368369,
+    "verdict": "ALEATORIO",
+    "interpretation": "I_biv > 0 ⇒ regiones pro-RLA se agrupan con vecinas de alta impugnación (consistente con hipótesis de focalización geográfica contra RLA)."
+  },
+  "finding": {
+    "id": "M2",
+    "severity": "MEDIA",
+    "description": "Clustering espacial positivo significativo en: share_rla",
+    "suspects": [
+      "share_rla"
+    ],
+    "caveat": "n=25 regiones, matriz queen contiguity binaria. Un Moran's I no significativo a este nivel no descarta clustering provincial/distrital. Pedido formal de data mesa-a-mesa necesario para replicar a mayor granularidad."
+  }
+}
