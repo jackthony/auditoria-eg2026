@@ -1,0 +1,77 @@
+# ──────────────────────────────────────────────────────────────
+# Python
+# ──────────────────────────────────────────────────────────────
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+.venv/
+venv/
+env/
+ENV/
+.pytest_cache/
+.coverage
+htmlcov/
+*.egg-info/
+
+# ──────────────────────────────────────────────────────────────
+# Jupyter
+# ──────────────────────────────────────────────────────────────
+.ipynb_checkpoints/
+*.ipynb_checkpoints
+
+# ──────────────────────────────────────────────────────────────
+# IDE
+# ──────────────────────────────────────────────────────────────
+.vscode/
+.idea/
+*.swp
+*.swo
+.DS_Store
+Thumbs.db
+
+# ──────────────────────────────────────────────────────────────
+# Outputs regenerables — NO se commitean
+# Los archivos derivados se pueden reconstruir desde captures/
+# ──────────────────────────────────────────────────────────────
+data/processed/*.csv
+data/processed/*.json
+reports/figures/*.png
+reports/*.docx
+reports/*.pdf
+reports/findings.json
+reports/impugnadas_por_region.csv
+reports/serie_temporal.csv
+
+# Excepciones: mantenemos los README que documentan la carpeta
+!data/processed/.gitkeep
+!reports/figures/.gitkeep
+!reports/.gitkeep
+
+# ──────────────────────────────────────────────────────────────
+# Capturas: SÍ se commitean, incluidas
+# Solo se ignoran archivos temporales dentro de captures/
+# ──────────────────────────────────────────────────────────────
+captures/**/*.tmp
+captures/**/.DS_Store
+
+# ──────────────────────────────────────────────────────────────
+# Evidencia sensible — a criterio del partido si commitear o no
+# Por defecto, los PDFs y fotos de copias físicas NO se suben a
+# repos públicos hasta revisión legal
+# ──────────────────────────────────────────────────────────────
+evidence/personero_copies/*.pdf
+evidence/personero_copies/*.jpg
+evidence/personero_copies/*.png
+evidence/personero_copies/*.jpeg
+!evidence/personero_copies/README.md
+
+# ──────────────────────────────────────────────────────────────
+# Secretos (por si acaso)
+# ──────────────────────────────────────────────────────────────
+.env
+.env.local
+*.key
+*.pem
+secrets/

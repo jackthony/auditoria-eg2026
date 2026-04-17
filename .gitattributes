@@ -1,0 +1,17 @@
+# Consistencia de line endings entre Windows y Linux/macOS
+* text=auto eol=lf
+
+# Archivos que siempre deben ser binarios
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.pdf binary
+*.docx binary
+*.xlsx binary
+*.zip binary
+
+# JSONL con un objeto por línea; LF estricto
+*.jsonl text eol=lf
+
+# Preservar line endings originales en capturas (no tocar nunca)
+captures/** binary
