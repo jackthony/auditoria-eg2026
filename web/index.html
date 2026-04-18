@@ -6,6 +6,10 @@
 <title>Monitor EG2026 · Auditoría Técnica</title>
 <meta name="description" content="Monitor técnico-estadístico del escrutinio de las Elecciones Generales 2026 del Perú. Data pública, hashes SHA-256, reproducible.">
 <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+  integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="">
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+  integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
 <style>
   :root{
     --navy:#0B2A4A; --accent:#C8A24B; --text:#1A1A1A; --muted:#5C6770;
@@ -44,6 +48,14 @@
   .mono{font-family:Consolas,Monaco,monospace;font-size:.85rem}
   .right{text-align:right}
   .updated{font-size:.8rem;color:var(--muted);margin-top:.5rem}
+  #map-peru{height:520px;width:100%;border-radius:6px;border:1px solid var(--line)}
+  .map-legend{background:#fff;padding:.6rem .8rem;border:1px solid var(--line);
+    border-radius:4px;font-size:.78rem;line-height:1.5;box-shadow:0 1px 3px rgba(0,0,0,.08)}
+  .map-legend .scale{display:flex;align-items:center;gap:.3rem;margin-top:.3rem}
+  .map-legend .swatch{width:18px;height:14px;border:1px solid #888;display:inline-block}
+  .leaflet-tooltip.region-tip{background:var(--navy);color:#fff;border:0;font-size:.85rem;
+    padding:.5rem .7rem;border-radius:4px;box-shadow:0 2px 6px rgba(0,0,0,.25)}
+  .leaflet-tooltip.region-tip strong{color:var(--accent)}
 </style>
 </head>
 <body>
@@ -86,6 +98,16 @@
       <div class="kpi"><div class="lbl">Margen Sánchez − RLA</div><div class="val" id="kpi-margen">—</div><div class="delta neutral" id="kpi-margen-d"></div></div>
       <div class="kpi"><div class="lbl">Actas impugnadas (JEE)</div><div class="val" id="kpi-jee">—</div></div>
     </div>
+  </section>
+
+  <section class="card">
+    <h2>Mapa por región — margen Sánchez vs López Aliaga</h2>
+    <p style="font-size:.9rem;color:var(--muted);margin:.2rem 0 .8rem">
+      Cada departamento coloreado por margen absoluto <strong>Sánchez − RLA</strong> al corte actual.
+      Rojo = RLA gana · Verde = Sánchez gana · Tonalidad ∝ magnitud del margen.
+      Hover para ver detalle por región.
+    </p>
+    <div id="map-peru"></div>
   </section>
 
   <div class="grid grid-main" style="padding:0;margin-top:0">
@@ -264,6 +286,9 @@ function render(d) {
          <td>${f.title}</td></tr>`
   ).join('');
 
+  // Mapa choropleth
+  if (d.regions) renderMap(d.regions);
+
   // Forecast bayesiano (si existe)
   if (d.forecast) renderForecast(d.forecast);
 
@@ -357,6 +382,97 @@ function renderForecast(f) {
         <td class="right" style="color:${c};font-weight:700">${sign}${FMT_INT.format(d)}</td></tr>`;
     }).join('');
   }
+}
+
+let _mapInstance = null;
+function normDep(s) {
+  return (s||'').normalize('NFKD').replace(/[\u0300-\u036f]/g,'').toUpperCase().trim();
+}
+function marginColor(m, vmax) {
+  // Diverging red(-) → white(0) → green(+). vmax = max(|margin|) para escala.
+  if (vmax <= 0) return '#FFFFFF';
+  const t = Math.max(-1, Math.min(1, m / vmax));
+  // Interpolación lineal en RGB.
+  const lerp = (a,b,k) => Math.round(a + (b-a)*k);
+  let r,g,b;
+  if (t >= 0) {
+    const k = Math.pow(t, 0.6);                       // sesgo: tonos más visibles en márgenes pequeños
+    r = lerp(255,46,k); g = lerp(255,107,k); b = lerp(255,63,k);   // → #2E6B3F
+  } else {
+    const k = Math.pow(-t, 0.6);
+    r = lerp(255,180,k); g = lerp(255,51,k); b = lerp(255,43,k);   // → #B4332B
+  }
+  return `rgb(${r},${g},${b})`;
+}
+async function renderMap(regions) {
+  if (_mapInstance) { _mapInstance.remove(); _mapInstance = null; }
+  const byName = {};
+  for (const r of regions) byName[r.name_norm] = r;
+  const vmax = Math.max(...regions.filter(r => r.name_norm !== 'EXTRANJERO')
+                                 .map(r => Math.abs(r.margin)), 1);
+
+  const map = L.map('map-peru', { zoomControl: true, attributionControl: false })
+               .setView([-9.2, -75.0], 5);
+  _mapInstance = map;
+
+  let geo;
+  try {
+    const resp = await fetch('peru-departamentos.geojson');
+    geo = await resp.json();
+  } catch (e) {
+    document.getElementById('map-peru').innerHTML =
+      '<div class="alert critical" style="margin:1rem">No se pudo cargar peru-departamentos.geojson</div>';
+    return;
+  }
+
+  const layer = L.geoJSON(geo, {
+    style: f => {
+      const key = normDep(f.properties.NOMBDEP || f.properties.nombdep || '');
+      const r = byName[key];
+      return {
+        fillColor: r ? marginColor(r.margin, vmax) : '#EEE',
+        fillOpacity: 0.85,
+        color: '#0B2A4A',
+        weight: 0.8,
+      };
+    },
+    onEachFeature: (f, lyr) => {
+      const key = normDep(f.properties.NOMBDEP || f.properties.nombdep || '');
+      const r = byName[key];
+      const fmt = new Intl.NumberFormat('es-PE');
+      const html = r ? `
+        <strong>${r.name}</strong><br>
+        Margen S−RLA: <strong>${r.margin>=0?'+':''}${fmt.format(r.margin)}</strong> votos<br>
+        Sánchez: ${r.sanch_pct.toFixed(2)}% · RLA: ${r.rla_pct.toFixed(2)}%<br>
+        Escrutado: ${r.pct_actas.toFixed(2)}% · Actas fuera: ${fmt.format(r.actas_fuera)}
+      ` : `<strong>${f.properties.NOMBDEP}</strong><br>(sin data)`;
+      lyr.bindTooltip(html, { className: 'region-tip', sticky: true });
+      lyr.on('mouseover', e => e.target.setStyle({ weight: 2.5, color: '#C8A24B' }));
+      lyr.on('mouseout',  e => layer.resetStyle(e.target));
+    },
+  }).addTo(map);
+  map.fitBounds(layer.getBounds(), { padding: [10, 10] });
+
+  // Leyenda divergente.
+  const legend = L.control({ position: 'bottomright' });
+  legend.onAdd = () => {
+    const div = L.DomUtil.create('div', 'map-legend');
+    const fmt = new Intl.NumberFormat('es-PE');
+    div.innerHTML = `
+      <strong>Margen Sánchez − RLA (votos)</strong>
+      <div class="scale">
+        <span class="swatch" style="background:${marginColor(-vmax,vmax)}"></span>
+        <span>−${fmt.format(vmax)}</span>
+        <span class="swatch" style="background:#FFFFFF"></span>
+        <span>0</span>
+        <span class="swatch" style="background:${marginColor(vmax,vmax)}"></span>
+        <span>+${fmt.format(vmax)}</span>
+      </div>
+      <div style="color:var(--muted);margin-top:.3rem">Escala γ=0.6 — destaca márgenes pequeños</div>
+    `;
+    return div;
+  };
+  legend.addTo(map);
 }
 
 function setDelta(id, v, inverted) {

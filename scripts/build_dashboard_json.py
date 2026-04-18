@@ -9,12 +9,21 @@ Uso:
 from __future__ import annotations
 
 import json
+import unicodedata
 from pathlib import Path
 
 import pandas as pd
 
 ROOT = Path(__file__).resolve().parents[1]
 OUT = ROOT / "web" / "data.json"
+
+
+def norm_dep(s: str) -> str:
+    """Normaliza nombre de región/departamento al formato del GeoJSON
+    (UPPERCASE, sin diacríticos, sin espacios extras)."""
+    s = unicodedata.normalize("NFKD", s)
+    s = "".join(c for c in s if not unicodedata.combining(c))
+    return s.upper().strip()
 
 
 def main():
@@ -114,6 +123,24 @@ def main():
             "delta": float(r["delta"]),
         })
 
+    # Regiones con margen absoluto (Sánchez − RLA) para mapa choropleth.
+    # `name_norm` = NOMBDEP del GeoJSON oficial (UPPERCASE, sin diacríticos).
+    regions = []
+    for _, r in reg.iterrows():
+        pct_actas = float(r["contabilizadas"]) / float(r["totalActas"]) * 100 if r["totalActas"] else 0.0
+        regions.append({
+            "name": r["name"],
+            "name_norm": norm_dep(str(r["name"])),
+            "rla_v": int(r["rla_v"]),
+            "sanch_v": int(r["sanch_v"]),
+            "rla_pct": float(r["rla"]),
+            "sanch_pct": float(r["sanch"]),
+            "margin": int(r["sanch_v"] - r["rla_v"]),
+            "vv": int(r["vv"]),
+            "pct_actas": round(pct_actas, 2),
+            "actas_fuera": int(r["actas_fuera"]),
+        })
+
     # Forecast bayesiano (opcional — si fue corrido).
     forecast_path = ROOT / "reports" / "forecast.json"
     forecast = None
@@ -135,6 +162,7 @@ def main():
         "findings": findings,
         "series": series,
         "contrafactual": contrafactual,
+        "regions": regions,
         "forecast": forecast,
         "meta": {
             "generated_at": pd.Timestamp.utcnow().isoformat(),
