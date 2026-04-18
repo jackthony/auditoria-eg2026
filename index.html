@@ -239,6 +239,24 @@
     </p>
   </section>
 
+  <section class="card" data-tab="forecast" id="fcast-int-card">
+    <h2>Forecast interactivo — ¿Y si la tasa JEE fuera…?</h2>
+    <p style="font-size:.9rem;color:var(--muted)">
+      Mueve el slider para simular distintas tasas de integración de actas impugnadas JEE.
+      La probabilidad se interpola entre los 3 escenarios (pesimista 0.29, central 0.50, optimista 0.71).
+    </p>
+    <label for="fcast-slider" class="mono" style="font-size:.85rem">
+      Tasa integración JEE: <strong id="fcast-rate-label">50%</strong>
+    </label>
+    <input type="range" id="fcast-slider" min="20" max="80" step="1" value="50"
+           style="width:100%;margin:.5rem 0 1rem">
+    <div class="kpi-grid" id="fcast-int-kpis"></div>
+    <p style="font-size:.8rem;color:var(--muted);margin-top:.6rem">
+      Interpolación lineal sobre los 3 escenarios del modelo. No re-simula MCMC —
+      es una lectura rápida de sensibilidad, no un modelo nuevo.
+    </p>
+  </section>
+
   <section class="card" data-tab="forecast">
     <h2>Regiones pivote (forecast)</h2>
     <p style="font-size:.9rem;color:var(--muted)">
@@ -510,7 +528,7 @@ function render(d) {
   if (d.series && d.series.length > 1) renderDiff(d.series);
 
   // Forecast bayesiano (si existe)
-  if (d.forecast) renderForecast(d.forecast);
+  if (d.forecast) { renderForecast(d.forecast); renderForecastInteractive(d.forecast); }
 
   // Contrafactual
   document.querySelector('#contrafactual tbody').innerHTML = d.contrafactual.map(r => {
@@ -602,6 +620,50 @@ function renderForecast(f) {
         <td class="right" style="color:${c};font-weight:700">${sign}${FMT_INT.format(d)}</td></tr>`;
     }).join('');
   }
+}
+
+// FCAST-INT-01 — forecast interactivo (interpolación lineal entre 3 escenarios).
+function renderForecastInteractive(f) {
+  const sc = f.escenarios || {};
+  if (!sc.pesimista || !sc.central || !sc.optimista) return;
+  const pts = ['pesimista','central','optimista'].map(k => ({
+    x: sc[k].beta_params.mean_integration,
+    p: sc[k].p_rla_supera_sanchez,
+    m50: sc[k].margen_final.p50,
+    m5: sc[k].margen_final.p5,
+    m95: sc[k].margen_final.p95,
+  })).sort((a,b) => a.x - b.x);
+  const lerp = (x, key) => {
+    if (x <= pts[0].x) return pts[0][key];
+    if (x >= pts[pts.length-1].x) return pts[pts.length-1][key];
+    for (let i=0; i<pts.length-1; i++) {
+      if (x >= pts[i].x && x <= pts[i+1].x) {
+        const t = (x - pts[i].x) / (pts[i+1].x - pts[i].x);
+        return pts[i][key] + t * (pts[i+1][key] - pts[i][key]);
+      }
+    }
+    return pts[1][key];
+  };
+  const slider = document.getElementById('fcast-slider');
+  const label = document.getElementById('fcast-rate-label');
+  const kpis = document.getElementById('fcast-int-kpis');
+  const draw = () => {
+    const x = parseInt(slider.value) / 100;
+    label.textContent = `${(x*100).toFixed(0)}%`;
+    const p = lerp(x, 'p'), m50 = lerp(x, 'm50'),
+          m5 = lerp(x, 'm5'), m95 = lerp(x, 'm95');
+    const color = p > 0.45 ? 'var(--red)' : p > 0.30 ? 'var(--orange)' : 'var(--green)';
+    const sign = m50 >= 0 ? '+' : '';
+    kpis.innerHTML = `
+      <div class="kpi"><div class="kpi-label">P(RLA supera Sánchez)</div>
+        <div class="kpi-val" style="color:${color}">${(p*100).toFixed(1)}%</div></div>
+      <div class="kpi"><div class="kpi-label">Margen mediano (S−RLA)</div>
+        <div class="kpi-val">${sign}${FMT_INT.format(Math.round(m50))}</div></div>
+      <div class="kpi"><div class="kpi-label">IC 90% del margen</div>
+        <div class="kpi-val mono" style="font-size:1rem">[${FMT_INT.format(Math.round(m5))}, ${FMT_INT.format(Math.round(m95))}]</div></div>`;
+  };
+  slider.oninput = draw;
+  draw();
 }
 
 let _mapInstance = null;
