@@ -1,0 +1,348 @@
+{
+  "forecast": {
+    "methodology": {
+      "model": "Bayesian hierarchical Dirichlet-Multinomial with Beta prior on JEE integration rate",
+      "references": [
+        "Linzer, D. (2013) JASA — Dynamic Bayesian Forecasting of Presidential Elections",
+        "Cohn, N. (NYT) — Election Needle methodology",
+        "Gelman & Hill (2007) — Multilevel Hierarchical Models",
+        "AP Elections Research — Race Call protocol"
+      ],
+      "n_simulations": 10000,
+      "seed_base": 20260417,
+      "seed_offsets": {
+        "pesimista": 1,
+        "central": 2,
+        "optimista": 3,
+        "mix": 4,
+        "hist_central": 5
+      }
+    },
+    "estado_actual": {
+      "sanchez": 1881664,
+      "rla": 1875914,
+      "margen": 5750,
+      "actas_fuera": 6332,
+      "votos_fuera_estimado": 1072906
+    },
+    "escenarios": {
+      "pesimista": {
+        "beta_params": {
+          "a": 2.0,
+          "b": 5.0,
+          "mean_integration": 0.2857142857142857
+        },
+        "p_rla_supera_sanchez": 0.366,
+        "p_sanchez_mantiene": 0.634,
+        "margen_final": {
+          "p5": -22184.915529633206,
+          "p25": -5328.671261979442,
+          "p50": 5277.588750694995,
+          "p75": 14748.773749362852,
+          "p95": 26036.003931792184,
+          "mean": 4071.277824952622,
+          "std": 14737.733234057428
+        }
+      },
+      "central": {
+        "beta_params": {
+          "a": 5.0,
+          "b": 5.0,
+          "mean_integration": 0.5
+        },
+        "p_rla_supera_sanchez": 0.4247,
+        "p_sanchez_mantiene": 0.5752999999999999,
+        "margen_final": {
+          "p5": -20307.179676857602,
+          "p25": -7103.916437305335,
+          "p50": 2764.3478431142867,
+          "p75": 12262.702934839239,
+          "p95": 24998.42960996564,
+          "mean": 2553.5094132811396,
+          "std": 13805.58946814524
+        }
+      },
+      "optimista": {
+        "beta_params": {
+          "a": 5.0,
+          "b": 2.0,
+          "mean_integration": 0.7142857142857143
+        },
+        "p_rla_supera_sanchez": 0.4934,
+        "p_sanchez_mantiene": 0.5065999999999999,
+        "margen_final": {
+          "p5": -20476.235526352095,
+          "p25": -9305.724691904907,
+          "p50": 233.39965278236195,
+          "p75": 11069.412779844075,
+          "p95": 27597.82170333111,
+          "mean": 1471.532709671397,
+          "std": 14683.545173163595
+        }
+      }
+    },
+    "escenario_mixto": {
+      "descripcion": "Mezcla uniforme de pesimista/central/optimista (máxima incertidumbre sobre tasa JEE)",
+      "p_rla_supera_sanchez": 0.43374337433743376,
+      "p_sanchez_mantiene": 0.5662566256625663,
+      "margen_final": {
+        "p5": -21029.159008453902,
+        "p25": -7772.98375198117,
+        "p50": 2569.90244954871,
+        "p75": 12571.376662344206,
+        "p95": 25343.355297857874,
+        "mean": 2384.7714159627053,
+        "std": 14315.929390848987
+      }
+    },
+    "regiones_pivote": [
+      {
+        "region": "Lima",
+        "actas_fuera": 1449,
+        "votos_fuera": 302146,
+        "share_sanch": 0.0327,
+        "share_rla": 0.1993,
+        "delta_esperado": -50360.0
+      },
+      {
+        "region": "Extranjero",
+        "actas_fuera": 804,
+        "votos_fuera": 98906,
+        "share_sanch": 0.025,
+        "share_rla": 0.2596,
+        "delta_esperado": -23202.0
+      },
+      {
+        "region": "Cajamarca",
+        "actas_fuera": 240,
+        "votos_fuera": 36562,
+        "share_sanch": 0.417,
+        "share_rla": 0.0324,
+        "delta_esperado": 14063.0
+      },
+      {
+        "region": "Cusco",
+        "actas_fuera": 352,
+        "votos_fuera": 62140,
+        "share_sanch": 0.2203,
+        "share_rla": 0.049,
+        "delta_esperado": 10646.0
+      },
+      {
+        "region": "Huánuco",
+        "actas_fuera": 212,
+        "votos_fuera": 31165,
+        "share_sanch": 0.2944,
+        "share_rla": 0.0598,
+        "delta_esperado": 7310.0
+      },
+      {
+        "region": "Puno",
+        "actas_fuera": 105,
+        "votos_fuera": 20151,
+        "share_sanch": 0.2482,
+        "share_rla": 0.0192,
+        "delta_esperado": 4615.0
+      },
+      {
+        "region": "San Martín",
+        "actas_fuera": 162,
+        "votos_fuera": 24966,
+        "share_sanch": 0.2378,
+        "share_rla": 0.0589,
+        "delta_esperado": 4467.0
+      },
+      {
+        "region": "Ayacucho",
+        "actas_fuera": 92,
+        "votos_fuera": 13759,
+        "share_sanch": 0.3129,
+        "share_rla": 0.0274,
+        "delta_esperado": 3929.0
+      },
+      {
+        "region": "Huancavelica",
+        "actas_fuera": 65,
+        "votos_fuera": 8849,
+        "share_sanch": 0.4338,
+        "share_rla": 0.0235,
+        "delta_esperado": 3631.0
+      },
+      {
+        "region": "Áncash",
+        "actas_fuera": 257,
+        "votos_fuera": 40249,
+        "share_sanch": 0.1494,
+        "share_rla": 0.0602,
+        "delta_esperado": 3588.0
+      }
+    ],
+    "histograma_central": [
+      {
+        "center": -45200.10739124914,
+        "count": 1
+      },
+      {
+        "center": -42795.10239009578,
+        "count": 0
+      },
+      {
+        "center": -40390.09738894242,
+        "count": 1
+      },
+      {
+        "center": -37985.09238778906,
+        "count": 9
+      },
+      {
+        "center": -35580.0873866357,
+        "count": 8
+      },
+      {
+        "center": -33175.08238548234,
+        "count": 24
+      },
+      {
+        "center": -30770.07738432898,
+        "count": 44
+      },
+      {
+        "center": -28365.07238317562,
+        "count": 54
+      },
+      {
+        "center": -25960.06738202226,
+        "count": 81
+      },
+      {
+        "center": -23555.062380868898,
+        "count": 121
+      },
+      {
+        "center": -21150.057379715538,
+        "count": 139
+      },
+      {
+        "center": -18745.052378562177,
+        "count": 215
+      },
+      {
+        "center": -16340.047377408817,
+        "count": 273
+      },
+      {
+        "center": -13935.042376255456,
+        "count": 365
+      },
+      {
+        "center": -11530.037375102096,
+        "count": 421
+      },
+      {
+        "center": -9125.032373948736,
+        "count": 487
+      },
+      {
+        "center": -6720.027372795375,
+        "count": 586
+      },
+      {
+        "center": -4315.022371642015,
+        "count": 612
+      },
+      {
+        "center": -1910.0173704886547,
+        "count": 685
+      },
+      {
+        "center": 494.98763066470565,
+        "count": 718
+      },
+      {
+        "center": 2899.992631818066,
+        "count": 665
+      },
+      {
+        "center": 5304.997632971426,
+        "count": 668
+      },
+      {
+        "center": 7710.002634124787,
+        "count": 629
+      },
+      {
+        "center": 10115.007635278147,
+        "count": 584
+      },
+      {
+        "center": 12520.012636431507,
+        "count": 504
+      },
+      {
+        "center": 14925.017637584868,
+        "count": 476
+      },
+      {
+        "center": 17330.022638738228,
+        "count": 361
+      },
+      {
+        "center": 19735.02763989159,
+        "count": 325
+      },
+      {
+        "center": 22140.03264104495,
+        "count": 285
+      },
+      {
+        "center": 24545.03764219831,
+        "count": 224
+      },
+      {
+        "center": 26950.04264335167,
+        "count": 141
+      },
+      {
+        "center": 29355.04764450503,
+        "count": 108
+      },
+      {
+        "center": 31760.05264565839,
+        "count": 76
+      },
+      {
+        "center": 34165.05764681175,
+        "count": 56
+      },
+      {
+        "center": 36570.06264796511,
+        "count": 23
+      },
+      {
+        "center": 38975.06764911847,
+        "count": 16
+      },
+      {
+        "center": 41380.07265027183,
+        "count": 8
+      },
+      {
+        "center": 43785.07765142519,
+        "count": 6
+      },
+      {
+        "center": 46190.08265257855,
+        "count": 0
+      },
+      {
+        "center": 48595.08765373191,
+        "count": 1
+      }
+    ]
+  },
+  "meta": {
+    "generated_at": "2026-04-18T23:21:16.772587+00:00",
+    "source": "ONPE vía proxy CORS + captura atómica con SHA-256",
+    "repo": "https://github.com/neuracode/auditoria-eg2026"
+  }
+}

@@ -1,0 +1,93 @@
+{
+  "findings": [
+    {
+      "severity": "INFO",
+      "id": "R1",
+      "title": "Reconciliación Σ regional vs nacional: coincide dentro de redondeo",
+      "detail": "Diferencias entre la suma de votos por región y el total nacional publicado: todas menores a 0.01%. Descarta hipótesis de manipulación agregada entre niveles."
+    },
+    {
+      "severity": "MEDIA",
+      "id": "A1",
+      "title": "Regiones con tasa de impugnación anómala (|z|>2): Extranjero (24.11%, z=+3.66)",
+      "detail": "1 región(es) fuera de ±2σ respecto al promedio regional de 7.06% (σ=4.66%)."
+    },
+    {
+      "severity": "MEDIA",
+      "id": "A2",
+      "title": "Diferencia de tasa de impugnación Lima+Callao vs resto del país",
+      "detail": "Lima+Callao: 4.13% · Resto: 6.94% · Diferencia: -2.81pp (z=-17.18, p=0). Estadísticamente significativa al 1%. La asimetría NO es perjudicial para candidatos con mayor votación en Lima+Callao."
+    },
+    {
+      "severity": "INFO",
+      "id": "C1",
+      "title": "Benford (primer dígito, agregado) conforme",
+      "detail": "Pool de 5 candidatos × 26 regiones (n=130): χ²=11.64, p=0.168. No se rechaza H0 de conformidad con Benford. Recordar: este test tiene limitaciones en datos electorales."
+    },
+    {
+      "severity": "INFO",
+      "id": "D1",
+      "title": "Artefactos técnicos de caché en tracking: 72 eventos",
+      "detail": "Se detectaron 72 oscilaciones donde pct baja y sube al mismo valor. Es condición de carrera típica del proxy caché, NO movimiento real de la data ONPE primaria. Se documenta para evitar mala interpretación pública."
+    },
+    {
+      "severity": "INFO",
+      "id": "D2",
+      "title": "Sin saltos anómalos en el conteo temporal",
+      "detail": "Ningún delta entre cortes consecutivos supera 0.5pp para ningún candidato en 116 cortes analizados."
+    },
+    {
+      "severity": "INFO",
+      "id": "D3",
+      "title": "Cruce Sánchez↔RLA único, consistente con flujo natural",
+      "detail": "Se registró 1 cambio de signo entre Sánchez y RLA, atribuible al ingreso progresivo de actas rurales (donde Sánchez tiene ventaja) posterior al procesamiento inicial de Lima y extranjero (donde RLA tiene ventaja)."
+    },
+    {
+      "severity": "CRÍTICO",
+      "id": "E1",
+      "title": "Pase a 2ª vuelta depende de la resolución del JEE",
+      "detail": "Margen Sánchez−RLA (+5,875 votos, +0.037pp) es aproximadamente 196× menor que los votos contenidos en actas impugnadas + pendientes (~1,150,973). Bajo distribución proporcional al nacional, el margen final sería +6,301. Para empatar, RLA requiere 51.07% del subgrupo RLA+Sánchez en disputa (vs 49.92% histórico)."
+    },
+    {
+      "id": "G1",
+      "severity": "MEDIA",
+      "title": "Asociación positiva entre tasa_impugnación y share_RLA por región (Pearson r=0.476, p=0.0139). Si TODAS las actas fuera se integran al ratio regional actual, margen final proyectado = +8 votos (vs margen actual +5,750). Empate estadístico. NOTA: correlación sensible a outliers (Spearman r=0.20 p=0.34 NO significativo; bootstrap CI95 incluye 0). La asociación es real en media pero está dominada por Lima y Extranjero."
+    },
+    {
+      "id": "H1",
+      "severity": "MEDIA",
+      "title": "Cambio significativo en velocidad de acumulación de actas JEE alrededor del cruce Sánchez>RLA (ventana ±6h): +182.6 actas/h antes vs +92.4 después (Mann-Whitney p=0.0127). La inflexión puede reflejar procesamiento natural o cambio de política de impugnaciones; requiere explicación formal."
+    },
+    {
+      "id": "H2",
+      "severity": "MEDIA",
+      "title": "Velocidad de acumulación de actas JEE desaceleró tras el cruce (ventana ±12h): +169.0/h antes vs +76.4/h después (ratio 0.45x). Acumuladas pre-cruce: +1522 actas; post-cruce: +556 actas."
+    },
+    {
+      "id": "F1",
+      "severity": "CRÍTICO",
+      "title": "Modelo bayesiano: P(RLA supera Sánchez) = 42.5% central / 43.4% mixto (n=10,000 simulaciones)"
+    },
+    {
+      "id": "M1",
+      "severity": "INFO",
+      "title": "Último dígito de vote counts regional conforme a uniforme"
+    },
+    {
+      "id": "M2",
+      "severity": "MEDIA",
+      "title": "Clustering espacial positivo significativo en: share_rla"
+    },
+    {
+      "id": "A0",
+      "severity": "MEDIA",
+      "title": "A0 — Inconsistencia agregacion ONPE: 21 actas no reconcilian nacional vs regional (por debajo del margen)",
+      "description": "Reconciliacion interna entre el agregado nacional publicado por ONPE y la suma desagregada de las 26 regiones (25 departamentos + Extranjero). No prueba error en conteo de votos; demuestra inconsistencia de la capa de presentacion/agregacion. Requiere explicacion formal de ONPE."
+    }
+  ],
+  "meta": {
+    "generated_at": "2026-04-18T23:21:16.772587+00:00",
+    "source": "ONPE vía proxy CORS + captura atómica con SHA-256",
+    "repo": "https://github.com/neuracode/auditoria-eg2026"
+  }
+}
