@@ -1,41 +1,41 @@
 {
   "state": {
-    "ts": "2026-04-16T09:58:54.317000+00:00",
-    "ts_human": "2026-04-16 09:58 UTC",
-    "pct": 92.909,
-    "fujimori": 17.058,
-    "sanchez": 11.987,
-    "rla": 11.915,
+    "ts": "2026-04-17T10:00:38.789000+00:00",
+    "ts_human": "2026-04-17 10:00 UTC",
+    "pct": 93.23,
+    "fujimori": 17.069,
+    "sanchez": 11.969,
+    "rla": 11.932,
     "nieto": 11.075,
-    "belmont": 10.155,
-    "margen_sanch_rla": 5773,
-    "votos_sanchez": 1881625,
-    "votos_rla": 1875852,
-    "actas_jee": 4959,
-    "contabilizadas": 86188
+    "belmont": 10.15,
+    "margen_sanch_rla": 13624,
+    "votos_sanchez": 1891836,
+    "votos_rla": 1878212,
+    "actas_jee": 5555,
+    "contabilizadas": 86486
   },
   "delta": {
-    "fujimori": 0.004000000000001336,
-    "sanchez": -0.023999999999999133,
-    "rla": 0.01699999999999946,
-    "margen_sanch_rla": -6445
+    "fujimori": 0.010999999999999233,
+    "sanchez": -0.018000000000000682,
+    "rla": 0.017000000000001236,
+    "margen_sanch_rla": -5515
   },
   "alerts": [
     {
       "level": "critical",
-      "msg": "Modelo bayesiano: P(RLA supera Sánchez) = 43% en escenario central. Empate técnico estadístico."
+      "msg": "Modelo bayesiano: P(RLA supera Sánchez) = 42% en escenario central. Empate técnico estadístico."
+    },
+    {
+      "level": "critical",
+      "msg": "Universo en disputa ~1,022,539 votos (≈75× el margen). Definición del 2° lugar depende de resolución JEE."
     },
     {
       "level": "warning",
-      "msg": "Margen estrecho: |Sánchez−RLA| = 5,773 votos. Cualquier movimiento material de actas puede voltear el 2° lugar."
-    },
-    {
-      "level": "warning",
-      "msg": "Variación relevante vs corte anterior: el margen redujo en 6,445 votos."
+      "msg": "Variación relevante vs corte anterior: el margen redujo en 5,515 votos."
     },
     {
       "level": "info",
-      "msg": "Escrutinio aún incompleto (92.91%). Faltan cortes."
+      "msg": "Escrutinio aún incompleto (93.23%). Faltan cortes."
     }
   ],
   "findings": [
@@ -49,13 +49,13 @@
       "severity": "MEDIA",
       "id": "A1",
       "title": "Regiones con tasa de impugnación anómala (|z|>2): Extranjero (24.11%, z=+3.66)",
-      "detail": "1 región(es) fuera de ±2σ respecto al promedio regional de 7.05% (σ=4.66%)."
+      "detail": "1 región(es) fuera de ±2σ respecto al promedio regional de 7.06% (σ=4.66%)."
     },
     {
       "severity": "MEDIA",
       "id": "A2",
       "title": "Diferencia de tasa de impugnación Lima+Callao vs resto del país",
-      "detail": "Lima+Callao: 4.13% · Resto: 6.94% · Diferencia: -2.81pp (z=-17.17, p=0). Estadísticamente significativa al 1%. La asimetría NO es perjudicial para candidatos con mayor votación en Lima+Callao."
+      "detail": "Lima+Callao: 4.13% · Resto: 6.94% · Diferencia: -2.81pp (z=-17.18, p=0). Estadísticamente significativa al 1%. La asimetría NO es perjudicial para candidatos con mayor votación en Lima+Callao."
     },
     {
       "severity": "INFO",
@@ -85,12 +85,12 @@
       "severity": "CRÍTICO",
       "id": "E1",
       "title": "Pase a 2ª vuelta depende de la resolución del JEE",
-      "detail": "Margen Sánchez−RLA (+5,898 votos, +0.038pp) es aproximadamente 195× menor que los votos contenidos en actas impugnadas + pendientes (~1,152,069). Bajo distribución proporcional al nacional, el margen final sería +6,336. Para empatar, RLA requiere 51.07% del subgrupo RLA+Sánchez en disputa (vs 49.92% histórico)."
+      "detail": "Margen Sánchez−RLA (+5,875 votos, +0.037pp) es aproximadamente 196× menor que los votos contenidos en actas impugnadas + pendientes (~1,150,973). Bajo distribución proporcional al nacional, el margen final sería +6,301. Para empatar, RLA requiere 51.07% del subgrupo RLA+Sánchez en disputa (vs 49.92% histórico)."
     },
     {
       "id": "G1",
       "severity": "MEDIA",
-      "title": "Asociación positiva entre tasa_impugnación y share_RLA por región (Pearson r=0.477, p=0.0138). Si TODAS las actas fuera se integran al ratio regional actual, margen final proyectado = +64 votos (vs margen actual +5,773). Empate estadístico. NOTA: correlación sensible a outliers (Spearman r=0.20 p=0.34 NO significativo; bootstrap CI95 incluye 0). La asociación es real en media pero está dominada por Lima y Extranjero."
+      "title": "Asociación positiva entre tasa_impugnación y share_RLA por región (Pearson r=0.476, p=0.0139). Si TODAS las actas fuera se integran al ratio regional actual, margen final proyectado = +8 votos (vs margen actual +5,750). Empate estadístico. NOTA: correlación sensible a outliers (Spearman r=0.20 p=0.34 NO significativo; bootstrap CI95 incluye 0). La asociación es real en media pero está dominada por Lima y Extranjero."
     },
     {
       "id": "H1",
@@ -105,7 +105,7 @@
     {
       "id": "F1",
       "severity": "CRÍTICO",
-      "title": "Modelo bayesiano: P(RLA supera Sánchez) = 42.6% central / 42.2% mixto (n=10,000 simulaciones)"
+      "title": "Modelo bayesiano: P(RLA supera Sánchez) = 42.5% central / 43.4% mixto (n=10,000 simulaciones)"
     },
     {
       "id": "M1",
@@ -116,6 +116,12 @@
       "id": "M2",
       "severity": "MEDIA",
       "title": "Clustering espacial positivo significativo en: share_rla"
+    },
+    {
+      "id": "A0",
+      "severity": "MEDIA",
+      "title": "A0 — Inconsistencia agregacion ONPE: 21 actas no reconcilian nacional vs regional (por debajo del margen)",
+      "description": "Reconciliacion interna entre el agregado nacional publicado por ONPE y la suma desagregada de las 26 regiones (25 departamentos + Extranjero). No prueba error en conteo de votos; demuestra inconsistencia de la capa de presentacion/agregacion. Requiere explicacion formal de ONPE."
     }
   ],
   "series": [
@@ -1046,22 +1052,30 @@
       "rla": 11.915,
       "nieto": 11.075,
       "belmont": 10.155
+    },
+    {
+      "ts": "2026-04-17T10:00:38.789000+00:00",
+      "fujimori": 17.069,
+      "sanchez": 11.969,
+      "rla": 11.932,
+      "nieto": 11.075,
+      "belmont": 10.15
     }
   ],
   "contrafactual": [
     {
       "name": "Lima",
-      "actas_fuera": 1449,
-      "rla": 19.935,
-      "sanch": 3.267,
-      "delta": 50361.70452600907
+      "actas_fuera": 1406,
+      "rla": 19.936,
+      "sanch": 3.266,
+      "delta": 48872.76298395891
     },
     {
       "name": "Extranjero",
-      "actas_fuera": 804,
+      "actas_fuera": 756,
       "rla": 25.955,
       "sanch": 2.497,
-      "delta": 23201.44744851064
+      "delta": 21230.286548091775
     },
     {
       "name": "Callao",
@@ -1079,10 +1093,10 @@
     },
     {
       "name": "Arequipa",
-      "actas_fuera": 90,
-      "rla": 10.634,
+      "actas_fuera": 88,
+      "rla": 10.632,
       "sanch": 10.049,
-      "delta": 110.01348327272743
+      "delta": 107.19602211776112
     },
     {
       "name": "Tumbes",
@@ -1135,10 +1149,10 @@
     },
     {
       "name": "Loreto",
-      "actas_fuera": 424,
-      "rla": 6.765,
-      "sanch": 9.931,
-      "delta": -1709.01487866256
+      "actas_fuera": 417,
+      "rla": 6.76,
+      "sanch": 9.912,
+      "delta": -1675.1881728421058
     },
     {
       "name": "Madre de Dios",
@@ -1176,18 +1190,18 @@
       "delta": -3359.930518421052
     },
     {
+      "name": "Huancavelica",
+      "actas_fuera": 63,
+      "rla": 2.347,
+      "sanch": 43.377,
+      "delta": -3519.1247890909085
+    },
+    {
       "name": "Áncash",
       "actas_fuera": 257,
       "rla": 6.022,
       "sanch": 14.936,
       "delta": -3587.845545499222
-    },
-    {
-      "name": "Huancavelica",
-      "actas_fuera": 65,
-      "rla": 2.348,
-      "sanch": 43.38,
-      "delta": -3631.070454966888
     },
     {
       "name": "Ayacucho",
@@ -1205,24 +1219,24 @@
     },
     {
       "name": "Puno",
-      "actas_fuera": 105,
+      "actas_fuera": 106,
       "rla": 1.921,
-      "sanch": 24.82,
-      "delta": -4614.583247114217
-    },
-    {
-      "name": "Huánuco",
-      "actas_fuera": 212,
-      "rla": 5.98,
-      "sanch": 29.436,
-      "delta": -7310.224906341005
+      "sanch": 24.819,
+      "delta": -4658.231773746582
     },
     {
       "name": "Cusco",
-      "actas_fuera": 352,
-      "rla": 4.895,
-      "sanch": 22.027,
-      "delta": -10645.986164472597
+      "actas_fuera": 177,
+      "rla": 4.77,
+      "sanch": 22.661,
+      "delta": -5532.767964277457
+    },
+    {
+      "name": "Huánuco",
+      "actas_fuera": 204,
+      "rla": 5.979,
+      "sanch": 29.418,
+      "delta": -7032.847710322883
     },
     {
       "name": "Cajamarca",
@@ -1242,14 +1256,21 @@
         "AP Elections Research — Race Call protocol"
       ],
       "n_simulations": 10000,
-      "seed": 20260417
+      "seed_base": 20260417,
+      "seed_offsets": {
+        "pesimista": 1,
+        "central": 2,
+        "optimista": 3,
+        "mix": 4,
+        "hist_central": 5
+      }
     },
     "estado_actual": {
-      "sanchez": 1881625,
-      "rla": 1875852,
-      "margen": 5773,
-      "actas_fuera": 6338,
-      "votos_fuera_estimado": 1073620
+      "sanchez": 1881664,
+      "rla": 1875914,
+      "margen": 5750,
+      "actas_fuera": 6332,
+      "votos_fuera_estimado": 1072906
     },
     "escenarios": {
       "pesimista": {
@@ -1258,16 +1279,16 @@
           "b": 5.0,
           "mean_integration": 0.2857142857142857
         },
-        "p_rla_supera_sanchez": 0.3697,
-        "p_sanchez_mantiene": 0.6303000000000001,
+        "p_rla_supera_sanchez": 0.366,
+        "p_sanchez_mantiene": 0.634,
         "margen_final": {
-          "p5": -21770.707354341623,
-          "p25": -5390.434515500441,
-          "p50": 5337.78459631966,
-          "p75": 14586.291839558398,
-          "p95": 26330.997329910584,
-          "mean": 4112.070889460019,
-          "std": 14620.584893953725
+          "p5": -22184.915529633206,
+          "p25": -5328.671261979442,
+          "p50": 5277.588750694995,
+          "p75": 14748.773749362852,
+          "p95": 26036.003931792184,
+          "mean": 4071.277824952622,
+          "std": 14737.733234057428
         }
       },
       "central": {
@@ -1276,16 +1297,16 @@
           "b": 5.0,
           "mean_integration": 0.5
         },
-        "p_rla_supera_sanchez": 0.4259,
-        "p_sanchez_mantiene": 0.5741,
+        "p_rla_supera_sanchez": 0.4247,
+        "p_sanchez_mantiene": 0.5752999999999999,
         "margen_final": {
-          "p5": -19684.95625147277,
-          "p25": -7030.474227615516,
-          "p50": 2736.519272132078,
-          "p75": 12480.259559712838,
-          "p95": 25463.897696739023,
-          "mean": 2752.5218736004585,
-          "std": 13790.33416456757
+          "p5": -20307.179676857602,
+          "p25": -7103.916437305335,
+          "p50": 2764.3478431142867,
+          "p75": 12262.702934839239,
+          "p95": 24998.42960996564,
+          "mean": 2553.5094132811396,
+          "std": 13805.58946814524
         }
       },
       "optimista": {
@@ -1294,31 +1315,31 @@
           "b": 2.0,
           "mean_integration": 0.7142857142857143
         },
-        "p_rla_supera_sanchez": 0.4922,
-        "p_sanchez_mantiene": 0.5078,
+        "p_rla_supera_sanchez": 0.4934,
+        "p_sanchez_mantiene": 0.5065999999999999,
         "margen_final": {
-          "p5": -20697.828864905205,
-          "p25": -9140.66983664973,
-          "p50": 300.1357559738681,
-          "p75": 10871.10568176664,
-          "p95": 27923.84601914784,
-          "mean": 1459.9461891787475,
-          "std": 14737.085005234347
+          "p5": -20476.235526352095,
+          "p25": -9305.724691904907,
+          "p50": 233.39965278236195,
+          "p75": 11069.412779844075,
+          "p95": 27597.82170333111,
+          "mean": 1471.532709671397,
+          "std": 14683.545173163595
         }
       }
     },
     "escenario_mixto": {
       "descripcion": "Mezcla uniforme de pesimista/central/optimista (máxima incertidumbre sobre tasa JEE)",
-      "p_rla_supera_sanchez": 0.42244224422442245,
-      "p_sanchez_mantiene": 0.5775577557755776,
+      "p_rla_supera_sanchez": 0.43374337433743376,
+      "p_sanchez_mantiene": 0.5662566256625663,
       "margen_final": {
-        "p5": -20401.486732667243,
-        "p25": -7126.586890382343,
-        "p50": 2914.8641324304044,
-        "p75": 12887.828092059353,
-        "p95": 26238.17138918621,
-        "mean": 2903.3596437726037,
-        "std": 14240.598739946663
+        "p5": -21029.159008453902,
+        "p25": -7772.98375198117,
+        "p50": 2569.90244954871,
+        "p75": 12571.376662344206,
+        "p95": 25343.355297857874,
+        "mean": 2384.7714159627053,
+        "std": 14315.929390848987
       }
     },
     "regiones_pivote": [
@@ -1405,169 +1426,169 @@
     ],
     "histograma_central": [
       {
-        "center": -45243.784739409704,
+        "center": -45200.10739124914,
         "count": 1
       },
       {
-        "center": -42885.44885674812,
+        "center": -42795.10239009578,
+        "count": 0
+      },
+      {
+        "center": -40390.09738894242,
         "count": 1
       },
       {
-        "center": -40527.112974086514,
-        "count": 3
+        "center": -37985.09238778906,
+        "count": 9
       },
       {
-        "center": -38168.77709142491,
-        "count": 7
+        "center": -35580.0873866357,
+        "count": 8
       },
       {
-        "center": -35810.441208763325,
-        "count": 17
-      },
-      {
-        "center": -33452.10532610172,
-        "count": 19
-      },
-      {
-        "center": -31093.769443440127,
-        "count": 34
-      },
-      {
-        "center": -28735.433560778532,
-        "count": 52
-      },
-      {
-        "center": -26377.097678116937,
-        "count": 97
-      },
-      {
-        "center": -24018.761795455343,
-        "count": 103
-      },
-      {
-        "center": -21660.425912793744,
-        "count": 163
-      },
-      {
-        "center": -19302.09003013215,
-        "count": 216
-      },
-      {
-        "center": -16943.75414747055,
-        "count": 258
-      },
-      {
-        "center": -14585.418264808954,
-        "count": 301
-      },
-      {
-        "center": -12227.082382147357,
-        "count": 354
-      },
-      {
-        "center": -9868.746499485762,
-        "count": 491
-      },
-      {
-        "center": -7510.410616824167,
-        "count": 469
-      },
-      {
-        "center": -5152.074734162572,
-        "count": 564
-      },
-      {
-        "center": -2793.7388515009734,
-        "count": 620
-      },
-      {
-        "center": -435.4029688393748,
-        "count": 704
-      },
-      {
-        "center": 1922.9329138222201,
-        "count": 641
-      },
-      {
-        "center": 4281.268796483815,
-        "count": 643
-      },
-      {
-        "center": 6639.60467914541,
-        "count": 617
-      },
-      {
-        "center": 8997.940561807005,
-        "count": 591
-      },
-      {
-        "center": 11356.276444468604,
-        "count": 508
-      },
-      {
-        "center": 13714.612327130202,
-        "count": 505
-      },
-      {
-        "center": 16072.948209791797,
-        "count": 445
-      },
-      {
-        "center": 18431.284092453396,
-        "count": 379
-      },
-      {
-        "center": 20789.61997511499,
-        "count": 318
-      },
-      {
-        "center": 23147.955857776586,
-        "count": 272
-      },
-      {
-        "center": 25506.29174043818,
-        "count": 191
-      },
-      {
-        "center": 27864.627623099776,
-        "count": 152
-      },
-      {
-        "center": 30222.963505761378,
-        "count": 87
-      },
-      {
-        "center": 32581.299388422973,
-        "count": 76
-      },
-      {
-        "center": 34939.63527108457,
-        "count": 49
-      },
-      {
-        "center": 37297.97115374616,
+        "center": -33175.08238548234,
         "count": 24
       },
       {
-        "center": 39656.30703640776,
-        "count": 14
+        "center": -30770.07738432898,
+        "count": 44
       },
       {
-        "center": 42014.64291906936,
+        "center": -28365.07238317562,
+        "count": 54
+      },
+      {
+        "center": -25960.06738202226,
+        "count": 81
+      },
+      {
+        "center": -23555.062380868898,
+        "count": 121
+      },
+      {
+        "center": -21150.057379715538,
+        "count": 139
+      },
+      {
+        "center": -18745.052378562177,
+        "count": 215
+      },
+      {
+        "center": -16340.047377408817,
+        "count": 273
+      },
+      {
+        "center": -13935.042376255456,
+        "count": 365
+      },
+      {
+        "center": -11530.037375102096,
+        "count": 421
+      },
+      {
+        "center": -9125.032373948736,
+        "count": 487
+      },
+      {
+        "center": -6720.027372795375,
+        "count": 586
+      },
+      {
+        "center": -4315.022371642015,
+        "count": 612
+      },
+      {
+        "center": -1910.0173704886547,
+        "count": 685
+      },
+      {
+        "center": 494.98763066470565,
+        "count": 718
+      },
+      {
+        "center": 2899.992631818066,
+        "count": 665
+      },
+      {
+        "center": 5304.997632971426,
+        "count": 668
+      },
+      {
+        "center": 7710.002634124787,
+        "count": 629
+      },
+      {
+        "center": 10115.007635278147,
+        "count": 584
+      },
+      {
+        "center": 12520.012636431507,
+        "count": 504
+      },
+      {
+        "center": 14925.017637584868,
+        "count": 476
+      },
+      {
+        "center": 17330.022638738228,
+        "count": 361
+      },
+      {
+        "center": 19735.02763989159,
+        "count": 325
+      },
+      {
+        "center": 22140.03264104495,
+        "count": 285
+      },
+      {
+        "center": 24545.03764219831,
+        "count": 224
+      },
+      {
+        "center": 26950.04264335167,
+        "count": 141
+      },
+      {
+        "center": 29355.04764450503,
+        "count": 108
+      },
+      {
+        "center": 31760.05264565839,
+        "count": 76
+      },
+      {
+        "center": 34165.05764681175,
+        "count": 56
+      },
+      {
+        "center": 36570.06264796511,
+        "count": 23
+      },
+      {
+        "center": 38975.06764911847,
+        "count": 16
+      },
+      {
+        "center": 41380.07265027183,
+        "count": 8
+      },
+      {
+        "center": 43785.07765142519,
         "count": 6
       },
       {
-        "center": 44372.978801730955,
-        "count": 6
+        "center": 46190.08265257855,
+        "count": 0
       },
       {
-        "center": 46731.31468439255,
-        "count": 2
+        "center": 48595.08765373191,
+        "count": 1
       }
     ]
   },
   "meta": {
-    "generated_at": "2026-04-17T16:10:31.616569+00:00",
+    "generated_at": "2026-04-18T20:33:23.531406+00:00",
     "source": "ONPE vía proxy CORS + captura atómica con SHA-256",
     "repo": "https://github.com/neuracode/auditoria-eg2026"
   }
