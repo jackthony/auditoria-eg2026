@@ -92,6 +92,7 @@ def iterate(do_publish: bool):
     run([PY, "-m", "src.analysis.run_all"])
     run([PY, "scripts/build_dashboard_json.py"])
     run([PY, "scripts/build_og_image.py"])
+    run([PY, "scripts/telegram_notify.py"])  # no-op si TELEGRAM_* no estan en env
     if do_publish:
         publish()
 
