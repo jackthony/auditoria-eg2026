@@ -102,3 +102,74 @@ auditoria-eg2026/
 - No se debe editar NUNCA un MANIFEST.jsonl ni archivos bajo `captures/{ts}/raw/`.
 - No usar Benford como evidencia única de fraude — siempre acompañar de otros tests y contexto.
 - Budget de infra: $0 (todo local).
+
+---
+
+## ECC Workflow (POLÍTICA OBLIGATORIA — auto-disparada por hooks)
+
+**Regla cero:** Para CUALQUIER cambio de código, UX o documento jurídico, se ejecuta el ciclo ECC. Los hooks en `.claude/settings.json` recuerdan automáticamente qué corresponde según el archivo modificado.
+
+**Mapa hook → skill ECC:**
+
+| Trigger | Acción esperada |
+|---------|------------------|
+| `SessionStart` | Leer `MEMORY.md`, recordar política ECC, ver `§UX_UI_BACKLOG`. |
+| `PostToolUse` Edit/Write en `web/**` o `scripts/build_dashboard_json.py` | `/ecc:quality-gate` + `/ecc:e2e` (smoke dashboard) antes de commit. Actualizar OG image y hash de `data.json`. |
+| `PostToolUse` Edit/Write en `src/analysis/**` o `src/process/**` | `/ecc:test-coverage` + `/ecc:code-review` (python-reviewer + security-reviewer). |
+| `PostToolUse` Edit/Write en `src/capture/**` | `/ecc:verify` + `/ecc:code-review` (security-reviewer obligatorio). |
+| `PostToolUse` Edit/Write en `docs/MEMORIAL_*` o `METHODOLOGY*` | Validar referencias cruzadas. Commit con prefijo `docs(memorial|methodology):`. |
+| `PreToolUse` Bash con `git commit` | Confirmar que se ejecutaron quality-gate, code-review y verify. |
+| `PreToolUse` Bash con `git push --force` o `git reset --hard` | Confirmar con usuario + crear backup branch. |
+| `Stop` | `/ecc:checkpoint` + `/ecc:save-session`. Issue/TODO si quedó UX a medias. |
+
+**Ciclo estándar para nuevo ticket UX/UI:**
+
+```
+/ecc:plan          (planifica el ticket sobre UX_UI_BACKLOG)
+/ecc:tdd           (tests primero — Playwright para UX, pytest para data)
+[implementación]
+/ecc:code-review   (python-reviewer si toca src/, typescript-reviewer si toca web/)
+/ecc:quality-gate  (lint + format + types + size budget)
+/ecc:verify        (regen data.json + verify_manifest)
+/ecc:e2e           (smoke en jackthony.github.io/auditoria-eg2026/)
+[git commit]
+/ecc:checkpoint    (snapshot de progreso)
+```
+
+---
+
+## UX_UI_BACKLOG (priorizado, dispara `/ecc:plan` por ticket)
+
+> Cada ítem va con esfuerzo estimado y un único responsable humano (Tony / Jack). Marcar `[x]` al completar. Sprint 1 = quick wins (alto impacto / bajo costo). El loop `--publish` debe seguir verde tras cada cambio.
+
+### Sprint 1 — Quick wins (~10 h totales)
+- [ ] **MAPA-01** Mapa choropleth Perú (Leaflet + GeoJSON regiones) coloreado por margen RLA−Sánchez. Esfuerzo 4 h. Owner: Tony.
+- [ ] **LIVE-01** Auto-refresh `data.json` cada 5 min sin reload + badge "EN VIVO" pulsante + "Actualizado hace X min". Esfuerzo 1.5 h. Owner: Tony.
+- [ ] **SHARE-01** Botón "Compartir" → X / WhatsApp / Telegram con texto pre-armado del corte. Esfuerzo 1 h. Owner: Tony.
+- [ ] **OG-01** OG image dinámica generada en cada loop (margen + corte + timestamp), referenciada en `<meta property="og:image">`. Esfuerzo 2 h. Owner: Tony.
+- [ ] **HASH-01** Hash SHA-256 del último `data.json` visible en footer + link "verificar inline". Esfuerzo 30 min. Owner: Tony.
+- [ ] **FOOT-01** Footer con redes (TikTok / IG / GitHub) + link directo al memorial PDF. Esfuerzo 30 min. Owner: Tony.
+
+### Sprint 2 — Diferenciador técnico (~23 h)
+- [ ] **TABS-01** Tabs (Resultado · Hallazgos · Forecast · Verificación). Esfuerzo 2 h.
+- [ ] **TABLE-01** Tabla findings con sort/filter por severidad CRÍTICO/MEDIA/BAJA y búsqueda por test. Esfuerzo 3 h.
+- [ ] **DIFF-01** Diff visual entre snapshots (slider de tiempo, "antes/después" por candidato y región). Esfuerzo 4 h.
+- [ ] **FCAST-INT-01** Forecast bayesiano interactivo: slider "% actas RLA pendientes" → P(2°) recalcula en cliente. Esfuerzo 6 h.
+- [ ] **TG-BOT-01** Bot Telegram `@AuditoriaEG2026` que postea cambios ≥0.1 pp en margen o nuevo finding CRÍTICO. Esfuerzo 3 h.
+- [ ] **API-01** Endpoint `/api/findings.json` y `/api/forecast.json` servidos desde mismo gh-pages para terceros consumidores. Esfuerzo 1 h.
+- [ ] **HIST-01** Comparador 2026 vs 2021 vs 2016 (gráfico paralelo de ausentismo y curvas de impugnación). Esfuerzo 4 h.
+
+### Sprint 3 — Diferenciación absoluta (~1 semana)
+- [ ] **MESA-01** Mesa-a-mesa: ingestar dump cuando ONPE libere; búsqueda por mesa/local/distrito.
+- [ ] **CALAG-MAP-01** Mapa de las 211 mesas no instaladas (CALAG): círculos en Lima con popup de electores afectados.
+- [ ] **PROC-TL-01** Timeline procesal denuncia JNE→ONPE: hitos auto-actualizados desde `evidence/legal_references/`.
+- [ ] **IPFS-01** IPFS pinning de cada captura → hash IPFS junto al SHA-256 (timestamp criptográfico irrefutable).
+- [ ] **PERITO-01** Modo perito: ZIP firmado con captura + análisis + memorial, listo para Fiscalía.
+- [ ] **I18N-01** Multi-idioma EN para visibilidad internacional.
+
+### Sueño (sin fecha, requiere alineación)
+- [ ] **ML-ANOM** Isolation forest sobre serie temporal para detectar saltos atípicos automáticamente.
+- [ ] **NEEDLE** Dashboard tipo NYT Election Needle (aguja oscilante con confidence interval bayesiano).
+- [ ] **NOTARY** Hash-chain pública firmada + publicada en blockchain (Polygon, gas mínimo).
+- [ ] **PYPI** Empaquetar como `pip install electoral-audit` para reuso en Bolivia 2025 / Ecuador 2025 / Colombia 2027.
+- [ ] **PEER** Peer-review formal con MIT Election Lab / Linzer / Mebane.

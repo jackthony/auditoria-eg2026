@@ -78,8 +78,10 @@ secrets/
 
 # ──────────────────────────────────────────────────────────────
 # Claude Code — contexto interno, NO publicar
+# Excepción: settings.json (hooks ECC compartidos del proyecto)
 # ──────────────────────────────────────────────────────────────
-.claude/
+.claude/*
+!.claude/settings.json
 
 # ──────────────────────────────────────────────────────────────
 # Informe privado para cliente original (RP) — NO publicar
