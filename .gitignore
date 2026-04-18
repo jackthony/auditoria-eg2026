@@ -76,6 +76,9 @@ evidence/personero_copies/*.jpeg
 *.pem
 secrets/
 
+# PERITO-01 — ZIPs periciales generados (artefactos locales)
+reports/perito/
+
 # ──────────────────────────────────────────────────────────────
 # Claude Code — contexto interno, NO publicar
 # Excepción: settings.json (hooks ECC compartidos del proyecto)
