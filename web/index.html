@@ -56,12 +56,30 @@
   .leaflet-tooltip.region-tip{background:var(--navy);color:#fff;border:0;font-size:.85rem;
     padding:.5rem .7rem;border-radius:4px;box-shadow:0 2px 6px rgba(0,0,0,.25)}
   .leaflet-tooltip.region-tip strong{color:var(--accent)}
+  .live-badge{display:inline-flex;align-items:center;gap:.4rem;background:rgba(46,107,63,.15);
+    color:#A8E6B4;padding:.25rem .7rem;border-radius:99px;font-size:.78rem;font-weight:600;
+    border:1px solid rgba(168,230,180,.4);margin-left:.6rem;vertical-align:middle}
+  .live-badge .dot{width:8px;height:8px;border-radius:50%;background:#3BD16F;
+    box-shadow:0 0 0 0 rgba(59,209,111,.7);animation:pulse 1.6s infinite}
+  .live-badge.stale{background:rgba(199,123,30,.15);color:#FFD9A8;border-color:rgba(255,217,168,.4)}
+  .live-badge.stale .dot{background:#C77B1E;animation:none}
+  @keyframes pulse{0%{box-shadow:0 0 0 0 rgba(59,209,111,.7)}
+    70%{box-shadow:0 0 0 10px rgba(59,209,111,0)}
+    100%{box-shadow:0 0 0 0 rgba(59,209,111,0)}}
+  .refresh-spinner{display:inline-block;width:10px;height:10px;border:2px solid #fff;
+    border-top-color:transparent;border-radius:50%;animation:spin .8s linear infinite;
+    vertical-align:middle;margin-left:.4rem;opacity:0;transition:opacity .2s}
+  .refresh-spinner.on{opacity:1}
+  @keyframes spin{to{transform:rotate(360deg)}}
 </style>
 </head>
 <body>
 <header>
   <h1>Monitor técnico-estadístico · Elecciones Generales 2026 Perú</h1>
-  <div class="sub">Aporte ciudadano · data pública · hashes SHA-256 · reproducible ·
+  <div class="sub">
+    <span class="live-badge" id="live-badge"><span class="dot"></span><span id="live-text">EN VIVO</span></span>
+    <span class="refresh-spinner" id="refresh-spin"></span>
+    Aporte ciudadano · data pública · hashes SHA-256 · reproducible ·
     <a href="https://github.com/neuracode/auditoria-eg2026" style="color:#fff" target="_blank">repo</a> ·
     <a href="MEMORIAL_TECNICO_FISCAL.pdf" style="color:#fff;background:var(--accent);padding:.2rem .6rem;border-radius:3px;font-weight:600" target="_blank">📄 Memorial técnico al Fiscal de la Nación</a></div>
 </header>
@@ -208,25 +226,125 @@
 
 </div>
 
+<section class="card" style="max-width:1200px;margin:1rem auto;background:var(--bg-soft)">
+  <h2 style="margin-top:0">Compartir este corte</h2>
+  <p style="font-size:.9rem;color:var(--muted);margin:.2rem 0 .8rem">
+    Texto pre-armado con el margen actual. Se actualiza automáticamente.
+  </p>
+  <div id="share-buttons" style="display:flex;flex-wrap:wrap;gap:.5rem"></div>
+</section>
+
 <footer>
   <p><strong>Autoría:</strong> Neuracode — Jack Aguilar · Aporte ciudadano independiente. Sin afiliación política.</p>
-  <p>Código: MIT · Documentos: CC-BY-4.0 · <a href="https://github.com/neuracode/auditoria-eg2026" target="_blank">GitHub</a></p>
+  <p>Código: MIT · Documentos: CC-BY-4.0</p>
+  <p style="margin:.6rem 0">
+    <a href="https://www.tiktok.com/@jackdeneuracode" target="_blank" style="margin:0 .5rem">TikTok @JackDeNeuracode</a> ·
+    <a href="https://instagram.com/neuracode" target="_blank" style="margin:0 .5rem">IG @neuracode</a> ·
+    <a href="https://facebook.com/neuracode" target="_blank" style="margin:0 .5rem">FB @neuracode</a> ·
+    <a href="https://github.com/jackthony/auditoria-eg2026" target="_blank" style="margin:0 .5rem">GitHub @jackthony</a> ·
+    <a href="MEMORIAL_TECNICO_FISCAL.pdf" target="_blank" style="margin:0 .5rem;font-weight:600;color:var(--navy)">📄 Memorial PDF</a>
+  </p>
+  <p class="mono" id="data-hash" style="font-size:.75rem;margin-top:.6rem;color:var(--muted)">
+    SHA-256 data.json: <span id="hash-val">—</span>
+    <a href="#" id="hash-verify" style="margin-left:.4rem">verificar</a>
+  </p>
 </footer>
 
 <script>
 const FMT_INT = new Intl.NumberFormat('es-PE');
 const FMT_PCT = n => (n==null?'—':n.toFixed(3)+'%');
 
+let _lastData = null;
+let _lastDataTs = null;
+function setSpin(on) {
+  document.getElementById('refresh-spin').classList.toggle('on', on);
+}
+function relativeTime(iso) {
+  if (!iso) return '';
+  const diff = (Date.now() - new Date(iso).getTime()) / 1000;
+  if (diff < 60) return `hace ${Math.round(diff)} s`;
+  if (diff < 3600) return `hace ${Math.round(diff/60)} min`;
+  if (diff < 86400) return `hace ${Math.round(diff/3600)} h`;
+  return `hace ${Math.round(diff/86400)} d`;
+}
+function refreshLiveBadge() {
+  const badge = document.getElementById('live-badge');
+  const txt = document.getElementById('live-text');
+  if (!_lastDataTs) { txt.textContent = 'cargando…'; return; }
+  const ageMin = (Date.now() - new Date(_lastDataTs).getTime()) / 60000;
+  // Stale > 30 min: badge naranja, sin pulso.
+  badge.classList.toggle('stale', ageMin > 30);
+  txt.textContent = ageMin > 30
+    ? `actualizado ${relativeTime(_lastDataTs)}`
+    : `EN VIVO · ${relativeTime(_lastDataTs)}`;
+}
 async function load() {
+  setSpin(true);
   try {
     const r = await fetch('data.json?t=' + Date.now());
     const d = await r.json();
+    _lastData = d;
+    _lastDataTs = (d.meta && d.meta.generated_at) || (d.state && d.state.ts) || new Date().toISOString();
     render(d);
+    refreshLiveBadge();
   } catch (e) {
     document.getElementById('alerts').innerHTML =
       '<div class="alert critical">No se pudo cargar data.json — ¿ya corriste el pipeline?</div>';
+  } finally {
+    setSpin(false);
   }
 }
+setInterval(refreshLiveBadge, 30 * 1000);
+
+async function computeHash(text) {
+  const buf = new TextEncoder().encode(text);
+  const h = await crypto.subtle.digest('SHA-256', buf);
+  return Array.from(new Uint8Array(h)).map(b => b.toString(16).padStart(2,'0')).join('');
+}
+async function updateHashAndShare() {
+  if (!_lastData) return;
+  const txt = JSON.stringify(_lastData);
+  const hash = await computeHash(txt);
+  const short = hash.slice(0,12) + '…' + hash.slice(-8);
+  const el = document.getElementById('hash-val');
+  el.textContent = short;
+  el.title = hash;
+  document.getElementById('hash-verify').onclick = (e) => {
+    e.preventDefault();
+    alert(`SHA-256 completo de data.json (calculado en tu navegador):\n\n${hash}\n\nReproducible con:\n  curl -s https://jackthony.github.io/auditoria-eg2026/data.json | sha256sum`);
+  };
+
+  // Share buttons.
+  const s = _lastData.state;
+  const url = 'https://jackthony.github.io/auditoria-eg2026/';
+  const fmt = new Intl.NumberFormat('es-PE');
+  const sign = s.margen_sanch_rla >= 0 ? '+' : '';
+  const msg = `📊 Auditoría EG2026 · al ${s.pct.toFixed(2)}% escrutado:\n` +
+              `Margen Sánchez−RLA = ${sign}${fmt.format(s.margen_sanch_rla)} votos\n` +
+              `Actas en JEE: ${fmt.format(s.actas_jee)}\n\n` +
+              `Data verificable + memorial al Fiscal: ${url}`;
+  const enc = encodeURIComponent(msg);
+  const buttons = [
+    {label:'X / Twitter', href:`https://twitter.com/intent/tweet?text=${enc}`, bg:'#000'},
+    {label:'WhatsApp',    href:`https://wa.me/?text=${enc}`, bg:'#25D366'},
+    {label:'Telegram',    href:`https://t.me/share/url?url=${encodeURIComponent(url)}&text=${enc}`, bg:'#229ED9'},
+    {label:'Copiar texto',href:'#copy', bg:'var(--navy)'},
+  ];
+  document.getElementById('share-buttons').innerHTML = buttons.map(b =>
+    `<a href="${b.href}" target="_blank" rel="noopener"
+        style="background:${b.bg};color:#fff;padding:.5rem 1rem;border-radius:4px;
+        text-decoration:none;font-weight:600;font-size:.88rem">${b.label}</a>`
+  ).join('');
+  document.querySelector('#share-buttons a[href="#copy"]').onclick = (e) => {
+    e.preventDefault();
+    navigator.clipboard.writeText(msg).then(() =>
+      e.target.textContent = '✓ Copiado'
+    );
+    setTimeout(() => { e.target.textContent = 'Copiar texto'; }, 2500);
+  };
+}
+const _origLoad = load;
+load = async function() { await _origLoad(); await updateHashAndShare(); };
 
 function render(d) {
   // KPIs
@@ -251,9 +369,10 @@ function render(d) {
     md.className = 'delta ' + (m > 0 ? 'up' : m < 0 ? 'down' : 'neutral');
   }
 
-  // Chart
+  // Chart (destruir instancia previa para auto-refresh sin leak).
   const ctx = document.getElementById('chart-time').getContext('2d');
-  new Chart(ctx, {
+  if (window._chartTime) window._chartTime.destroy();
+  window._chartTime = new Chart(ctx, {
     type: 'line',
     data: {
       labels: d.series.map(p => p.ts.substring(5, 16)),
@@ -350,7 +469,8 @@ function renderForecast(f) {
   // Histograma del margen (escenario central)
   const ctx = document.getElementById('chart-forecast').getContext('2d');
   const h = f.histograma_central;
-  new Chart(ctx, {
+  if (window._chartFcast) window._chartFcast.destroy();
+  window._chartFcast = new Chart(ctx, {
     type: 'bar',
     data: {
       labels: h.map(p => FMT_INT.format(Math.round(p.center))),
