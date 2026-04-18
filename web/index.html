@@ -166,6 +166,27 @@
     <div id="map-peru"></div>
   </section>
 
+  <section class="card" data-tab="resultado">
+    <h2>Comparar cortes — antes vs ahora</h2>
+    <p style="font-size:.9rem;color:var(--muted);margin:.2rem 0 .8rem">
+      Mové el slider para elegir un corte histórico y comparar contra el corte actual.
+      Δ = corte actual − corte seleccionado (en puntos porcentuales).
+    </p>
+    <div style="display:flex;align-items:center;gap:1rem;flex-wrap:wrap;margin-bottom:.8rem">
+      <input type="range" id="diff-slider" min="0" max="0" value="0" step="1" style="flex:1;min-width:200px">
+      <div style="font-size:.9rem"><strong>Corte A:</strong> <span id="diff-ts" class="mono">—</span></div>
+    </div>
+    <table id="diff-table">
+      <thead><tr>
+        <th>Candidato</th>
+        <th class="right">Corte A</th>
+        <th class="right">Ahora</th>
+        <th class="right">Δ pp</th>
+      </tr></thead>
+      <tbody></tbody>
+    </table>
+  </section>
+
   <div class="grid grid-main" data-tab="resultado" style="padding:0;margin-top:0">
     <section class="card">
       <h2>Serie temporal — 5 candidatos</h2>
@@ -477,6 +498,9 @@ function render(d) {
   // Mapa choropleth
   if (d.regions) renderMap(d.regions);
 
+  // DIFF slider snapshots
+  if (d.series && d.series.length > 1) renderDiff(d.series);
+
   // Forecast bayesiano (si existe)
   if (d.forecast) renderForecast(d.forecast);
 
@@ -661,6 +685,33 @@ async function renderMap(regions) {
     return div;
   };
   legend.addTo(map);
+}
+
+// DIFF — comparador de cortes (national).
+const CAND_LABELS = {fujimori:'Keiko Fujimori', sanchez:'Roberto Sánchez',
+  rla:'López Aliaga', nieto:'Nieto', belmont:'Belmont'};
+function renderDiff(series) {
+  const slider = document.getElementById('diff-slider');
+  const last = series[series.length - 1];
+  slider.max = series.length - 2;
+  if (parseInt(slider.value) > slider.max) slider.value = 0;
+  const draw = () => {
+    const a = series[parseInt(slider.value)];
+    document.getElementById('diff-ts').textContent =
+      a.ts.substring(0,16).replace('T',' ');
+    const rows = Object.keys(CAND_LABELS).map(k => {
+      const av = a[k], bv = last[k], d = bv - av;
+      const cls = Math.abs(d) < 0.01 ? 'neutral' : (d > 0 ? 'up' : 'down');
+      const sign = d >= 0 ? '+' : '';
+      return `<tr><td>${CAND_LABELS[k]}</td>
+        <td class="right mono">${av.toFixed(3)}%</td>
+        <td class="right mono">${bv.toFixed(3)}%</td>
+        <td class="right mono delta ${cls}"><strong>${sign}${d.toFixed(3)}</strong></td></tr>`;
+    }).join('');
+    document.querySelector('#diff-table tbody').innerHTML = rows;
+  };
+  slider.oninput = draw;
+  draw();
 }
 
 // Findings — sort/filter/search.
