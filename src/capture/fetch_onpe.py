@@ -121,16 +121,33 @@ def git_commit_hash() -> str | None:
 # ══════════════════════════════════════════════════════════════
 
 def fetch_endpoint(base: str, path: str, out_path: Path) -> dict:
-    """Descarga un endpoint y devuelve metadata para el manifiesto."""
-    url = base + path
+    """Descarga un endpoint con cache-busting agresivo.
+
+    El proxy CORS Cloudflare cachea /api/tracking con cf-cache-status=HIT
+    (age <60s). Mitigamos con: query param `_=<epoch_ms>` + headers
+    Cache-Control/Pragma. No garantiza bypass del Cache API interno del
+    worker, pero sí del cache CDN de Cloudflare.
+    """
+    cache_buster = int(datetime.now(timezone.utc).timestamp() * 1000)
+    sep = "&" if "?" in path else "?"
+    url = base + path + f"{sep}_={cache_buster}"
     started = utc_now_iso()
+    headers = {
+        "User-Agent": USER_AGENT,
+        "Cache-Control": "no-cache, no-store, must-revalidate",
+        "Pragma": "no-cache",
+    }
     try:
-        resp = requests.get(url, headers={"User-Agent": USER_AGENT}, timeout=TIMEOUT)
+        resp = requests.get(url, headers=headers, timeout=TIMEOUT)
         status = resp.status_code
         content = resp.content
+        cf_cache = resp.headers.get("cf-cache-status", "-")
+        cf_age = resp.headers.get("age", "-")
     except Exception as e:
         status = 0
         content = f"FETCH_ERROR: {e}".encode("utf-8")
+        cf_cache = "-"
+        cf_age = "-"
 
     out_path.parent.mkdir(parents=True, exist_ok=True)
     out_path.write_bytes(content)
@@ -142,6 +159,8 @@ def fetch_endpoint(base: str, path: str, out_path: Path) -> dict:
         "sha256": sha256_of(out_path),
         "http_status": status,
         "user_agent": USER_AGENT,
+        "cf_cache_status": cf_cache,
+        "cf_age": cf_age,
     }
 
 
