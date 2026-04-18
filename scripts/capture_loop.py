@@ -59,7 +59,7 @@ def publish() -> None:
     if not out:
         log.info("publish: sin cambios para publicar")
         return
-    rc, _ = git(["add", "captures/", "reports/", "web/data.json", "data/processed/"])
+    rc, _ = git(["add", "captures/", "reports/", "web/data.json", "web/og-image.png", "data/processed/"])
     if rc != 0:
         log.warning("publish: git add con warnings")
     ts = datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%MZ")
@@ -91,6 +91,7 @@ def iterate(do_publish: bool):
     run([PY, "src/process/build_dataset.py"])
     run([PY, "-m", "src.analysis.run_all"])
     run([PY, "scripts/build_dashboard_json.py"])
+    run([PY, "scripts/build_og_image.py"])
     if do_publish:
         publish()
 
