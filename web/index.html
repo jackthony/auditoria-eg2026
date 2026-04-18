@@ -80,6 +80,28 @@
     vertical-align:middle;margin-left:.4rem;opacity:0;transition:opacity .2s}
   .refresh-spinner.on{opacity:1}
   @keyframes spin{to{transform:rotate(360deg)}}
+  .tabs-nav{max-width:1200px;margin:0 auto;padding:.6rem 1.5rem 0;display:flex;gap:.3rem;
+    border-bottom:1px solid var(--line);overflow-x:auto;flex-wrap:wrap}
+  .tab-btn{background:transparent;border:0;border-bottom:3px solid transparent;
+    padding:.7rem 1.1rem;font-size:.95rem;font-weight:600;color:var(--muted);
+    cursor:pointer;font-family:inherit;white-space:nowrap;transition:all .15s}
+  .tab-btn:hover{color:var(--navy);background:var(--bg-soft)}
+  .tab-btn.active{color:var(--navy);border-bottom-color:var(--accent)}
+  .tab-btn .badge{background:var(--red);color:#fff;font-size:.7rem;padding:.05rem .4rem;
+    border-radius:99px;margin-left:.4rem;font-weight:700}
+  [data-tab]{display:none}
+  [data-tab].active{display:block}
+  .chip{padding:.35rem .8rem;border:1px solid var(--line);border-radius:99px;
+    background:#fff;cursor:pointer;font-size:.82rem;font-weight:600;color:var(--muted);
+    transition:all .15s;font-family:inherit}
+  .chip:hover{border-color:var(--navy);color:var(--navy)}
+  .chip.active{background:var(--navy);color:#fff;border-color:var(--navy)}
+  .chip.crit.active{background:var(--red);border-color:var(--red)}
+  .chip.med.active{background:var(--orange);border-color:var(--orange)}
+  .chip.baja.active{background:var(--green);border-color:var(--green)}
+  th[data-sort]:hover{background:#1a3d68}
+  .sort-arr{font-size:.75rem;opacity:.7;margin-left:.2rem}
+  .finding-detail{font-size:.85rem;color:var(--muted);padding:.4rem 0 .8rem;line-height:1.5}
 </style>
 </head>
 <body>
@@ -92,6 +114,13 @@
     <a href="https://github.com/neuracode/auditoria-eg2026" style="color:#fff" target="_blank">repo</a> ·
     <a href="MEMORIAL_TECNICO_FISCAL.pdf" style="color:#fff;background:var(--accent);padding:.2rem .6rem;border-radius:3px;font-weight:600" target="_blank">📄 Memorial técnico al Fiscal de la Nación</a></div>
 </header>
+
+<nav class="tabs-nav" id="tabs-nav" role="tablist">
+  <button class="tab-btn active" data-tab-btn="resultado" role="tab">Resultado</button>
+  <button class="tab-btn" data-tab-btn="hallazgos" role="tab">Hallazgos <span class="badge" id="badge-crit">·</span></button>
+  <button class="tab-btn" data-tab-btn="forecast" role="tab">Forecast</button>
+  <button class="tab-btn" data-tab-btn="verif" role="tab">Verificación</button>
+</nav>
 
 <div class="grid" style="padding-bottom:0">
   <section class="card" style="border-left:6px solid var(--accent);background:#FDF9F0">
@@ -115,7 +144,7 @@
 
 <div class="grid">
 
-  <section class="card">
+  <section class="card active" data-tab="resultado">
     <h2>Estado del escrutinio</h2>
     <div class="kpi-grid">
       <div class="kpi"><div class="lbl">Escrutinio oficial</div><div class="val" id="kpi-pct">—</div><div class="updated" id="kpi-pct-ts"></div></div>
@@ -127,7 +156,7 @@
     </div>
   </section>
 
-  <section class="card">
+  <section class="card active" data-tab="resultado">
     <h2>Mapa por región — margen Sánchez vs López Aliaga</h2>
     <p style="font-size:.9rem;color:var(--muted);margin:.2rem 0 .8rem">
       Cada departamento coloreado por margen absoluto <strong>Sánchez − RLA</strong> al corte actual.
@@ -137,7 +166,7 @@
     <div id="map-peru"></div>
   </section>
 
-  <div class="grid grid-main" style="padding:0;margin-top:0">
+  <div class="grid grid-main" data-tab="resultado" style="padding:0;margin-top:0">
     <section class="card">
       <h2>Serie temporal — 5 candidatos</h2>
       <div class="chart-wrap"><canvas id="chart-time"></canvas></div>
@@ -150,15 +179,26 @@
     </section>
   </div>
 
-  <section class="card">
+  <section class="card" data-tab="hallazgos">
     <h2>Hallazgos al corte</h2>
+    <div class="findings-toolbar" style="display:flex;gap:.6rem;flex-wrap:wrap;margin:.4rem 0 .8rem">
+      <input type="search" id="findings-search" placeholder="Buscar por título, detalle o ID…"
+        style="flex:1;min-width:200px;padding:.5rem .7rem;border:1px solid var(--line);border-radius:4px;font-size:.9rem">
+      <div id="findings-filters" style="display:flex;gap:.3rem;flex-wrap:wrap"></div>
+    </div>
     <table id="findings">
-      <thead><tr><th>ID</th><th>Severidad</th><th>Hallazgo</th></tr></thead>
+      <thead><tr>
+        <th data-sort="id" style="cursor:pointer;user-select:none">ID <span class="sort-arr"></span></th>
+        <th data-sort="severity" style="cursor:pointer;user-select:none">Severidad <span class="sort-arr"></span></th>
+        <th data-sort="title" style="cursor:pointer;user-select:none">Hallazgo <span class="sort-arr"></span></th>
+        <th></th>
+      </tr></thead>
       <tbody></tbody>
     </table>
+    <p style="font-size:.8rem;color:var(--muted);margin-top:.5rem" id="findings-count"></p>
   </section>
 
-  <section class="card" id="forecast-card" style="display:none">
+  <section class="card" data-tab="forecast" id="forecast-card">
     <h2>Proyección bayesiana — P(2° lugar)</h2>
     <p style="font-size:.9rem;color:var(--muted)">
       Modelo jerárquico bayesiano Dirichlet-Multinomial con prior Beta sobre tasa de integración
@@ -178,7 +218,7 @@
     </p>
   </section>
 
-  <section class="card">
+  <section class="card" data-tab="forecast">
     <h2>Regiones pivote (forecast)</h2>
     <p style="font-size:.9rem;color:var(--muted)">
       Top 10 regiones con mayor impacto esperado en el margen, ordenadas por
@@ -190,7 +230,7 @@
     </table>
   </section>
 
-  <section class="card">
+  <section class="card" data-tab="forecast">
     <h2>Proyección contrafactual por región</h2>
     <p style="font-size:.9rem;color:var(--muted)">
       Ganancia / pérdida neta RLA vs Sánchez si todas las actas impugnadas y pendientes
@@ -202,7 +242,7 @@
     </table>
   </section>
 
-  <section class="card">
+  <section class="card" data-tab="hallazgos">
     <h2>Contexto — "Teoría morrocoy" (comparada)</h2>
     <p>
       <strong>Hipótesis comparada.</strong> En el contexto venezolano se ha denominado "morrocoy"
@@ -221,7 +261,7 @@
     </p>
   </section>
 
-  <section class="card">
+  <section class="card" data-tab="verif">
     <h2>Metodología</h2>
     <ul>
       <li>Captura atómica endpoints públicos ONPE con SHA-256 inmediato.</li>
@@ -353,7 +393,30 @@ async function updateHashAndShare() {
   };
 }
 const _origLoad = load;
-load = async function() { await _origLoad(); await updateHashAndShare(); };
+load = async function() { await _origLoad(); await updateHashAndShare(); updateBadges(); };
+
+// Tabs.
+function setTab(name) {
+  document.querySelectorAll('[data-tab-btn]').forEach(b =>
+    b.classList.toggle('active', b.dataset.tabBtn === name));
+  document.querySelectorAll('[data-tab]').forEach(s =>
+    s.classList.toggle('active', s.dataset.tab === name));
+  if (location.hash.slice(1) !== name) history.replaceState(null, '', '#' + name);
+  // Mapa Leaflet necesita invalidateSize si tab cambia (oculto al inicio).
+  if (name === 'resultado' && _mapInstance) setTimeout(() => _mapInstance.invalidateSize(), 50);
+}
+document.querySelectorAll('[data-tab-btn]').forEach(b =>
+  b.addEventListener('click', () => setTab(b.dataset.tabBtn)));
+const initialTab = (location.hash.slice(1) || 'resultado');
+setTab(['resultado','hallazgos','forecast','verif'].includes(initialTab) ? initialTab : 'resultado');
+
+function updateBadges() {
+  if (!_lastData || !_lastData.findings) return;
+  const crit = _lastData.findings.filter(f => f.severity === 'CRÍTICO').length;
+  const b = document.getElementById('badge-crit');
+  if (crit > 0) { b.textContent = crit; b.style.display = ''; }
+  else b.style.display = 'none';
+}
 
 function render(d) {
   // KPIs
@@ -407,12 +470,9 @@ function render(d) {
     `<div class="alert ${a.level}"><strong>[${a.level.toUpperCase()}]</strong> ${a.msg}</div>`
   ).join('');
 
-  // Findings
-  document.querySelector('#findings tbody').innerHTML = d.findings.map(f =>
-    `<tr><td><strong>${f.id}</strong></td>
-         <td><span class="tag ${f.severity==='CRÍTICO'?'crit':f.severity==='MEDIA'?'med':'info'}">${f.severity}</span></td>
-         <td>${f.title}</td></tr>`
-  ).join('');
+  // Findings (con sort/filter/search)
+  _findings = d.findings;
+  renderFindings();
 
   // Mapa choropleth
   if (d.regions) renderMap(d.regions);
@@ -433,7 +493,6 @@ function render(d) {
 }
 
 function renderForecast(f) {
-  document.getElementById('forecast-card').style.display = '';
   const sc = f.escenarios;
   const mix = f.escenario_mixto;
 
@@ -603,6 +662,86 @@ async function renderMap(regions) {
   };
   legend.addTo(map);
 }
+
+// Findings — sort/filter/search.
+let _findings = [];
+let _findingsSev = new Set();   // vacío = todas
+let _findingsSearch = '';
+let _findingsSort = {key: 'severity', dir: 1};
+const SEV_RANK = {'CRÍTICO': 0, 'MEDIA': 1, 'BAJA': 2, 'INFO': 3};
+const SEV_CLS = {'CRÍTICO': 'crit', 'MEDIA': 'med', 'BAJA': 'baja', 'INFO': 'info'};
+
+function renderFindings() {
+  const filt = _findings.filter(f => {
+    if (_findingsSev.size > 0 && !_findingsSev.has(f.severity)) return false;
+    if (!_findingsSearch) return true;
+    const q = _findingsSearch.toLowerCase();
+    return (f.title||'').toLowerCase().includes(q) ||
+           (f.detail||'').toLowerCase().includes(q) ||
+           (f.id||'').toLowerCase().includes(q);
+  });
+  const k = _findingsSort.key;
+  filt.sort((a,b) => {
+    let av, bv;
+    if (k === 'severity') { av = SEV_RANK[a.severity] ?? 99; bv = SEV_RANK[b.severity] ?? 99; }
+    else { av = (a[k]||'').toString().toLowerCase(); bv = (b[k]||'').toString().toLowerCase(); }
+    return av < bv ? -_findingsSort.dir : av > bv ? _findingsSort.dir : 0;
+  });
+  document.querySelector('#findings tbody').innerHTML = filt.map(f => {
+    const cls = SEV_CLS[f.severity] || 'info';
+    const tagCls = cls === 'baja' ? 'info' : cls;  // tabla usa crit/med/info
+    return `<tr data-id="${f.id}">
+      <td><strong>${f.id}</strong></td>
+      <td><span class="tag ${tagCls}">${f.severity}</span></td>
+      <td>${f.title}</td>
+      <td class="right"><a href="#" class="finding-toggle" data-id="${f.id}" style="font-size:.8rem">detalle ▾</a></td>
+    </tr>` + (f.detail ? `<tr class="finding-row-detail" data-id="${f.id}" style="display:none">
+      <td colspan="4" class="finding-detail">${f.detail}</td></tr>` : '');
+  }).join('');
+  document.getElementById('findings-count').textContent =
+    `${filt.length} de ${_findings.length} hallazgos${_findingsSev.size?` · filtrado por ${[..._findingsSev].join(', ')}`:''}${_findingsSearch?` · "${_findingsSearch}"`:''}`;
+  // Toggle detalle.
+  document.querySelectorAll('.finding-toggle').forEach(a => a.onclick = e => {
+    e.preventDefault();
+    const id = a.dataset.id;
+    const row = document.querySelector(`.finding-row-detail[data-id="${id}"]`);
+    if (row) {
+      const open = row.style.display !== 'none';
+      row.style.display = open ? 'none' : 'table-row';
+      a.textContent = open ? 'detalle ▾' : 'cerrar ▴';
+    }
+  });
+  // Indicadores de sort.
+  document.querySelectorAll('th[data-sort]').forEach(th => {
+    const arr = th.querySelector('.sort-arr');
+    arr.textContent = th.dataset.sort === _findingsSort.key ? (_findingsSort.dir > 0 ? '▲' : '▼') : '';
+  });
+}
+
+(function initFindingsControls() {
+  // Chips de severidad.
+  const cont = document.getElementById('findings-filters');
+  const sevs = ['CRÍTICO', 'MEDIA', 'BAJA', 'INFO'];
+  cont.innerHTML = sevs.map(s =>
+    `<button class="chip ${SEV_CLS[s]}" data-sev="${s}">${s}</button>`
+  ).join('');
+  cont.querySelectorAll('.chip').forEach(c => c.onclick = () => {
+    const s = c.dataset.sev;
+    if (_findingsSev.has(s)) _findingsSev.delete(s); else _findingsSev.add(s);
+    c.classList.toggle('active');
+    renderFindings();
+  });
+  document.getElementById('findings-search').oninput = e => {
+    _findingsSearch = e.target.value.trim();
+    renderFindings();
+  };
+  document.querySelectorAll('th[data-sort]').forEach(th => th.onclick = () => {
+    const k = th.dataset.sort;
+    if (_findingsSort.key === k) _findingsSort.dir *= -1;
+    else { _findingsSort.key = k; _findingsSort.dir = 1; }
+    renderFindings();
+  });
+})();
 
 function setDelta(id, v, inverted) {
   const e = document.getElementById(id);
