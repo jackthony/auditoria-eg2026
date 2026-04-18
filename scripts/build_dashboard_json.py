@@ -176,6 +176,24 @@ def main():
                    encoding="utf-8")
     print(f"OK: {OUT} ({OUT.stat().st_size:,} bytes)")
 
+    # API-01: endpoints publicos consumibles por terceros desde gh-pages.
+    api_dir = ROOT / "web" / "api"
+    api_dir.mkdir(parents=True, exist_ok=True)
+    meta = out["meta"]
+    endpoints = {
+        "findings.json": {"findings": findings, "meta": meta},
+        "forecast.json": {"forecast": forecast, "meta": meta},
+        "state.json": {"state": state, "delta": delta, "meta": meta},
+        "regions.json": {"regions": regions, "meta": meta},
+        "series.json": {"series": series, "meta": meta},
+    }
+    for name, payload in endpoints.items():
+        (api_dir / name).write_text(
+            json.dumps(payload, ensure_ascii=False, indent=2, default=str),
+            encoding="utf-8",
+        )
+    print(f"OK: {api_dir} ({len(endpoints)} endpoints)")
+
 
 if __name__ == "__main__":
     main()
