@@ -233,10 +233,13 @@ auditoria-eg2026/
 Código bajo licencia **MIT** (ver `LICENSE`). Los datos capturados de ONPE son
 públicos por su propia naturaleza electoral.
 
-**Autor del análisis:** [completar con tu nombre y credenciales antes de
-firmar]. La firma del autor implica responsabilidad por los cálculos. Las
-herramientas de IA generativa pueden haber asistido en la redacción del código
-y del informe; la revisión, ejecución y validación son responsabilidad humana.
+**Autor del análisis:** **Jack Aguilar** — Ingeniero de software, fundador de **Neuracode**. La firma del autor implica responsabilidad técnica por los cálculos, no vocería política. Las herramientas de IA generativa pueden haber asistido en la redacción del código y del informe; la revisión, ejecución y validación son responsabilidad humana.
+
+**Canales públicos:**
+
+- TikTok: [`@JackDeNeuracode`](https://www.tiktok.com/@JackDeNeuracode)
+- Facebook / Instagram: [`@neuracode`](https://www.instagram.com/neuracode)
+- GitHub: [`@jackthony`](https://github.com/jackthony)
 
 **Fuente primaria:** Oficina Nacional de Procesos Electorales (ONPE) —
 `resultadoelectoral.onpe.gob.pe/main/resumen` y backend asociado.

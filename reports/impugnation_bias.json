@@ -7,17 +7,17 @@
   },
   "correlaciones": {
     "pearson_tasa_imp_vs_share_rla": {
-      "r": 0.47668776014211134,
-      "p_value": 0.01381325341930031,
+      "r": 0.4763616291984532,
+      "p_value": 0.013887456410648398,
       "ci_95": [
         -0.29844354340264007,
-        0.8484358255565523
+        0.848230277377436
       ],
       "significativa_05": true
     },
     "pearson_tasa_imp_vs_share_sanchez": {
-      "r": -0.3378962114166839,
-      "p_value": 0.091358695734678
+      "r": -0.3380338034506849,
+      "p_value": 0.0912185115254606
     },
     "spearman_tasa_imp_vs_share_rla": {
       "r": 0.19589743589743588,
@@ -29,12 +29,12 @@
     }
   },
   "proyeccion_integracion_total": {
-    "votos_gana_rla": 130791,
-    "votos_gana_sanchez": 125082,
-    "neto_rla_menos_sanchez": 5708,
-    "margen_actual": 5773,
-    "margen_proyectado_100pct": 64,
-    "interpretacion": "Si TODAS las actas impugnadas + pendientes se integran al ratio de voto regional actual, el margen final proyectado sería de +64 votos (Sánchez-RLA). Esto NO incluye la incertidumbre sobre la tasa de anulación real del JEE (ver forecast_bayesian.py)."
+    "votos_gana_rla": 130741,
+    "votos_gana_sanchez": 124999,
+    "neto_rla_menos_sanchez": 5741,
+    "margen_actual": 5750,
+    "margen_proyectado_100pct": 8,
+    "interpretacion": "Si TODAS las actas impugnadas + pendientes se integran al ratio de voto regional actual, el margen final proyectado sería de +8 votos (Sánchez-RLA). Esto NO incluye la incertidumbre sobre la tasa de anulación real del JEE (ver forecast_bayesian.py)."
   },
   "por_ganador_regional": {
     "RLA": {
@@ -46,10 +46,10 @@
     },
     "Sanchez": {
       "n_regiones": 21,
-      "actas_fuera_total": 3631,
-      "tasa_imp_media": 6.649656932305261,
-      "tasa_imp_ponderada": 6.396343835083625,
-      "votos_fuera_total": 581450.2161267111
+      "actas_fuera_total": 3625,
+      "tasa_imp_media": 6.651422562546976,
+      "tasa_imp_ponderada": 6.398288603656165,
+      "votos_fuera_total": 580736.6235286345
     }
   },
   "top_regiones_pro_rla": [
@@ -220,7 +220,7 @@
     {
       "id": "G1",
       "severity": "MEDIA",
-      "title": "Asociación positiva entre tasa_impugnación y share_RLA por región (Pearson r=0.477, p=0.0138). Si TODAS las actas fuera se integran al ratio regional actual, margen final proyectado = +64 votos (vs margen actual +5,773). Empate estadístico. NOTA: correlación sensible a outliers (Spearman r=0.20 p=0.34 NO significativo; bootstrap CI95 incluye 0). La asociación es real en media pero está dominada por Lima y Extranjero."
+      "title": "Asociación positiva entre tasa_impugnación y share_RLA por región (Pearson r=0.476, p=0.0139). Si TODAS las actas fuera se integran al ratio regional actual, margen final proyectado = +8 votos (vs margen actual +5,750). Empate estadístico. NOTA: correlación sensible a outliers (Spearman r=0.20 p=0.34 NO significativo; bootstrap CI95 incluye 0). La asociación es real en media pero está dominada por Lima y Extranjero."
     }
   ]
 }

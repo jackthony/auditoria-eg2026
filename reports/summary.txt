@@ -1,25 +1,25 @@
 ══════════════════════════════════════════════════════════════════════
  RECONCILIACIÓN — Σ regional vs nacional
 ══════════════════════════════════════════════════════════════════════
-  ✓  fuji   reg= 2,683,271 nac= 2,683,310 diff=+39 (+0.001%)
-  ✓  rla    reg= 1,875,852 nac= 1,875,875 diff=+23 (+0.001%)
-  ✓  nieto  reg= 1,741,060 nac= 1,741,125 diff=+65 (+0.004%)
-  ✓  belm   reg= 1,595,652 nac= 1,595,757 diff=+105 (+0.007%)
-  ✓  sanch  reg= 1,881,625 nac= 1,881,773 diff=+148 (+0.008%)
+  ✓  fuji   reg= 2,683,590 nac= 2,683,629 diff=+39 (+0.001%)
+  ✓  rla    reg= 1,875,914 nac= 1,875,937 diff=+23 (+0.001%)
+  ✓  nieto  reg= 1,741,107 nac= 1,741,172 diff=+65 (+0.004%)
+  ✓  belm   reg= 1,595,690 nac= 1,595,795 diff=+105 (+0.007%)
+  ✓  sanch  reg= 1,881,664 nac= 1,881,812 diff=+148 (+0.008%)
 
 ══════════════════════════════════════════════════════════════════════
  A. TASA DE IMPUGNACIÓN POR REGIÓN
 ══════════════════════════════════════════════════════════════════════
-Tasa nacional: 5.987%  (5,554 / 92,766)
+Tasa nacional: 5.988%  (5,555 / 92,766)
 
   Extranjero             2,543  imp=  613  24.11%  z=+3.66  ⚠ OUTLIER
-  Loreto                 2,697  imp=  400  14.83%  z=+1.67  → elevado
-  Ucayali                1,564  imp=  188  12.02%  z=+1.07  → elevado
+  Loreto                 2,697  imp=  401  14.87%  z=+1.68  → elevado
+  Ucayali                1,564  imp=  188  12.02%  z=+1.06  → elevado
   Madre de Dios            507  imp=   54  10.65%  z=+0.77  
   Ica                    2,443  imp=  230   9.41%  z=+0.51  
   Tumbes                   632  imp=   59   9.34%  z=+0.49  
   Huánuco                2,341  imp=  211   9.01%  z=+0.42  
-  Piura                  5,281  imp=  428   8.10%  z=+0.23  
+  Piura                  5,281  imp=  428   8.10%  z=+0.22  
   La Libertad            5,302  imp=  389   7.34%  z=+0.06  
   Áncash                 3,472  imp=  241   6.94%  z=-0.02  
   Pasco                    802  imp=   55   6.86%  z=-0.04  
@@ -44,13 +44,13 @@ Tasa nacional: 5.987%  (5,554 / 92,766)
 ══════════════════════════════════════════════════════════════════════
     estrato  actas_total  impugnadas  tasa_imp_pct  rla_pct  sanch_pct
 Lima+Callao        32145        1329          4.13    19.50       3.24
-      Resto        42410        3634          8.57     7.45      16.09
+      Resto        42410        3635          8.57     7.45      16.08
  Sur andino        18211         574          3.15     5.53      21.42
 
 z-test Lima+Callao vs Resto:
   Lima+Callao: 4.13%
   Resto      : 6.94%
-  z = -17.173  p = 0  ✓ significativo al 1%
+  z = -17.182  p = 0  ✓ significativo al 1%
 
 [A] escrito: reports\impugnadas_por_region.csv
 
@@ -81,16 +81,16 @@ Nota: χ² gl=8, α=0.05. Test complementario, no concluyente.
 ══════════════════════════════════════════════════════════════════════
  E. SIMULACIÓN — resolución de actas JEE y 2º puesto
 ══════════════════════════════════════════════════════════════════════
-  Margen actual Sánchez − RLA: +5,898 votos (+0.038 pts)
-  Actas impugnadas (JEE): 5,554
-  Actas pendientes: 780
+  Margen actual Sánchez − RLA: +5,875 votos (+0.037 pts)
+  Actas impugnadas (JEE): 5,555
+  Actas pendientes: 773
   Votos válidos/acta: 181.9
-  Votos en juego: ~1,152,069
+  Votos en juego: ~1,150,973
 
   Proyección con distribución proporcional al nacional:
-    → RLA ganaría 137,465
-    → Sánchez ganaría 137,903
-    → Margen final: +6,336 (a favor de Sánchez)
+    → RLA ganaría 137,334
+    → Sánchez ganaría 137,760
+    → Margen final: +6,301 (a favor de Sánchez)
 
   Break-even: RLA necesita 51.07% de RLA+Sánchez en disputa para empatar
   Histórico:  RLA tiene 49.92% de RLA+Sánchez
@@ -98,11 +98,11 @@ Nota: χ² gl=8, α=0.05. Test complementario, no concluyente.
 
 ── Análisis de sesgo político en impugnaciones ──
 OK: C:\Users\jaaguilar\Documents\elecciones2026\auditoria-eg2026\reports\impugnation_bias.json
-Pearson r(tasa_imp, share_RLA) = +0.477  p=0.0138  CI95=[-0.298, +0.848]
-Pearson r(tasa_imp, share_Sanch) = -0.338  p=0.0914
+Pearson r(tasa_imp, share_RLA) = +0.476  p=0.0139  CI95=[-0.298, +0.848]
+Pearson r(tasa_imp, share_Sanch) = -0.338  p=0.0912
 Spearman r(tasa_imp, share_RLA) = +0.196  p=0.3375
-Neto RLA si integra todo: +5,708 votos
-Margen actual: +5,773  -> Margen proyectado 100%: +64
+Neto RLA si integra todo: +5,741 votos
+Margen actual: +5,750  -> Margen proyectado 100%: +8
 
 ── Velocidad temporal de impugnaciones (Mann-Whitney pre/post cruce) ──
 OK: C:\Users\jaaguilar\Documents\elecciones2026\auditoria-eg2026\reports\impugnation_velocity.json
@@ -116,12 +116,12 @@ Spikes detectados: 1
 
 ── Forecast bayesiano (Linzer 2013 / NYT Needle) ──
 OK: C:\Users\jaaguilar\Documents\elecciones2026\auditoria-eg2026\reports\forecast.json
-Margen actual: +5,773 (Sánchez - RLA)
+Margen actual: +5,750 (Sánchez - RLA)
 P(RLA supera Sánchez):
-  pesimista : 36.5%  (margen p50=+5,318)
-  central   : 42.3%  (margen p50=+2,815)
-  optimista : 49.1%  (margen p50=+303)
-  mixto     : 43.2%
+  pesimista : 36.6%  (margen p50=+5,278)
+  central   : 42.5%  (margen p50=+2,764)
+  optimista : 49.3%  (margen p50=+233)
+  mixto     : 43.4%
 
 ── M1: Último dígito de vote counts (test Mebane / Beber-Scacco) ──
 
@@ -148,10 +148,10 @@ P(RLA supera Sánchez):
   [INFO   ] D2  Sin saltos anómalos en el conteo temporal
   [INFO   ] D3  Cruce Sánchez↔RLA único, consistente con flujo natural
   [CRÍTICO] E1  Pase a 2ª vuelta depende de la resolución del JEE
-  [MEDIA  ] G1  Asociación positiva entre tasa_impugnación y share_RLA por región (Pearson r=0.477, p=0.0138). Si TODAS las actas fuera se integran al ratio regional actual, margen final proyectado = +64 votos (vs margen actual +5,773). Empate estadístico. NOTA: correlación sensible a outliers (Spearman r=0.20 p=0.34 NO significativo; bootstrap CI95 incluye 0). La asociación es real en media pero está dominada por Lima y Extranjero.
+  [MEDIA  ] G1  Asociación positiva entre tasa_impugnación y share_RLA por región (Pearson r=0.476, p=0.0139). Si TODAS las actas fuera se integran al ratio regional actual, margen final proyectado = +8 votos (vs margen actual +5,750). Empate estadístico. NOTA: correlación sensible a outliers (Spearman r=0.20 p=0.34 NO significativo; bootstrap CI95 incluye 0). La asociación es real en media pero está dominada por Lima y Extranjero.
   [MEDIA  ] H1  Cambio significativo en velocidad de acumulación de actas JEE alrededor del cruce Sánchez>RLA (ventana ±6h): +182.6 actas/h antes vs +92.4 después (Mann-Whitney p=0.0127). La inflexión puede reflejar procesamiento natural o cambio de política de impugnaciones; requiere explicación formal.
   [MEDIA  ] H2  Velocidad de acumulación de actas JEE desaceleró tras el cruce (ventana ±12h): +169.0/h antes vs +76.4/h después (ratio 0.45x). Acumuladas pre-cruce: +1522 actas; post-cruce: +556 actas.
-  [CRÍTICO] F1  Modelo bayesiano: P(RLA supera Sánchez) = 42.3% central / 43.2% mixto (n=10,000 simulaciones)
+  [CRÍTICO] F1  Modelo bayesiano: P(RLA supera Sánchez) = 42.5% central / 43.4% mixto (n=10,000 simulaciones)
   [INFO   ] M1  Último dígito de vote counts regional conforme a uniforme
   [MEDIA  ] M2  Clustering espacial positivo significativo en: share_rla
   [MEDIA  ] A0  A0 — Inconsistencia agregacion ONPE: 21 actas no reconcilian nacional vs regional (por debajo del margen)

@@ -81,3 +81,11 @@ secrets/
 # ──────────────────────────────────────────────────────────────
 .claude/
 
+# ──────────────────────────────────────────────────────────────
+# Informe privado para cliente original (RP) — NO publicar
+# Ver README.md §9 (Declaración de transparencia)
+# ──────────────────────────────────────────────────────────────
+scripts/build_pdf.py
+scripts/build_pdf_v*.py
+scripts/build_memorial_pdf.py
+

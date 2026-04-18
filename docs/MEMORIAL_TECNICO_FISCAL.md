@@ -18,7 +18,7 @@ Se presenta a Ud. este memorial técnico como aporte ciudadano, elaborado a part
 
 - **Razón social:** Neuracode — Jack Aguilar (Ingeniero responsable).
 - **Naturaleza:** Aporte ciudadano independiente. Sin afiliación política ni institucional. Sin retribución económica.
-- **Canal público:** `https://github.com/neuracode/auditoria-eg2026` · Dashboard en vivo.
+- **Canal público:** `https://github.com/jackthony/auditoria-eg2026` · Dashboard en vivo.
 - **Licencia:** Código MIT · Documentos Creative Commons BY 4.0. Uso libre con atribución.
 
 ---
@@ -112,9 +112,74 @@ Conclusión técnica: **empate estadístico**. La resolución del JEE no es un d
 
 ### Hecho 7 — Discrepancia institucional ONPE ↔ CALAG
 
-A la fecha de este memorial, se reporta públicamente que la empresa **CALAG** (tecnología proveedora) ha desmentido a la ONPE y la ha denunciado por atribución indebida de negligencia. Esta discrepancia entre dos actores institucionales del proceso constituye **evidencia directa** (declaración testimonial con interés) que supera por sí sola la fortaleza probatoria de cualquier análisis estadístico sobre data agregada.
+A la fecha de este memorial, se reporta públicamente que la empresa **CALAG — Servicios Generales Galaga S.A.C.** (proveedor tecnológico) ha desmentido a la ONPE y la ha denunciado por atribución indebida de negligencia. Esta discrepancia entre dos actores institucionales del proceso constituye **evidencia directa** (declaración testimonial con interés) que supera por sí sola la fortaleza probatoria de cualquier análisis estadístico sobre data agregada.
 
 El contenido específico de esta discrepancia no pertenece al alcance de este memorial técnico. Se solicita al Ministerio Público documentarla y contrastarla.
+
+### Hecho 8 — Inconsistencia de agregación en el propio sitio público ONPE (finding A0)
+
+Al snapshot **2026-04-17T08:41:14Z (corte 93.17%)**, el endpoint público de ONPE reporta cifras nacionales que **no reconcilian** con la suma de las 26 circunscripciones desagregadas:
+
+| Métrica | Nacional publicado | Σ de las 26 regiones | Diferencia |
+|---------|--------------------|-----------------------|------------|
+| totalActas | 92,766 | 92,766 | 0 ✓ |
+| contabilizadas | 86,438 | 86,434 | −4 |
+| enviadasJee | 5,555 | 5,538 | −17 |
+| pendientesJee | 773 | 794 | +21 |
+
+**Métrica consolidada (post red-team metodológico):** `actas_movidas = max(|diff|) = 21`. Es el mínimo número de actas que deben reclasificarse entre categorías para que la vista nacional reconcilie con la vista regional. Con votos promedio por acta ≈ 218, el **universo de votos en zona gris ≈ 4,582 (ratio 0.78× el margen Sánchez−RLA de 5,875)**.
+
+**Interpretación honesta:** este hecho **NO prueba error en el conteo de votos**. Prueba que la **agregación del agregador público de ONPE** (UI/API) no es internamente consistente al mismo timestamp. El autor ciudadano que reportó originalmente el hecho hizo el salto lógico "vista incoherente = conteo incorrecto"; ese salto no se sostiene técnicamente. Pero la inconsistencia del agregador oficial sí requiere **explicación formal** (timestamp desalineado entre endpoints, categoría no reflejada en desagregado, o actas migrando de estado durante el cálculo del snapshot). El **test es reproducible** por cualquier tercero contra cualquier snapshot horario en `captures/`.
+
+### Hecho 9 — Ratio electores afectados (CALAG) / margen final
+
+Datos **oficiales de ONPE** sobre las fallas del proveedor CALAG / Servicios Generales Galaga S.A.C. en Lima el día de la jornada electoral (12-abril-2026):
+
+- **Locales de votación afectados:** 15.
+- **Mesas no instaladas o instaladas tardíamente:** 211.
+- **Electores oficialmente impedidos de votar:** **63,300**.
+- **Margen final Sánchez − López Aliaga (corte 93.17%):** 5,898.
+
+**Ratio: 63,300 / 5,898 = 10.73×.** El universo de electores afectados por una falla operativa contratada bajo mecanismo excepcional (fuera del régimen ordinario de la Ley de Contrataciones) supera en **10.73 veces** el margen que define el pase a segunda vuelta.
+
+**Marco jurídico directamente aplicable:** **Artículo 363° de la Ley 26859** (Ley Orgánica de Elecciones) — nulidad parcial cuando concurra un evento que *podría* haber alterado el resultado. El estándar del Art. 363 **no exige probar alteración**, sino acreditar que el evento **tuvo magnitud suficiente** para haberla causado. El ratio 10.73× satisface ese umbral por varios órdenes de magnitud.
+
+Este hecho, combinado con la discrepancia institucional del Hecho 7 (CALAG ↔ ONPE), configura el núcleo de materia que debe conocer el JEE / JNE para resolver la validez del resultado en Lima.
+
+### Hecho 10 — Brecha de ausentismo post-pandemia vs pre-pandemia
+
+Serie histórica de ausentismo nacional ONPE en elecciones generales peruanas:
+
+| Elección | Contexto | Ausentismo nacional |
+|----------|----------|---------------------|
+| 2016 | Pre-pandemia | 18.21% |
+| 2021 | Durante pandemia | 29.15% |
+| **2026** | Post-pandemia (proyección a 100% escrutinio) | **26.16%** |
+
+**Comparación válida (pre/post-pandemia):** 2026 vs 2016 → **+7.95 puntos porcentuales** = **≈ 3,000,000 electores adicionales que no acudieron a votar** respecto al baseline pre-pandemia.
+
+**Honestidad estadística obligatoria:** la narrativa viral "el ausentismo subió post-pandemia vs pandemia" **NO se sostiene**. El ausentismo 2026 está *por debajo* de 2021 (efecto reversión pandémica). La comparación honesta es 2026 vs 2016, y ahí sí hay una brecha material.
+
+**Relevancia para la investigación:** la brecha de 3M electores es multifactorial (desconfianza institucional, fallas logísticas, clima, movilidad). Ninguna causa única la explica. Pero **la fracción atribuible a las fallas operativas documentadas (CALAG, STAE, cédulas Callao, personeros ausentes, locales con cierre prematuro en 13% de Lima)** es materia propia de peritaje. Se solicita que ese peritaje determine el **componente del ausentismo atribuible a fallas del proceso**, separable del componente atribuible a decisión libre del elector.
+
+### Hecho 11 — Cuatro cajas selladas con material electoral en basurero de Surquillo + denuncia penal JNE → ONPE (2026-04-17)
+
+**Hechos verificables (fuente: comunicado oficial JNE, declaraciones del Presidente Roberto Burneo ante la Comisión de Fiscalización del Congreso, 2026-04-17; cobertura concurrente Infobae · El Comercio · Radio Nacional · Canal N):**
+
+1. **Hallazgo material:** cuatro cajas selladas conteniendo aproximadamente **1,200 sobres con cédulas de votación** de la jornada del 12-abril-2026 fueron encontradas en un basurero del distrito de **Surquillo (Lima)** el 17-abril-2026.
+2. **Denuncia penal formalizada:** el Procurador Público del JNE, Ronald Johanne Angulo Zavaleta, presentó denuncia penal ante el Ministerio Público contra **Piero Corvetto Salinas** (Jefe de la ONPE) y demás funcionarios responsables, por los presuntos delitos de **Atentado contra el Derecho de Sufragio (Art. 354 CP)**, **Omisión de Actos Funcionales (Art. 377 CP)** y **Estorbo del Acto Electoral**.
+3. **Discrepancia institucional documentada (Hecho 7 ratificado):** el Presidente del JNE Roberto Burneo declaró ante el Congreso que, contrario a la versión pública de ONPE, **no había inspector ni efectivo policial acompañando el traslado** del material; las cajas fueron transportadas en **vehículos privados sin registro y sin presencia de fedatario JNE**. Esto contradice frontalmente el protocolo de cadena de custodia electoral.
+4. **Allanamiento fiscal:** el Ministerio Público (Fiscalía de Prevención del Delito de Lima Sur), con participación de funcionarios JNE, allanó el **almacén principal de la ONPE en Lurín** para verificar existencia y condición del material electoral del 12-abril.
+5. **Audiencia en Congreso:** el Presidente del JNE expuso ante la Comisión de Fiscalización del Congreso el 17-abril-2026 el detalle de las irregularidades detectadas que **impidieron la instalación de 211 mesas de sufragio** (consistente con el universo de 63,300 electores afectados del Hecho 9).
+
+**Relevancia técnico-procesal:**
+
+- Este hecho constituye **evidencia material directa** de ruptura de cadena de custodia, no inferencia estadística.
+- Refuerza el Hecho 7 (discrepancia ONPE↔CALAG) y el Hecho 9 (63,300 electores afectados) con un eslabón documentado que ya está bajo investigación fiscal autónoma.
+- La denuncia del JNE es **acción institucional de un órgano electoral autónomo contra otro**, no de un actor político, y por ello **goza de presunción de seriedad procesal**.
+- El presente memorial **no duplica** la denuncia del JNE: la complementa aportando el marco estadístico-forense (Hechos 1-10) que permite dimensionar el impacto de las fallas operativas sobre el resultado.
+
+**Honestidad técnica:** se desconoce, al cierre de este memorial, el **destino electoral concreto** de las 1,200 cédulas (mesa de origen, candidato afectado, si fueron contabilizadas o no en el escrutinio). Esa determinación requiere peritaje sobre el material físico recuperado (números de serie de sobres, mesas correlacionadas en SIRE-DMS), lo cual es atribución exclusiva del Ministerio Público y se solicita formalmente como variable adicional (ver §V, ítem 16).
 
 ---
 
@@ -156,6 +221,14 @@ Para permitir verificación forense independiente, se solicita se requiera forma
 | 8 | Manual técnico del módulo de descarga masiva para organizaciones políticas y razón de su no habilitación al corte actual | El no-acceso al detalle mesa-por-mesa imposibilita auditoría partidaria |
 | 9 | Base de datos de resolución de impugnaciones JEE histórica (EG2021, EG2016, EG2011) | Línea base para calibrar qué tasa de integración es "normal" |
 | 10 | Especificación técnica del algoritmo de asignación aleatoria de miembros de mesa y coordinadores de local | Detectar sesgos en la cadena operativa |
+| 11 | **Dump estructurado mesa-a-mesa** (≈90,000 registros) en formato CSV/JSON: mesa_id, ODPE, distrito, candidato, votos, estado, timestamp digitación, operador | Habilitar auditoría granular independiente por cualquier organización política o ciudadano (tests M3 a escala mesa) |
+| 12 | **Desagregado oficial de electores emitidos por región** al cierre del escrutinio (no solo proyección nacional) | Permitir cálculo honesto de ausentismo por circunscripción, que actualmente se reporta solo a nivel nacional |
+| 13 | **Expediente íntegro CALAG / Servicios Generales Galaga S.A.C.**: acto administrativo de contratación excepcional, términos de referencia, SLA, pólizas de fidelidad/incumplimiento, informes técnicos de conformidad y los 63,300 electores afectados con ODPE y mesa | Acreditar la magnitud oficial del evento del Hecho 9 y la cadena de responsabilidad administrativa |
+| 14 | **Motivos codificados de rechazo/impugnación** de las 5,555 actas actualmente en JEE: causal, fecha, funcionario ONPE que derivó, partido afectado en la mesa | Verificar si la tasa 24.11% en Extranjero (Hecho 2) tiene patrón operativo o sesgo |
+| 15 | **Actas físicas digitalizadas** (muestra aleatoria ≥1% del universo) para contraste contra el sistema SIRE-DMS | Contrastar el dato físico con el dato digital, principio de doble-fuente |
+| 16 | **Trazabilidad completa del material electoral hallado en basurero de Surquillo (2026-04-17):** números de serie de las 4 cajas y de los ~1,200 sobres; mesa(s) de origen; cadena de custodia documental desde la mesa hasta el punto de hallazgo; identificación de vehículos, conductores, custodios y fedatarios designados vs efectivos; correlación con registros SIRE-DMS de las mesas afectadas | Determinar el impacto electoral concreto del material extraviado y reconstruir la ruptura de cadena de custodia (Hecho 11) |
+| 17 | **Acta(s) y video del allanamiento fiscal al almacén ONPE en Lurín (2026-04-17)** + inventario certificado del material remanente vs el material que debió retornar tras la jornada | Verificar discrepancia entre material despachado y material retornado a almacén |
+| 18 | **Bitácora oficial JNE de fedatarios designados** para acompañar el traslado de material el 12-abril-2026, vs los efectivamente presentes (firma + huella) | Acreditar el hecho central de la denuncia penal JNE→ONPE: ausencia de fedatario en el traslado |
 
 ---
 
@@ -174,7 +247,7 @@ Para permitir verificación forense independiente, se solicita se requiera forma
 Toda la evidencia estadística descrita es **replicable por cualquier tercero** siguiendo estos pasos:
 
 ```bash
-git clone https://github.com/neuracode/auditoria-eg2026
+git clone https://github.com/jackthony/auditoria-eg2026
 cd auditoria-eg2026
 pip install -r requirements.txt
 py src/capture/verify_manifest.py captures/<timestamp>/
@@ -188,9 +261,13 @@ Los archivos ofrecidos como anexos técnicos:
 |-------|---------------------|---------------|
 | A. Capturas atómicas ONPE con manifiesto | `captures/*/MANIFEST.jsonl` | Individual por archivo |
 | B. Dataset procesado | `data/processed/regiones.csv` · `tracking.csv` | (ver manifest) |
-| C. Reports técnicos estructurados | `reports/findings.json` · `forecast.json` · `impugnation_bias.json` · `impugnation_velocity.json` | — |
+| C. Reports técnicos estructurados | `reports/findings.json` · `forecast.json` · `impugnation_bias.json` · `impugnation_velocity.json` · `ausentismo_comparacion.json` · `reconcile_internal` (incluido en findings.json) | — |
 | D. Código fuente del pipeline | `src/` · `scripts/` | — |
 | E. Metodología completa | `METHODOLOGY.md` | — |
+| F. Dossier para perito acreditado | `dossier-perito/00_RESUMEN_EJECUTIVO.md` a `05_LIMITACIONES.md` | — |
+| G. Pre-registro de hipótesis (commit frozen) | `docs/PRE_REGISTRO_H1_H5.md` + hashes | Commit `413d6a1` |
+| H. Fallas técnicas verificadas con fuente pública | `docs/FALLAS_TECNICAS_VERIFICADAS.md` | — |
+| I. Evidencia ciudadana (versión pública) | `docs/EVIDENCIA_CIUDADANA.md` | — |
 
 **Cadena de custodia:** cada snapshot incluye timestamp ISO-8601 UTC, IP pública del capturador, hostname, commit git vigente, y hash SHA-256 de cada archivo. Cualquier modificación posterior es detectable por `py src/capture/verify_manifest.py`.
 
@@ -202,7 +279,12 @@ Los archivos ofrecidos como anexos técnicos:
 
 2. **Sobre la publicidad del documento:** el presente memorial es público por decisión del aportante. Se difunde en el repositorio mencionado y en medios digitales. El Ministerio Público puede conservarlo como reservado a efectos de la investigación si así lo dispone.
 
-3. **Sobre la contradicción con narrativas virales:** el aportante hace constar expresamente que varios patrones virales atribuidos al proceso **no se sostienen con los datos disponibles** (ejemplo: la tesis de "aceleración estratégica post-cruce" es contradicha por los propios datos — la velocidad DESACELERÓ 0.26× a 0.51× según ventana). El rigor técnico obliga a reportar tanto los indicios a favor como los contra de cualquier hipótesis.
+3. **Sobre la contradicción con narrativas virales:** el aportante hace constar expresamente que varios patrones virales atribuidos al proceso **no se sostienen con los datos disponibles**:
+   - La tesis de "aceleración estratégica post-cruce" es contradicha por los propios datos — la velocidad DESACELERÓ 0.26× a 0.51× según ventana (Hecho 5).
+   - La narrativa "ausentismo aumentó post-pandemia vs pandemia" tampoco se sostiene: 2026 (26.16%) está por debajo de 2021 (29.15%). La comparación honesta es 2026 vs 2016 (Hecho 10).
+   - La lectura "agregador inconsistente = conteo incorrecto" (Hecho 8, finding A0) tampoco se sostiene lógicamente; lo que sí se sostiene es que la UI/API de ONPE no reconcilia consigo misma al mismo timestamp, y eso requiere explicación formal.
+   
+   El rigor técnico obliga a reportar tanto los indicios a favor como los contra de cualquier hipótesis. Este memorial lo hace.
 
 4. **Sobre el peritaje contradictorio:** el aportante se ofrece a sostener técnicamente las conclusiones ante cualquier perito designado por la contraparte. El código es abierto; los datos son públicos; los hashes son verificables; el método es estándar (Linzer 2013, Gelman & Hill 2007, NYT Election Needle).
 
@@ -221,7 +303,7 @@ A Ud., Señor Fiscal de la Nación, pido se sirva admitir el presente memorial t
 **Neuracode — Jack Aguilar**
 Aporte ciudadano independiente
 
-GitHub: `github.com/neuracode/auditoria-eg2026`
+GitHub: `github.com/jackthony/auditoria-eg2026`
 Canales: TikTok `@JackDeNeuracode` · FB/IG `@neuracode`
 
 ---
