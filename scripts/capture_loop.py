@@ -44,7 +44,40 @@ def run(cmd: list[str]) -> int:
     return proc.returncode
 
 
-def iterate():
+def git(args: list[str]) -> tuple[int, str]:
+    proc = subprocess.run(
+        ["git", *args], cwd=ROOT, capture_output=True, text=True
+    )
+    return proc.returncode, (proc.stdout + proc.stderr).strip()
+
+
+def publish() -> None:
+    rc, out = git(["status", "--porcelain"])
+    if rc != 0:
+        log.error("git status falló: %s", out)
+        return
+    if not out:
+        log.info("publish: sin cambios para publicar")
+        return
+    rc, _ = git(["add", "captures/", "reports/", "web/data.json", "data/processed/"])
+    if rc != 0:
+        log.warning("publish: git add con warnings")
+    ts = datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%MZ")
+    rc, out = git(["commit", "-m", f"loop: snapshot {ts}"])
+    if rc != 0:
+        log.warning("publish: nada commiteable o commit falló — %s", out)
+        return
+    rc, out = git(["push", "origin", "main"])
+    if rc != 0:
+        log.error("publish: push main falló — %s", out)
+        return
+    rc, out = git(["subtree", "push", "--prefix", "web", "origin", "gh-pages"])
+    if rc != 0:
+        log.warning("publish: subtree push gh-pages falló — %s", out)
+    log.info("publish OK @ %s", ts)
+
+
+def iterate(do_publish: bool):
     before = tracking_hash()
     rc = run([PY, "src/capture/fetch_onpe.py"])
     if rc != 0:
@@ -56,7 +89,10 @@ def iterate():
         return
     log.info("tracking actualizado — re-procesando dataset y análisis")
     run([PY, "src/process/build_dataset.py"])
-    run([PY, "src/analysis/run_all.py"])
+    run([PY, "-m", "src.analysis.run_all"])
+    run([PY, "scripts/build_dashboard_json.py"])
+    if do_publish:
+        publish()
 
 
 def main():
@@ -65,16 +101,19 @@ def main():
                     help="minutos entre capturas (default 15)")
     ap.add_argument("--max-iters", type=int, default=0,
                     help="número máximo de iteraciones (0 = infinito)")
+    ap.add_argument("--publish", action="store_true",
+                    help="auto-commit + push a main + subtree push a gh-pages cuando hay cambios")
     args = ap.parse_args()
 
     n = 0
-    log.info("capture_loop iniciado — intervalo=%d min", args.interval)
+    log.info("capture_loop iniciado — intervalo=%d min · publish=%s",
+             args.interval, args.publish)
     while True:
         n += 1
         log.info("=== iteración %d @ %s UTC ===", n,
                  datetime.now(timezone.utc).strftime("%H:%M:%S"))
         try:
-            iterate()
+            iterate(args.publish)
         except Exception:
             log.exception("iteración %d falló", n)
         if args.max_iters and n >= args.max_iters:
