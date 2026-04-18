@@ -84,8 +84,8 @@ def main() -> int:
     token = os.environ.get("TELEGRAM_BOT_TOKEN")
     chat_id = os.environ.get("TELEGRAM_CHAT_ID")
     if not token or not chat_id:
-        logger.error("Faltan TELEGRAM_BOT_TOKEN / TELEGRAM_CHAT_ID en el env.")
-        return 1
+        logger.info("Telegram no configurado (TOKEN/CHAT_ID ausentes) — skip.")
+        return 0
 
     if not DATA_JSON.exists():
         logger.error("data.json no existe: %s", DATA_JSON)
