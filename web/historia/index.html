@@ -102,10 +102,23 @@ h2 { font-size: clamp(32px, 5vw, 64px); margin-bottom: 30px; }
   max-width: 600px; margin: 40px auto; aspect-ratio: 2/3;
 }
 .dot {
-  background: var(--ink); border-radius: 50%; aspect-ratio: 1;
-  transition: opacity .3s, background .3s;
+  background: rgba(17,17,17,.28); border-radius: 50%; aspect-ratio: 1;
+  transition: background .3s, box-shadow .3s, transform .3s;
 }
-.dot.off { background: var(--blood); opacity: .15; }
+.dot.off {
+  background: var(--blood);
+  box-shadow: 0 0 8px rgba(176,23,31,.6);
+  transform: scale(1.15);
+}
+.legend {
+  display: flex; gap: 28px; justify-content: center; flex-wrap: wrap;
+  margin-top: 24px; font-family: 'Inter', sans-serif; font-size: 15px;
+  color: var(--ink); font-weight: 500;
+}
+.legend-item { display: inline-flex; align-items: center; gap: 8px; }
+.legend-dot { width: 12px; height: 12px; border-radius: 50%; display: inline-block; }
+.legend-ok { background: rgba(17,17,17,.35); }
+.legend-off { background: var(--blood); box-shadow: 0 0 6px rgba(176,23,31,.5); }
 
 /* Scene 5 — podio */
 .podio {
@@ -191,10 +204,13 @@ h2 { font-size: clamp(32px, 5vw, 64px); margin-bottom: 30px; }
   <div class="big-number" id="num-falt" style="margin:30px 0">4.703</div>
   <p class="lead">Como si en tu mercado faltaran<br>5 de cada 100 puestos<br>y nadie supiera dónde están.</p>
   <div class="dots-grid" id="dots"></div>
-  <p class="caption">Cada punto es una mesa. Los rojos: las que no devuelven datos.</p>
+  <div class="legend">
+    <span class="legend-item"><span class="legend-dot legend-ok"></span> mesa con datos</span>
+    <span class="legend-item"><span class="legend-dot legend-off"></span> mesa sin datos</span>
+  </div>
   <p class="caption" style="margin-top:20px;font-style:italic">
     Verificado: no son actas duplicadas ni mesas del extranjero fuera de rango.<br>
-    Las 2.543 mesas de peruanos en el exterior ya están incluidas en el conteo.
+    Las 2.543 mesas de peruanos en el exterior ya están incluidas.
   </p>
 </section>
 
