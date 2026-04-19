@@ -106,20 +106,22 @@
 </head>
 <body>
 <header>
-  <h1>Monitor técnico-estadístico · Elecciones Generales 2026 Perú</h1>
+  <h1 data-i18n="h1">Monitor técnico-estadístico · Elecciones Generales 2026 Perú</h1>
   <div class="sub">
     <span class="live-badge" id="live-badge"><span class="dot"></span><span id="live-text">EN VIVO</span></span>
     <span class="refresh-spinner" id="refresh-spin"></span>
-    Aporte ciudadano · data pública · hashes SHA-256 · reproducible ·
+    <span data-i18n="subtitle">Aporte ciudadano · data pública · hashes SHA-256 · reproducible</span> ·
     <a href="https://github.com/neuracode/auditoria-eg2026" style="color:#fff" target="_blank">repo</a> ·
-    <a href="MEMORIAL_TECNICO_FISCAL.pdf" style="color:#fff;background:var(--accent);padding:.2rem .6rem;border-radius:3px;font-weight:600" target="_blank">📄 Memorial técnico al Fiscal de la Nación</a></div>
+    <a href="MEMORIAL_TECNICO_FISCAL.pdf" style="color:#fff;background:var(--accent);padding:.2rem .6rem;border-radius:3px;font-weight:600" target="_blank"><span data-i18n="memorial_cta">📄 Memorial técnico al Fiscal de la Nación</span></a> ·
+    <button id="lang-toggle" style="background:transparent;border:1px solid #fff;color:#fff;padding:.15rem .5rem;border-radius:3px;cursor:pointer;font-size:.8rem" title="Change language">🌐 EN</button>
+  </div>
 </header>
 
 <nav class="tabs-nav" id="tabs-nav" role="tablist">
-  <button class="tab-btn active" data-tab-btn="resultado" role="tab">Resultado</button>
-  <button class="tab-btn" data-tab-btn="hallazgos" role="tab">Hallazgos <span class="badge" id="badge-crit">·</span></button>
-  <button class="tab-btn" data-tab-btn="forecast" role="tab">Forecast</button>
-  <button class="tab-btn" data-tab-btn="verif" role="tab">Verificación</button>
+  <button class="tab-btn active" data-tab-btn="resultado" role="tab" data-i18n="tab_result">Resultado</button>
+  <button class="tab-btn" data-tab-btn="hallazgos" role="tab"><span data-i18n="tab_findings">Hallazgos</span> <span class="badge" id="badge-crit">·</span></button>
+  <button class="tab-btn" data-tab-btn="forecast" role="tab" data-i18n="tab_forecast">Forecast</button>
+  <button class="tab-btn" data-tab-btn="verif" role="tab" data-i18n="tab_verif">Verificación</button>
 </nav>
 
 <div class="grid" style="padding-bottom:0">
@@ -441,6 +443,43 @@ async function updateHashAndShare() {
 }
 const _origLoad = load;
 load = async function() { await _origLoad(); await updateHashAndShare(); updateBadges(); };
+
+// I18N-01 — toggle ES/EN minimalista (solo strings de alto nivel).
+const I18N = {
+  es: {
+    h1: 'Monitor técnico-estadístico · Elecciones Generales 2026 Perú',
+    subtitle: 'Aporte ciudadano · data pública · hashes SHA-256 · reproducible',
+    memorial_cta: '📄 Memorial técnico al Fiscal de la Nación',
+    tab_result: 'Resultado', tab_findings: 'Hallazgos',
+    tab_forecast: 'Forecast', tab_verif: 'Verificación',
+  },
+  en: {
+    h1: 'Technical-statistical monitor · Peru General Election 2026',
+    subtitle: 'Citizen contribution · public data · SHA-256 hashes · reproducible',
+    memorial_cta: '📄 Technical memorial to the Attorney General',
+    tab_result: 'Results', tab_findings: 'Findings',
+    tab_forecast: 'Forecast', tab_verif: 'Verification',
+  },
+};
+function applyLang(lang) {
+  const dict = I18N[lang] || I18N.es;
+  document.querySelectorAll('[data-i18n]').forEach(el => {
+    const k = el.dataset.i18n;
+    if (dict[k]) el.textContent = dict[k];
+  });
+  document.documentElement.lang = lang;
+  const btn = document.getElementById('lang-toggle');
+  if (btn) btn.textContent = lang === 'es' ? '🌐 EN' : '🌐 ES';
+  try { localStorage.setItem('lang', lang); } catch (_) {}
+}
+(function initLang() {
+  let lang = 'es';
+  try { lang = localStorage.getItem('lang') || 'es'; } catch (_) {}
+  applyLang(lang);
+  const btn = document.getElementById('lang-toggle');
+  if (btn) btn.onclick = () => applyLang(
+    (localStorage.getItem('lang') || 'es') === 'es' ? 'en' : 'es');
+})();
 
 // Tabs.
 function setTab(name) {
