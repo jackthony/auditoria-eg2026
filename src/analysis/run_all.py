@@ -19,7 +19,7 @@ import sys
 from io import StringIO
 from pathlib import Path
 
-from . import reconcile, impugnation_rates, benford, temporal, jee_simulation, forecast_bayesian, impugnation_bias, impugnation_velocity, last_digit_forensic, spatial_cluster, reconcile_internal
+from . import reconcile, impugnation_rates, benford, temporal, jee_simulation, forecast_bayesian, impugnation_bias, impugnation_velocity, last_digit_forensic, spatial_cluster, reconcile_internal, ml_anomalies
 
 import sys
 if sys.platform == "win32":
@@ -179,6 +179,16 @@ def main():
             "I": sc["bivariate_share_rla_x_tasa_impug"]["morans_I_bivariate"],
             "p": sc["bivariate_share_rla_x_tasa_impug"]["permutation_p_value"],
             "verdict": sc["bivariate_share_rla_x_tasa_impug"]["verdict"],
+        }
+
+        print()
+
+        # 10b. ML-ANOM: IsolationForest sobre saltos temporales
+        ml = ml_anomalies.run(ROOT)
+        all_findings.extend(ml["findings"])
+        all_results["ml_anomalies"] = {
+            "total": ml["total"],
+            "by_candidate": {k: len(v) for k, v in ml["anomalies"].items()},
         }
 
         print()
