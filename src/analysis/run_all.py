@@ -237,7 +237,7 @@ def main():
         print(" RESUMEN DE HALLAZGOS")
         print("═" * 70)
         for f in all_findings:
-            print(f"  [{f['severity']:7}] {f.get('id','—')}  {f['title']}")
+            print(f"  [{f['severity']:7}] {f.get('id','—')}  {f.get('title', f.get('interpretation', '—'))}")
 
     finally:
         sys.stdout = orig_stdout
