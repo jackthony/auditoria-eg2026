@@ -76,9 +76,21 @@ Ningún delta entre cortes supera 0.5pp en 117 cortes.
 
 ---
 
+## FDR correction aplicada (2026-04-19)
+
+Resultado Benjamini-Hochberg α=0.05 sobre 17 p-valores (`reports/fdr_results.json`):
+
+**Sobreviven (4):**
+- `impugnation.ztest_lima_vs_resto` (q=0)
+- `impugnation_velocity.mann_whitney_12h` (q=0.013)
+- `impugnation_bias.pearson_imp_vs_rla` (q=0.047)
+- `spatial_cluster.share_rla` (q=0.047)
+
+**No sobreviven:** Moran's I tasa_impugnacion/pct_fuera, Benford pool, last-digit ×5, Spearman, bivariado rla↔impug. Se mantienen como señales exploratorias con p-valor crudo y q-valor documentado.
+
 ## Pendiente para ascenso a findings públicos
 
-- [ ] Aplicar FDR (Benjamini-Hochberg) sobre los 16+ p-valores del pipeline.
+- [x] Aplicar FDR (Benjamini-Hochberg) sobre los 16+ p-valores del pipeline.
 - [ ] Sensitivity analysis: Bayesiano con prior uniforme vs Dirichlet(votos+1).
 - [ ] ML-anomalies con 3 valores de contamination.
 - [ ] CUSUM / Bayesian changepoint en H1/H2.
