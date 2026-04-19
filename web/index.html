@@ -6,13 +6,13 @@
 <title>Monitor EG2026 · Auditoría Técnica</title>
 <meta name="description" content="Monitor técnico-estadístico del escrutinio de las Elecciones Generales 2026 del Perú. Data pública, hashes SHA-256, reproducible.">
 <meta property="og:title" content="Monitor EG2026 · Auditoría Técnica Perú">
-<meta property="og:description" content="Margen Sánchez vs López Aliaga en vivo. Data ONPE con hashes SHA-256. Memorial al Fiscal de la Nación.">
+<meta property="og:description" content="Verificación mesa-a-mesa independiente del escrutinio oficial ONPE. 4.703 mesas del universo oficial no aparecen en la API pública. Reproducible con hashes SHA-256.">
 <meta property="og:image" content="https://jackthony.github.io/auditoria-eg2026/og-image.png">
 <meta property="og:url" content="https://jackthony.github.io/auditoria-eg2026/">
 <meta property="og:type" content="website">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Monitor EG2026 · Auditoría Técnica Perú">
-<meta name="twitter:description" content="Margen Sánchez vs López Aliaga en vivo. Reproducible. Memorial al Fiscal.">
+<meta name="twitter:description" content="Verificación mesa-a-mesa ONPE. 4.703 mesas faltantes en la API pública. Reproducible con SHA-256.">
 <meta name="twitter:image" content="https://jackthony.github.io/auditoria-eg2026/og-image.png">
 <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
@@ -112,7 +112,6 @@
     <span class="refresh-spinner" id="refresh-spin"></span>
     <span data-i18n="subtitle">Aporte ciudadano · data pública · hashes SHA-256 · reproducible</span> ·
     <a href="https://github.com/neuracode/auditoria-eg2026" style="color:#fff" target="_blank">repo</a> ·
-    <a href="MEMORIAL_TECNICO_FISCAL.pdf" style="color:#fff;background:var(--accent);padding:.2rem .6rem;border-radius:3px;font-weight:600" target="_blank"><span data-i18n="memorial_cta">📄 Memorial técnico al Fiscal de la Nación</span></a> ·
     <button id="lang-toggle" style="background:transparent;border:1px solid #fff;color:#fff;padding:.15rem .5rem;border-radius:3px;cursor:pointer;font-size:.8rem" title="Change language">🌐 EN</button>
   </div>
 </header>
@@ -124,27 +123,17 @@
   <button class="tab-btn" data-tab-btn="verif" role="tab" data-i18n="tab_verif">Verificación</button>
 </nav>
 
+<div class="grid" style="padding-bottom:0" id="gap-hero-wrap"></div>
+
 <div class="grid" style="padding-bottom:0">
-  <section class="card" style="border-left:6px solid var(--accent);background:#FDF9F0">
-    <h2 style="margin-top:0">Memorial técnico ciudadano — Fiscal de la Nación</h2>
-    <p style="margin:.3rem 0">
-      Solicitud formal de <strong>peritaje forense informático y medidas cautelares técnicas</strong>
-      sobre el proceso de escrutinio, basada en los hechos estadísticos reproducibles de este dashboard.
-    </p>
-    <p style="margin:.3rem 0">
-      <strong>NO imputa delito.</strong> Solicita entrega obligatoria de 10 variables de trazabilidad
-      (logs SIRE-DMS, código fuente, contrato ONPE-CALAG, detalle por acta, etc.) y 5 medidas cautelares
-      que preserven la integridad probatoria hasta el pronunciamiento del JNE.
-    </p>
-    <p style="margin:.6rem 0 0">
-      <a href="MEMORIAL_TECNICO_FISCAL.pdf" target="_blank" style="background:var(--navy);color:#fff;padding:.5rem 1rem;border-radius:4px;text-decoration:none;font-weight:600">📄 Descargar Memorial (PDF)</a>
-      &nbsp;
-      <a href="https://github.com/neuracode/auditoria-eg2026/blob/main/docs/MEMORIAL_TECNICO_FISCAL.md" target="_blank">Ver en Markdown</a>
+  <section class="card" style="border-left:4px solid #b45309;background:#fffbeb">
+    <p style="margin:0;font-size:.95rem">
+      ⚠ <strong>Esto NO es un informe pericial.</strong> Es un análisis técnico reproducible. La palabra
+      "forense" refiere a la cadena de custodia de los datos, no a calidad pericial-judicial. Todos los
+      números son verificables con SHA-256 + código abierto (MIT).
     </p>
   </section>
 </div>
-
-<div class="grid" style="padding-bottom:0" id="gap-hero-wrap"></div>
 
 <div class="grid">
 
@@ -155,17 +144,17 @@
       <div class="kpi"><div class="lbl">Keiko Fujimori</div><div class="val" id="kpi-fuji">—</div><div class="delta neutral" id="kpi-fuji-d"></div></div>
       <div class="kpi"><div class="lbl">Roberto Sánchez</div><div class="val" id="kpi-sanch">—</div><div class="delta neutral" id="kpi-sanch-d"></div></div>
       <div class="kpi"><div class="lbl">López Aliaga</div><div class="val" id="kpi-rla">—</div><div class="delta neutral" id="kpi-rla-d"></div></div>
-      <div class="kpi"><div class="lbl">Margen Sánchez − RLA</div><div class="val" id="kpi-margen">—</div><div class="delta neutral" id="kpi-margen-d"></div></div>
+      <div class="kpi"><div class="lbl">Margen Sánchez − López Aliaga</div><div class="val" id="kpi-margen">—</div><div class="delta neutral" id="kpi-margen-d"></div></div>
       <div class="kpi"><div class="lbl">Actas impugnadas (JEE)</div><div class="val" id="kpi-jee">—</div></div>
-      <div class="kpi" id="kpi-proj-card" style="display:none;border-left-color:#c026d3"><div class="lbl">Proyección lineal @100% · Sánchez − RLA (pp)</div><div class="val" id="kpi-proj">—</div><div class="delta neutral" id="kpi-proj-sub"></div></div>
+      <div class="kpi" id="kpi-proj-card" style="display:none;border-left-color:#c026d3"><div class="lbl">Proyección lineal @100% · Sánchez − López Aliaga (pp)</div><div class="val" id="kpi-proj">—</div><div class="delta neutral" id="kpi-proj-sub"></div></div>
     </div>
   </section>
 
   <section class="card active" data-tab="resultado">
     <h2>Mapa por región — margen Sánchez vs López Aliaga</h2>
     <p style="font-size:.9rem;color:var(--muted);margin:.2rem 0 .8rem">
-      Cada departamento coloreado por margen absoluto <strong>Sánchez − RLA</strong> al corte actual.
-      Rojo = RLA gana · Verde = Sánchez gana · Tonalidad ∝ magnitud del margen.
+      Cada departamento coloreado por margen absoluto <strong>Sánchez − López Aliaga</strong> al corte actual.
+      Rojo = López Aliaga gana · Verde = Sánchez gana · Tonalidad ∝ magnitud del margen.
       Hover para ver detalle por región.
     </p>
     <div id="map-peru"></div>
@@ -232,7 +221,7 @@
     </p>
     <div class="kpi-grid" id="forecast-kpis" style="margin-bottom:1rem"></div>
     <table>
-      <thead><tr><th>Escenario</th><th class="right">Tasa integración JEE</th><th class="right">P(RLA supera Sánchez)</th><th class="right">Margen p5</th><th class="right">Margen p50</th><th class="right">Margen p95</th></tr></thead>
+      <thead><tr><th>Escenario</th><th class="right">Tasa integración JEE</th><th class="right">P(López Aliaga supera Sánchez)</th><th class="right">Margen p5</th><th class="right">Margen p50</th><th class="right">Margen p95</th></tr></thead>
       <tbody id="forecast-scenarios"></tbody>
     </table>
     <div class="chart-wrap" style="height:240px;margin-top:1rem"><canvas id="chart-forecast"></canvas></div>
@@ -266,10 +255,10 @@
     <h2>Regiones pivote (forecast)</h2>
     <p style="font-size:.9rem;color:var(--muted)">
       Top 10 regiones con mayor impacto esperado en el margen, ordenadas por
-      <span class="mono">votos_fuera × (share_Sánchez − share_RLA)</span>.
+      <span class="mono">votos_fuera × (share_Sánchez − share_López Aliaga)</span>.
     </p>
     <table id="tbl-pivote">
-      <thead><tr><th>Región</th><th class="right">Actas fuera</th><th class="right">Votos fuera</th><th class="right">Share S</th><th class="right">Share RLA</th><th class="right">Δ esperado</th></tr></thead>
+      <thead><tr><th>Región</th><th class="right">Actas fuera</th><th class="right">Votos fuera</th><th class="right">Share S</th><th class="right">Share López Aliaga</th><th class="right">Δ esperado</th></tr></thead>
       <tbody></tbody>
     </table>
   </section>
@@ -277,32 +266,13 @@
   <section class="card" data-tab="forecast">
     <h2>Proyección contrafactual por región</h2>
     <p style="font-size:.9rem;color:var(--muted)">
-      Ganancia / pérdida neta RLA vs Sánchez si todas las actas impugnadas y pendientes
+      Ganancia / pérdida neta López Aliaga vs Sánchez si todas las actas impugnadas y pendientes
       se resuelven al ratio regional actual.
     </p>
     <table id="contrafactual">
-      <thead><tr><th>Región</th><th class="right">Actas fuera</th><th class="right">RLA %</th><th class="right">Sánch %</th><th class="right">Δ RLA−S</th></tr></thead>
+      <thead><tr><th>Región</th><th class="right">Actas fuera</th><th class="right">López Aliaga %</th><th class="right">Sánch %</th><th class="right">Δ López Aliaga−S</th></tr></thead>
       <tbody></tbody>
     </table>
-  </section>
-
-  <section class="card" data-tab="hallazgos">
-    <h2>Contexto — "Teoría morrocoy" (comparada)</h2>
-    <p>
-      <strong>Hipótesis comparada.</strong> En el contexto venezolano se ha denominado "morrocoy"
-      (tortuga, lento) a la estrategia de extender deliberadamente el conteo electoral para
-      disipar la atención pública, facilitar impugnaciones masivas, y generar
-      agotamiento en la contraparte. Se atribuye a los procesos que consolidaron a Hugo Chávez
-      y Nicolás Maduro. Es una <em>hipótesis con antecedentes comparados</em>, no una demostración.
-    </p>
-    <p>
-      <strong>Qué dice la data peruana al corte.</strong> Actas pendientes: 780. Impugnadas: 5,554.
-      Plazo legal JEE para audiencia: 2 días hábiles (Res. 0180-2025-JNE). Runoff: 2026-06-07.
-      Hasta que el conteo llegue a 100% y todas las actas sean resueltas, no es posible
-      discriminar entre "demora logística razonable" y "dilación estratégica". Se requiere
-      evidencia directa (logs, testimonios firmados, comunicaciones internas), que esta
-      auditoría <strong>no tiene</strong>.
-    </p>
   </section>
 
   <section class="card" data-tab="verif">
@@ -422,7 +392,7 @@ async function updateHashAndShare() {
   const fmt = new Intl.NumberFormat('es-PE');
   const sign = s.margen_sanch_rla >= 0 ? '+' : '';
   const msg = `📊 Auditoría EG2026 · al ${s.pct.toFixed(2)}% escrutado:\n` +
-              `Margen Sánchez−RLA = ${sign}${fmt.format(s.margen_sanch_rla)} votos\n` +
+              `Margen Sánchez−López Aliaga = ${sign}${fmt.format(s.margen_sanch_rla)} votos\n` +
               `Actas en JEE: ${fmt.format(s.actas_jee)}\n\n` +
               `Data verificable + memorial al Fiscal: ${url}`;
   const enc = encodeURIComponent(msg);
@@ -530,14 +500,14 @@ function render(d) {
     document.getElementById('kpi-proj-card').style.display = '';
     el.textContent = (m >= 0 ? '+' : '') + m.toFixed(2) + ' pp';
     el.style.color = m < 0 ? '#b91c1c' : '#0a7a3b';
-    sub.textContent = `Sánchez ${p.sanchez.toFixed(2)} · RLA ${p.rla.toFixed(2)} · regresión tail-${p.window_points} vs %escrutado`;
+    sub.textContent = `Sánchez ${p.sanchez.toFixed(2)} · López Aliaga ${p.rla.toFixed(2)} · regresión tail-${p.window_points} vs %escrutado`;
   }
 
   // Deltas vs corte anterior
   if (d.delta) {
     setDelta('kpi-fuji-d', d.delta.fujimori);
-    setDelta('kpi-sanch-d', d.delta.sanchez, true);  // Sánchez sube es malo para RLA
-    setDelta('kpi-rla-d', d.delta.rla, false);       // RLA sube es bueno
+    setDelta('kpi-sanch-d', d.delta.sanchez, true);  // Sánchez sube es malo para López Aliaga
+    setDelta('kpi-rla-d', d.delta.rla, false);       // López Aliaga sube es bueno
     const m = d.delta.margen_sanch_rla;
     const md = document.getElementById('kpi-margen-d');
     md.textContent = (m >= 0 ? '↑' : '↓') + ' ' + FMT_INT.format(Math.abs(m)) + ' vs corte previo';
@@ -553,7 +523,7 @@ function render(d) {
       labels: d.series.map(p => p.ts.substring(5, 16)),
       datasets: [
         {label:'Fujimori', data: d.series.map(p=>p.fujimori), borderColor:'#E85D3D', tension:.3, pointRadius:0},
-        {label:'RLA',      data: d.series.map(p=>p.rla),      borderColor:'#0B2A4A', tension:.3, pointRadius:0},
+        {label:'López Aliaga',      data: d.series.map(p=>p.rla),      borderColor:'#0B2A4A', tension:.3, pointRadius:0},
         {label:'Nieto',    data: d.series.map(p=>p.nieto),    borderColor:'#7D4F9F', tension:.3, pointRadius:0},
         {label:'Belmont',  data: d.series.map(p=>p.belmont),  borderColor:'#4E7A4E', tension:.3, pointRadius:0},
         {label:'Sánchez',  data: d.series.map(p=>p.sanchez),  borderColor:'#C77B1E', tension:.3, pointRadius:0},
@@ -610,10 +580,10 @@ function renderForecast(f) {
   const pMix = mix.p_rla_supera_sanchez;
   const kpis = document.getElementById('forecast-kpis');
   kpis.innerHTML = `
-    <div class="kpi"><div class="lbl">P(RLA supera Sánchez) · central</div>
+    <div class="kpi"><div class="lbl">P(López Aliaga supera Sánchez) · central</div>
       <div class="val">${(pCentral*100).toFixed(1)}%</div>
       <div class="updated">tasa integración JEE 50%</div></div>
-    <div class="kpi"><div class="lbl">P(RLA supera Sánchez) · mixto</div>
+    <div class="kpi"><div class="lbl">P(López Aliaga supera Sánchez) · mixto</div>
       <div class="val">${(pMix*100).toFixed(1)}%</div>
       <div class="updated">incertidumbre máxima sobre JEE</div></div>
     <div class="kpi"><div class="lbl">Margen final p50 (central)</div>
@@ -652,7 +622,7 @@ function renderForecast(f) {
     data: {
       labels: h.map(p => FMT_INT.format(Math.round(p.center))),
       datasets: [{
-        label: 'Margen Sánchez − RLA (10k simulaciones, central)',
+        label: 'Margen Sánchez − López Aliaga (10k simulaciones, central)',
         data: h.map(p => p.count),
         backgroundColor: h.map(p => p.center >= 0 ? '#0B2A4A' : '#B4332B'),
       }]
@@ -714,9 +684,9 @@ function renderForecastInteractive(f) {
     const color = p > 0.45 ? 'var(--red)' : p > 0.30 ? 'var(--orange)' : 'var(--green)';
     const sign = m50 >= 0 ? '+' : '';
     kpis.innerHTML = `
-      <div class="kpi"><div class="lbl">P(RLA supera Sánchez)</div>
+      <div class="kpi"><div class="lbl">P(López Aliaga supera Sánchez)</div>
         <div class="val" style="color:${color}">${(p*100).toFixed(1)}%</div></div>
-      <div class="kpi"><div class="lbl">Margen mediano (S−RLA)</div>
+      <div class="kpi"><div class="lbl">Margen mediano (S−López Aliaga)</div>
         <div class="val">${sign}${FMT_INT.format(Math.round(m50))}</div></div>
       <div class="kpi"><div class="lbl">IC 90% del margen</div>
         <div class="val mono" style="font-size:1rem">[${FMT_INT.format(Math.round(m5))}, ${FMT_INT.format(Math.round(m95))}]</div></div>`;
@@ -782,8 +752,8 @@ async function renderMap(regions) {
       const fmt = new Intl.NumberFormat('es-PE');
       const html = r ? `
         <strong>${r.name}</strong><br>
-        Margen S−RLA: <strong>${r.margin>=0?'+':''}${fmt.format(r.margin)}</strong> votos<br>
-        Sánchez: ${r.sanch_pct.toFixed(2)}% · RLA: ${r.rla_pct.toFixed(2)}%<br>
+        Margen S−López Aliaga: <strong>${r.margin>=0?'+':''}${fmt.format(r.margin)}</strong> votos<br>
+        Sánchez: ${r.sanch_pct.toFixed(2)}% · López Aliaga: ${r.rla_pct.toFixed(2)}%<br>
         Escrutado: ${r.pct_actas.toFixed(2)}% · Actas fuera: ${fmt.format(r.actas_fuera)}
       ` : `<strong>${f.properties.NOMBDEP}</strong><br>(sin data)`;
       lyr.bindTooltip(html, { className: 'region-tip', sticky: true });
@@ -799,7 +769,7 @@ async function renderMap(regions) {
     const div = L.DomUtil.create('div', 'map-legend');
     const fmt = new Intl.NumberFormat('es-PE');
     div.innerHTML = `
-      <strong>Margen Sánchez − RLA (votos)</strong>
+      <strong>Margen Sánchez − López Aliaga (votos)</strong>
       <div class="scale">
         <span class="swatch" style="background:${marginColor(-vmax,vmax)}"></span>
         <span>−${fmt.format(vmax)}</span>
@@ -816,8 +786,8 @@ async function renderMap(regions) {
 }
 
 // DIFF — comparador de cortes (national).
-const CAND_LABELS = {fujimori:'Keiko Fujimori', sanchez:'Roberto Sánchez',
-  rla:'López Aliaga', nieto:'Nieto', belmont:'Belmont'};
+const CAND_LABELS = {fujimori:'Keiko Fujimori', sanchez:'Roberto Sánchez Palomino',
+  rla:'Rafael López Aliaga', nieto:'Jorge Nieto', belmont:'Ricardo Belmont'};
 function renderDiff(series) {
   const slider = document.getElementById('diff-slider');
   const last = series[series.length - 1];
