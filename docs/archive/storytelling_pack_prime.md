@@ -164,7 +164,7 @@ Música: trap tenso 90 BPM. Subtítulos duros blanco/amarillo. Cambio de plano c
 ## 6. Pitch panelistas TV (dossier 1 pág)
 
 **Para:** productor/a de mesa política
-**De:** Jack Aguilar — Neuracode Academy — jaaguilar@acity.com.pe
+**De:** Jack Aguilar — github.com/jackthony
 **Asunto:** Hallazgo replicable sobre agregador ONPE — EG2026
 
 **Contexto (3 líneas):**

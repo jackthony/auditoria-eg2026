@@ -138,11 +138,11 @@ Datos **oficiales de ONPE** sobre las fallas del proveedor CALAG / Servicios Gen
 - **Locales de votación afectados:** 15.
 - **Mesas no instaladas o instaladas tardíamente:** 211.
 - **Electores oficialmente impedidos de votar:** **63,300**.
-- **Margen final Sánchez − López Aliaga (corte 93.17%):** 5,898.
+- **Margen final Sánchez − López Aliaga (corte 93.474% al 2026-04-18):** 13,624. *(Valor vivo: `data/processed/meta.json` → `margen_sanch_rla_votos`.)*
 
-**Ratio: 63,300 / 5,898 = 10.73×.** El universo de electores afectados por una falla operativa contratada bajo mecanismo excepcional (fuera del régimen ordinario de la Ley de Contrataciones) supera en **10.73 veces** el margen que define el pase a segunda vuelta.
+**Ratio: 63,300 / 13,624 ≈ 4.64×** al corte vigente. El universo de electores afectados por una falla operativa contratada bajo mecanismo excepcional (fuera del régimen ordinario de la Ley de Contrataciones) supera en **4.64 veces** el margen que define el pase a segunda vuelta.
 
-**Marco jurídico directamente aplicable:** **Artículo 363° de la Ley 26859** (Ley Orgánica de Elecciones) — nulidad parcial cuando concurra un evento que *podría* haber alterado el resultado. El estándar del Art. 363 **no exige probar alteración**, sino acreditar que el evento **tuvo magnitud suficiente** para haberla causado. El ratio 10.73× satisface ese umbral por varios órdenes de magnitud.
+**Marco jurídico directamente aplicable:** **Artículo 363° de la Ley 26859** (Ley Orgánica de Elecciones) — nulidad parcial cuando concurra un evento que *podría* haber alterado el resultado. El estándar del Art. 363 **no exige probar alteración**, sino acreditar que el evento **tuvo magnitud suficiente** para haberla causado. Un ratio ≥ 1× ya satisface ese umbral; 4.64× lo supera por varios múltiplos.
 
 Este hecho, combinado con la discrepancia institucional del Hecho 7 (CALAG ↔ ONPE), configura el núcleo de materia que debe conocer el JEE / JNE para resolver la validez del resultado en Lima.
 

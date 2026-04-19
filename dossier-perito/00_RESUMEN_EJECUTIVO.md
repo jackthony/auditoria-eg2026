@@ -10,9 +10,9 @@
 ## Contexto
 
 Elecciones Generales Perú 2026, 1ra vuelta, 12 de abril. Margen
-Sánchez−RLA: **+5,875 a +5,898 votos** (oscila con el corte). Tercer vs
-cuarto puesto separados por <0.04 puntos porcentuales. El resultado final
-decide el pase a segunda vuelta.
+Sánchez−RLA: **+13,624 votos al corte 93.474% (2026-04-18)** — oscila con cada corte
+(valor histórico al 93.17%: +5,898). Tercer vs cuarto puesto separados por ~0.086 pp.
+El resultado final decide el pase a segunda vuelta. *Valor vivo: `data/processed/meta.json → margen_sanch_rla_votos`.*
 
 ---
 
@@ -29,7 +29,7 @@ decide el pase a segunda vuelta.
 
 | ID | Descripción | Fuente |
 |----|-------------|--------|
-| A-AUS-3 | Ratio 10.73× entre electores afectados por CALAG/Galaga en Lima (63,300) y margen final (5,898). Abre Art. 363 Ley 26859 | Comparación ausentismo |
+| A-AUS-3 | Ratio 4.64× entre electores afectados por CALAG/Galaga en Lima (63,300) y margen vigente al corte 93.474% (13,624). Abre Art. 363 Ley 26859 | Comparación ausentismo |
 
 ### MEDIA
 

@@ -1,18 +1,18 @@
 {
-  "capture": "20260419T025134Z",
+  "capture": "20260419T220357Z",
   "snapshot": {
-    "actasContabilizadas_pct": 93.483,
-    "contabilizadas": 86720,
+    "actasContabilizadas_pct": 93.513,
+    "contabilizadas": 86748,
     "totalActas": 92766,
-    "totalVotosValidos": 15757620,
+    "totalVotosValidos": 15761459,
     "candidatos": 38,
-    "mesasInstaladas": 92496,
+    "mesasInstaladas": 92532,
     "mesasNoInstaladas": 48,
-    "mesasPendientes": 222
+    "mesasPendientes": 186
   },
   "checks_total": 7,
-  "votos_validos_sum": 15757620,
-  "votos_blancos_nulos_sum": 3144646,
+  "votos_validos_sum": 15761459,
+  "votos_blancos_nulos_sum": 3146355,
   "findings_count": 0,
   "findings": [],
   "status": "OK"

@@ -75,13 +75,13 @@ No prueba sesgo deliberado. Sí amerita explicación operativa de ONPE.
 ### Resultado
 
 - Electores afectados oficialmente en Lima por CALAG/Galaga: 63,300.
-- Margen final Sánchez−RLA: 5,898.
-- **Ratio: 10.73×.**
+- Margen Sánchez−RLA al corte 93.474% (2026-04-18): **13,624** (histórico al 93.17%: 5,898).
+- **Ratio vigente: 4.64×** (ratio histórico: 10.73×).
 
 ### Interpretación honesta
 
 El número oficial (no la denuncia RLA de 600K) de afectados supera en
-10.73× al margen que define la elección. Si incluso un 10% de esos electores
+4.64× al margen vigente que define la elección. Si incluso un 21% de esos electores
 hubiera preferido a RLA por encima de Sánchez, el margen se invierte.
 
 ### Lo que NO implica
