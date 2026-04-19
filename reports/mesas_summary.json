@@ -1,0 +1,72 @@
+{
+  "capture_ts": "20260419T035056Z",
+  "id_eleccion": 10,
+  "archivos_totales": 88063,
+  "mesas_procesadas": 88063,
+  "mesas_sin_data_presidencial": 0,
+  "mesas_contabilizadas": 82322,
+  "mesas_observadas_jee": 5458,
+  "mesas_pendientes": 283,
+  "mesas_otros_estado": 0,
+  "suma_mesa_total_electores": 26215556,
+  "suma_mesa_total_emitidos": 18121044,
+  "suma_mesa_total_validos": 15192198,
+  "suma_detalle_validos": 15191387,
+  "suma_detalle_blancos": 2042209,
+  "suma_detalle_nulos": 886510,
+  "suma_detalle_emitidos": 18120106,
+  "delta_validos_vs_detalle": 811,
+  "top10_agrupaciones": [
+    {
+      "agrupacion": "FUERZA POPULAR",
+      "votos": 2595320,
+      "pct_validos": 17.084
+    },
+    {
+      "agrupacion": "RENOVACIÓN POPULAR",
+      "votos": 1863643,
+      "pct_validos": 12.268
+    },
+    {
+      "agrupacion": "PARTIDO DEL BUEN GOBIERNO",
+      "votos": 1731694,
+      "pct_validos": 11.399
+    },
+    {
+      "agrupacion": "JUNTOS POR EL PERÚ",
+      "votos": 1656517,
+      "pct_validos": 10.904
+    },
+    {
+      "agrupacion": "PARTIDO CÍVICO OBRAS",
+      "votos": 1552461,
+      "pct_validos": 10.219
+    },
+    {
+      "agrupacion": "PARTIDO PAÍS PARA TODOS",
+      "votos": 1226320,
+      "pct_validos": 8.072
+    },
+    {
+      "agrupacion": "AHORA NACIÓN - AN",
+      "votos": 1133127,
+      "pct_validos": 7.459
+    },
+    {
+      "agrupacion": "PRIMERO LA GENTE – COMUNIDAD, ECOLOGÍA, LIBERTAD Y PROGRESO",
+      "votos": 536595,
+      "pct_validos": 3.532
+    },
+    {
+      "agrupacion": "PARTIDO SICREO",
+      "votos": 527634,
+      "pct_validos": 3.473
+    },
+    {
+      "agrupacion": "PARTIDO FRENTE DE LA ESPERANZA 2021",
+      "votos": 284825,
+      "pct_validos": 1.875
+    }
+  ],
+  "ubigeos_con_mesas": 2087
+}

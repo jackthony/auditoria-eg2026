@@ -56,6 +56,9 @@ reports/serie_temporal.csv
 captures/**/*.tmp
 captures/**/.DS_Store
 
+# MESA-03: raw gzipped responses mesa-a-mesa (22GB). MANIFEST+summary SÍ van a git.
+captures/**/mesas/*.json.gz
+
 # ──────────────────────────────────────────────────────────────
 # Evidencia sensible — a criterio del partido si commitear o no
 # Por defecto, los PDFs y fotos de copias físicas NO se suben a
