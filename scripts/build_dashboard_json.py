@@ -35,9 +35,11 @@ def main():
     prev = tr.iloc[-2] if len(tr) > 1 else None
 
     reg = pd.read_csv(ROOT / "data" / "processed" / "regiones.csv")
-    reg["vv_acta"] = reg["vv"] / reg["contabilizadas"]
+    # Guard div/0 y NaN → se propagan como Infinity/NaN a JSON y rompen el JS.
+    reg["vv_acta"] = reg["vv"] / reg["contabilizadas"].replace(0, np.nan)
+    reg["vv_acta"] = reg["vv_acta"].fillna(0.0).replace([np.inf, -np.inf], 0.0)
     reg["actas_fuera"] = reg["enviadasJee"] + reg["pendientes_calc"]
-    reg["votos_fuera"] = reg["actas_fuera"] * reg["vv_acta"]
+    reg["votos_fuera"] = (reg["actas_fuera"] * reg["vv_acta"]).fillna(0.0)
     reg["delta"] = reg["votos_fuera"] * (reg["rla"] - reg["sanch"]) / 100
     reg = reg.sort_values("delta", ascending=False)
 
@@ -152,13 +154,20 @@ def main():
         tail = tr_sorted.tail(30)  # ultimos 30 cortes: fase estable
         xs = tail["pct"].astype(float).values
         proj: dict = {"pct_now": pct_now, "target_pct": 100.0, "window_points": int(len(tail))}
+        xs_var = float(np.var(xs))
         for cand in ("fujimori", "sanchez", "rla", "nieto", "belmont"):
             ys = tail[cand].astype(float).values
-            if len(set(xs)) < 2:
-                proj[cand] = float(ys[-1])
+            # Guard: xs casi constante o NaN → usar último valor observado.
+            if xs_var < 1e-6 or np.any(np.isnan(ys)) or np.any(np.isnan(xs)):
+                proj[cand] = round(float(ys[-1]), 3)
+                proj[f"{cand}_slope"] = 0.0
                 continue
-            m, b = np.polyfit(xs, ys, 1)  # y = m*x + b
+            m, b = np.polyfit(xs, ys, 1)
             y100 = m * 100.0 + b
+            if not np.isfinite(y100):
+                proj[cand] = round(float(ys[-1]), 3)
+                proj[f"{cand}_slope"] = 0.0
+                continue
             proj[cand] = round(float(y100), 3)
             proj[f"{cand}_slope"] = round(float(m), 5)
         proj["margin_sanchez_rla_100"] = round(proj["sanchez"] - proj["rla"], 3)

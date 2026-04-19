@@ -169,9 +169,17 @@ def main():
     ts = utc_now_compact()
     capture_dir = ROOT / "captures" / ts
     raw_dir = capture_dir / "raw"
-    raw_dir.mkdir(parents=True, exist_ok=True)
+    # Inmutabilidad: si la carpeta ya existe, ABORTAR. Nunca sobrescribir captura.
+    if capture_dir.exists():
+        print(f"ERROR: captures/{ts} ya existe. No se sobrescriben capturas (cadena de custodia).",
+              file=sys.stderr)
+        sys.exit(3)
+    raw_dir.mkdir(parents=True, exist_ok=False)
 
     pub_ip = public_ip()
+    if pub_ip in ("unknown", "captured-from-container", None, ""):
+        print(f"WARNING: public_ip = {pub_ip!r} (no peruana verificable). "
+              "Se registrará en MANIFEST como ip_warning=true.", file=sys.stderr)
     host = hostname()
     commit = git_commit_hash()
     os_desc = f"{platform.system()} {platform.release()} ({platform.machine()})"
