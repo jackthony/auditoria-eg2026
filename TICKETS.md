@@ -17,23 +17,23 @@ Marcar `[x]` al completar. `/ecc:plan <ID>` para iniciar.
 - [ ] **BRAND-03** · Landing `/` narrativa tipo `historia/` con CTAs a `/dashboard`, `/chat`, `/historia`, memorial PDF. · 2 h · Tony
 - [ ] **BRAND-04** · OG image unificada (estilo Fraunces+paper+blood), hero "4.703 mesas no aparecen · 2° puesto cambia". Regenerar `build_og_image.py`. · 1 h · Tony
 
-## 🟡 Sprint 1 — Quick wins (~10 h)
+## ✅ Sprint 1 — Quick wins (COMPLETO 2026-04-19)
 
-- [ ] **MAPA-01** · Mapa choropleth Perú (Leaflet + GeoJSON) coloreado por margen RLA−Sánchez. · 4 h · Tony
-- [ ] **LIVE-01** · Auto-refresh `data.json` cada 5 min sin reload + badge "EN VIVO" + "Actualizado hace X min". · 1.5 h · Tony
-- [ ] **SHARE-01** · Botón "Compartir" → X / WhatsApp / Telegram con texto pre-armado. · 1 h · Tony
-- [ ] **OG-01** · OG image dinámica por loop (margen + corte + timestamp). · 2 h · Tony
-- [ ] **HASH-01** · Hash SHA-256 de `data.json` visible en footer + link "verificar inline". · 30 min · Tony
-- [ ] **FOOT-01** · Footer con redes (TikTok / IG / GitHub) + link memorial PDF. · 30 min · Tony
+- [x] **MAPA-01** · Leaflet + GeoJSON por margen López Aliaga−Sánchez.
+- [x] **LIVE-01** · Auto-refresh + badge EN VIVO + relative time.
+- [x] **SHARE-01** · X / WhatsApp / Telegram / Copiar con texto pre-armado.
+- [x] **OG-01** · OG image regenerada por `build_og_image.py`.
+- [x] **HASH-01** · SHA-256 footer + alert hash completo.
+- [x] **FOOT-01** · Footer TikTok/IG/FB/GitHub + Memorial PDF + API pública.
 
 ## 🟢 Sprint 2 — Diferenciador técnico (~23 h)
 
-- [ ] **TABS-01** · Tabs (Resultado · Hallazgos · Forecast · Verificación). · 2 h
+- [x] **TABS-01** · Tabs implementados (Resultado · Hallazgos · Forecast · Verificación).
 - [ ] **TABLE-01** · Tabla findings con sort/filter por severidad + búsqueda por test. · 3 h
 - [ ] **DIFF-01** · Diff visual entre snapshots (slider tiempo, "antes/después"). · 4 h
-- [ ] **FCAST-INT-01** · Forecast bayesiano interactivo: slider "% actas RLA pendientes" → P(2°) en cliente. · 6 h
+- [ ] **FCAST-INT-01** · Forecast bayesiano interactivo: slider "% actas López Aliaga pendientes" → P(2°) en cliente. · 6 h
 - [ ] **TG-BOT-01** · Bot Telegram `@AuditoriaEG2026` (cambios ≥0.1 pp o finding CRÍTICO). · 3 h
-- [ ] **API-01** · Endpoints `/api/findings.json` y `/api/forecast.json` en gh-pages. · 1 h
+- [x] **API-01** · 7 endpoints en `web/api/` (findings, forecast, state, regions, series, projection, findings_gap).
 - [ ] **HIST-01** · Comparador 2026 vs 2021 vs 2016 (ausentismo + impugnación). · 4 h
 
 ## 🔵 Sprint 3 — Diferenciación absoluta (~1 semana)
