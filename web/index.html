@@ -414,7 +414,8 @@ async function updateHashAndShare() {
   };
 
   // Share buttons.
-  const s = _lastData.state;
+  const s = _lastData?.state;
+  if (!s) return;
   const url = 'https://jackthony.github.io/auditoria-eg2026/';
   const fmt = new Intl.NumberFormat('es-PE');
   const sign = s.margen_sanch_rla >= 0 ? '+' : '';
@@ -584,7 +585,7 @@ function render(d) {
   if (d.forecast) { renderForecast(d.forecast); renderForecastInteractive(d.forecast); }
 
   // Contrafactual
-  document.querySelector('#contrafactual tbody').innerHTML = d.contrafactual.map(r => {
+  document.querySelector('#contrafactual tbody').innerHTML = (d.contrafactual||[]).map(r => {
     const c = r.delta > 0 ? 'var(--green)' : (r.delta < -1000 ? 'var(--red)' : 'var(--muted)');
     const sign = r.delta >= 0 ? '+' : '';
     return `<tr><td>${r.name}</td>
@@ -708,12 +709,12 @@ function renderForecastInteractive(f) {
     const color = p > 0.45 ? 'var(--red)' : p > 0.30 ? 'var(--orange)' : 'var(--green)';
     const sign = m50 >= 0 ? '+' : '';
     kpis.innerHTML = `
-      <div class="kpi"><div class="kpi-label">P(RLA supera Sánchez)</div>
-        <div class="kpi-val" style="color:${color}">${(p*100).toFixed(1)}%</div></div>
-      <div class="kpi"><div class="kpi-label">Margen mediano (S−RLA)</div>
-        <div class="kpi-val">${sign}${FMT_INT.format(Math.round(m50))}</div></div>
-      <div class="kpi"><div class="kpi-label">IC 90% del margen</div>
-        <div class="kpi-val mono" style="font-size:1rem">[${FMT_INT.format(Math.round(m5))}, ${FMT_INT.format(Math.round(m95))}]</div></div>`;
+      <div class="kpi"><div class="lbl">P(RLA supera Sánchez)</div>
+        <div class="val" style="color:${color}">${(p*100).toFixed(1)}%</div></div>
+      <div class="kpi"><div class="lbl">Margen mediano (S−RLA)</div>
+        <div class="val">${sign}${FMT_INT.format(Math.round(m50))}</div></div>
+      <div class="kpi"><div class="lbl">IC 90% del margen</div>
+        <div class="val mono" style="font-size:1rem">[${FMT_INT.format(Math.round(m5))}, ${FMT_INT.format(Math.round(m95))}]</div></div>`;
   };
   slider.oninput = draw;
   draw();

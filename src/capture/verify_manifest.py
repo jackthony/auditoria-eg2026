@@ -53,7 +53,12 @@ def verify(capture_dir: Path) -> int:
                 return 2
 
             total += 1
-            local = capture_dir / entry["local_path"]
+            local = (capture_dir / entry["local_path"]).resolve()
+            base = capture_dir.resolve()
+            # Anti path-traversal: local_path manipulado no debe escapar capture_dir.
+            if base not in local.parents and local != base:
+                fails.append((entry.get("endpoint", "?"), "PATH_TRAVERSAL", entry.get("sha256", ""), str(local)))
+                continue
             expected = entry["sha256"]
 
             if not local.exists():
