@@ -9,6 +9,13 @@ from src.models.onpe import (
     EleccionItem,
     UbigeoItem,
 )
+from src.models.findings import (
+    Finding,
+    Severity,
+    ReconcileResult,
+    load_findings,
+    dump_findings,
+)
 
 __all__ = [
     "OnpeResponse",
@@ -20,4 +27,9 @@ __all__ = [
     "ProcesoActivo",
     "EleccionItem",
     "UbigeoItem",
+    "Finding",
+    "Severity",
+    "ReconcileResult",
+    "load_findings",
+    "dump_findings",
 ]
