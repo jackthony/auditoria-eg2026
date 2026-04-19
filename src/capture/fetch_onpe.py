@@ -37,34 +37,32 @@ if sys.platform == "win32":
 #  CONFIGURACIÓN
 # ══════════════════════════════════════════════════════════════
 
-# Fuente oficial ONPE. Documentada en el índice de endpoints del
-# backend de resultadoelectoral.onpe.gob.pe
-ONPE_BASE = "https://resultadoelectoral.onpe.gob.pe/presentacion-backend"
+# Fuente oficial ONPE (directa). Se usa si la IP capturante es peruana.
+ONPE_BASE = "https://resultadoelectoral.onpe.gob.pe"
 
-# Proxy de respaldo (solo se usa si ONPE bloquea la IP).
-# Lo declaramos explícitamente en el manifest para transparencia.
-PROXY_BASE = "https://onpe-proxy.renzonunez-af.workers.dev"
+# Worker Cloudflare propio (Neuracode). Proxy puro a ONPE, cache 30s edge,
+# allowlist de 6 paths, validación anti-redirect hijack. Ver proxy/onpe-proxy-neuracode/.
+# Permite captura 24/7 desde GitHub Actions (datacenter) que ONPE bloquearía directo.
+PROXY_BASE = os.environ.get(
+    "ONPE_PROXY_BASE",
+    "https://onpe-proxy-neuracode.jackgptgod.workers.dev",
+)
 
 USER_AGENT = "AuditoriaEG2026/1.0 (analisis tecnico - personero acreditado)"
 
-# Endpoints a capturar.
-# Nota: los paths específicos del backend de ONPE están sujetos a cambio;
-# si alguno devuelve 404, usar el fallback vía proxy que ya tiene los
-# paths mapeados.
+# Endpoints oficiales ONPE. Paths confirmados vía inspección de network tab
+# en resultadoelectoral.onpe.gob.pe/main/resumen.
 ENDPOINTS_ONPE = {
-    # NOTA: Los paths exactos del backend ONPE se descubren inspeccionando
-    # el Network tab del navegador en resultadoelectoral.onpe.gob.pe/main/resumen
-    # Agregar aquí a medida que se confirmen.
+    "proceso_activo":    "/presentacion-backend/proceso/proceso-electoral-activo",
+    "elecciones":        "/presentacion-backend/proceso/2/elecciones",
+    "totales":           "/presentacion-backend/resumen-general/totales?idEleccion=10&tipoFiltro=eleccion",
+    "mapa_calor":        "/presentacion-backend/resumen-general/mapa-calor?idEleccion=10&tipoFiltro=total",
+    "presidencial":      "/presentacion-backend/eleccion-presidencial/participantes-ubicacion-geografica-nombre?idEleccion=10&tipoFiltro=eleccion",
+    "mesa_totales":      "/presentacion-backend/mesa/totales?tipoFiltro=eleccion",
 }
 
-# Endpoints del proxy de respaldo (agregados con totales por región)
-ENDPOINTS_PROXY = {
-    "health":        "/",
-    "snap1":         "/api/snapshot?half=1",
-    "snap2":         "/api/snapshot?half=2",
-    "tracking":      "/api/tracking",
-    "prev_snapshot": "/api/prev-snapshot",
-}
+# Si ONPE_DIRECT=1 (IP peruana verificada), va directo; si no, via Worker.
+USE_DIRECT = os.environ.get("ONPE_DIRECT", "0") == "1"
 
 TIMEOUT = 20  # segundos por request
 
@@ -190,30 +188,22 @@ def main():
     print(f"[capture] git HEAD: {commit or 'no-repo'}")
     print()
 
-    # Estrategia: intentar ONPE directo primero; caer al proxy para los
-    # endpoints que ONPE directo no tenga mapeados.
+    # Estrategia: ONPE directo si ONPE_DIRECT=1 (IP peruana), si no via Worker propio.
+    base = ONPE_BASE if USE_DIRECT else PROXY_BASE
+    source = "onpe_direct" if USE_DIRECT else "proxy_neuracode"
     manifest_entries = []
 
-    # 1. ONPE directo (cuando hayan endpoints confirmados)
+    print(f"[capture] source: {source}  base: {base}")
+    print()
+
     for name, path in ENDPOINTS_ONPE.items():
         out = raw_dir / f"{name}.json"
-        entry = fetch_endpoint(ONPE_BASE, path, out)
+        entry = fetch_endpoint(base, path, out)
         entry["endpoint"] = name
-        entry["source"] = "onpe_direct"
+        entry["source"] = source
         manifest_entries.append(entry)
         flag = "✓" if entry["http_status"] == 200 else f"✗ HTTP {entry['http_status']}"
-        print(f"  {flag}  ONPE     {name:<15}  {entry['bytes']:>7}B  "
-              f"sha256={entry['sha256'][:16]}...")
-
-    # 2. Proxy de respaldo para los endpoints agregados
-    for name, path in ENDPOINTS_PROXY.items():
-        out = raw_dir / f"{name}.json"
-        entry = fetch_endpoint(PROXY_BASE, path, out)
-        entry["endpoint"] = name
-        entry["source"] = "proxy_renzo"
-        manifest_entries.append(entry)
-        flag = "✓" if entry["http_status"] == 200 else f"✗ HTTP {entry['http_status']}"
-        print(f"  {flag}  PROXY    {name:<15}  {entry['bytes']:>7}B  "
+        print(f"  {flag}  {name:<18}  {entry['bytes']:>7}B  "
               f"sha256={entry['sha256'][:16]}...")
 
     # 3. Escribir manifiesto (una línea por entrada)

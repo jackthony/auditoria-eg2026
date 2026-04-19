@@ -1,12 +1,5 @@
 /**
  * onpe-proxy-neuracode — proxy puro ONPE para auditoria-eg2026.
- *
- * Principios:
- *  - Allowlist estricto de paths (no proxy abierto).
- *  - CORS restringido a orígenes conocidos.
- *  - Cache edge 30s (reduce carga upstream + latencia).
- *  - Header de trazabilidad X-Proxy-Source para cadena de custodia.
- *  - Sin estado (KV/Durable Objects). La evidencia pericial vive en git.
  */
 
 const ALLOWED_PATHS = new Set([
@@ -18,9 +11,9 @@ const ALLOWED_PATHS = new Set([
   "/presentacion-backend/mesa/totales",
 ]);
 
-function corsHeaders(origin, allowed) {
-  const list = allowed.split(",").map((s) => s.trim());
-  const ok = list.includes(origin) ? origin : list[0];
+function corsHeaders(origin, allowedCsv) {
+  const list = (allowedCsv || "").split(",").map((s) => s.trim()).filter(Boolean);
+  const ok = list.includes(origin) ? origin : (list[0] || "*");
   return {
     "Access-Control-Allow-Origin": ok,
     "Access-Control-Allow-Methods": "GET, OPTIONS",
@@ -29,8 +22,8 @@ function corsHeaders(origin, allowed) {
   };
 }
 
-function jsonError(status, msg, cors) {
-  return new Response(JSON.stringify({ error: msg, proxy: "neuracode" }), {
+function jsonResp(status, obj, cors) {
+  return new Response(JSON.stringify(obj), {
     status,
     headers: { "Content-Type": "application/json", ...cors },
   });
@@ -42,75 +35,75 @@ export default {
     const origin = request.headers.get("Origin") || "";
     const cors = corsHeaders(origin, env.ALLOWED_ORIGINS);
 
-    if (request.method === "OPTIONS") {
-      return new Response(null, { status: 204, headers: cors });
-    }
-    if (request.method !== "GET") {
-      return jsonError(405, "Method not allowed", cors);
-    }
-
-    // Allowlist check (sin query string)
-    if (!ALLOWED_PATHS.has(url.pathname)) {
-      return jsonError(404, `Path not in allowlist: ${url.pathname}`, cors);
-    }
-
-    // Cache edge por URL completa
-    const cacheKey = new Request(url.toString(), request);
-    const cache = caches.default;
-    let response = await cache.match(cacheKey);
-    if (response) {
-      const hit = new Response(response.body, response);
-      hit.headers.set("X-Proxy-Cache", "HIT");
-      for (const [k, v] of Object.entries(cors)) hit.headers.set(k, v);
-      return hit;
-    }
-
-    // Forward a ONPE
-    const upstreamUrl = env.UPSTREAM + url.pathname + url.search;
-    const upstreamReq = new Request(upstreamUrl, {
-      method: "GET",
-      headers: {
-        "User-Agent": "Mozilla/5.0 (compatible; AuditoriaEG2026-Neuracode/1.0; +https://github.com/jackthony/auditoria-eg2026)",
-        "Accept": "application/json",
-        "Referer": "https://resultadoelectoral.onpe.gob.pe/",
-      },
-      redirect: "error", // no seguir redirects a otros hosts
-    });
-
-    let upstream;
     try {
-      upstream = await fetch(upstreamReq, { cf: { cacheTtl: 30, cacheEverything: true } });
+      if (request.method === "OPTIONS") {
+        return new Response(null, { status: 204, headers: cors });
+      }
+      if (request.method !== "GET") {
+        return jsonResp(405, { error: "Method not allowed" }, cors);
+      }
+      if (!ALLOWED_PATHS.has(url.pathname)) {
+        return jsonResp(404, { error: `Path not in allowlist: ${url.pathname}` }, cors);
+      }
+
+      // Cache key: URL string simple.
+      const cacheKey = new Request(url.toString(), { method: "GET" });
+      const cache = caches.default;
+      const cached = await cache.match(cacheKey);
+      if (cached) {
+        const hit = new Response(cached.body, cached);
+        for (const [k, v] of Object.entries(cors)) hit.headers.set(k, v);
+        hit.headers.set("X-Proxy-Cache", "HIT");
+        return hit;
+      }
+
+      // Fetch upstream.
+      const upstreamUrl = env.UPSTREAM + url.pathname + url.search;
+      const upstream = await fetch(upstreamUrl, {
+        method: "GET",
+        headers: {
+          "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36",
+          "Accept": "application/json, text/plain, */*",
+          "Accept-Language": "es-PE,es;q=0.9,en;q=0.8",
+          "Referer": "https://resultadoelectoral.onpe.gob.pe/",
+          "Origin": "https://resultadoelectoral.onpe.gob.pe",
+          "X-Requested-With": "XMLHttpRequest",
+          "Sec-Fetch-Dest": "empty",
+          "Sec-Fetch-Mode": "cors",
+          "Sec-Fetch-Site": "same-origin",
+        },
+      });
+
+      // Validar que la respuesta final viene de onpe.gob.pe.
+      let finalHost = "";
+      try { finalHost = new URL(upstream.url).hostname; } catch {}
+      if (finalHost && !finalHost.endsWith("onpe.gob.pe")) {
+        return jsonResp(502, { error: `Untrusted redirect to ${finalHost}` }, cors);
+      }
+
+      const body = await upstream.arrayBuffer();
+      const ttl = parseInt(env.CACHE_TTL || "30", 10);
+      const response = new Response(body, {
+        status: upstream.status,
+        headers: {
+          "Content-Type": upstream.headers.get("Content-Type") || "application/json",
+          "Cache-Control": `public, max-age=${ttl}`,
+          "X-Proxy-Source": "neuracode-cf",
+          "X-Proxy-Ts": new Date().toISOString(),
+          "X-Upstream-Status": String(upstream.status),
+          "X-Upstream-Url": upstreamUrl,
+          ...cors,
+        },
+      });
+
+      if (upstream.status === 200) {
+        ctx.waitUntil(cache.put(cacheKey, response.clone()));
+      }
+      const out = new Response(response.body, response);
+      out.headers.set("X-Proxy-Cache", "MISS");
+      return out;
     } catch (e) {
-      return jsonError(502, `Upstream fetch failed: ${e.message}`, cors);
+      return jsonResp(502, { error: "proxy_error", message: String(e && e.message || e) }, cors);
     }
-
-    // Validar host de respuesta (anti-redirect-hijack)
-    const finalUrl = new URL(upstream.url);
-    if (!finalUrl.hostname.endsWith("onpe.gob.pe")) {
-      return jsonError(502, `Untrusted redirect to ${finalUrl.hostname}`, cors);
-    }
-
-    const body = await upstream.arrayBuffer();
-    const tsIso = new Date().toISOString();
-
-    response = new Response(body, {
-      status: upstream.status,
-      headers: {
-        "Content-Type": upstream.headers.get("Content-Type") || "application/json",
-        "Cache-Control": `public, max-age=${env.CACHE_TTL}`,
-        "X-Proxy-Source": "neuracode-cf",
-        "X-Proxy-Ts": tsIso,
-        "X-Upstream-Status": String(upstream.status),
-        "X-Upstream-Url": upstreamUrl,
-        ...cors,
-      },
-    });
-
-    // Guardar en cache edge (no bloquea respuesta)
-    ctx.waitUntil(cache.put(cacheKey, response.clone()));
-
-    const out = new Response(response.body, response);
-    out.headers.set("X-Proxy-Cache", "MISS");
-    return out;
   },
 };

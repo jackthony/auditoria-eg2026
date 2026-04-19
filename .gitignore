@@ -94,3 +94,8 @@ scripts/build_pdf.py
 scripts/build_pdf_v*.py
 scripts/build_memorial_pdf.py
 
+
+# Node (Cloudflare Worker)
+node_modules/
+.wrangler/
+dist/

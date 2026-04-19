@@ -27,7 +27,9 @@ for (const p of PATHS) {
       console.log(`OK  ${r.status} ${cache || "-"} ${src || "-"} up=${up || "-"} ${size}B  ${p}`);
     } else {
       fail++;
-      console.log(`ERR ${r.status} ${p}`);
+      const buf = await r.clone().arrayBuffer().catch(() => null);
+      const text = buf ? new TextDecoder().decode(buf).slice(0, 200) : "";
+      console.log(`ERR ${r.status} src=${src || "-"} up=${up || "-"} url=${r.headers.get("x-upstream-url") || "-"}  body=${text}`);
     }
   } catch (e) {
     fail++;
