@@ -24,7 +24,7 @@ import subprocess
 import sys
 from datetime import datetime, timezone
 from pathlib import Path
-from urllib.parse import urlencode
+from urllib.parse import urlencode, urlparse
 
 import requests
 
@@ -67,6 +67,11 @@ ENDPOINTS_ONPE = {
 USE_DIRECT = os.environ.get("ONPE_DIRECT", "0") == "1"
 
 TIMEOUT = 20  # segundos por request
+MAX_RESPONSE_BYTES = 10 * 1024 * 1024  # 10 MB
+ALLOWED_HOSTS = {
+    "resultadoelectoral.onpe.gob.pe",
+    "onpe-proxy-neuracode.jackgptgod.workers.dev",
+}
 
 # ══════════════════════════════════════════════════════════════
 #  HELPERS
@@ -138,9 +143,19 @@ def fetch_endpoint(base: str, path: str, out_path: Path) -> dict:
         "Pragma": "no-cache",
     }
     try:
-        resp = requests.get(url, headers=headers, timeout=TIMEOUT)
+        resp = requests.get(url, headers=headers, timeout=TIMEOUT, stream=True, allow_redirects=False)
+        if resp.is_redirect:
+            location = resp.headers.get("Location", "")
+            final_host = urlparse(location).netloc
+            if final_host not in ALLOWED_HOSTS:
+                raise ValueError(f"Redirect no autorizado: {final_host}")
+            resp = requests.get(location, headers=headers, timeout=TIMEOUT, stream=True)
+        content = b""
+        for chunk in resp.iter_content(chunk_size=65536):
+            content += chunk
+            if len(content) > MAX_RESPONSE_BYTES:
+                raise ValueError(f"Respuesta excede límite: {url}")
         status = resp.status_code
-        content = resp.content
         cf_cache = resp.headers.get("cf-cache-status", "-")
         cf_age = resp.headers.get("age", "-")
     except Exception as e:

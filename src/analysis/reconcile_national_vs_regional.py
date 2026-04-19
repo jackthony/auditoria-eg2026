@@ -59,8 +59,15 @@ def _load_snapshot(raw_dir: Path) -> dict | None:
     snap_file = snap_files[0]
     logger.info(f"Cargando {snap_file.name}")
     try:
-        return json.loads(snap_file.read_text(encoding="utf-8"))
-    except (json.JSONDecodeError, IOError) as e:
+        MAX_SNAP_BYTES = 20 * 1024 * 1024
+        content = snap_file.read_text(encoding="utf-8")
+        if len(content.encode()) > MAX_SNAP_BYTES:
+            raise ValueError(f"Snapshot demasiado grande: {snap_file}")
+        data = json.loads(content)
+        if isinstance(data.get("regions"), list) and len(data["regions"]) > 50:
+            raise ValueError(f"regions excede 50 items: {len(data['regions'])}")
+        return data
+    except (json.JSONDecodeError, IOError, ValueError) as e:
         logger.error(f"Error cargando {snap_file}: {e}")
         return None
 
@@ -160,7 +167,10 @@ def run(root: Path | None = None) -> ReconcileResult:
         meta_file = root / "data" / "processed" / "meta.json"
         if meta_file.exists():
             meta_data = json.loads(meta_file.read_text(encoding="utf-8"))
-            capture_dir = root / meta_data.get("capture_dir", "captures/latest")
+            capture_dir = (root / meta_data.get("capture_dir", "captures/latest")).resolve()
+            root_resolved = root.resolve()
+            if not str(capture_dir).startswith(str(root_resolved)):
+                raise ValueError(f"Path traversal bloqueado: {capture_dir}")
         else:
             capture_dir = root / "captures" / "latest"
     except Exception as e:
@@ -254,6 +264,105 @@ def run(root: Path | None = None) -> ReconcileResult:
         encoding="utf-8",
     )
     logger.info(f"Guardado: {output_file}")
+
+    return result
+
+
+def run_reconcile(
+    national: dict,
+    regions: list[dict],
+    output_path: Path | None = None,
+) -> ReconcileResult:
+    """
+    Reconcilia national vs regions directamente desde dicts (sin leer archivos).
+
+    Args:
+        national: dict con métricas nacionales (totalActas, contabilizadas, etc.)
+        regions: lista de dicts regionales con las mismas métricas
+        output_path: si se indica, escribe JSON de findings ahí
+
+    Returns:
+        ReconcileResult con findings Pydantic validados
+    """
+    capture_ts = datetime.now().isoformat()
+    sha256_val = "unknown"
+
+    # Compare all numeric metrics present in national against sum of regions
+    severity = "INFO"
+    statistic_val: float | None = None
+    alerted_metrics: list[str] = []
+
+    # Collect numeric fields: top-level scalars + flatten nested dicts one level
+    nat_metrics: dict[str, float] = {}
+    for k, v in national.items():
+        if isinstance(v, (int, float)) and k not in ("pct",):
+            nat_metrics[k] = v
+        elif isinstance(v, dict):
+            for sub_k, sub_v in v.items():
+                if isinstance(sub_v, (int, float)) and sub_k not in ("pct",):
+                    nat_metrics[sub_k] = sub_v
+
+    for metric, nat_val in nat_metrics.items():
+        if nat_val == 0:
+            continue
+        reg_sum = sum(int(r.get(metric, 0) or 0) for r in regions)
+        if reg_sum == 0:
+            continue
+        # Skip if regions cover less than 50% of national (incomplete data)
+        coverage = reg_sum / int(nat_val) if int(nat_val) > 0 else 0
+        if coverage < 0.5:
+            continue
+        diff = int(nat_val) - reg_sum
+        pct = 100 * diff / int(nat_val) if int(nat_val) > 0 else 0
+        alert = abs(pct) > THRESHOLD_PCT and abs(diff) > THRESHOLD_ABS
+        if alert:
+            severity = "CRÍTICO"
+            alerted_metrics.append(metric)
+            candidate_stat = round(abs(pct), 3)
+            if statistic_val is None or candidate_stat > statistic_val:
+                statistic_val = candidate_stat
+
+    if severity == "CRÍTICO":
+        interpretation = (
+            f"Diferencias > {THRESHOLD_PCT}% o {THRESHOLD_ABS} en: "
+            + ", ".join(alerted_metrics)
+        )
+    else:
+        interpretation = (
+            f"Totales nacionales coinciden con suma regional "
+            f"(tolerancia: {THRESHOLD_PCT}% o {THRESHOLD_ABS} actas)."
+        )
+
+    finding = Finding(
+        id="RECNR1",
+        severity=severity,
+        test="Reconciliación Nacional-Regional",
+        h0="national.totalActas == sum(regions.totalActas); etc.",
+        interpretation=interpretation,
+        limitations=(
+            "Solo compara campo-a-campo. No valida votos por candidato. "
+            "Umbrales: 0.1% o 50 actas."
+        ),
+        captura_sha256=sha256_val,
+        captura_ts=capture_ts,
+        statistic=statistic_val,
+        p_value=None,
+    )
+
+    result = ReconcileResult(
+        findings=[finding],
+        capture_ts=capture_ts,
+        status="OK" if severity == "INFO" else "WARN",
+    )
+
+    if output_path is not None:
+        output_path.parent.mkdir(parents=True, exist_ok=True)
+        findings_list = [f.model_dump(mode="json") for f in result.findings]
+        output_path.write_text(
+            json.dumps(findings_list, indent=2, ensure_ascii=False),
+            encoding="utf-8",
+        )
+        logger.info(f"Guardado: {output_path}")
 
     return result
 
