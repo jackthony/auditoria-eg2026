@@ -519,8 +519,8 @@ function render(d) {
     (s.margen_sanch_rla >= 0 ? '+' : '') + FMT_INT.format(s.margen_sanch_rla);
   document.getElementById('kpi-jee').textContent = FMT_INT.format(s.actas_jee);
   // Proyección lineal al 100% (tipo Renzo)
-  if (data.projection) {
-    const p = data.projection;
+  if (d.projection) {
+    const p = d.projection;
     const m = p.margin_sanchez_rla_100;
     const el = document.getElementById('kpi-proj');
     const sub = document.getElementById('kpi-proj-sub');
