@@ -1,10 +1,23 @@
 {
   "method": "Comparacion ausentismo primera vuelta Peru 2016, 2021, 2026 (proyeccion al 100%)",
-  "fecha_calculo": "2026-04-17",
+  "generated_at_utc": "2026-04-19T22:44:01.370284+00:00",
+  "capture_ts_utc": "20260418T203307Z",
   "sources": {
-    "2016": "JNE/ONPE oficial",
-    "2021": "JNE/ONPE oficial (con efecto pandemia COVID)",
-    "2026": "ONPE corte 93.17% al 2026-04-17, meta.json auditoria-eg2026"
+    "2016": {
+      "padron": 22901954,
+      "emitidos": 18732154,
+      "url": "https://www.web.onpe.gob.pe/modElecciones/elecciones/elecciones2016/PRPCP2016/"
+    },
+    "2021": {
+      "padron": 25287954,
+      "emitidos": 17916862,
+      "url": "https://www.web.onpe.gob.pe/modElecciones/elecciones/elecciones2021/PRPCP2021/"
+    },
+    "2026": {
+      "capture": "20260418T203307Z",
+      "meta_path": "data/processed/meta.json"
+    },
+    "calag_galaga": "Oficial ONPE — docs/MEMORIAL_TECNICO_FISCAL.md §Hecho 9"
   },
   "nacional": {
     "2016": {
@@ -21,54 +34,42 @@
     },
     "2026": {
       "padron": 27408209,
-      "emitidos_parcial_93_17": 18857027,
-      "emitidos_proyectado_100pct": 20238942,
-      "ausentismo_parcial_pct": 31.19,
-      "ausentismo_proyectado_100pct_pct": 26.16,
-      "contexto": "Primera vuelta post-pandemia, proyeccion asumiendo ritmo estable al 100% de actas"
+      "emitidos_parcial": 18900465,
+      "emitidos_proyectado_100pct": 20220023,
+      "pct_escrutinio": 93.474,
+      "ausentismo_parcial_pct": 31.04,
+      "ausentismo_proyectado_100pct_pct": 26.23,
+      "contexto": "Primera vuelta post-pandemia, proyección desde corte 93.474%"
     }
   },
   "deltas": {
-    "2026_vs_2016_pp": 7.95,
-    "2026_vs_2016_electores_adicionales_no_votaron": 2998821,
-    "2026_vs_2021_pp": -2.99,
-    "nota_2021": "Comparacion 2026 vs 2021 ARROJA NEGATIVO (-2.99 pp) porque 2021 estuvo inflado por pandemia. La comparacion valida pre/post pandemia es 2026 vs 2016."
-  },
-  "lima_callao": {
-    "estado": "NO_CALCULADO_HONESTAMENTE",
-    "razon": "Pipeline solo expone votos validos (vv) por region, no emitidos. Aplicar ratio nacional emit/vv (1.1995) a Lima introduce error: Lima historicamente tiene distinto patron de blancos/nulos que el promedio nacional. Padron Lima+Callao 2026 requiere verificacion ONPE oficial.",
-    "dato_parcial_disponible": {
-      "vv_lima_parcial_95_05pct_actas": 5796450,
-      "vv_callao_parcial_95_38pct_actas": 552444
-    },
-    "pendiente": "Solicitar a ONPE desagregacion por region de: padron, emitidos, validos, blancos, nulos, impugnados."
+    "2026_vs_2016_pp": 8.02,
+    "2026_vs_2021_pp": -2.92
   },
   "contexto_politico": {
-    "corvetto_oficial_lima_no_votaron_por_galaga": 63300,
-    "corvetto_locales_afectados": 15,
-    "corvetto_mesas_afectadas": 211,
-    "rla_denuncia_electores_afectados_lima": 600000,
-    "rla_estimacion_votos_propios_perdidos": 120000,
-    "margen_sanchez_rla_votos": 5898,
-    "ratio_afectados_oficial_vs_margen": 10.73,
-    "ratio_afectados_rla_vs_margen": 101.73
+    "calag_locales_afectados": 15,
+    "calag_mesas_afectadas": 211,
+    "calag_electores_afectados_oficial": 63300,
+    "margen_sanchez_rla_votos_corte": 13624,
+    "margen_sanchez_rla_pct_corte": 0.0860000000000003,
+    "ratio_calag_vs_margen": 4.65
   },
   "hallazgos_principales": [
     {
       "id": "A-AUS-1",
       "severity": "MEDIA",
-      "title": "Ausentismo 2026 proyectado (26.16%) supera 2016 pre-pandemia (18.21%) en +7.95 pp, ~3.0M electores adicionales no votaron."
+      "title": "Ausentismo 2026 proyectado (26.23%) vs 2016 pre-pandemia (18.21%): +8.02 pp, ~2,198,138 electores adicionales no votaron."
     },
     {
       "id": "A-AUS-2",
       "severity": "INFO",
-      "title": "Ausentismo 2026 proyectado (26.16%) esta DEBAJO de 2021 (29.15%). Narrativa 'aumento post-pandemia vs pandemia' no se sostiene. Comparacion valida es 2026 vs 2016."
+      "title": "Ausentismo 2026 proyectado (26.23%) vs 2021 pandemia (29.15%): -2.92 pp. Comparación válida pre/post-pandemia es 2026 vs 2016."
     },
     {
       "id": "A-AUS-3",
       "severity": "ALTA_PROCESAL",
-      "title": "Ratio 10.73x entre electores oficialmente afectados en Lima por Galaga (63,300) y el margen Sanchez-RLA (5,898). Abre estandar Art. 363 Ley 26859 (nulidad parcial por evento que altera resultado), no prueba fraude."
+      "title": "Ratio 4.65× entre electores oficialmente afectados por CALAG/Galaga en Lima (63,300) y margen Sánchez−RLA al corte 93.474% (13,624). Abre estándar Art. 363 Ley 26859 (nulidad parcial por evento que altera resultado); no prueba fraude."
     }
   ],
-  "caveat_honesto": "Este analisis NO prueba fraude. Establece (a) ausentismo 2026 significativamente mayor que 2016 pre-pandemia, (b) margen final 10x mas pequeno que afectados oficialmente en Lima por fallas de CALAG/Galaga. Causas del ausentismo son multifactoriales (desconfianza, clima, protesta, fallas logisticas) y requieren investigacion adicional."
+  "caveat_honesto": "Este análisis NO prueba fraude. Establece (a) ausentismo 2026 vs 2016 pre-pandemia, (b) relación entre afectados oficiales por CALAG/Galaga y margen vigente. Causas multifactoriales (desconfianza, clima, protesta, fallas logísticas) requieren investigación adicional."
 }

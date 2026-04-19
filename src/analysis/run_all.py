@@ -19,7 +19,7 @@ import sys
 from io import StringIO
 from pathlib import Path
 
-from . import reconcile, impugnation_rates, benford, temporal, jee_simulation, forecast_bayesian, impugnation_bias, impugnation_velocity, last_digit_forensic, spatial_cluster, reconcile_internal, ml_anomalies
+from . import reconcile, impugnation_rates, benford, temporal, jee_simulation, forecast_bayesian, impugnation_bias, impugnation_velocity, last_digit_forensic, spatial_cluster, reconcile_internal, ml_anomalies, ausentismo
 
 import sys
 if sys.platform == "win32":
@@ -190,6 +190,21 @@ def main():
             "total": ml["total"],
             "by_candidate": {k: len(v) for k, v in ml["anomalies"].items()},
         }
+
+        print()
+
+        # 10c. A-AUS: Ausentismo 2016/2021/2026 + ratio CALAG vs margen vigente
+        print("── Ausentismo histórico + ratio CALAG (A-AUS-1/2/3) ──")
+        ausentismo.main()
+        aus_path = ROOT / "reports" / "ausentismo_comparacion.json"
+        if aus_path.exists():
+            aus = json.loads(aus_path.read_text(encoding="utf-8"))
+            all_findings.extend(aus.get("hallazgos_principales", []))
+            all_results["ausentismo"] = {
+                "corte": aus["contexto_politico"]["margen_sanchez_rla_pct_corte"],
+                "margen_vigente": aus["contexto_politico"]["margen_sanchez_rla_votos_corte"],
+                "ratio_calag_vs_margen": aus["contexto_politico"]["ratio_calag_vs_margen"],
+            }
 
         print()
 

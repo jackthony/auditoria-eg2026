@@ -143,7 +143,12 @@ def run(root: Path | None = None) -> dict:
     if not captures:
         raise FileNotFoundError("No hay capturas en captures/")
 
-    latest = captures[-1]
+    latest = next(
+        (c for c in reversed(captures) if any((c / "raw").glob("snap*.json"))),
+        None,
+    )
+    if latest is None:
+        raise FileNotFoundError("Ninguna captura tiene raw/snap*.json (¿solo mesa-a-mesa?)")
     national, regions = load_snapshot(latest)
 
     # Validar completitud del snapshot (26 regiones = 25 dept + Extranjero)
