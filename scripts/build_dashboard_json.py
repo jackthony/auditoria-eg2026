@@ -12,6 +12,7 @@ import json
 import unicodedata
 from pathlib import Path
 
+import numpy as np
 import pandas as pd
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -141,6 +142,29 @@ def main():
             "actas_fuera": int(r["actas_fuera"]),
         })
 
+    # Proyeccion lineal tipo Renzo — regresion por candidato vs pct escrutado
+    # usando los ultimos N puntos (donde el conteo empieza a estabilizarse).
+    # No reemplaza el forecast bayesiano; es una lectura rapida, asume integracion lineal.
+    projection = None
+    if len(tr) >= 10:
+        tr_sorted = tr.sort_values("ts").copy()
+        pct_now = float(tr_sorted["pct"].iloc[-1])
+        tail = tr_sorted.tail(30)  # ultimos 30 cortes: fase estable
+        xs = tail["pct"].astype(float).values
+        proj: dict = {"pct_now": pct_now, "target_pct": 100.0, "window_points": int(len(tail))}
+        for cand in ("fujimori", "sanchez", "rla", "nieto", "belmont"):
+            ys = tail[cand].astype(float).values
+            if len(set(xs)) < 2:
+                proj[cand] = float(ys[-1])
+                continue
+            m, b = np.polyfit(xs, ys, 1)  # y = m*x + b
+            y100 = m * 100.0 + b
+            proj[cand] = round(float(y100), 3)
+            proj[f"{cand}_slope"] = round(float(m), 5)
+        proj["margin_sanchez_rla_100"] = round(proj["sanchez"] - proj["rla"], 3)
+        proj["method"] = "linear_regression_tail30"
+        projection = proj
+
     # Forecast bayesiano (opcional — si fue corrido).
     forecast_path = ROOT / "reports" / "forecast.json"
     forecast = None
@@ -163,6 +187,7 @@ def main():
         "series": series,
         "contrafactual": contrafactual,
         "regions": regions,
+        "projection": projection,
         "forecast": forecast,
         "meta": {
             "generated_at": pd.Timestamp.utcnow().isoformat(),
@@ -186,6 +211,7 @@ def main():
         "state.json": {"state": state, "delta": delta, "meta": meta},
         "regions.json": {"regions": regions, "meta": meta},
         "series.json": {"series": series, "meta": meta},
+        "projection.json": {"projection": projection, "meta": meta},
     }
     for name, payload in endpoints.items():
         (api_dir / name).write_text(

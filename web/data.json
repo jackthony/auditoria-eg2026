@@ -1566,6 +1566,23 @@
       "actas_fuera": 240
     }
   ],
+  "projection": {
+    "pct_now": 93.23,
+    "target_pct": 100.0,
+    "window_points": 30,
+    "fujimori": 17.239,
+    "fujimori_slope": 0.02477,
+    "sanchez": 11.84,
+    "sanchez_slope": -0.02607,
+    "rla": 11.979,
+    "rla_slope": 0.01395,
+    "nieto": 11.045,
+    "nieto_slope": -0.00234,
+    "belmont": 10.117,
+    "belmont_slope": -0.00445,
+    "margin_sanchez_rla_100": -0.139,
+    "method": "linear_regression_tail30"
+  },
   "forecast": {
     "methodology": {
       "model": "Bayesian hierarchical Dirichlet-Multinomial with Beta prior on JEE integration rate",
@@ -1908,7 +1925,7 @@
     ]
   },
   "meta": {
-    "generated_at": "2026-04-19T00:05:25.145569+00:00",
+    "generated_at": "2026-04-19T01:41:25.899619+00:00",
     "source": "ONPE vía proxy CORS + captura atómica con SHA-256",
     "repo": "https://github.com/neuracode/auditoria-eg2026"
   }
