@@ -17,8 +17,8 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 8
     env:
-      ONPE_PROXY_BASE: ${{ vars.ONPE_PROXY_BASE }}     # ej: https://onpe-proxy-neuracode.<user>.workers.dev
-      W3S_TOKEN: ${{ secrets.W3S_TOKEN }}               # opcional — IPFS pin
+      ONPE_PROXY_BASE: ${{ vars.ONPE_PROXY_BASE }}
+      W3S_TOKEN: ${{ secrets.W3S_TOKEN }}
     steps:
       - uses: actions/checkout@v4
         with:
@@ -35,18 +35,21 @@ jobs:
       - name: Capture ONPE via Worker
         id: cap
         run: |
-          py make.py capture
+          python src/capture/fetch_onpe.py
           TS=$(ls -1 captures/ | sort | tail -1)
           echo "ts=$TS" >> "$GITHUB_OUTPUT"
 
       - name: Verify manifest (SHA-256)
-        run: py -m src.capture.verify_manifest captures/${{ steps.cap.outputs.ts }}
+        run: python src/capture/verify_manifest.py captures/${{ steps.cap.outputs.ts }}
+
+      - name: Reconcile endpoints
+        run: python src/analysis/reconcile_endpoints.py captures/${{ steps.cap.outputs.ts }} || true
 
       - name: Build dataset + analyze + dashboard
         run: |
-          py make.py build
-          py make.py analyze || true
-          py scripts/build_dashboard_json.py
+          python make.py build || true
+          python make.py analyze || true
+          python scripts/build_dashboard_json.py || true
 
       - name: IPFS pin (Web3.Storage) — opcional
         if: env.W3S_TOKEN != ''
@@ -59,7 +62,7 @@ jobs:
         run: |
           git config user.name "neuracode-capture-bot"
           git config user.email "bot@neuracode.dev"
-          git add captures/ web/data.json web/api reports/findings.json reports/forecast.json 2>/dev/null || true
+          git add captures/ web/data.json web/api reports/findings.json reports/forecast.json reports/reconcile_endpoints.json 2>/dev/null || true
           if ! git diff --cached --quiet; then
             git commit -m "chore(capture): ${{ steps.cap.outputs.ts }} + dashboard refresh"
             git push origin main
@@ -70,4 +73,4 @@ jobs:
       - name: Deploy gh-pages
         run: |
           git subtree push --prefix web origin gh-pages || \
-            git push origin `git subtree split --prefix web main`:gh-pages --force
+            git push origin $(git subtree split --prefix web main):gh-pages --force
