@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Tía María pregunta — EG2026</title>
+<meta name="description" content="Le expliqué a mi tía lo que pasó con las elecciones. Aquí va la conversación completa.">
+<meta property="og:title" content="Tía María pregunta — EG2026">
+<meta property="og:description" content="Le expliqué a mi tía lo de las mesas que no aparecen. Lee tú el chat.">
+<meta property="og:image" content="https://jackthony.github.io/auditoria-eg2026/og-image.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:wght@700;900&family=Caveat:wght@500;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --ink: #111111;
+  --paper: #faf7f2;
+  --blood: #b0171f;
+  --muted: #6b6b6b;
+  --bubble-jack: #dcf8c6;
+  --bubble-tia: #ffffff;
+  --bg-chat: #e5ddd5;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  background: var(--paper);
+  color: var(--ink);
+  font-family: 'Inter', -apple-system, sans-serif;
+  font-size: 16px; line-height: 1.5;
+}
+.hero {
+  min-height: 70vh;
+  display: flex; flex-direction: column; justify-content: center; align-items: center;
+  padding: 60px 40px; text-align: center;
+}
+.kicker {
+  font-family: 'Caveat', cursive; color: var(--blood); font-size: 28px;
+  transform: rotate(-2deg); margin-bottom: 10px;
+}
+.hero h1 {
+  font-family: 'Fraunces', Georgia, serif; font-weight: 900;
+  font-size: clamp(40px, 7vw, 80px); line-height: 1.05;
+  letter-spacing: -0.02em; max-width: 800px;
+}
+.hero p {
+  font-family: 'Fraunces', Georgia, serif; font-style: italic;
+  font-size: clamp(18px, 2.4vw, 26px); color: var(--muted);
+  margin-top: 20px; max-width: 600px;
+}
+.scroll-hint {
+  margin-top: 40px; font-family: 'Caveat', cursive; font-size: 22px;
+  color: var(--blood); animation: bounce 1.6s infinite;
+}
+@keyframes bounce { 0%,100% { transform: translateY(0); } 50% { transform: translateY(8px); } }
+
+/* chat container — mobile first, central on desktop */
+.chat-wrap {
+  background: var(--bg-chat);
+  max-width: 480px; margin: 0 auto; padding: 12px 10px 80px;
+  min-height: 100vh;
+  background-image:
+    radial-gradient(circle at 20% 20%, rgba(0,0,0,.03) 1px, transparent 1px),
+    radial-gradient(circle at 80% 60%, rgba(0,0,0,.025) 1px, transparent 1px);
+  background-size: 40px 40px;
+}
+.chat-header {
+  position: sticky; top: 0; z-index: 10;
+  background: #075e54; color: white; padding: 14px 18px;
+  display: flex; align-items: center; gap: 12px;
+  margin: -12px -10px 16px;
+}
+.avatar {
+  width: 42px; height: 42px; border-radius: 50%;
+  background: var(--blood); display: flex; align-items: center; justify-content: center;
+  color: white; font-family: 'Fraunces', serif; font-weight: 900; font-size: 20px;
+}
+.chat-header .name { font-weight: 600; font-size: 16px; }
+.chat-header .status { font-size: 12px; opacity: .8; }
+
+.msg {
+  max-width: 78%; padding: 8px 12px; margin: 4px 0;
+  border-radius: 12px; font-size: 15px; line-height: 1.45;
+  position: relative; word-wrap: break-word;
+  opacity: 0; transform: translateY(14px);
+  transition: opacity .5s ease, transform .5s ease;
+  box-shadow: 0 1px 1px rgba(0,0,0,.1);
+}
+.msg.in { opacity: 1; transform: translateY(0); }
+.msg.tia { background: var(--bubble-tia); margin-right: auto; border-bottom-left-radius: 2px; }
+.msg.jack { background: var(--bubble-jack); margin-left: auto; border-bottom-right-radius: 2px; }
+.msg .time {
+  font-size: 10px; color: #999; float: right; margin: 6px 0 -2px 8px;
+}
+.msg strong { font-weight: 700; color: var(--blood); }
+.sep {
+  text-align: center; margin: 20px 0;
+  font-size: 12px; color: #555;
+}
+.sep span { background: #e1f3fb; padding: 4px 12px; border-radius: 10px; }
+
+/* bloque especial: captura de pantalla falsa */
+.capture {
+  background: white; padding: 12px; border-radius: 8px;
+  font-family: 'Menlo', 'Consolas', monospace; font-size: 12px;
+  color: var(--ink); margin: 8px 0 4px; line-height: 1.5;
+  box-shadow: 0 1px 3px rgba(0,0,0,.15);
+}
+.capture .hd { color: #888; font-size: 10px; margin-bottom: 4px; text-transform: uppercase; letter-spacing: 1px;}
+.capture .big { font-family: 'Fraunces', serif; font-weight: 900; color: var(--blood); font-size: 32px; line-height: 1; }
+.capture .sm { color: #555; font-size: 11px; margin-top: 4px; }
+
+.typing {
+  background: var(--bubble-tia); padding: 12px 16px; border-radius: 12px;
+  margin-right: auto; margin: 6px 0; max-width: 60px;
+  display: none;
+}
+.typing.show { display: block; }
+.typing span {
+  display: inline-block; width: 6px; height: 6px; background: #999;
+  border-radius: 50%; margin: 0 1px;
+  animation: dot 1.2s infinite;
+}
+.typing span:nth-child(2) { animation-delay: .2s; }
+.typing span:nth-child(3) { animation-delay: .4s; }
+@keyframes dot { 0%, 60%, 100% { opacity: .3; } 30% { opacity: 1; } }
+
+.outro {
+  padding: 80px 40px; text-align: center; max-width: 700px; margin: 0 auto;
+}
+.outro h2 {
+  font-family: 'Fraunces', Georgia, serif; font-weight: 900;
+  font-size: clamp(30px, 5vw, 52px); line-height: 1.1;
+  letter-spacing: -0.02em;
+}
+.outro p { font-size: 18px; color: var(--muted); margin-top: 20px; }
+.cta {
+  display: inline-block; margin-top: 30px;
+  background: var(--ink); color: var(--paper);
+  padding: 16px 32px; font-weight: 600; text-decoration: none;
+  transition: background .3s;
+}
+.cta:hover { background: var(--blood); }
+.cta-sub { font-family: 'Caveat', cursive; color: var(--blood); font-size: 22px; margin-top: 14px; }
+
+.byline {
+  margin-top: 50px; font-size: 13px; color: var(--muted);
+  text-align: center; padding: 20px;
+}
+.byline a { color: var(--blood); text-decoration: none; }
+
+.share-tip {
+  margin-top: 20px; padding: 16px; background: white;
+  border-left: 3px solid var(--blood); font-family: 'Caveat', cursive;
+  font-size: 22px; color: var(--ink); max-width: 440px; margin-left: auto; margin-right: auto;
+}
+</style>
+</head>
+<body>
+
+<section class="hero">
+  <div class="kicker">una historia real · 19 abril 2026</div>
+  <h1>Le expliqué a mi tía<br>qué pasó con las<br>elecciones.</h1>
+  <p>Aquí está la conversación, completa.<br>Léela tú mismo.</p>
+  <div class="scroll-hint">↓ desliza ↓</div>
+</section>
+
+<div class="chat-wrap">
+  <div class="chat-header">
+    <div class="avatar">M</div>
+    <div>
+      <div class="name">Tía María ❤️</div>
+      <div class="status">en línea</div>
+    </div>
+  </div>
+
+  <div class="sep"><span>hoy, 9:42 am</span></div>
+
+  <div class="msg tia">Sobri buenos días, ¿tú no eres de computadoras?<span class="time">9:42</span></div>
+  <div class="msg tia">Me pasaron un audio que las elecciones están raras y no entiendo nada 😩<span class="time">9:42</span></div>
+
+  <div class="msg jack">Tía buenos días! Sí, soy ingeniero<span class="time">9:43</span></div>
+  <div class="msg jack">Estuve revisando yo mismo los datos de la ONPE. Le cuento paso a paso, tranquila.<span class="time">9:43</span></div>
+
+  <div class="msg tia">Dale pero explícame como si tuviera 10 años 🙈<span class="time">9:44</span></div>
+
+  <div class="msg jack">Jaja listo tía. Empiezo:<span class="time">9:44</span></div>
+  <div class="msg jack">En el Perú hubo <strong>92.766 mesas de votación</strong>. Una por cada grupito de vecinos que fue a votar.<span class="time">9:44</span></div>
+
+  <div class="msg tia">Ya, como las mesas donde me tocó votar en el colegio<span class="time">9:45</span></div>
+
+  <div class="msg jack">Exacto 👌<span class="time">9:45</span></div>
+  <div class="msg jack">Cada mesa cuenta los votos en papel, firma un acta, y manda el resultado a la ONPE.<span class="time">9:45</span></div>
+  <div class="msg jack">La ONPE los publica en su página web.<span class="time">9:45</span></div>
+
+  <div class="msg tia">Hasta ahí voy bien<span class="time">9:46</span></div>
+
+  <div class="msg jack">Bueno. Lo que hice fue: <strong>bajé las mesas una por una</strong> de la página de la ONPE.<span class="time">9:46</span></div>
+  <div class="msg jack">Como quien cuenta monedas en un frasco. Una por una.<span class="time">9:46</span></div>
+
+  <div class="msg tia">¿Una por una? ¿Las 92 mil?? 😱<span class="time">9:47</span></div>
+
+  <div class="msg jack">Sí tía jaja. Con un programa. Se demoró 21 minutos.<span class="time">9:47</span></div>
+
+  <div class="capture msg jack">
+    <div class="hd">terminal · walker.py</div>
+    <div>✓ mesa 00001/88064 ok</div>
+    <div>✓ mesa 00002/88064 ok</div>
+    <div style="color:#aaa">...</div>
+    <div>✓ mesa 88063/88064 ok</div>
+    <div style="color:#0a7a3d">✓ terminó. 21 min. 0 errores.</div>
+  </div>
+
+  <div class="msg tia">Oe qué loco 😯<span class="time">9:48</span></div>
+  <div class="msg tia">¿Y qué salió?<span class="time">9:48</span></div>
+
+  <div class="msg jack">Aquí viene lo raro tía.<span class="time">9:49</span></div>
+  <div class="msg jack">De las 92.766 mesas del total oficial...<span class="time">9:49</span></div>
+  <div class="msg jack"><strong>sólo me devolvieron datos 88.063</strong>.<span class="time">9:49</span></div>
+
+  <div class="msg tia">O sea... ¿faltaron?<span class="time">9:49</span></div>
+
+  <div class="msg jack">Faltaron <strong>4.703 mesas</strong>.<span class="time">9:50</span></div>
+
+  <div class="capture msg jack">
+    <div class="hd">resultado</div>
+    <div class="big">4.703</div>
+    <div class="sm">mesas del universo oficial sin data</div>
+  </div>
+
+  <div class="msg tia">Sobri eso es un montón 😨<span class="time">9:51</span></div>
+
+  <div class="msg jack">Tía, para que lo entienda:<span class="time">9:51</span></div>
+  <div class="msg jack">Es como si en su mercado, de cada 100 puestos, <strong>faltaran 5 y nadie supiera dónde están</strong>.<span class="time">9:51</span></div>
+
+  <div class="msg tia">Uy no, imagínate que falten la señora Rosa y la carnicería<span class="time">9:52</span></div>
+
+  <div class="msg jack">Exactamente 🙌<span class="time">9:52</span></div>
+  <div class="msg jack">Pero espere, hay más.<span class="time">9:52</span></div>
+
+  <div class="msg tia">ay Dios<span class="time">9:52</span></div>
+
+  <div class="msg jack">Con las mesas que SÍ tenía, sumé todos los votos.<span class="time">9:53</span></div>
+  <div class="msg jack">Y el 2° puesto... <strong>no es el que dice ONPE</strong>.<span class="time">9:53</span></div>
+
+  <div class="msg tia">¿Cómo así??<span class="time">9:53</span></div>
+
+  <div class="msg jack">ONPE dice en su portada que el 2° es Juntos por el Perú.<span class="time">9:54</span></div>
+  <div class="msg jack">Sumando mesa por mesa, el 2° sería <strong>Renovación Popular</strong>.<span class="time">9:54</span></div>
+  <div class="msg jack">Y Juntos por el Perú caería al 4°.<span class="time">9:54</span></div>
+
+  <div class="capture msg jack">
+    <div class="hd">comparación</div>
+    <div style="display:flex;justify-content:space-between;margin-top:4px">
+      <div><strong style="color:#111">OFICIAL</strong><br>2° Juntos x el Perú<br>3° Renovación Pop.</div>
+      <div style="color:var(--blood);font-size:22px;align-self:center">→</div>
+      <div><strong style="color:var(--blood)">MESA x MESA</strong><br>2° Renovación Pop.<br>4° Juntos x el Perú</div>
+    </div>
+  </div>
+
+  <div class="msg tia">Sobri eso es gravísimo 😨😨😨<span class="time">9:55</span></div>
+  <div class="msg tia">¿Estás diciendo que hubo fraude?<span class="time">9:55</span></div>
+
+  <div class="msg jack">NO tía. Escuche bien esto 🙏<span class="time">9:55</span></div>
+  <div class="msg jack">Yo <strong>no estoy diciendo que hubo fraude</strong>.<span class="time">9:55</span></div>
+  <div class="msg jack">Estoy diciendo que <strong>las cuentas no cuadran</strong> y que hay preguntas que la ONPE tiene que responder.<span class="time">9:56</span></div>
+  <div class="msg jack">La diferencia es enorme.<span class="time">9:56</span></div>
+
+  <div class="msg tia">Ya entendí<span class="time">9:56</span></div>
+  <div class="msg tia">¿Y cómo sé que no te inventaste los números tú?<span class="time">9:56</span></div>
+
+  <div class="msg jack">¡Esa es la mejor pregunta tía! 👏<span class="time">9:57</span></div>
+  <div class="msg jack">Todo mi código está <strong>público en internet</strong>. Cualquier persona, incluido su sobrino del colegio, puede bajarlo y volver a contar.<span class="time">9:57</span></div>
+  <div class="msg jack">Si le sale distinto, me corrige. Si le sale igual, confirma.<span class="time">9:57</span></div>
+
+  <div class="msg tia">O sea es como una receta. Yo puedo hacerla en mi cocina y sale lo mismo 🍲<span class="time">9:58</span></div>
+
+  <div class="msg jack">TÍA USTED ES UNA GENIA 🤣 exactamente así.<span class="time">9:58</span></div>
+
+  <div class="msg tia">Jajaja<span class="time">9:58</span></div>
+  <div class="msg tia">¿Qué hago yo con esto?<span class="time">9:58</span></div>
+
+  <div class="msg jack">Tres cosas:<span class="time">9:59</span></div>
+  <div class="msg jack">1️⃣ Compártalo. Mande este link a su grupo del barrio.<span class="time">9:59</span></div>
+  <div class="msg jack">2️⃣ Pregunte. En redes, en su diario, donde sea: ¿dónde están esas 4.703 mesas?<span class="time">9:59</span></div>
+  <div class="msg jack">3️⃣ Verifique. Si alguien de su familia sabe de computadoras, que corra el código. En 21 minutos tiene la respuesta.<span class="time">9:59</span></div>
+
+  <div class="msg tia">Dale sobri. Ya lo mando al grupo del edificio ❤️<span class="time">10:00</span></div>
+  <div class="msg tia">Que Dios te bendiga por hacer esto<span class="time">10:00</span></div>
+
+  <div class="msg jack">Gracias tía 🙏<span class="time">10:00</span></div>
+  <div class="msg jack">Si alguien pregunta: <strong>yo no soy de ningún partido</strong>. Soy ingeniero, hice las cuentas, y comparto lo que salió.<span class="time">10:00</span></div>
+
+  <div class="sep"><span>tía María vio tu mensaje</span></div>
+
+  <div class="share-tip">
+    💬 Esta conversación es real en espíritu.<br>
+    Los números son reales al 100%.
+  </div>
+</div>
+
+<section class="outro">
+  <h2>¿Dónde están<br>esas 4.703 mesas?</h2>
+  <p>No afirmamos fraude. Afirmamos que las cuentas no cuadran.<br>Y cualquiera puede volver a contar.</p>
+  <a class="cta" href="https://github.com/jackthony/auditoria-eg2026" target="_blank">Ver el código completo →</a>
+  <div class="cta-sub">datos públicos · código abierto · huella SHA-256 sellada</div>
+  <div class="byline">
+    Por <strong style="color:var(--ink)">Jack Aguilar</strong> · Neuracode Academy<br>
+    Aporte ciudadano independiente. Sin afiliación política.<br><br>
+    <a href="../historia/">Versión larga editorial</a> ·
+    <a href="../index.html">Dashboard técnico</a> ·
+    <a href="../MEMORIAL_TECNICO_FISCAL.pdf">Memorial al Fiscal</a>
+  </div>
+</section>
+
+<script>
+const io = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if (e.isIntersecting) e.target.classList.add('in');
+  });
+}, { threshold: 0.15, rootMargin: '0px 0px -10% 0px' });
+document.querySelectorAll('.msg').forEach((m, i) => {
+  m.style.transitionDelay = Math.min(i * 30, 400) + 'ms';
+  io.observe(m);
+});
+</script>
+</body>
+</html>
