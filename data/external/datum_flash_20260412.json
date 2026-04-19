@@ -1,0 +1,18 @@
+{
+  "fuente": "Datum Internacional",
+  "tipo": "Flash electoral / conteo rápido 100%",
+  "fecha_eleccion": "2026-04-12",
+  "margen_error_pp": 1.0,
+  "url_fuente": "https://www.infobae.com/peru/2026/04/12/flash-electoral-de-datum-en-vivo-resultados-a-boca-de-urna-de-elecciones-generales-2026-hoy/",
+  "capturado_por": "Jack Aguilar (Neuracode Academy)",
+  "capturado_ts": "2026-04-19",
+  "ranking": [
+    { "pos": 1, "candidato": "Keiko Fujimori",         "partido": "FUERZA POPULAR",            "pct": 16.8 },
+    { "pos": 2, "candidato": "Rafael López Aliaga",    "partido": "RENOVACIÓN POPULAR",        "pct": 12.9 },
+    { "pos": 3, "candidato": "Jorge Nieto",            "partido": "PARTIDO DEL BUEN GOBIERNO", "pct": 11.6 },
+    { "pos": 4, "candidato": "Ricardo Belmont",        "partido": "PARTIDO CÍVICO OBRAS",      "pct": 10.1 },
+    { "pos": 5, "candidato": "Roberto Sánchez",        "partido": "JUNTOS POR EL PERÚ",        "pct": 9.4  }
+  ],
+  "otros_pct": 23.4,
+  "nota": "Datum (independiente) coincide con el conteo mesa-a-mesa: RP > Buen Gobierno > JPP. Contradice la portada ONPE que pone a JPP 2°. Diferencia JPP entre Datum (9.4%) y ONPE oficial (12.0%) = 2.6pp, fuera del margen ±1%."
+}
