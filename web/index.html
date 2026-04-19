@@ -444,6 +444,8 @@ async function updateHashAndShare() {
 const _origLoad = load;
 load = async function() { await _origLoad(); await updateHashAndShare(); updateBadges(); };
 
+let _mapInstance = null;
+
 // I18N-01 — toggle ES/EN minimalista (solo strings de alto nivel).
 const I18N = {
   es: {
@@ -705,7 +707,6 @@ function renderForecastInteractive(f) {
   draw();
 }
 
-let _mapInstance = null;
 function normDep(s) {
   return (s||'').normalize('NFKD').replace(/[\u0300-\u036f]/g,'').toUpperCase().trim();
 }
