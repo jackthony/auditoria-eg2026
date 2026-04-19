@@ -120,21 +120,26 @@ h2 { font-size: clamp(32px, 5vw, 64px); margin-bottom: 30px; }
 .legend-ok { background: rgba(17,17,17,.35); }
 .legend-off { background: var(--blood); box-shadow: 0 0 6px rgba(176,23,31,.5); }
 
-/* Scene 5 — doble podio (oficial vs mesa-a-mesa) */
+/* Scene 5 — triple podio (Datum · ONPE · Mesa-a-mesa) */
 .podios {
-  display: grid; grid-template-columns: 1fr 1fr; gap: 40px;
-  margin: 50px 0 30px; max-width: 780px; width: 100%;
+  display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 28px;
+  margin: 50px 0 30px; max-width: 1000px; width: 100%;
 }
-@media (max-width: 640px) { .podios { grid-template-columns: 1fr; gap: 30px; } }
+@media (max-width: 820px) { .podios { grid-template-columns: 1fr; gap: 24px; } }
 .podio-col { text-align: center; }
 .podio-title {
   font-family: 'Inter', sans-serif; font-weight: 700;
   text-transform: uppercase; letter-spacing: 2px; font-size: 13px;
   margin-bottom: 18px; color: var(--muted);
 }
+.podio-col.datum .podio-title { color: #1e40af; }
 .podio-col.oficial .podio-title { color: var(--muted); }
 .podio-col.alt .podio-title { color: var(--blood); }
 .podio-col.alt .podio-title::before { content: "→ "; }
+.podio-source {
+  font-size: 10px; color: #888; margin-top: -12px; margin-bottom: 14px;
+  font-style: italic; font-family: 'Inter', sans-serif;
+}
 .rank-row {
   display: flex; align-items: center; gap: 10px;
   padding: 8px 0; border-bottom: 1px dashed rgba(0,0,0,.1);
@@ -234,8 +239,18 @@ h2 { font-size: clamp(32px, 5vw, 64px); margin-bottom: 30px; }
   <h2>El segundo puesto<br>cambió.</h2>
   <p class="lead">Sumando mesa por mesa — las que sí están —<br>el ranking no es el mismo que ONPE publica.</p>
   <div class="podios">
+    <div class="podio-col datum">
+      <div class="podio-title">Datum · flash 100%</div>
+      <div class="podio-source">empresa encuestadora · 12 abr · ±1%</div>
+      <div class="rank-row"><span class="rank-pos">1°</span><span class="rank-name">Keiko (FP)</span><span class="rank-pct">16,8%</span></div>
+      <div class="rank-row rp alt-rp"><span class="rank-pos">2°</span><span class="rank-name">López Aliaga (RP)</span><span class="rank-pct">12,9%</span></div>
+      <div class="rank-row"><span class="rank-pos">3°</span><span class="rank-name">Nieto (Buen Gob.)</span><span class="rank-pct">11,6%</span></div>
+      <div class="rank-row"><span class="rank-pos">4°</span><span class="rank-name">Belmont (Obras)</span><span class="rank-pct">10,1%</span></div>
+      <div class="rank-row jpp"><span class="rank-pos">5°</span><span class="rank-name">Sánchez (JPP)</span><span class="rank-pct">9,4%</span></div>
+    </div>
     <div class="podio-col oficial">
       <div class="podio-title">ONPE · portada oficial</div>
+      <div class="podio-source">resultadoelectoral.onpe.gob.pe</div>
       <div class="rank-row"><span class="rank-pos">1°</span><span class="rank-name">Fuerza Popular</span><span class="rank-pct">17,06%</span></div>
       <div class="rank-row jpp"><span class="rank-pos">2°</span><span class="rank-name">Juntos por el Perú</span><span class="rank-pct">12,01%</span></div>
       <div class="rank-row"><span class="rank-pos">3°</span><span class="rank-name">Renovación Popular</span><span class="rank-pct">11,92%</span></div>
@@ -243,14 +258,19 @@ h2 { font-size: clamp(32px, 5vw, 64px); margin-bottom: 30px; }
     </div>
     <div class="podio-col alt">
       <div class="podio-title">Sumando mesa por mesa</div>
+      <div class="podio-source">walker ONPE · 88.063 mesas · SHA-256</div>
       <div class="rank-row"><span class="rank-pos">1°</span><span class="rank-name">Fuerza Popular</span><span class="rank-pct">17,08%</span></div>
       <div class="rank-row rp alt-rp"><span class="rank-pos">2°</span><span class="rank-name">Renovación Popular</span><span class="rank-pct">12,27%</span><span class="rank-arrow">↑</span></div>
       <div class="rank-row"><span class="rank-pos">3°</span><span class="rank-name">Partido del Buen Gobierno</span><span class="rank-pct">11,40%</span><span class="rank-arrow">↑</span></div>
       <div class="rank-row jpp"><span class="rank-pos">4°</span><span class="rank-name">Juntos por el Perú</span><span class="rank-pct">10,90%</span><span class="rank-arrow">↓↓</span></div>
     </div>
   </div>
-  <p class="handwrite" id="handwrite" style="opacity:0">JPP cae del 2° al 4° · RP sube al 2°</p>
-  <p class="caption">Mismos datos, sumados mesa por mesa desde el portal ONPE. Captura SHA-256 sellada.</p>
+  <p class="handwrite" id="handwrite" style="opacity:0">Datum y mesa-a-mesa coinciden. ONPE portada no.</p>
+  <p class="caption">
+    Dos fuentes independientes — encuesta Datum y nuestro conteo mesa-a-mesa desde la propia ONPE — coinciden:
+    RP 2°, Buen Gobierno 3°, JPP más abajo. La portada de ONPE pone a JPP 2°.<br>
+    <span style="font-style:italic">JPP en Datum: 9,4%. En ONPE: 12,0%. Diferencia: 2,6 puntos — fuera del margen ±1%.</span>
+  </p>
 </section>
 
 <section class="scene" data-scene="6">
