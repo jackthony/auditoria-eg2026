@@ -120,28 +120,43 @@ h2 { font-size: clamp(32px, 5vw, 64px); margin-bottom: 30px; }
 .legend-ok { background: rgba(17,17,17,.35); }
 .legend-off { background: var(--blood); box-shadow: 0 0 6px rgba(176,23,31,.5); }
 
-/* Scene 5 — podio */
-.podio {
-  display: flex; align-items: flex-end; justify-content: center;
-  gap: 20px; margin: 60px 0 40px;
+/* Scene 5 — doble podio (oficial vs mesa-a-mesa) */
+.podios {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 40px;
+  margin: 50px 0 30px; max-width: 780px; width: 100%;
 }
-.step {
-  text-align: center; font-family: 'Inter', sans-serif;
+@media (max-width: 640px) { .podios { grid-template-columns: 1fr; gap: 30px; } }
+.podio-col { text-align: center; }
+.podio-title {
+  font-family: 'Inter', sans-serif; font-weight: 700;
+  text-transform: uppercase; letter-spacing: 2px; font-size: 13px;
+  margin-bottom: 18px; color: var(--muted);
 }
-.step-bar {
-  background: var(--ink); color: var(--paper); padding: 30px 25px;
-  font-family: 'Fraunces', serif; font-weight: 700;
-  transition: background .6s ease, transform .6s ease;
+.podio-col.oficial .podio-title { color: var(--muted); }
+.podio-col.alt .podio-title { color: var(--blood); }
+.podio-col.alt .podio-title::before { content: "→ "; }
+.rank-row {
+  display: flex; align-items: center; gap: 10px;
+  padding: 8px 0; border-bottom: 1px dashed rgba(0,0,0,.1);
+  font-family: 'Inter', sans-serif; font-size: 14px;
+  opacity: 0; transform: translateX(-10px);
+  transition: opacity .5s ease, transform .5s ease;
 }
-.step-bar.swap { background: var(--blood); }
-.step-bar.sw1 { height: 200px; font-size: 40px; }
-.step-bar.sw2 { height: 160px; font-size: 32px; }
-.step-bar.sw3 { height: 130px; font-size: 26px; }
-.step-name {
-  margin-top: 12px; font-size: 14px; max-width: 140px;
-  color: var(--ink); font-weight: 600;
+.rank-row.in { opacity: 1; transform: translateX(0); }
+.rank-pos {
+  font-family: 'Fraunces', serif; font-weight: 900;
+  font-size: 20px; color: var(--ink); width: 32px; text-align: left;
 }
-.step-old { font-size: 12px; color: var(--muted); text-decoration: line-through; }
+.rank-name { flex: 1; text-align: left; font-weight: 500; }
+.rank-pct { font-variant-numeric: tabular-nums; color: var(--muted); font-size: 13px; }
+.rank-row.jpp { background: rgba(176,23,31,.08); }
+.rank-row.jpp .rank-pos, .rank-row.jpp .rank-name { color: var(--blood); font-weight: 700; }
+.rank-row.rp.alt-rp { background: rgba(176,23,31,.08); }
+.rank-row.rp.alt-rp .rank-pos, .rank-row.rp.alt-rp .rank-name { color: var(--blood); font-weight: 700; }
+.rank-arrow {
+  font-family: 'Caveat', cursive; color: var(--blood);
+  font-size: 18px; margin-left: 6px;
+}
 
 /* Scene final */
 .cta {
@@ -218,24 +233,24 @@ h2 { font-size: clamp(32px, 5vw, 64px); margin-bottom: 30px; }
   <span class="scene-label">Por eso también...</span>
   <h2>El segundo puesto<br>cambió.</h2>
   <p class="lead">Sumando mesa por mesa — las que sí están —<br>el ranking no es el mismo que ONPE publica.</p>
-  <div class="podio">
-    <div class="step">
-      <div class="step-bar sw2" id="bar2">2°</div>
-      <div class="step-name" id="name2">Juntos por el Perú</div>
-      <div class="step-old">12,01 %</div>
+  <div class="podios">
+    <div class="podio-col oficial">
+      <div class="podio-title">ONPE · portada oficial</div>
+      <div class="rank-row"><span class="rank-pos">1°</span><span class="rank-name">Fuerza Popular</span><span class="rank-pct">17,06%</span></div>
+      <div class="rank-row jpp"><span class="rank-pos">2°</span><span class="rank-name">Juntos por el Perú</span><span class="rank-pct">12,01%</span></div>
+      <div class="rank-row"><span class="rank-pos">3°</span><span class="rank-name">Renovación Popular</span><span class="rank-pct">11,92%</span></div>
+      <div class="rank-row"><span class="rank-pos">4°</span><span class="rank-name">Alianza para el Progreso</span><span class="rank-pct">10,88%</span></div>
     </div>
-    <div class="step">
-      <div class="step-bar sw1">1°</div>
-      <div class="step-name">Fuerza Popular</div>
-      <div class="step-old">17,06 %</div>
-    </div>
-    <div class="step">
-      <div class="step-bar sw3" id="bar3">3°</div>
-      <div class="step-name" id="name3">Renovación Popular</div>
-      <div class="step-old">11,92 %</div>
+    <div class="podio-col alt">
+      <div class="podio-title">Sumando mesa por mesa</div>
+      <div class="rank-row"><span class="rank-pos">1°</span><span class="rank-name">Fuerza Popular</span><span class="rank-pct">17,04%</span></div>
+      <div class="rank-row rp alt-rp"><span class="rank-pos">2°</span><span class="rank-name">Renovación Popular</span><span class="rank-pct">12,27%</span><span class="rank-arrow">↑</span></div>
+      <div class="rank-row"><span class="rank-pos">3°</span><span class="rank-name">Alianza para el Progreso</span><span class="rank-pct">11,15%</span><span class="rank-arrow">↑</span></div>
+      <div class="rank-row jpp"><span class="rank-pos">4°</span><span class="rank-name">Juntos por el Perú</span><span class="rank-pct">10,90%</span><span class="rank-arrow">↓↓</span></div>
     </div>
   </div>
-  <p class="handwrite" id="handwrite" style="opacity:0">↑ se mueven al sumar mesa por mesa</p>
+  <p class="handwrite" id="handwrite" style="opacity:0">JPP cae del 2° al 4° · RP sube al 2°</p>
+  <p class="caption">Mismos datos, sumados mesa por mesa desde el portal ONPE. Captura SHA-256 sellada.</p>
 </section>
 
 <section class="scene" data-scene="6">
@@ -312,25 +327,19 @@ function animateDots() {
   }, 15);
 }
 
-// Podio: intercambia 2° y 3° con pausa dramática
+// Doble podio: primero oficial, luego alt, luego handwrite
 function animatePodio() {
-  const b2 = document.getElementById('bar2');
-  const b3 = document.getElementById('bar3');
-  const n2 = document.getElementById('name2');
-  const n3 = document.getElementById('name3');
   const hw = document.getElementById('handwrite');
-  if (b2.dataset.done) return;
-  b2.dataset.done = '1';
+  const rows = document.querySelectorAll('.podios .rank-row');
+  if (!rows.length || hw.dataset.done) return;
+  hw.dataset.done = '1';
+  rows.forEach((r, i) => {
+    setTimeout(() => r.classList.add('in'), 200 + i * 180);
+  });
   setTimeout(() => {
-    b2.classList.add('swap');
-    b3.classList.add('swap');
-    n2.textContent = 'Renovación Popular';
-    n3.textContent = 'Juntos por el Perú';
-    b2.style.transform = 'translateY(-20px)';
-    b3.style.transform = 'translateY(15px)';
     hw.style.transition = 'opacity .8s';
     hw.style.opacity = '1';
-  }, 1200);
+  }, 200 + rows.length * 180 + 400);
 }
 </script>
 </body>
