@@ -1,0 +1,15 @@
+{
+  "name": "onpe-proxy-neuracode",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Proxy Cloudflare Worker para endpoints ONPE — auditoria-eg2026",
+  "scripts": {
+    "dev": "wrangler dev",
+    "deploy": "wrangler deploy",
+    "tail": "wrangler tail",
+    "smoke": "node smoke.mjs"
+  },
+  "devDependencies": {
+    "wrangler": "^3.80.0"
+  }
+}
