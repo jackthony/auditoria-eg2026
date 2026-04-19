@@ -18,15 +18,13 @@
 <link rel="stylesheet" href="styles/brand.css">
 <style>
 :root {
-  --ink: #002000;
-  --paper: #ffffff;
-  --blood: #2E76E5;
-  --purple: #A020F0;
-  --lilac: #C5A3FF;
-  --navy: #1f4f9f;
-  --muted: #3c4552;
-  --muted-soft: #535f71;
-  --rule: #cbd3de;
+  --ink: #111111;
+  --paper: #faf7f2;
+  --blood: #b0171f;
+  --navy: #1a3a5c;
+  --muted: #3d3d3d;
+  --muted-soft: #5a5a5a;
+  --rule: #d4ccbd;
 }
 * { box-sizing: border-box; margin: 0; padding: 0; }
 html { scroll-behavior: smooth; }
@@ -182,9 +180,15 @@ footer .mono { font-family: 'Courier New', monospace; font-size: 12px; word-brea
   </div>
 
   <footer>
-    <div>SHA-256 <span class="mono" id="hash-val">calculando…</span></div>
-    <div>Repo: <a href="https://github.com/jackthony/auditoria-eg2026" target="_blank" rel="noopener">github.com/jackthony/auditoria-eg2026</a></div>
-    <div>Responsable técnico: Jack Aguilar · Neuracode</div>
+    <div>SHA-256 <span class="mono" id="hash-val">calculando…</span> · <a href="#" id="verify-inline">verificar inline</a></div>
+    <div style="margin-top:10px;">
+      <a href="https://github.com/jackthony/auditoria-eg2026" target="_blank" rel="noopener">GitHub</a> ·
+      <a href="https://www.tiktok.com/@neuracode" target="_blank" rel="noopener">TikTok</a> ·
+      <a href="https://instagram.com/neuracode.dev" target="_blank" rel="noopener">Instagram</a> ·
+      <a href="https://www.neuracode.dev/comunidad" target="_blank" rel="noopener">Neuracode Academy</a> ·
+      <a href="MEMORIAL_TECNICO_FISCAL.pdf" target="_blank" rel="noopener">Memorial al Fiscal (PDF)</a>
+    </div>
+    <div style="margin-top:10px;">Responsable técnico: Jack Aguilar · Neuracode</div>
     <div>Licencia: MIT (código) · CC-BY-4.0 (datos derivados) · Datos públicos ONPE.</div>
   </footer>
 
@@ -202,6 +206,13 @@ footer .mono { font-family: 'Courier New', monospace; font-size: 12px; word-brea
     const hashBuf = await crypto.subtle.digest('SHA-256', buf);
     const hex = Array.from(new Uint8Array(hashBuf)).map(b => b.toString(16).padStart(2, '0')).join('');
     document.getElementById('hash-val').textContent = hex;
+    const vi = document.getElementById('verify-inline');
+    vi.addEventListener('click', async (e) => {
+      e.preventDefault();
+      try { await navigator.clipboard.writeText(hex); vi.textContent = '✅ hash copiado'; }
+      catch(_) { vi.textContent = hex; }
+      setTimeout(() => { vi.textContent = 'verificar inline'; }, 2500);
+    });
   } catch (e) {
     document.getElementById('corte').textContent = 'corte no disponible';
     document.getElementById('hash-val').textContent = 'no disponible';
