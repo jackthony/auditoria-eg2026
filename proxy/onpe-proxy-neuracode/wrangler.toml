@@ -1,0 +1,16 @@
+name = "onpe-proxy-neuracode"
+main = "src/worker.js"
+compatibility_date = "2026-04-01"
+
+# Rate limit via bindings (no DB needed)
+# [[rate_limiters]]
+# binding = "RL"
+# simple = { limit = 30, period = 10 }
+
+[observability]
+enabled = true
+
+[vars]
+UPSTREAM = "https://resultadoelectoral.onpe.gob.pe"
+CACHE_TTL = "30"
+ALLOWED_ORIGINS = "https://jackthony.github.io,http://localhost:8000"

@@ -1,0 +1,73 @@
+name: capture-onpe
+
+on:
+  schedule:
+    - cron: "*/10 * * * *"   # cada 10 min
+  workflow_dispatch: {}
+
+concurrency:
+  group: capture
+  cancel-in-progress: false
+
+permissions:
+  contents: write
+
+jobs:
+  capture:
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    env:
+      ONPE_PROXY_BASE: ${{ vars.ONPE_PROXY_BASE }}     # ej: https://onpe-proxy-neuracode.<user>.workers.dev
+      W3S_TOKEN: ${{ secrets.W3S_TOKEN }}               # opcional — IPFS pin
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+          cache: pip
+
+      - name: Install deps
+        run: pip install -r requirements.txt
+
+      - name: Capture ONPE via Worker
+        id: cap
+        run: |
+          py make.py capture
+          TS=$(ls -1 captures/ | sort | tail -1)
+          echo "ts=$TS" >> "$GITHUB_OUTPUT"
+
+      - name: Verify manifest (SHA-256)
+        run: py -m src.capture.verify_manifest captures/${{ steps.cap.outputs.ts }}
+
+      - name: Build dataset + analyze + dashboard
+        run: |
+          py make.py build
+          py make.py analyze || true
+          py scripts/build_dashboard_json.py
+
+      - name: IPFS pin (Web3.Storage) — opcional
+        if: env.W3S_TOKEN != ''
+        run: |
+          npx -y @web3-storage/w3cli login --no-browser || true
+          CID=$(npx -y @web3-storage/w3cli up captures/${{ steps.cap.outputs.ts }} --json | jq -r .cid)
+          echo "$CID" > captures/${{ steps.cap.outputs.ts }}/IPFS_CID.txt
+
+      - name: Commit + push si hay cambios
+        run: |
+          git config user.name "neuracode-capture-bot"
+          git config user.email "bot@neuracode.dev"
+          git add captures/ web/data.json web/api reports/findings.json reports/forecast.json 2>/dev/null || true
+          if ! git diff --cached --quiet; then
+            git commit -m "chore(capture): ${{ steps.cap.outputs.ts }} + dashboard refresh"
+            git push origin main
+          else
+            echo "No changes"
+          fi
+
+      - name: Deploy gh-pages
+        run: |
+          git subtree push --prefix web origin gh-pages || \
+            git push origin `git subtree split --prefix web main`:gh-pages --force
