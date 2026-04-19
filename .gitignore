@@ -102,3 +102,4 @@ scripts/build_memorial_pdf.py
 node_modules/
 .wrangler/
 dist/
+reports/mesas_presidencial.csv
