@@ -7,7 +7,7 @@ from typing import Literal, Optional
 from pathlib import Path
 import json
 
-from pydantic import BaseModel, ConfigDict
+from pydantic import BaseModel, ConfigDict, model_validator
 
 # Definición de severidad permitida
 Severity = Literal["CRÍTICO", "MEDIA", "BAJA", "INFO"]
@@ -25,11 +25,17 @@ class Finding(BaseModel):
     interpretation: str  # interpretación técnica del resultado
     limitations: str  # limitaciones conocidas del test
     captura_sha256: str  # SHA-256 del archivo fuente (MANIFEST)
-    captura_ts: str  # timestamp ISO 8601 de la captura
+    captura_ts: Optional[str] = None  # timestamp ISO 8601 de la captura
     statistic: Optional[float] = None  # valor del estadístico (χ², z, r, etc)
     p_value: Optional[float] = None  # p-valor del test
     threshold: Optional[float] = None  # umbral de significancia usado (ej: 0.05)
     method: Optional[str] = None  # nombre del método/test (ej: "χ² Benford-1")
+
+    def __setattr__(self, name: str, value: object) -> None:
+        try:
+            super().__setattr__(name, value)
+        except Exception as exc:
+            raise TypeError(str(exc)) from exc
 
 
 class ReconcileResult(BaseModel):
@@ -60,10 +66,16 @@ def load_findings(path: Path) -> list[Finding]:
     if not path.exists():
         raise FileNotFoundError(f"Archivo no encontrado: {path}")
 
+    MAX_FILE_BYTES = 5 * 1024 * 1024
+    if path.stat().st_size > MAX_FILE_BYTES:
+        raise ValueError(f"findings.json excede tamaño: {path}")
+
     with open(path, "r", encoding="utf-8") as f:
         data = json.load(f)
 
     findings_raw = data.get("findings", [])
+    if len(findings_raw) > 10_000:
+        raise ValueError(f"Demasiados findings: {len(findings_raw)}")
     return [Finding(**item) for item in findings_raw]
 
 

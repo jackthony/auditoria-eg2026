@@ -1,10 +1,20 @@
 from pydantic import BaseModel, ConfigDict
-from typing import Generic, TypeVar, Optional
+from typing import Any, Generic, TypeVar, Optional, Union
 
 T = TypeVar("T")
 
 
-class OnpeResponse(BaseModel, Generic[T]):
+class _FrozenMixin(BaseModel):
+    """Mixin que convierte ValidationError de frozen en TypeError para compatibilidad."""
+
+    def __setattr__(self, name: str, value: object) -> None:
+        try:
+            super().__setattr__(name, value)
+        except Exception as exc:
+            raise TypeError(str(exc)) from exc
+
+
+class OnpeResponse(_FrozenMixin, Generic[T]):
     success: bool
     data: T
     message: Optional[str] = None
@@ -12,7 +22,7 @@ class OnpeResponse(BaseModel, Generic[T]):
     model_config = ConfigDict(frozen=True, extra="ignore")
 
 
-class TotalesData(BaseModel):
+class TotalesData(_FrozenMixin):
     actasContabilizadas: float
     contabilizadas: int
     totalActas: int
@@ -34,19 +44,19 @@ class TotalesData(BaseModel):
     model_config = ConfigDict(frozen=True, extra="ignore")
 
 
-class PresidencialItem(BaseModel):
+class PresidencialItem(_FrozenMixin):
     nombreAgrupacionPolitica: str
     codigoAgrupacionPolitica: str
     nombreCandidato: str
     dniCandidato: str
     totalVotosValidos: int
-    porcentajeVotosValidos: float
-    porcentajeVotosEmitidos: float
+    porcentajeVotosValidos: Optional[float] = None
+    porcentajeVotosEmitidos: Optional[float] = None
 
     model_config = ConfigDict(frozen=True, extra="ignore")
 
 
-class MapaCalorItem(BaseModel):
+class MapaCalorItem(_FrozenMixin):
     ambitoGeografico: Optional[str] = None
     ubigeoNivel01: Optional[str] = None
     ubigeoNivel02: Optional[str] = None
@@ -58,7 +68,7 @@ class MapaCalorItem(BaseModel):
     model_config = ConfigDict(frozen=True, extra="ignore")
 
 
-class ResumenEleccionItem(BaseModel):
+class ResumenEleccionItem(_FrozenMixin):
     id: int
     nombre: str
     totalElectoresHabiles: Optional[int] = None
@@ -79,7 +89,7 @@ class ResumenEleccionItem(BaseModel):
     model_config = ConfigDict(frozen=True, extra="ignore")
 
 
-class MesaTotales(BaseModel):
+class MesaTotales(_FrozenMixin):
     mesasInstaladas: int
     mesasNoInstaladas: int
     mesasPendientes: int
@@ -87,11 +97,11 @@ class MesaTotales(BaseModel):
     model_config = ConfigDict(frozen=True, extra="ignore")
 
 
-class ProcesoActivo(BaseModel):
+class ProcesoActivo(_FrozenMixin):
     id: int
     nombre: str
     acronimo: str
-    fechaProceso: str
+    fechaProceso: Union[str, int]
     idEleccionPrincipal: int
     tipoProcesoElectoral: str
     activoFechaProceso: bool
@@ -99,11 +109,11 @@ class ProcesoActivo(BaseModel):
     model_config = ConfigDict(frozen=True, extra="ignore")
 
 
-class EleccionItem(BaseModel):
+class EleccionItem(_FrozenMixin):
     id: int
     nombre: str
     padre: Optional[int] = None
-    hijos: Optional[list] = None
+    hijos: Optional[Any] = None
     icono: Optional[str] = None
     orden: int
     idEleccion: int
@@ -114,7 +124,7 @@ class EleccionItem(BaseModel):
     model_config = ConfigDict(frozen=True, extra="ignore")
 
 
-class UbigeoItem(BaseModel):
+class UbigeoItem(_FrozenMixin):
     ubigeo: str
     nombre: str
 
