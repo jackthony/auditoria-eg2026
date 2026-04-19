@@ -231,6 +231,7 @@ def main():
     meta = out["meta"]
     endpoints = {
         "findings.json": {"findings": findings, "meta": meta},
+        "findings_prime.json": {"findings_prime": findings_prime, "meta": meta},
         "forecast.json": {"forecast": forecast, "meta": meta},
         "state.json": {"state": state, "delta": delta, "meta": meta},
         "regions.json": {"regions": regions, "meta": meta},
