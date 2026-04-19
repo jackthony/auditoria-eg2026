@@ -160,7 +160,11 @@ auditoria-eg2026/
 - [ ] **HIST-01** Comparador 2026 vs 2021 vs 2016 (gráfico paralelo de ausentismo y curvas de impugnación). Esfuerzo 4 h.
 
 ### Sprint 3 — Diferenciación absoluta (~1 semana)
-- [ ] **MESA-01** Mesa-a-mesa: ingestar dump cuando ONPE libere; búsqueda por mesa/local/distrito.
+- [ ] **MESA-01** Mesa-a-mesa: ingestar universo JEE vía `/actas/observadas` + `/actas/{id}`. Walker departamento→provincia→distrito→actas. Ref: artvepa80/onpe-2026-forecast. Esfuerzo 6 h. Owner: Tony.
+- [x] **MESA-02** Reconcile contable cross-endpoint (totales vs mesa/totales vs mapa-calor vs presidencial). 7 checks, 0 findings en captura 20260419T025134Z. ✓ 2026-04-18.
+- [x] **RESEARCH-01** Endpoints mesa-a-mesa confirmados 2026-04-18: `/presentacion-backend/actas/observadas?pagina=N&tamanio=100&idAmbitoGeografico=1&idUbigeo={u}`, `/presentacion-backend/actas/{id}` (con lineaTiempo T/D/C/O/E), `/presentacion-backend/ubigeos/{departamentos,provincias,distritos}`. Limitación: `/actas/observadas` sólo universo JEE, no todas las mesas. Pendiente: Network tab `/main/acta-detalle/{id}` para confirmar votos-por-candidato-por-mesa.
+- [ ] **MESA-03** Ampliar Worker allowlist a 3 nuevos paths (actas/observadas, actas/{id}, ubigeos/*). Esfuerzo 30 min. Owner: Tony.
+- [ ] **MESA-04** Inspeccionar Network tab `/main/acta-detalle/{id}` en resultadoelectoral.onpe.gob.pe para confirmar endpoint con votos por candidato por mesa. Esfuerzo 30 min. Owner: Tony (manual, browser DevTools).
 - [ ] **CALAG-MAP-01** Mapa de las 211 mesas no instaladas (CALAG): círculos en Lima con popup de electores afectados.
 - [ ] **PROC-TL-01** Timeline procesal denuncia JNE→ONPE: hitos auto-actualizados desde `evidence/legal_references/`.
 - [ ] **IPFS-01** IPFS pinning de cada captura → hash IPFS junto al SHA-256 (timestamp criptográfico irrefutable).

@@ -18,11 +18,11 @@
     }
   },
   "estado_actual": {
-    "sanchez": 1881664,
-    "rla": 1875914,
-    "margen": 5750,
-    "actas_fuera": 6332,
-    "votos_fuera_estimado": 1072906
+    "sanchez": 1891836,
+    "rla": 1878212,
+    "margen": 13624,
+    "actas_fuera": 6054,
+    "votos_fuera_estimado": 1022539
   },
   "escenarios": {
     "pesimista": {
@@ -31,16 +31,16 @@
         "b": 5.0,
         "mean_integration": 0.2857142857142857
       },
-      "p_rla_supera_sanchez": 0.366,
-      "p_sanchez_mantiene": 0.634,
+      "p_rla_supera_sanchez": 0.2156,
+      "p_sanchez_mantiene": 0.7844,
       "margen_final": {
-        "p5": -22184.915529633206,
-        "p25": -5328.671261979442,
-        "p50": 5277.588750694995,
-        "p75": 14748.773749362852,
-        "p95": 26036.003931792184,
-        "mean": 4071.277824952622,
-        "std": 14737.733234057428
+        "p5": -14521.313138748472,
+        "p25": 1763.8260187873966,
+        "p50": 12042.036613021279,
+        "p75": 20888.478844396654,
+        "p95": 31409.83504600996,
+        "mean": 10753.840137466132,
+        "std": 13993.833739863267
       }
     },
     "central": {
@@ -49,16 +49,16 @@
         "b": 5.0,
         "mean_integration": 0.5
       },
-      "p_rla_supera_sanchez": 0.4247,
-      "p_sanchez_mantiene": 0.5752999999999999,
+      "p_rla_supera_sanchez": 0.2687,
+      "p_sanchez_mantiene": 0.7313000000000001,
       "margen_final": {
-        "p5": -20307.179676857602,
-        "p25": -7103.916437305335,
-        "p50": 2764.3478431142867,
-        "p75": 12262.702934839239,
-        "p95": 24998.42960996564,
-        "mean": 2553.5094132811396,
-        "std": 13805.58946814524
+        "p5": -13386.210732908594,
+        "p25": -850.1615293484065,
+        "p50": 8606.037031344371,
+        "p75": 17616.93665808061,
+        "p95": 29708.468373016698,
+        "mean": 8375.750351885421,
+        "std": 13120.30443808657
       }
     },
     "optimista": {
@@ -67,49 +67,49 @@
         "b": 2.0,
         "mean_integration": 0.7142857142857143
       },
-      "p_rla_supera_sanchez": 0.4934,
-      "p_sanchez_mantiene": 0.5065999999999999,
+      "p_rla_supera_sanchez": 0.3546,
+      "p_sanchez_mantiene": 0.6454,
       "margen_final": {
-        "p5": -20476.235526352095,
-        "p25": -9305.724691904907,
-        "p50": 233.39965278236195,
-        "p75": 11069.412779844075,
-        "p95": 27597.82170333111,
-        "mean": 1471.532709671397,
-        "std": 14683.545173163595
+        "p5": -14202.694148937717,
+        "p25": -3868.692706927599,
+        "p50": 5159.361651617335,
+        "p75": 15518.69217953377,
+        "p95": 31420.541811572173,
+        "mean": 6384.831338258405,
+        "std": 13946.689990596135
       }
     }
   },
   "escenario_mixto": {
     "descripcion": "Mezcla uniforme de pesimista/central/optimista (máxima incertidumbre sobre tasa JEE)",
-    "p_rla_supera_sanchez": 0.43374337433743376,
-    "p_sanchez_mantiene": 0.5662566256625663,
+    "p_rla_supera_sanchez": 0.28862886288628864,
+    "p_sanchez_mantiene": 0.7113711371137114,
     "margen_final": {
-      "p5": -21029.159008453902,
-      "p25": -7772.98375198117,
-      "p50": 2569.90244954871,
-      "p75": 12571.376662344206,
-      "p95": 25343.355297857874,
-      "mean": 2384.7714159627053,
-      "std": 14315.929390848987
+      "p5": -14242.840639935293,
+      "p25": -1598.5581938321702,
+      "p50": 8344.981053142343,
+      "p75": 17987.12524353189,
+      "p95": 30120.411617289206,
+      "mean": 8193.062775084049,
+      "std": 13697.559421052616
     }
   },
   "regiones_pivote": [
     {
       "region": "Lima",
-      "actas_fuera": 1449,
-      "votos_fuera": 302146,
+      "actas_fuera": 1406,
+      "votos_fuera": 293177,
       "share_sanch": 0.0327,
-      "share_rla": 0.1993,
-      "delta_esperado": -50360.0
+      "share_rla": 0.1994,
+      "delta_esperado": -48873.0
     },
     {
       "region": "Extranjero",
-      "actas_fuera": 804,
-      "votos_fuera": 98906,
+      "actas_fuera": 756,
+      "votos_fuera": 90503,
       "share_sanch": 0.025,
       "share_rla": 0.2596,
-      "delta_esperado": -23202.0
+      "delta_esperado": -21231.0
     },
     {
       "region": "Cajamarca",
@@ -120,28 +120,28 @@
       "delta_esperado": 14063.0
     },
     {
-      "region": "Cusco",
-      "actas_fuera": 352,
-      "votos_fuera": 62140,
-      "share_sanch": 0.2203,
-      "share_rla": 0.049,
-      "delta_esperado": 10646.0
+      "region": "Huánuco",
+      "actas_fuera": 204,
+      "votos_fuera": 30004,
+      "share_sanch": 0.2942,
+      "share_rla": 0.0598,
+      "delta_esperado": 7033.0
     },
     {
-      "region": "Huánuco",
-      "actas_fuera": 212,
-      "votos_fuera": 31165,
-      "share_sanch": 0.2944,
-      "share_rla": 0.0598,
-      "delta_esperado": 7310.0
+      "region": "Cusco",
+      "actas_fuera": 177,
+      "votos_fuera": 30924,
+      "share_sanch": 0.2266,
+      "share_rla": 0.0477,
+      "delta_esperado": 5533.0
     },
     {
       "region": "Puno",
-      "actas_fuera": 105,
-      "votos_fuera": 20151,
+      "actas_fuera": 106,
+      "votos_fuera": 20343,
       "share_sanch": 0.2482,
       "share_rla": 0.0192,
-      "delta_esperado": 4615.0
+      "delta_esperado": 4658.0
     },
     {
       "region": "San Martín",
@@ -160,182 +160,182 @@
       "delta_esperado": 3929.0
     },
     {
-      "region": "Huancavelica",
-      "actas_fuera": 65,
-      "votos_fuera": 8849,
-      "share_sanch": 0.4338,
-      "share_rla": 0.0235,
-      "delta_esperado": 3631.0
-    },
-    {
       "region": "Áncash",
       "actas_fuera": 257,
       "votos_fuera": 40249,
       "share_sanch": 0.1494,
       "share_rla": 0.0602,
       "delta_esperado": 3588.0
+    },
+    {
+      "region": "Huancavelica",
+      "actas_fuera": 63,
+      "votos_fuera": 8576,
+      "share_sanch": 0.4338,
+      "share_rla": 0.0235,
+      "delta_esperado": 3519.0
     }
   ],
   "histograma_central": [
     {
-      "center": -45200.10739124914,
+      "center": -37941.91289813107,
       "count": 1
     },
     {
-      "center": -42795.10239009578,
+      "center": -35670.35409546798,
       "count": 0
     },
     {
-      "center": -40390.09738894242,
-      "count": 1
-    },
-    {
-      "center": -37985.09238778906,
-      "count": 9
-    },
-    {
-      "center": -35580.0873866357,
-      "count": 8
-    },
-    {
-      "center": -33175.08238548234,
-      "count": 24
-    },
-    {
-      "center": -30770.07738432898,
-      "count": 44
-    },
-    {
-      "center": -28365.07238317562,
-      "count": 54
-    },
-    {
-      "center": -25960.06738202226,
-      "count": 81
-    },
-    {
-      "center": -23555.062380868898,
-      "count": 121
-    },
-    {
-      "center": -21150.057379715538,
-      "count": 139
-    },
-    {
-      "center": -18745.052378562177,
-      "count": 215
-    },
-    {
-      "center": -16340.047377408817,
-      "count": 273
-    },
-    {
-      "center": -13935.042376255456,
-      "count": 365
-    },
-    {
-      "center": -11530.037375102096,
-      "count": 421
-    },
-    {
-      "center": -9125.032373948736,
-      "count": 487
-    },
-    {
-      "center": -6720.027372795375,
-      "count": 586
-    },
-    {
-      "center": -4315.022371642015,
-      "count": 612
-    },
-    {
-      "center": -1910.0173704886547,
-      "count": 685
-    },
-    {
-      "center": 494.98763066470565,
-      "count": 718
-    },
-    {
-      "center": 2899.992631818066,
-      "count": 665
-    },
-    {
-      "center": 5304.997632971426,
-      "count": 668
-    },
-    {
-      "center": 7710.002634124787,
-      "count": 629
-    },
-    {
-      "center": 10115.007635278147,
-      "count": 584
-    },
-    {
-      "center": 12520.012636431507,
-      "count": 504
-    },
-    {
-      "center": 14925.017637584868,
-      "count": 476
-    },
-    {
-      "center": 17330.022638738228,
-      "count": 361
-    },
-    {
-      "center": 19735.02763989159,
-      "count": 325
-    },
-    {
-      "center": 22140.03264104495,
-      "count": 285
-    },
-    {
-      "center": 24545.03764219831,
-      "count": 224
-    },
-    {
-      "center": 26950.04264335167,
-      "count": 141
-    },
-    {
-      "center": 29355.04764450503,
-      "count": 108
-    },
-    {
-      "center": 31760.05264565839,
-      "count": 76
-    },
-    {
-      "center": 34165.05764681175,
-      "count": 56
-    },
-    {
-      "center": 36570.06264796511,
-      "count": 23
-    },
-    {
-      "center": 38975.06764911847,
-      "count": 16
-    },
-    {
-      "center": 41380.07265027183,
-      "count": 8
-    },
-    {
-      "center": 43785.07765142519,
-      "count": 6
-    },
-    {
-      "center": 46190.08265257855,
+      "center": -33398.795292804876,
       "count": 0
     },
     {
-      "center": 48595.08765373191,
+      "center": -31127.236490141775,
+      "count": 2
+    },
+    {
+      "center": -28855.67768747868,
+      "count": 14
+    },
+    {
+      "center": -26584.11888481558,
+      "count": 14
+    },
+    {
+      "center": -24312.56008215248,
+      "count": 27
+    },
+    {
+      "center": -22041.001279489385,
+      "count": 55
+    },
+    {
+      "center": -19769.442476826283,
+      "count": 72
+    },
+    {
+      "center": -17497.88367416319,
+      "count": 100
+    },
+    {
+      "center": -15226.324871500088,
+      "count": 125
+    },
+    {
+      "center": -12954.766068836989,
+      "count": 180
+    },
+    {
+      "center": -10683.207266173891,
+      "count": 235
+    },
+    {
+      "center": -8411.648463510792,
+      "count": 318
+    },
+    {
+      "center": -6140.089660847694,
+      "count": 418
+    },
+    {
+      "center": -3868.5308581845966,
+      "count": 430
+    },
+    {
+      "center": -1596.9720555214953,
+      "count": 505
+    },
+    {
+      "center": 674.5867471416022,
+      "count": 619
+    },
+    {
+      "center": 2946.1455498047,
+      "count": 617
+    },
+    {
+      "center": 5217.704352467797,
+      "count": 724
+    },
+    {
+      "center": 7489.263155130895,
+      "count": 680
+    },
+    {
+      "center": 9760.821957793996,
+      "count": 656
+    },
+    {
+      "center": 12032.380760457094,
+      "count": 692
+    },
+    {
+      "center": 14303.939563120191,
+      "count": 609
+    },
+    {
+      "center": 16575.498365783293,
+      "count": 521
+    },
+    {
+      "center": 18847.05716844639,
+      "count": 471
+    },
+    {
+      "center": 21118.615971109488,
+      "count": 436
+    },
+    {
+      "center": 23390.17477377259,
+      "count": 347
+    },
+    {
+      "center": 25661.73357643569,
+      "count": 318
+    },
+    {
+      "center": 27933.292379098784,
+      "count": 246
+    },
+    {
+      "center": 30204.85118176188,
+      "count": 191
+    },
+    {
+      "center": 32476.40998442498,
+      "count": 131
+    },
+    {
+      "center": 34747.96878708808,
+      "count": 93
+    },
+    {
+      "center": 37019.52758975118,
+      "count": 74
+    },
+    {
+      "center": 39291.086392414276,
+      "count": 31
+    },
+    {
+      "center": 41562.64519507737,
+      "count": 26
+    },
+    {
+      "center": 43834.20399774047,
+      "count": 15
+    },
+    {
+      "center": 46105.76280040357,
+      "count": 4
+    },
+    {
+      "center": 48377.32160306667,
       "count": 1
+    },
+    {
+      "center": 50648.88040572977,
+      "count": 2
     }
   ]
 }

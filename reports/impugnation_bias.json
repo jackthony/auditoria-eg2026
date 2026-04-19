@@ -7,67 +7,67 @@
   },
   "correlaciones": {
     "pearson_tasa_imp_vs_share_rla": {
-      "r": 0.4763616291984532,
-      "p_value": 0.013887456410648398,
+      "r": 0.5060750038523367,
+      "p_value": 0.008344380988231597,
       "ci_95": [
-        -0.29844354340264007,
-        0.848230277377436
+        -0.3204616651155535,
+        0.8694224232776347
       ],
       "significativa_05": true
     },
     "pearson_tasa_imp_vs_share_sanchez": {
-      "r": -0.3380338034506849,
-      "p_value": 0.0912185115254606
+      "r": -0.32758453558672784,
+      "p_value": 0.10233276446302744
     },
     "spearman_tasa_imp_vs_share_rla": {
-      "r": 0.19589743589743588,
-      "p_value": 0.3375108894172771
+      "r": 0.14188034188034188,
+      "p_value": 0.489326361399106
     },
     "spearman_tasa_imp_vs_share_sanchez": {
-      "r": -0.27384615384615385,
-      "p_value": 0.17582630494762727
+      "r": -0.2170940170940171,
+      "p_value": 0.28674241493467584
     }
   },
   "proyeccion_integracion_total": {
-    "votos_gana_rla": 130741,
-    "votos_gana_sanchez": 124999,
-    "neto_rla_menos_sanchez": 5741,
-    "margen_actual": 5750,
-    "margen_proyectado_100pct": 8,
-    "interpretacion": "Si TODAS las actas impugnadas + pendientes se integran al ratio de voto regional actual, el margen final proyectado sería de +8 votos (Sánchez-RLA). Esto NO incluye la incertidumbre sobre la tasa de anulación real del JEE (ver forecast_bayesian.py)."
+    "votos_gana_rla": 125083,
+    "votos_gana_sanchez": 117342,
+    "neto_rla_menos_sanchez": 7740,
+    "margen_actual": 13624,
+    "margen_proyectado_100pct": 5883,
+    "interpretacion": "Si TODAS las actas impugnadas + pendientes se integran al ratio de voto regional actual, el margen final proyectado sería de +5,883 votos (Sánchez-RLA). Esto NO incluye la incertidumbre sobre la tasa de anulación real del JEE (ver forecast_bayesian.py)."
   },
   "por_ganador_regional": {
     "RLA": {
       "n_regiones": 5,
-      "actas_fuera_total": 2707,
-      "tasa_imp_media": 8.756838829077669,
-      "tasa_imp_ponderada": 5.4370434866734385,
-      "votos_fuera_total": 492170.2514439203
+      "actas_fuera_total": 2614,
+      "tasa_imp_media": 9.303097602014919,
+      "tasa_imp_ponderada": 5.749044647607991,
+      "votos_fuera_total": 474380.44568464585
     },
     "Sanchez": {
       "n_regiones": 21,
-      "actas_fuera_total": 3625,
-      "tasa_imp_media": 6.651422562546976,
-      "tasa_imp_ponderada": 6.398288603656165,
-      "votos_fuera_total": 580736.6235286345
+      "actas_fuera_total": 3440,
+      "tasa_imp_media": 6.806673373671445,
+      "tasa_imp_ponderada": 6.584986386619992,
+      "votos_fuera_total": 548159.0172147884
     }
   },
   "top_regiones_pro_rla": [
     {
       "name": "Lima",
-      "actas_fuera": 1449,
-      "tasa_impugnacion": 4.1132,
-      "share_rla": 0.1993,
+      "actas_fuera": 1406,
+      "tasa_impugnacion": 4.3184,
+      "share_rla": 0.1994,
       "share_sanch": 0.0327,
-      "beneficio_rla": 50360.4386
+      "beneficio_rla": 48872.6024
     },
     {
       "name": "Extranjero",
-      "actas_fuera": 804,
-      "tasa_impugnacion": 24.1054,
+      "actas_fuera": 756,
+      "tasa_impugnacion": 26.3468,
       "share_rla": 0.2596,
       "share_sanch": 0.025,
-      "beneficio_rla": 23202.2657
+      "beneficio_rla": 21231.0353
     },
     {
       "name": "Callao",
@@ -87,11 +87,11 @@
     },
     {
       "name": "Arequipa",
-      "actas_fuera": 90,
-      "tasa_impugnacion": 1.8031,
+      "actas_fuera": 88,
+      "tasa_impugnacion": 2.0878,
       "share_rla": 0.1063,
       "share_sanch": 0.1005,
-      "beneficio_rla": 110.0509
+      "beneficio_rla": 107.1907
     },
     {
       "name": "Tumbes",
@@ -120,7 +120,7 @@
     {
       "name": "Lambayeque",
       "actas_fuera": 169,
-      "tasa_impugnacion": 4.6797,
+      "tasa_impugnacion": 4.7075,
       "share_rla": 0.0859,
       "share_sanch": 0.1064,
       "beneficio_rla": -647.891
@@ -138,34 +138,34 @@
     {
       "name": "Cajamarca",
       "actas_fuera": 240,
-      "tasa_impugnacion": 5.6132,
+      "tasa_impugnacion": 5.6368,
       "share_rla": 0.0324,
       "share_sanch": 0.417,
       "beneficio_rla": -14062.62
     },
     {
-      "name": "Cusco",
-      "actas_fuera": 352,
-      "tasa_impugnacion": 1.9332,
-      "share_rla": 0.049,
-      "share_sanch": 0.2203,
-      "beneficio_rla": -10645.8915
+      "name": "Huánuco",
+      "actas_fuera": 204,
+      "tasa_impugnacion": 8.7142,
+      "share_rla": 0.0598,
+      "share_sanch": 0.2942,
+      "beneficio_rla": -7032.7019
     },
     {
-      "name": "Huánuco",
-      "actas_fuera": 212,
-      "tasa_impugnacion": 9.0132,
-      "share_rla": 0.0598,
-      "share_sanch": 0.2944,
-      "beneficio_rla": -7310.465
+      "name": "Cusco",
+      "actas_fuera": 177,
+      "tasa_impugnacion": 3.6154,
+      "share_rla": 0.0477,
+      "share_sanch": 0.2266,
+      "beneficio_rla": -5532.6684
     },
     {
       "name": "Puno",
-      "actas_fuera": 105,
-      "tasa_impugnacion": 3.0026,
+      "actas_fuera": 106,
+      "tasa_impugnacion": 3.0321,
       "share_rla": 0.0192,
       "share_sanch": 0.2482,
-      "beneficio_rla": -4614.5459
+      "beneficio_rla": -4658.299
     },
     {
       "name": "San Martín",
@@ -184,20 +184,20 @@
       "beneficio_rla": -3928.7765
     },
     {
-      "name": "Huancavelica",
-      "actas_fuera": 65,
-      "tasa_impugnacion": 3.535,
-      "share_rla": 0.0235,
-      "share_sanch": 0.4338,
-      "beneficio_rla": -3631.0679
-    },
-    {
       "name": "Áncash",
       "actas_fuera": 257,
-      "tasa_impugnacion": 6.9412,
+      "tasa_impugnacion": 7.4021,
       "share_rla": 0.0602,
       "share_sanch": 0.1494,
       "beneficio_rla": -3587.768
+    },
+    {
+      "name": "Huancavelica",
+      "actas_fuera": 63,
+      "tasa_impugnacion": 4.8704,
+      "share_rla": 0.0235,
+      "share_sanch": 0.4338,
+      "beneficio_rla": -3519.1488
     },
     {
       "name": "Amazonas",
@@ -220,7 +220,7 @@
     {
       "id": "G1",
       "severity": "MEDIA",
-      "title": "Asociación positiva entre tasa_impugnación y share_RLA por región (Pearson r=0.476, p=0.0139). Si TODAS las actas fuera se integran al ratio regional actual, margen final proyectado = +8 votos (vs margen actual +5,750). Empate estadístico. NOTA: correlación sensible a outliers (Spearman r=0.20 p=0.34 NO significativo; bootstrap CI95 incluye 0). La asociación es real en media pero está dominada por Lima y Extranjero."
+      "title": "Asociación positiva entre tasa_impugnación y share_RLA por región (Pearson r=0.506, p=0.0083). Si TODAS las actas fuera se integran al ratio regional actual, margen final proyectado = +5,883 votos (vs margen actual +13,624). Empate estadístico. NOTA: correlación sensible a outliers (Spearman r=0.14 p=0.49 NO significativo; bootstrap CI95 incluye 0). La asociación es real en media pero está dominada por Lima y Extranjero."
     }
   ]
 }

@@ -7,9 +7,18 @@ const ALLOWED_PATHS = new Set([
   "/presentacion-backend/proceso/2/elecciones",
   "/presentacion-backend/resumen-general/totales",
   "/presentacion-backend/resumen-general/mapa-calor",
+  "/presentacion-backend/resumen-general/elecciones",
   "/presentacion-backend/eleccion-presidencial/participantes-ubicacion-geografica-nombre",
   "/presentacion-backend/mesa/totales",
+  "/presentacion-backend/actas/observadas",
+  "/presentacion-backend/ubigeos/departamentos",
+  "/presentacion-backend/ubigeos/provincias",
+  "/presentacion-backend/ubigeos/distritos",
 ]);
+
+const ALLOWED_PREFIXES = [
+  "/presentacion-backend/actas/",  // /actas/{id}
+];
 
 function corsHeaders(origin, allowedCsv) {
   const list = (allowedCsv || "").split(",").map((s) => s.trim()).filter(Boolean);
@@ -42,7 +51,9 @@ export default {
       if (request.method !== "GET") {
         return jsonResp(405, { error: "Method not allowed" }, cors);
       }
-      if (!ALLOWED_PATHS.has(url.pathname)) {
+      const pathOk = ALLOWED_PATHS.has(url.pathname) ||
+        ALLOWED_PREFIXES.some((p) => url.pathname.startsWith(p));
+      if (!pathOk) {
         return jsonResp(404, { error: `Path not in allowlist: ${url.pathname}` }, cors);
       }
 
