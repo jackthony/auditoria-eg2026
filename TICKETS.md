@@ -29,10 +29,10 @@ Marcar `[x]` al completar. `/ecc:plan <ID>` para iniciar.
 ## 🟢 Sprint 2 — Diferenciador técnico (~23 h)
 
 - [x] **TABS-01** · Tabs implementados (Resultado · Hallazgos · Forecast · Verificación).
-- [ ] **TABLE-01** · Tabla findings con sort/filter por severidad + búsqueda por test. · 3 h
-- [ ] **DIFF-01** · Diff visual entre snapshots (slider tiempo, "antes/después"). · 4 h
-- [ ] **FCAST-INT-01** · Forecast bayesiano interactivo: slider "% actas López Aliaga pendientes" → P(2°) en cliente. · 6 h
-- [ ] **TG-BOT-01** · Bot Telegram `@AuditoriaEG2026` (cambios ≥0.1 pp o finding CRÍTICO). · 3 h
+- [x] **TABLE-01** · Tabla findings con sort por severidad + filtros + búsqueda.
+- [x] **DIFF-01** · Slider de corte histórico vs corte actual (diff-slider).
+- [x] **FCAST-INT-01** · Slider fcast-slider 20-80% integración JEE en cliente.
+- [x] **TG-BOT-01** · `scripts/telegram_notify.py` dispara en Δmargen ≥0.1pp o finding CRÍTICO.
 - [x] **API-01** · 7 endpoints en `web/api/` (findings, forecast, state, regions, series, projection, findings_gap).
 - [ ] **HIST-01** · Comparador 2026 vs 2021 vs 2016 (ausentismo + impugnación). · 4 h
 
