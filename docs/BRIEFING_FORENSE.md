@@ -68,7 +68,7 @@ src/capture/verify_manifest.py   Verificación SHA-256
 src/process/build_dataset.py     Construcción del dataset
 src/analysis/run_all.py          Pipeline de análisis
 scripts/capture_loop.py          Bucle continuo de captura
-scripts/build_pdf.py             Generador del informe
+scripts/build_pdf_v3.py          Generador del informe PDF
 scripts/docx_to_txt.py           Extractor de texto del Word
 ```
 
@@ -160,7 +160,7 @@ El equipo estadístico NO puede responder sin herramientas específicas. Son los
 | Backend ONPE oficial | resultadoelectoral.onpe.gob.pe/presentacion-backend | Retorna HTML (SPA Angular) |
 | Proxy CORS | onpe-proxy.renzonunez-af.workers.dev | **Cacheado** — contactar owner |
 | Módulo descarga masiva actas OP | Pendiente habilitación ONPE | **BLOQUEANTE para OCR** |
-| Repo del proyecto | `C:\Users\jaaguilar\Documents\elecciones2026\auditoria-eg2026` | Git local |
+| Repo del proyecto | `github.com/jackthony/auditoria-eg2026` | Git local + gh-pages |
 
 ---
 

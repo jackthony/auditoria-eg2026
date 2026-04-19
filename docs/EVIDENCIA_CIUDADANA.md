@@ -64,8 +64,9 @@ que el sistema de ONPE tiene integridad de agregación débil.
 votar en Lima. Proveedor contratado vía mecanismo excepcional fuera de la
 Ley de Contrataciones.
 
-**Ratio clave:** 63,300 afectados / 5,898 margen = **10.73×**. El número
-oficial de afectados supera en 10.73 veces al margen que define la elección.
+**Ratio clave (corte 93.474% al 2026-04-18):** 63,300 afectados / 13,624 margen = **4.64×**. El número
+oficial de afectados supera en 4.64 veces al margen que define la elección.
+*Margen vivo en `data/processed/meta.json`; valor histórico al 93.17%: 5,898 (ratio 10.73×).*
 
 Si incluso un 10% de esos electores hubieran preferido a RLA sobre Sánchez,
 el resultado se invierte. Esto abre el estándar del **Art. 363 de la Ley

@@ -66,7 +66,7 @@ Dashboard en vivo: `web/index.html` (auto-refresh 5 min).
 │   └── analysis/run_all.py           Pipeline de análisis
 └── scripts/
     ├── capture_loop.py               Bucle continuo
-    └── build_pdf.py                  Generador del PDF
+    └── build_pdf_v3.py               Generador del PDF
 ```
 
 ---
@@ -92,7 +92,7 @@ Cada archivo debe pasar el check SHA-256. Un MISMATCH indica modificación poste
 py src/capture/fetch_onpe.py           # captura fresca (atómica)
 py src/process/build_dataset.py        # procesa a CSV
 py src/analysis/run_all.py             # corre tests y genera reports/
-py scripts/build_pdf.py                # genera el PDF ejecutivo
+py scripts/build_pdf_v3.py             # genera el PDF ejecutivo (tras cierre de datos)
 ```
 
 ### Captura continua (cada 15 min)

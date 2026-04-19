@@ -1,0 +1,68 @@
+# TICKETS — auditoria-eg2026
+
+Estado vivo del backlog. Cada ítem: **ID · descripción · esfuerzo · owner**.
+Marcar `[x]` al completar. `/ecc:plan <ID>` para iniciar.
+
+---
+
+## 🔴 Urgente (datos stale — bloquea publicación nueva)
+
+- [x] **AUS-02** · ✓ 2026-04-19. Actualizado ratio 4.64× (margen 13,624) en `MEMORIAL_TECNICO_FISCAL.md`, `EVIDENCIA_CIUDADANA.md`, `dossier-perito/00_RESUMEN_EJECUTIVO.md`, `dossier-perito/02_HALLAZGOS.md`. Notas: `HIPOTESIS_CIENTIFICAS.md` no tenía el ratio; perito zip (Apr 18) congelado — se regenerará post-AUS-01.
+- [ ] **AUS-01** · Crear `src/analysis/ausentismo.py` que regenere `reports/ausentismo_comparacion.json` desde `data/processed/meta.json` cada corte. Citar URL JNE/ONPE para padrón 2016 (22,901,954) y 2021 (25,287,954). · 2 h · Tony
+
+## 🟠 Sprint 0 — Rebrand editorial Neuracode (bloquea sprints siguientes)
+
+- [ ] **BRAND-01** · Extraer sistema de diseño de `web/chat/` + `web/historia/` a `web/styles/brand.css`. Tokens: Fraunces 700/900 + Caveat + Inter; paleta `--ink #111` / `--paper #faf7f2` / `--blood #b0171f` / `--muted`; branding "Jack de Neuracode @JackDeNeuracode". · 2 h · Tony
+- [ ] **BRAND-02** · Rehacer `web/index.html` (949 L monolito AI-looking) heredando `brand.css`. Conservar 4 tabs y funcionalidad (mapa Leaflet, slider diff, slider JEE, findings search, share, hash). Eliminar toggle EN, badge "EN VIVO" pulsante, alertas genéricas. · 6 h · Tony
+- [ ] **BRAND-03** · Landing `/` narrativa tipo `historia/` con CTAs a `/dashboard`, `/chat`, `/historia`, memorial PDF. · 2 h · Tony
+- [ ] **BRAND-04** · OG image unificada (estilo Fraunces+paper+blood), hero "4.703 mesas no aparecen · 2° puesto cambia". Regenerar `build_og_image.py`. · 1 h · Tony
+
+## 🟡 Sprint 1 — Quick wins (~10 h)
+
+- [ ] **MAPA-01** · Mapa choropleth Perú (Leaflet + GeoJSON) coloreado por margen RLA−Sánchez. · 4 h · Tony
+- [ ] **LIVE-01** · Auto-refresh `data.json` cada 5 min sin reload + badge "EN VIVO" + "Actualizado hace X min". · 1.5 h · Tony
+- [ ] **SHARE-01** · Botón "Compartir" → X / WhatsApp / Telegram con texto pre-armado. · 1 h · Tony
+- [ ] **OG-01** · OG image dinámica por loop (margen + corte + timestamp). · 2 h · Tony
+- [ ] **HASH-01** · Hash SHA-256 de `data.json` visible en footer + link "verificar inline". · 30 min · Tony
+- [ ] **FOOT-01** · Footer con redes (TikTok / IG / GitHub) + link memorial PDF. · 30 min · Tony
+
+## 🟢 Sprint 2 — Diferenciador técnico (~23 h)
+
+- [ ] **TABS-01** · Tabs (Resultado · Hallazgos · Forecast · Verificación). · 2 h
+- [ ] **TABLE-01** · Tabla findings con sort/filter por severidad + búsqueda por test. · 3 h
+- [ ] **DIFF-01** · Diff visual entre snapshots (slider tiempo, "antes/después"). · 4 h
+- [ ] **FCAST-INT-01** · Forecast bayesiano interactivo: slider "% actas RLA pendientes" → P(2°) en cliente. · 6 h
+- [ ] **TG-BOT-01** · Bot Telegram `@AuditoriaEG2026` (cambios ≥0.1 pp o finding CRÍTICO). · 3 h
+- [ ] **API-01** · Endpoints `/api/findings.json` y `/api/forecast.json` en gh-pages. · 1 h
+- [ ] **HIST-01** · Comparador 2026 vs 2021 vs 2016 (ausentismo + impugnación). · 4 h
+
+## 🔵 Sprint 3 — Diferenciación absoluta (~1 semana)
+
+- [ ] **MESA-01** · Walker mesa-a-mesa universo JEE (`/actas/observadas` + `/actas/{id}`). Ref: artvepa80/onpe-2026-forecast. · 6 h · Tony
+- [ ] **MESA-04** · Inspeccionar Network tab `/main/acta-detalle/{id}` para confirmar endpoint votos/candidato/mesa. · 30 min · Tony (browser DevTools)
+- [ ] **CALAG-MAP-01** · Mapa 211 mesas no instaladas (CALAG) con popup electores.
+- [ ] **PROC-TL-01** · Timeline procesal denuncia JNE→ONPE auto-actualizado.
+- [ ] **IPFS-01** · IPFS pinning + hash IPFS junto al SHA-256.
+- [ ] **PERITO-01** · ZIP firmado captura + análisis + memorial para Fiscalía.
+- [ ] **I18N-01** · Multi-idioma EN.
+
+## ⚫ Post-cierre escrutinio (bloquea firma fiscal)
+
+- [ ] **PDF-01** · Refactor `scripts/build_pdf_v3.py`: 5 hardcoded CRÍTICOS → `findings.json`/`meta.json`/`forecast.json`. Leer `forecast.json` (hoy ignorado). Log ERROR si figura faltante. Disclaimer "estimación" en S/ 216k/72k/40k. `.hexval()` → `colors.toHexString()`. · 4 h · Tony
+  - Hardcoded: L495 (Extranjero 24.11%/z=+3.66), L506 (Lima+Callao z=−17.17/4.13%/6.94%), L809 (116 cortes/76.44%/92.91%/72 artefactos), L659-663 (98 mesas/~5,325 votos Infobae), L726-727 (Lima 50,362 + Extranjero 23,201).
+
+## 💭 Sueño (sin fecha)
+
+- [ ] **ML-ANOM** · Isolation forest saltos temporales.
+- [ ] **NEEDLE** · Dashboard estilo NYT Election Needle.
+- [ ] **NOTARY** · Hash-chain en blockchain (Polygon).
+- [ ] **PYPI** · Paquete `pip install electoral-audit` (Bolivia/Ecuador/Colombia).
+- [ ] **PEER** · Peer-review MIT Election Lab / Linzer / Mebane.
+
+---
+
+## ✅ Completados
+
+- [x] **MESA-02** · Reconcile contable cross-endpoint (7 checks, 0 findings). ✓ 2026-04-18 · captura 20260419T025134Z.
+- [x] **RESEARCH-01** · Endpoints mesa-a-mesa confirmados. ✓ 2026-04-18 · `/actas/observadas`, `/actas/{id}` con lineaTiempo T/D/C/O/E, `/ubigeos/{dep,prov,dist}`.
+- [x] **MESA-03** · Worker allowlist ampliada (actas/observadas, actas/{id}, ubigeos/*). ✓ 2026-04-18 · `proxy/onpe-proxy-neuracode/src/worker.js` L13-20.
