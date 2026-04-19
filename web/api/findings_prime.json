@@ -1,0 +1,394 @@
+{
+  "findings_prime": {
+    "capture_oficial_ts": "20260419T031241Z",
+    "capture_mesa_ts": "20260419T035056Z",
+    "findings": [
+      {
+        "id": "PRIME-F1-RANKING",
+        "severity": "CRITICO",
+        "pregunta": "¿Suma mesa-a-mesa da ranking distinto al total nacional?",
+        "top10_oficial": [
+          [
+            "FUERZA POPULAR",
+            2687621,
+            17.056,
+            1
+          ],
+          [
+            "JUNTOS POR EL PERÚ",
+            1891906,
+            12.006,
+            2
+          ],
+          [
+            "RENOVACIÓN POPULAR",
+            1878493,
+            11.921,
+            3
+          ],
+          [
+            "PARTIDO DEL BUEN GOBIERNO",
+            1743316,
+            11.063,
+            4
+          ],
+          [
+            "PARTIDO CÍVICO OBRAS",
+            1602041,
+            10.167,
+            5
+          ],
+          [
+            "PARTIDO PAÍS PARA TODOS",
+            1242445,
+            7.885,
+            6
+          ],
+          [
+            "AHORA NACIÓN - AN",
+            1157942,
+            7.348,
+            7
+          ],
+          [
+            "PRIMERO LA GENTE – COMUNIDAD, ECOLOGÍA, LIBERTAD Y PROGRESO",
+            540567,
+            3.431,
+            8
+          ],
+          [
+            "PARTIDO SICREO",
+            531884,
+            3.375,
+            9
+          ],
+          [
+            "PARTIDO FRENTE DE LA ESPERANZA 2021",
+            291397,
+            1.849,
+            10
+          ]
+        ],
+        "top10_mesa_a_mesa": [
+          [
+            "FUERZA POPULAR",
+            2595320,
+            17.084,
+            1
+          ],
+          [
+            "RENOVACIÓN POPULAR",
+            1863643,
+            12.268,
+            2
+          ],
+          [
+            "PARTIDO DEL BUEN GOBIERNO",
+            1731694,
+            11.399,
+            3
+          ],
+          [
+            "JUNTOS POR EL PERÚ",
+            1656517,
+            10.904,
+            4
+          ],
+          [
+            "PARTIDO CÍVICO OBRAS",
+            1552461,
+            10.219,
+            5
+          ],
+          [
+            "PARTIDO PAÍS PARA TODOS",
+            1226320,
+            8.072,
+            6
+          ],
+          [
+            "AHORA NACIÓN - AN",
+            1133127,
+            7.459,
+            7
+          ],
+          [
+            "PRIMERO LA GENTE – COMUNIDAD, ECOLOGÍA, LIBERTAD Y PROGRESO",
+            536595,
+            3.532,
+            8
+          ],
+          [
+            "PARTIDO SICREO",
+            527634,
+            3.473,
+            9
+          ],
+          [
+            "PARTIDO FRENTE DE LA ESPERANZA 2021",
+            284825,
+            1.875,
+            10
+          ]
+        ],
+        "cambios_ranking_top10": [
+          {
+            "agrupacion": "JUNTOS POR EL PERÚ",
+            "rank_oficial": 2,
+            "rank_mesa": 4,
+            "delta": -2
+          },
+          {
+            "agrupacion": "RENOVACIÓN POPULAR",
+            "rank_oficial": 3,
+            "rank_mesa": 2,
+            "delta": 1
+          },
+          {
+            "agrupacion": "PARTIDO DEL BUEN GOBIERNO",
+            "rank_oficial": 4,
+            "rank_mesa": 3,
+            "delta": 1
+          }
+        ],
+        "interpretacion": "Cambio en 2° puesto = hallazgo Prime confirmado"
+      },
+      {
+        "id": "PRIME-F2-MESAS-FALTANTES",
+        "severity": "CRITICO",
+        "pregunta": "¿Dónde están las mesas que faltan entre la API y el universo oficial?",
+        "totalActas_oficial": 92766,
+        "mesasInstaladas_oficial": 92496,
+        "mesas_obtenidas_walker": 88063,
+        "mesas_contabilizadas_walker": 82322,
+        "mesas_contabilizadas_oficial": 86720,
+        "delta_universo": 4703,
+        "delta_contabilizadas": -4398,
+        "interpretacion": "4,703 mesas del universo oficial no devuelven data mesa-a-mesa. Prime reportó 4,343 — nosotros 4,703."
+      },
+      {
+        "id": "PRIME-F3-DESFASE-AGRUPACION",
+        "severity": "CRITICO",
+        "pregunta": "¿El desfase entre suma mesa-a-mesa y total oficial está sesgado a una agrupación?",
+        "votos_totales_oficial": 15757620,
+        "votos_totales_mesa": 15191387,
+        "delta_total": 566233,
+        "top_agrupaciones_por_desfase": [
+          {
+            "agrupacion": "JUNTOS POR EL PERÚ",
+            "votos_oficial": 1891906,
+            "votos_mesa": 1656517,
+            "delta": 235389,
+            "pct_oficial": 12.006,
+            "pct_del_desfase": 41.571,
+            "ratio_desfase_vs_pct_oficial": 3.46
+          },
+          {
+            "agrupacion": "FUERZA POPULAR",
+            "votos_oficial": 2687621,
+            "votos_mesa": 2595320,
+            "delta": 92301,
+            "pct_oficial": 17.056,
+            "pct_del_desfase": 16.301,
+            "ratio_desfase_vs_pct_oficial": 0.96
+          },
+          {
+            "agrupacion": "PARTIDO CÍVICO OBRAS",
+            "votos_oficial": 1602041,
+            "votos_mesa": 1552461,
+            "delta": 49580,
+            "pct_oficial": 10.167,
+            "pct_del_desfase": 8.756,
+            "ratio_desfase_vs_pct_oficial": 0.86
+          },
+          {
+            "agrupacion": "AHORA NACIÓN - AN",
+            "votos_oficial": 1157942,
+            "votos_mesa": 1133127,
+            "delta": 24815,
+            "pct_oficial": 7.348,
+            "pct_del_desfase": 4.382,
+            "ratio_desfase_vs_pct_oficial": 0.6
+          },
+          {
+            "agrupacion": "PODEMOS PERÚ",
+            "votos_oficial": 249195,
+            "votos_mesa": 228922,
+            "delta": 20273,
+            "pct_oficial": 1.581,
+            "pct_del_desfase": 3.58,
+            "ratio_desfase_vs_pct_oficial": 2.26
+          },
+          {
+            "agrupacion": "PARTIDO PAÍS PARA TODOS",
+            "votos_oficial": 1242445,
+            "votos_mesa": 1226320,
+            "delta": 16125,
+            "pct_oficial": 7.885,
+            "pct_del_desfase": 2.848,
+            "ratio_desfase_vs_pct_oficial": 0.36
+          },
+          {
+            "agrupacion": "RENOVACIÓN POPULAR",
+            "votos_oficial": 1878493,
+            "votos_mesa": 1863643,
+            "delta": 14850,
+            "pct_oficial": 11.921,
+            "pct_del_desfase": 2.623,
+            "ratio_desfase_vs_pct_oficial": 0.22
+          },
+          {
+            "agrupacion": "PARTIDO DEL BUEN GOBIERNO",
+            "votos_oficial": 1743316,
+            "votos_mesa": 1731694,
+            "delta": 11622,
+            "pct_oficial": 11.063,
+            "pct_del_desfase": 2.053,
+            "ratio_desfase_vs_pct_oficial": 0.19
+          },
+          {
+            "agrupacion": "ALIANZA ELECTORAL VENCEREMOS",
+            "votos_oficial": 132517,
+            "votos_mesa": 122043,
+            "delta": 10474,
+            "pct_oficial": 0.841,
+            "pct_del_desfase": 1.85,
+            "ratio_desfase_vs_pct_oficial": 2.2
+          },
+          {
+            "agrupacion": "ALIANZA PARA EL PROGRESO",
+            "votos_oficial": 178052,
+            "votos_mesa": 168457,
+            "delta": 9595,
+            "pct_oficial": 1.13,
+            "pct_del_desfase": 1.695,
+            "ratio_desfase_vs_pct_oficial": 1.5
+          },
+          {
+            "agrupacion": "PARTIDO DEMÓCRATA UNIDO PERÚ",
+            "votos_oficial": 111952,
+            "votos_mesa": 103626,
+            "delta": 8326,
+            "pct_oficial": 0.71,
+            "pct_del_desfase": 1.47,
+            "ratio_desfase_vs_pct_oficial": 2.07
+          },
+          {
+            "agrupacion": "PARTIDO POLÍTICO COOPERACIÓN POPULAR",
+            "votos_oficial": 204789,
+            "votos_mesa": 197256,
+            "delta": 7533,
+            "pct_oficial": 1.3,
+            "pct_del_desfase": 1.33,
+            "ratio_desfase_vs_pct_oficial": 1.02
+          },
+          {
+            "agrupacion": "PARTIDO FRENTE DE LA ESPERANZA 2021",
+            "votos_oficial": 291397,
+            "votos_mesa": 284825,
+            "delta": 6572,
+            "pct_oficial": 1.849,
+            "pct_del_desfase": 1.161,
+            "ratio_desfase_vs_pct_oficial": 0.63
+          },
+          {
+            "agrupacion": "PARTIDO POLÍTICO NACIONAL PERÚ LIBRE",
+            "votos_oficial": 93902,
+            "votos_mesa": 87387,
+            "delta": 6515,
+            "pct_oficial": 0.596,
+            "pct_del_desfase": 1.151,
+            "ratio_desfase_vs_pct_oficial": 1.93
+          },
+          {
+            "agrupacion": "PARTIDO PATRIÓTICO DEL PERÚ",
+            "votos_oficial": 135568,
+            "votos_mesa": 129792,
+            "delta": 5776,
+            "pct_oficial": 0.86,
+            "pct_del_desfase": 1.02,
+            "ratio_desfase_vs_pct_oficial": 1.19
+          }
+        ],
+        "agrupaciones_atipicas_ratio_ge_2": [
+          {
+            "agrupacion": "JUNTOS POR EL PERÚ",
+            "votos_oficial": 1891906,
+            "votos_mesa": 1656517,
+            "delta": 235389,
+            "pct_oficial": 12.006,
+            "pct_del_desfase": 41.571,
+            "ratio_desfase_vs_pct_oficial": 3.46
+          },
+          {
+            "agrupacion": "PODEMOS PERÚ",
+            "votos_oficial": 249195,
+            "votos_mesa": 228922,
+            "delta": 20273,
+            "pct_oficial": 1.581,
+            "pct_del_desfase": 3.58,
+            "ratio_desfase_vs_pct_oficial": 2.26
+          },
+          {
+            "agrupacion": "ALIANZA ELECTORAL VENCEREMOS",
+            "votos_oficial": 132517,
+            "votos_mesa": 122043,
+            "delta": 10474,
+            "pct_oficial": 0.841,
+            "pct_del_desfase": 1.85,
+            "ratio_desfase_vs_pct_oficial": 2.2
+          },
+          {
+            "agrupacion": "PARTIDO DEMÓCRATA UNIDO PERÚ",
+            "votos_oficial": 111952,
+            "votos_mesa": 103626,
+            "delta": 8326,
+            "pct_oficial": 0.71,
+            "pct_del_desfase": 1.47,
+            "ratio_desfase_vs_pct_oficial": 2.07
+          },
+          {
+            "agrupacion": "SALVEMOS AL PERÚ",
+            "votos_oficial": 16392,
+            "votos_mesa": 14511,
+            "delta": 1881,
+            "pct_oficial": 0.104,
+            "pct_del_desfase": 0.332,
+            "ratio_desfase_vs_pct_oficial": 3.19
+          },
+          {
+            "agrupacion": "FE EN EL PERÚ",
+            "votos_oficial": 21824,
+            "votos_mesa": 20094,
+            "delta": 1730,
+            "pct_oficial": 0.138,
+            "pct_del_desfase": 0.306,
+            "ratio_desfase_vs_pct_oficial": 2.21
+          }
+        ],
+        "interpretacion": "Delta total = 566,233 votos válidos faltan en mesa-a-mesa. Hay agrupaciones con sobre-representación en el desfase."
+      },
+      {
+        "id": "PRIME-F4-PENDIENTES",
+        "severity": "MEDIA",
+        "pregunta": "¿El número de pendientes en el sistema coincide con lo reportado?",
+        "pendientes_oficial": 282,
+        "enviadas_jee_oficial": 5764,
+        "mesas_no_contabilizadas_walker": 5741,
+        "interpretacion": "Oficial reporta 282 pendientes, walker encuentra 5741 mesas en estados no-Contabilizada."
+      }
+    ],
+    "metadata": {
+      "oficial_totalActas": 92766,
+      "oficial_contabilizadas": 86720,
+      "oficial_porcentaje": 93.483,
+      "walker_mesas_procesadas": 88063,
+      "walker_mesas_contabilizadas": 82322
+    }
+  },
+  "meta": {
+    "generated_at": "2026-04-19T05:13:59.698724+00:00",
+    "source": "ONPE vía proxy CORS + captura atómica con SHA-256",
+    "repo": "https://github.com/neuracode/auditoria-eg2026"
+  }
+}
