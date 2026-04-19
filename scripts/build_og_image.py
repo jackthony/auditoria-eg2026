@@ -1,6 +1,6 @@
 """Genera web/og-image.png (1200x630) para previews sociales.
 
-Si hay `findings_prime` en data.json, usa hook Prime (mesa-a-mesa, ranking cambia).
+Si hay `findings_gap` en data.json, usa hook mesa-a-mesa (ranking cambia).
 Si no, fallback al margen Sánchez−RLA.
 
 Uso:
@@ -44,10 +44,10 @@ def fmt_int(n: int) -> str:
     return f"{n:,}".replace(",", ".")
 
 
-def render_prime(fp: dict, s: dict) -> Image.Image:
-    F1 = next(f for f in fp["findings"] if f["id"] == "PRIME-F1-RANKING")
-    F2 = next(f for f in fp["findings"] if f["id"] == "PRIME-F2-MESAS-FALTANTES")
-    F3 = next(f for f in fp["findings"] if f["id"] == "PRIME-F3-DESFASE-AGRUPACION")
+def render_gap(fp: dict, s: dict) -> Image.Image:
+    F1 = next(f for f in fp["findings"] if f["id"] == "GAP-F1-RANKING")
+    F2 = next(f for f in fp["findings"] if f["id"] == "GAP-F2-MESAS-FALTANTES")
+    F3 = next(f for f in fp["findings"] if f["id"] == "GAP-F3-DESFASE-AGRUPACION")
     mesas_falt = int(F2["delta_universo"])
     desfase = int(F3["delta_total"])
     oficial2 = F1["top10_oficial"][1][0]
@@ -60,7 +60,7 @@ def render_prime(fp: dict, s: dict) -> Image.Image:
     dr.rectangle([0, 0, W, 110], fill=DANGER)
     dr.rectangle([0, 110, W, 116], fill=NAVY)
     dr.text((40, 20), "ALERTA · Auditoría EG2026 Perú", font=font(30, True), fill=WHITE)
-    dr.text((40, 62), "Replica independiente mesa-a-mesa · 88.063 mesas walker",
+    dr.text((40, 62), "Verificación mesa-a-mesa independiente · 88.063 mesas walker",
             font=font(18), fill=(255, 230, 230))
 
     # Hook maestro.
@@ -119,8 +119,8 @@ def render_margen(s: dict) -> Image.Image:
 def main() -> None:
     d = json.loads(DATA.read_text(encoding="utf-8"))
     s = d["state"]
-    fp = d.get("findings_prime")
-    img = render_prime(fp, s) if fp else render_margen(s)
+    fp = d.get("findings_gap")
+    img = render_gap(fp, s) if fp else render_margen(s)
     OUT.parent.mkdir(parents=True, exist_ok=True)
     img.save(OUT, "PNG", optimize=True)
     print(f"OK: {OUT} ({OUT.stat().st_size:,} bytes)")

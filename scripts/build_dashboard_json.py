@@ -45,11 +45,11 @@ def main():
 
     findings = json.loads((ROOT / "reports" / "findings.json").read_text(encoding="utf-8"))["findings"]
 
-    # Prime-style mesa-a-mesa findings (F1..F4).
-    prime_path = ROOT / "reports" / "findings_prime.json"
-    findings_prime = None
-    if prime_path.exists():
-        findings_prime = json.loads(prime_path.read_text(encoding="utf-8"))
+    # Findings mesa-a-mesa GAP (F1..F4).
+    gap_path = ROOT / "reports" / "findings_gap.json"
+    findings_gap = None
+    if gap_path.exists():
+        findings_gap = json.loads(gap_path.read_text(encoding="utf-8"))
 
     # Margen Sánchez - RLA en votos absolutos (desde regiones.csv sanch_v/rla_v).
     # Los porcentajes de tracking.csv están redondeados a 3 dec y producen error de +5-6k votos.
@@ -105,9 +105,9 @@ def main():
     if state["pct"] < 95.0:
         alerts.append({"level": "info",
             "msg": f"Escrutinio aún incompleto ({state['pct']:.2f}%). Faltan cortes."})
-    # Alertas Prime (mesa-a-mesa) — prepend CRITICOS arriba.
-    if findings_prime:
-        for f in findings_prime.get("findings", []):
+    # Alertas GAP (mesa-a-mesa) — prepend CRITICOS arriba.
+    if findings_gap:
+        for f in findings_gap.get("findings", []):
             if f["severity"] == "CRITICO":
                 alerts.insert(0, {
                     "level": "critical",
@@ -207,7 +207,7 @@ def main():
         "delta": delta,
         "alerts": alerts,
         "findings": findings,
-        "findings_prime": findings_prime,
+        "findings_gap": findings_gap,
         "series": series,
         "contrafactual": contrafactual,
         "regions": regions,
@@ -231,7 +231,7 @@ def main():
     meta = out["meta"]
     endpoints = {
         "findings.json": {"findings": findings, "meta": meta},
-        "findings_prime.json": {"findings_prime": findings_prime, "meta": meta},
+        "findings_gap.json": {"findings_gap": findings_gap, "meta": meta},
         "forecast.json": {"forecast": forecast, "meta": meta},
         "state.json": {"state": state, "delta": delta, "meta": meta},
         "regions.json": {"regions": regions, "meta": meta},

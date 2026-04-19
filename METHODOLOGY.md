@@ -4,6 +4,12 @@ Este documento justifica las pruebas estadísticas aplicadas y sus
 limitaciones conocidas. Todo análisis forense electoral debe ser explícito
 sobre qué test responde qué pregunta, y qué NO puede concluir.
 
+> **Nota de independencia.** La metodología mesa-a-mesa (reconstruir la suma
+> desde la API pública ONPE y contrastarla con los totales oficiales) se
+> inspira en análisis públicos previos sobre el mismo dataset. Este proyecto
+> aporta una **verificación independiente y reproducible**: captura propia con
+> SHA-256, código abierto, y pipeline replicable por cualquier tercero.
+
 ## 1. Marco general
 
 Se sigue el enfoque de **election forensics** propuesto por Walter Mebane y

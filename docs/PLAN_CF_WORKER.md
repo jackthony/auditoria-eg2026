@@ -149,4 +149,4 @@ Tener captura ONPE 24/7 sin depender de la PC local, **sin sacrificar cadena de 
 ---
 
 ## Siguiente paso tras este plan
-MESA-02 — jalar `/presentacion-backend/mesa/totales` (ya accesible via Worker) y reconciliar suma mesa-a-mesa vs total nacional. Si la discrepancia de Prime Institute se confirma con nuestro pipeline independiente = **dos pipelines llegan al mismo hallazgo** = evidencia mucho más fuerte.
+MESA-02 — jalar `/presentacion-backend/mesa/totales` (ya accesible via Worker) y reconciliar suma mesa-a-mesa vs total nacional. Verificación independiente del contaje contable.
