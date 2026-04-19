@@ -19,7 +19,7 @@ import sys
 from io import StringIO
 from pathlib import Path
 
-from . import reconcile, impugnation_rates, benford, temporal, jee_simulation, forecast_bayesian, impugnation_bias, impugnation_velocity, last_digit_forensic, spatial_cluster, reconcile_internal, ml_anomalies, ausentismo
+from . import reconcile, reconcile_national_vs_regional, impugnation_rates, benford, temporal, jee_simulation, forecast_bayesian, impugnation_bias, impugnation_velocity, last_digit_forensic, spatial_cluster, reconcile_internal, ml_anomalies, ausentismo
 
 import sys
 if sys.platform == "win32":
@@ -57,6 +57,17 @@ def main():
         r = reconcile.run(ROOT)
         all_findings.extend(r["findings"])
         all_results["reconciliation"] = {"severe": r["severe"], "rows": r["rows"]}
+
+        print()
+
+        # 1a. Reconciliación nacional vs regional (formato snapshot)
+        print("── Reconciliación nacional vs regional (snapshot) ──")
+        rnr = reconcile_national_vs_regional.run(ROOT)
+        all_findings.extend([f.model_dump(mode="json") for f in rnr.findings])
+        all_results["reconcile_national_regional"] = {
+            "status": rnr.status,
+            "findings_count": len(rnr.findings),
+        }
 
         print()
 
