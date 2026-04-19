@@ -1,0 +1,20 @@
+files: 88063
+  0/88063
+  10000/88063
+  20000/88063
+  30000/88063
+  40000/88063
+  50000/88063
+  60000/88063
+  70000/88063
+  80000/88063
+============================================================
+mesas con presi:          88,063
+actas presi total:        88,063
+distrib numeroCopia:      {None: 88063}
+distrib estadoActa:       {'D': 82263, 'I': 5419, 'L': 11, 'H': 19, 'A': 262, 'J': 39, 'T': 2, 'N': 48}
+distrib idAmbito:         {1: 85520, 2: 2543}
+mesas extranjero unicas:  2,543
+mesas nacional unicas:    85,520
+============================================================
+VEREDICTO: F2 RESISTE. actas 88,063 = mesas 88,063. Gap 4,703 real.
