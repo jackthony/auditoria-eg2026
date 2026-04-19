@@ -144,6 +144,8 @@
   </section>
 </div>
 
+<div class="grid" style="padding-bottom:0" id="prime-hero-wrap"></div>
+
 <div class="grid">
 
   <section class="card active" data-tab="resultado">
@@ -571,6 +573,9 @@ function render(d) {
     `<div class="alert ${a.level}"><strong>[${a.level.toUpperCase()}]</strong> ${a.msg}</div>`
   ).join('');
 
+  // Findings Prime (mesa-a-mesa) — hero card
+  if (d.findings_prime) renderPrimeHero(d.findings_prime);
+
   // Findings (con sort/filter/search)
   _findings = d.findings;
   renderFindings();
@@ -844,6 +849,45 @@ let _findingsSearch = '';
 let _findingsSort = {key: 'severity', dir: 1};
 const SEV_RANK = {'CRÍTICO': 0, 'MEDIA': 1, 'BAJA': 2, 'INFO': 3};
 const SEV_CLS = {'CRÍTICO': 'crit', 'MEDIA': 'med', 'BAJA': 'baja', 'INFO': 'info'};
+
+function renderPrimeHero(fp) {
+  const wrap = document.getElementById('prime-hero-wrap');
+  if (!wrap) return;
+  const F1 = fp.findings.find(f => f.id === 'PRIME-F1-RANKING');
+  const F2 = fp.findings.find(f => f.id === 'PRIME-F2-MESAS-FALTANTES');
+  const F3 = fp.findings.find(f => f.id === 'PRIME-F3-DESFASE-AGRUPACION');
+  if (!F1 || !F2 || !F3) return;
+  const delta2 = F1.top10_mesa_a_mesa[1][0];
+  const oficial2 = F1.top10_oficial[1][0];
+  const mesas_falt = F2.delta_universo.toLocaleString('es-PE');
+  const desfase = F3.delta_total.toLocaleString('es-PE');
+  const jpp_pct = F3.top_agrupaciones_por_desfase[0].pct_del_desfase.toFixed(1);
+  wrap.innerHTML = `
+    <section class="card" style="border-left:6px solid #dc2626;background:#fef2f2">
+      <h2 style="margin-top:0;color:#991b1b">🚨 Hallazgos mesa-a-mesa (replica independiente Prime Institute)</h2>
+      <div class="kpi-grid" style="margin-top:.6rem">
+        <div class="kpi" style="border-left-color:#dc2626">
+          <div class="lbl">2° puesto suma mesa-a-mesa</div>
+          <div class="val" style="color:#dc2626;font-size:1.3rem">${delta2}</div>
+          <div class="updated">Oficial dice: ${oficial2}</div>
+        </div>
+        <div class="kpi" style="border-left-color:#dc2626">
+          <div class="lbl">Mesas faltantes vs universo oficial</div>
+          <div class="val" style="color:#dc2626">${mesas_falt}</div>
+          <div class="updated">de 92,766 actas</div>
+        </div>
+        <div class="kpi" style="border-left-color:#dc2626">
+          <div class="lbl">Votos de desfase válidos</div>
+          <div class="val" style="color:#dc2626">${desfase}</div>
+          <div class="updated">${jpp_pct}% concentrados en JPP</div>
+        </div>
+      </div>
+      <p style="margin:.8rem 0 0;font-size:.9rem;color:#7f1d1d">
+        Captura forense <span class="mono">${fp.capture_mesa_ts}</span> · 88,063 mesas walker · SHA-256 en MANIFEST.
+        Detalle en <span class="mono">reports/findings_prime.json</span>.
+      </p>
+    </section>`;
+}
 
 function renderFindings() {
   const filt = _findings.filter(f => {
