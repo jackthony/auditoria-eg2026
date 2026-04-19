@@ -155,6 +155,7 @@
       <div class="kpi"><div class="lbl">López Aliaga</div><div class="val" id="kpi-rla">—</div><div class="delta neutral" id="kpi-rla-d"></div></div>
       <div class="kpi"><div class="lbl">Margen Sánchez − RLA</div><div class="val" id="kpi-margen">—</div><div class="delta neutral" id="kpi-margen-d"></div></div>
       <div class="kpi"><div class="lbl">Actas impugnadas (JEE)</div><div class="val" id="kpi-jee">—</div></div>
+      <div class="kpi" id="kpi-proj-card" style="display:none;border-left-color:#c026d3"><div class="lbl">Proyección lineal @100% · Sánchez − RLA (pp)</div><div class="val" id="kpi-proj">—</div><div class="delta neutral" id="kpi-proj-sub"></div></div>
     </div>
   </section>
 
@@ -517,6 +518,17 @@ function render(d) {
   document.getElementById('kpi-margen').textContent =
     (s.margen_sanch_rla >= 0 ? '+' : '') + FMT_INT.format(s.margen_sanch_rla);
   document.getElementById('kpi-jee').textContent = FMT_INT.format(s.actas_jee);
+  // Proyección lineal al 100% (tipo Renzo)
+  if (data.projection) {
+    const p = data.projection;
+    const m = p.margin_sanchez_rla_100;
+    const el = document.getElementById('kpi-proj');
+    const sub = document.getElementById('kpi-proj-sub');
+    document.getElementById('kpi-proj-card').style.display = '';
+    el.textContent = (m >= 0 ? '+' : '') + m.toFixed(2) + ' pp';
+    el.style.color = m < 0 ? '#b91c1c' : '#0a7a3b';
+    sub.textContent = `Sánchez ${p.sanchez.toFixed(2)} · RLA ${p.rla.toFixed(2)} · regresión tail-${p.window_points} vs %escrutado`;
+  }
 
   // Deltas vs corte anterior
   if (d.delta) {
