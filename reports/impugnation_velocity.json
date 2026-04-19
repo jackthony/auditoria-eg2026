@@ -5,12 +5,12 @@
     "spike_threshold": "|z| > 2σ sobre d_jee/dt"
   },
   "resumen": {
-    "n_cortes_unicos": 44,
+    "n_cortes_unicos": 45,
     "jee_inicial": 1680,
-    "jee_final": 4959,
-    "djee_total": 3279,
-    "horas_totales": 40.800065833333335,
-    "velocidad_promedio_global": 80.36751738084409,
+    "jee_final": 5555,
+    "djee_total": 3875,
+    "horas_totales": 64.82908583333334,
+    "velocidad_promedio_global": 59.772553479499805,
     "cruce": {
       "ts": "2026-04-15T10:31:59.632000+00:00",
       "hours": 17.351542222222225,

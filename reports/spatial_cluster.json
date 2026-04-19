@@ -7,58 +7,60 @@
   ],
   "tests": {
     "tasa_impugnacion": {
-      "morans_I": 0.26028543141341953,
+      "morans_I": 0.27045745258556936,
       "I_expected_under_null": -0.041666666666666664,
       "n_observations": 25,
       "S0_sum_weights": 25.0,
-      "permutation_p_value": 0.05105105105105105,
-      "permutation_mean_I": -0.040765587241703906,
-      "permutation_std_I": 0.13109276726880512,
-      "verdict": "ALEATORIO"
+      "permutation_p_value": 0.035035035035035036,
+      "permutation_mean_I": -0.041794865305500785,
+      "permutation_std_I": 0.13061968975354402,
+      "verdict": "CLUSTERING_POSITIVO"
     },
     "share_rla": {
-      "morans_I": 0.317016165227131,
+      "morans_I": 0.3183831592796711,
       "I_expected_under_null": -0.041666666666666664,
       "n_observations": 25,
       "S0_sum_weights": 25.0,
       "permutation_p_value": 0.011011011011011011,
-      "permutation_mean_I": -0.03904005659475157,
-      "permutation_std_I": 0.12338714717033447,
+      "permutation_mean_I": -0.03907459793367969,
+      "permutation_std_I": 0.12346083462681666,
       "verdict": "CLUSTERING_POSITIVO"
     },
     "share_sanch": {
-      "morans_I": 0.026105093525560383,
+      "morans_I": 0.02831164389762463,
       "I_expected_under_null": -0.041666666666666664,
       "n_observations": 25,
       "S0_sum_weights": 25.0,
-      "permutation_p_value": 0.8538538538538538,
-      "permutation_mean_I": -0.04877087695144654,
-      "permutation_std_I": 0.13350551059583718,
+      "permutation_p_value": 0.8428428428428428,
+      "permutation_mean_I": -0.04874781350195829,
+      "permutation_std_I": 0.13354142812843764,
       "verdict": "ALEATORIO"
     },
     "pct_fuera": {
-      "morans_I": 0.2307433001605711,
+      "morans_I": 0.2644645071449187,
       "I_expected_under_null": -0.041666666666666664,
       "n_observations": 25,
       "S0_sum_weights": 25.0,
-      "permutation_p_value": 0.08808808808808809,
-      "permutation_mean_I": -0.04301251075605509,
-      "permutation_std_I": 0.13002878911136567,
-      "verdict": "ALEATORIO"
+      "permutation_p_value": 0.04104104104104104,
+      "permutation_mean_I": -0.04210663693291572,
+      "permutation_std_I": 0.12896860775936791,
+      "verdict": "CLUSTERING_POSITIVO"
     }
   },
   "bivariate_share_rla_x_tasa_impug": {
-    "morans_I_bivariate": -0.02333751232683461,
-    "permutation_p_value": 0.8358358358358359,
+    "morans_I_bivariate": -0.029135558818621028,
+    "permutation_p_value": 0.7877877877877878,
     "verdict": "ALEATORIO",
     "interpretation": "I_biv > 0 ⇒ regiones pro-RLA se agrupan con vecinas de alta impugnación (consistente con hipótesis de focalización geográfica contra RLA)."
   },
   "finding": {
     "id": "M2",
     "severity": "MEDIA",
-    "description": "Clustering espacial positivo significativo en: share_rla",
+    "description": "Clustering espacial positivo significativo en: tasa_impugnacion, share_rla, pct_fuera",
     "suspects": [
-      "share_rla"
+      "tasa_impugnacion",
+      "share_rla",
+      "pct_fuera"
     ],
     "caveat": "n=25 regiones, matriz queen contiguity binaria. Un Moran's I no significativo a este nivel no descarta clustering provincial/distrital. Pedido formal de data mesa-a-mesa necesario para replicar a mayor granularidad."
   }

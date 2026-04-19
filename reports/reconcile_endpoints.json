@@ -1,0 +1,19 @@
+{
+  "capture": "20260419T025134Z",
+  "snapshot": {
+    "actasContabilizadas_pct": 93.483,
+    "contabilizadas": 86720,
+    "totalActas": 92766,
+    "totalVotosValidos": 15757620,
+    "candidatos": 38,
+    "mesasInstaladas": 92496,
+    "mesasNoInstaladas": 48,
+    "mesasPendientes": 222
+  },
+  "checks_total": 7,
+  "votos_validos_sum": 15757620,
+  "votos_blancos_nulos_sum": 3144646,
+  "findings_count": 0,
+  "findings": [],
+  "status": "OK"
+}

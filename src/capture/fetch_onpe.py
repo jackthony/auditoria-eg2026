@@ -55,10 +55,12 @@ USER_AGENT = "AuditoriaEG2026/1.0 (analisis tecnico - personero acreditado)"
 ENDPOINTS_ONPE = {
     "proceso_activo":    "/presentacion-backend/proceso/proceso-electoral-activo",
     "elecciones":        "/presentacion-backend/proceso/2/elecciones",
+    "resumen_elecciones":"/presentacion-backend/resumen-general/elecciones?activo=1&idProceso=2&tipoFiltro=eleccion",
     "totales":           "/presentacion-backend/resumen-general/totales?idEleccion=10&tipoFiltro=eleccion",
     "mapa_calor":        "/presentacion-backend/resumen-general/mapa-calor?idEleccion=10&tipoFiltro=total",
     "presidencial":      "/presentacion-backend/eleccion-presidencial/participantes-ubicacion-geografica-nombre?idEleccion=10&tipoFiltro=eleccion",
     "mesa_totales":      "/presentacion-backend/mesa/totales?tipoFiltro=eleccion",
+    "ubigeos_departamentos": "/presentacion-backend/ubigeos/departamentos?idEleccion=10&idAmbitoGeografico=1",
 }
 
 # Si ONPE_DIRECT=1 (IP peruana verificada), va directo; si no, via Worker.
