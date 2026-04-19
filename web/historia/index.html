@@ -184,6 +184,67 @@ h2 { font-size: clamp(32px, 5vw, 64px); margin-bottom: 30px; }
 }
 .terminal .prompt { color: #888; }
 .terminal .ok { color: #6fd36b; }
+
+/* Share FAB */
+.share-fab {
+  position: fixed; right: 24px; bottom: 24px; z-index: 200;
+  background: var(--ink); color: var(--paper);
+  border-radius: 999px; padding: 14px 22px;
+  font-family: 'Inter', sans-serif; font-weight: 600; font-size: 14px;
+  border: none; cursor: pointer; box-shadow: 0 8px 24px rgba(0,0,0,.2);
+  display: inline-flex; align-items: center; gap: 8px;
+  transition: background .3s, transform .2s;
+}
+.share-fab:hover { background: var(--blood); transform: translateY(-2px); }
+.share-fab svg { width: 16px; height: 16px; }
+.share-menu {
+  position: fixed; right: 24px; bottom: 84px; z-index: 200;
+  background: var(--paper); border: 1px solid rgba(0,0,0,.15);
+  border-radius: 12px; padding: 8px; box-shadow: 0 16px 40px rgba(0,0,0,.15);
+  display: none; flex-direction: column; gap: 2px; min-width: 220px;
+}
+.share-menu.open { display: flex; }
+.share-menu a {
+  padding: 12px 16px; text-decoration: none; color: var(--ink);
+  font-family: 'Inter', sans-serif; font-size: 14px; font-weight: 500;
+  border-radius: 8px; display: flex; align-items: center; gap: 12px;
+  transition: background .2s;
+}
+.share-menu a:hover { background: rgba(176,23,31,.08); color: var(--blood); }
+.share-menu a .icon { font-size: 18px; }
+
+/* Webinar card */
+.webinar {
+  margin-top: 80px; max-width: 700px; width: 100%;
+  background: linear-gradient(135deg, #f8f6f1 0%, #ffffff 100%);
+  border: 1px solid rgba(0,0,0,.08); border-radius: 16px;
+  padding: 30px; display: grid; grid-template-columns: 180px 1fr; gap: 28px;
+  align-items: center; box-shadow: 0 8px 32px rgba(0,0,0,.06);
+}
+.webinar img {
+  width: 100%; height: auto; border-radius: 10px; display: block;
+  box-shadow: 0 4px 16px rgba(0,0,0,.1);
+}
+.webinar-body { text-align: left; font-family: 'Inter', sans-serif; }
+.webinar-eyebrow {
+  font-size: 11px; letter-spacing: 2px; text-transform: uppercase;
+  color: var(--blood); font-weight: 700; margin-bottom: 8px;
+}
+.webinar h3 {
+  font-family: 'Fraunces', serif; font-size: 24px; font-weight: 800;
+  color: var(--ink); margin: 0 0 8px; line-height: 1.2;
+}
+.webinar p { font-size: 14px; color: var(--muted); margin: 0 0 16px; line-height: 1.5; }
+.webinar .cta-webinar {
+  display: inline-block; background: var(--blood); color: #fff;
+  padding: 12px 22px; font-weight: 600; font-size: 14px;
+  text-decoration: none; border-radius: 8px; transition: opacity .2s;
+}
+.webinar .cta-webinar:hover { opacity: .9; }
+@media (max-width: 620px) {
+  .webinar { grid-template-columns: 1fr; gap: 18px; padding: 20px; }
+  .webinar img { max-width: 200px; margin: 0 auto; }
+}
 </style>
 </head>
 <body>
@@ -330,7 +391,28 @@ h2 { font-size: clamp(32px, 5vw, 64px); margin-bottom: 30px; }
     findings.json SHA-256: <code style="font-size:10px;">e44134c4edba2c1f…</code><br>
     reproducir: <code style="font-size:10px;">git clone · py make.py analyze</code>
   </p>
+
+  <div class="webinar">
+    <img src="../neuracode-webinar.png" alt="Webinar Neuracode — Usar la IA te hace más productivo" loading="lazy">
+    <div class="webinar-body">
+      <div class="webinar-eyebrow">Neuracode Academy</div>
+      <h3>¿Quieres aprender a analizar datos así con IA?</h3>
+      <p>Webinar gratis: <strong>Lunes 8PM · Zoom</strong>. Pipelines, forense de datos y automatización con Python + Claude. Dictado por Jack Aguilar.</p>
+      <a class="cta-webinar" href="https://www.neuracode.dev/comunidad" target="_blank" rel="noopener">Regístrate ahora →</a>
+    </div>
+  </div>
 </section>
+
+<button class="share-fab" id="shareFab" aria-label="Compartir">
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8"/><polyline points="16 6 12 2 8 6"/><line x1="12" y1="2" x2="12" y2="15"/></svg>
+  Compartir
+</button>
+<div class="share-menu" id="shareMenu">
+  <a href="#" data-channel="x"><span class="icon">𝕏</span> Compartir en X</a>
+  <a href="#" data-channel="wa"><span class="icon">💬</span> Compartir en WhatsApp</a>
+  <a href="#" data-channel="tg"><span class="icon">✈️</span> Compartir en Telegram</a>
+  <a href="#" data-channel="copy"><span class="icon">🔗</span> Copiar link</a>
+</div>
 
 <script>
 // Scene reveal
@@ -386,6 +468,45 @@ function animateDots() {
     i++;
   }, 15);
 }
+
+// Share FAB
+(function(){
+  const fab = document.getElementById('shareFab');
+  const menu = document.getElementById('shareMenu');
+  const url = 'https://jackthony.github.io/auditoria-eg2026/historia/';
+  const text = '4 fuentes miran el 2° puesto. Dos dicen RLA, dos dicen JPP. Las cuentas no cuadran. Datos ONPE, código abierto, SHA-256 reproducible.';
+  const full = text + ' ' + url;
+
+  fab.addEventListener('click', async (e) => {
+    e.preventDefault();
+    if (navigator.share) {
+      try { await navigator.share({ title: 'El peritaje público', text, url }); return; }
+      catch(_) {}
+    }
+    menu.classList.toggle('open');
+  });
+  document.addEventListener('click', (e) => {
+    if (!menu.contains(e.target) && !fab.contains(e.target)) menu.classList.remove('open');
+  });
+  menu.querySelectorAll('a').forEach(a => {
+    a.addEventListener('click', async (e) => {
+      e.preventDefault();
+      const ch = a.dataset.channel;
+      const enc = encodeURIComponent;
+      let target = '';
+      if (ch === 'x')   target = `https://twitter.com/intent/tweet?text=${enc(text)}&url=${enc(url)}`;
+      if (ch === 'wa')  target = `https://wa.me/?text=${enc(full)}`;
+      if (ch === 'tg')  target = `https://t.me/share/url?url=${enc(url)}&text=${enc(text)}`;
+      if (ch === 'copy') {
+        try { await navigator.clipboard.writeText(full); a.innerHTML = '<span class="icon">✅</span> Copiado'; setTimeout(()=>{a.innerHTML='<span class="icon">🔗</span> Copiar link';}, 1600); }
+        catch(_) {}
+        return;
+      }
+      window.open(target, '_blank', 'noopener');
+      menu.classList.remove('open');
+    });
+  });
+})();
 
 // Doble podio: primero oficial, luego alt, luego handwrite
 function animatePodio() {
