@@ -3,7 +3,7 @@
   "capture_mesa_ts": "20260419T035056Z",
   "findings": [
     {
-      "id": "PRIME-F1-RANKING",
+      "id": "GAP-F1-RANKING",
       "severity": "CRITICO",
       "pregunta": "¿Suma mesa-a-mesa da ranking distinto al total nacional?",
       "top10_oficial": [
@@ -150,10 +150,10 @@
           "delta": 1
         }
       ],
-      "interpretacion": "Cambio en 2° puesto = hallazgo Prime confirmado"
+      "interpretacion": "Cambio de ranking en top-10: la suma mesa-a-mesa produce un orden distinto al total oficial."
     },
     {
-      "id": "PRIME-F2-MESAS-FALTANTES",
+      "id": "GAP-F2-MESAS-FALTANTES",
       "severity": "CRITICO",
       "pregunta": "¿Dónde están las mesas que faltan entre la API y el universo oficial?",
       "totalActas_oficial": 92766,
@@ -163,10 +163,10 @@
       "mesas_contabilizadas_oficial": 86720,
       "delta_universo": 4703,
       "delta_contabilizadas": -4398,
-      "interpretacion": "4,703 mesas del universo oficial no devuelven data mesa-a-mesa. Prime reportó 4,343 — nosotros 4,703."
+      "interpretacion": "4,703 mesas del universo oficial no devuelven data mesa-a-mesa en la API pública ONPE."
     },
     {
-      "id": "PRIME-F3-DESFASE-AGRUPACION",
+      "id": "GAP-F3-DESFASE-AGRUPACION",
       "severity": "CRITICO",
       "pregunta": "¿El desfase entre suma mesa-a-mesa y total oficial está sesgado a una agrupación?",
       "votos_totales_oficial": 15757620,
@@ -368,7 +368,7 @@
       "interpretacion": "Delta total = 566,233 votos válidos faltan en mesa-a-mesa. Hay agrupaciones con sobre-representación en el desfase."
     },
     {
-      "id": "PRIME-F4-PENDIENTES",
+      "id": "GAP-F4-PENDIENTES",
       "severity": "MEDIA",
       "pregunta": "¿El número de pendientes en el sistema coincide con lo reportado?",
       "pendientes_oficial": 282,

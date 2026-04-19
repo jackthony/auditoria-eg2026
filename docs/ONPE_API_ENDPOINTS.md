@@ -17,7 +17,7 @@
 
 ## Observaciones
 - `idEleccion=10` = presidencial 2026 2da vuelta (confirmar contra endpoint 2).
-- Endpoint 5 (`mesa/totales`) es probablemente el leak que Prime Institute usó.
+- Endpoint 5 (`mesa/totales`) permite reconstruir el universo mesa-a-mesa desde la API pública.
 - Verificar: existe paginación (`?page=` / `?limit=`)? Tamaño de respuesta?
 
 ## Siguiente paso (MESA-02)

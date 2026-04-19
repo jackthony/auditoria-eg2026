@@ -1,10 +1,10 @@
 """
-src/analysis/reconcile_prime.py — Las 4 reconciliations tipo Prime Institute.
+src/analysis/reconcile_gap.py — Las 4 reconciliaciones mesa-a-mesa vs total oficial.
 
-Responde las 4 preguntas críticas de la tesis Prime:
+Responde 4 preguntas críticas de consistencia contable:
   F1. Suma mesa-a-mesa vs total nacional: ¿ranking cambia?
   F2. ¿Dónde están las mesas faltantes? (universo JEE - walker)
-  F3. ¿44% del desfase va a candidato con 11%?
+  F3. ¿El desfase se concentra en una agrupación?
   F4. Pendientes reales vs pendientes reportados.
 
 Input:
@@ -15,7 +15,7 @@ Input:
   captures/{ts}/raw/mesa_totales.json
 
 Output:
-  reports/findings_prime.json
+  reports/findings_gap.json
 """
 from __future__ import annotations
 
@@ -91,7 +91,7 @@ def ranking(d: dict[str, int | float], key="votos") -> list[tuple[str, int, floa
 
 
 def finding_1_ranking(oficial: dict, mesa: dict[str, int]) -> dict:
-    """F1: ¿Ranking cambia? (el gran hallazgo Prime)"""
+    """F1: ¿Ranking cambia al sumar mesa-a-mesa?"""
     rk_of = ranking(oficial)
     rk_me = ranking(mesa)
     top10_of = [(n, v, round(p, 3), r) for n, v, p, r in rk_of[:10]]
@@ -110,14 +110,14 @@ def finding_1_ranking(oficial: dict, mesa: dict[str, int]) -> dict:
     cambios.sort(key=lambda x: x["rank_oficial"])
 
     return {
-        "id": "PRIME-F1-RANKING",
+        "id": "GAP-F1-RANKING",
         "severity": "CRITICO" if cambios else "INFO",
         "pregunta": "¿Suma mesa-a-mesa da ranking distinto al total nacional?",
         "top10_oficial": top10_of,
         "top10_mesa_a_mesa": top10_me,
         "cambios_ranking_top10": cambios,
-        "interpretacion": "Cambio en 2° puesto = hallazgo Prime confirmado" if cambios else
-                          "Ranking top-10 coincide",
+        "interpretacion": "Cambio de ranking en top-10: la suma mesa-a-mesa produce un orden distinto al total oficial."
+                          if cambios else "Ranking top-10 coincide.",
     }
 
 
@@ -130,7 +130,7 @@ def finding_2_mesas_faltantes(oficial: dict, procesadas: int, contabilizadas: in
     faltantes = total_actas_oficial - procesadas
     delta_contab = contabilizadas - contab_oficial
     return {
-        "id": "PRIME-F2-MESAS-FALTANTES",
+        "id": "GAP-F2-MESAS-FALTANTES",
         "severity": "CRITICO" if faltantes > 1000 else ("MEDIA" if faltantes > 0 else "INFO"),
         "pregunta": "¿Dónde están las mesas que faltan entre la API y el universo oficial?",
         "totalActas_oficial": total_actas_oficial,
@@ -141,7 +141,7 @@ def finding_2_mesas_faltantes(oficial: dict, procesadas: int, contabilizadas: in
         "delta_universo": faltantes,
         "delta_contabilizadas": delta_contab,
         "interpretacion": f"{faltantes:,} mesas del universo oficial no devuelven data "
-                          f"mesa-a-mesa. Prime reportó 4,343 — nosotros {faltantes:,}.",
+                          f"mesa-a-mesa en la API pública ONPE.",
     }
 
 
@@ -175,7 +175,7 @@ def finding_3_desfase_agrupacion(oficial: dict, mesa: dict[str, int]) -> dict:
                 and x["pct_oficial"] < 15]
 
     return {
-        "id": "PRIME-F3-DESFASE-AGRUPACION",
+        "id": "GAP-F3-DESFASE-AGRUPACION",
         "severity": "CRITICO" if atipicas else "MEDIA",
         "pregunta": "¿El desfase entre suma mesa-a-mesa y total oficial está sesgado a una agrupación?",
         "votos_totales_oficial": total_of,
@@ -197,7 +197,7 @@ def finding_4_pendientes(oficial: dict, mesas_observadas: int,
     no_contabilizadas_walker = mesas_observadas + mesas_pendientes_walker + mesas_otros
 
     return {
-        "id": "PRIME-F4-PENDIENTES",
+        "id": "GAP-F4-PENDIENTES",
         "severity": "MEDIA" if no_contabilizadas_walker > pendientes_oficial * 3 else "INFO",
         "pregunta": "¿El número de pendientes en el sistema coincide con lo reportado?",
         "pendientes_oficial": pendientes_oficial,
@@ -254,12 +254,12 @@ def main() -> int:
         },
     }
 
-    out_p = ROOT / "reports" / "findings_prime.json"
+    out_p = ROOT / "reports" / "findings_gap.json"
     out_p.write_text(json.dumps(out, indent=2, ensure_ascii=False), encoding="utf-8")
 
     # Print humano
     print("═" * 70)
-    print("FINDINGS PRIME-STYLE")
+    print("FINDINGS GAP mesa-a-mesa")
     print("═" * 70)
     for f in out["findings"]:
         print(f"\n[{f['severity']}] {f['id']}")
