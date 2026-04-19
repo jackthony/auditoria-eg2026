@@ -109,10 +109,29 @@ def _sum_regions(regions: list[dict], metric: str) -> int:
     return total
 
 
+MIN_COVERAGE = 0.90  # regiones deben cubrir ≥90% del nacional para comparar
+
+
 def _compare_metrics(snapshot: dict) -> dict:
     """Compara nacional vs Σ(regional) para cada métrica."""
     nat = snapshot.get("national", {})
     regions = snapshot.get("regions", [])
+
+    # Validar cobertura regional antes de comparar
+    nat_total = nat.get("totalActas") or nat.get("contabilizadas") or 0
+    reg_total = _sum_regions(regions, "totalActas") or _sum_regions(regions, "contabilizadas")
+    coverage = reg_total / nat_total if nat_total > 0 else 0
+    if coverage < MIN_COVERAGE:
+        logger.warning(
+            f"Cobertura regional insuficiente: {coverage:.1%} < {MIN_COVERAGE:.0%}. "
+            f"Solo {len(regions)} regiones capturadas. Reconcile no aplica."
+        )
+        return {
+            "severity": "INFO",
+            "critical": False,
+            "results": {},
+            "note": f"Cobertura regional {coverage:.1%} — datos insuficientes para reconcile",
+        }
 
     metrics_check = ["totalActas", "contabilizadas", "enviadasJee", "pendientes"]
     results = {}
@@ -217,7 +236,7 @@ def run(root: Path | None = None) -> ReconcileResult:
 
     comparison = _compare_metrics(snapshot)
     severity = comparison["severity"]
-    metrics = comparison["metrics"]
+    metrics = comparison.get("metrics", {})
 
     if severity == "CRÍTICO":
         interpretation = (
