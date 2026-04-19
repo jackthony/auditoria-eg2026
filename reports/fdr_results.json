@@ -1,0 +1,128 @@
+{
+  "alpha": 0.05,
+  "method": "Benjamini-Hochberg",
+  "n_tests": 17,
+  "n_survive_fdr": 4,
+  "interpretation": "De 17 p-valores, 4 sobreviven FDR BH a α=0.05. Tests que no sobreviven no deben reportarse como significativos sin contexto adicional.",
+  "results": [
+    {
+      "test": "impugnation.ztest_lima_vs_resto",
+      "p_value": 0.0,
+      "q_value_fdr_bh": 0.0,
+      "reject_at_fdr_05": true,
+      "survives": "SI"
+    },
+    {
+      "test": "impugnation_velocity.mann_whitney_12h",
+      "p_value": 0.001508220248849934,
+      "q_value_fdr_bh": 0.012819872115224439,
+      "reject_at_fdr_05": true,
+      "survives": "SI"
+    },
+    {
+      "test": "impugnation_bias.pearson_tasa_imp_vs_share_rla",
+      "p_value": 0.008344380988231597,
+      "q_value_fdr_bh": 0.0467967967967968,
+      "reject_at_fdr_05": true,
+      "survives": "SI"
+    },
+    {
+      "test": "spatial_cluster.share_rla",
+      "p_value": 0.011011011011011011,
+      "q_value_fdr_bh": 0.0467967967967968,
+      "reject_at_fdr_05": true,
+      "survives": "SI"
+    },
+    {
+      "test": "spatial_cluster.tasa_impugnacion",
+      "p_value": 0.035035035035035036,
+      "q_value_fdr_bh": 0.11628294961628294,
+      "reject_at_fdr_05": false,
+      "survives": "NO"
+    },
+    {
+      "test": "spatial_cluster.pct_fuera",
+      "p_value": 0.04104104104104104,
+      "q_value_fdr_bh": 0.11628294961628294,
+      "reject_at_fdr_05": false,
+      "survives": "NO"
+    },
+    {
+      "test": "impugnation_bias.pearson_tasa_imp_vs_share_sanchez",
+      "p_value": 0.10233276446302744,
+      "q_value_fdr_bh": 0.2485224279816381,
+      "reject_at_fdr_05": false,
+      "survives": "NO"
+    },
+    {
+      "test": "benford.pool_chi2",
+      "p_value": 0.15545825418443593,
+      "q_value_fdr_bh": 0.33034879014192636,
+      "reject_at_fdr_05": false,
+      "survives": "NO"
+    },
+    {
+      "test": "last_digit.Belmont.chi2",
+      "p_value": 0.1885222423609903,
+      "q_value_fdr_bh": 0.3560975689040928,
+      "reject_at_fdr_05": false,
+      "survives": "NO"
+    },
+    {
+      "test": "last_digit.López Aliaga (RLA).chi2",
+      "p_value": 0.23121649773399694,
+      "q_value_fdr_bh": 0.3749708502991915,
+      "reject_at_fdr_05": false,
+      "survives": "NO"
+    },
+    {
+      "test": "last_digit.Fujimori.chi2",
+      "p_value": 0.28101851776997044,
+      "q_value_fdr_bh": 0.3749708502991915,
+      "reject_at_fdr_05": false,
+      "survives": "NO"
+    },
+    {
+      "test": "last_digit.Sánchez.chi2",
+      "p_value": 0.28101851776997044,
+      "q_value_fdr_bh": 0.3749708502991915,
+      "reject_at_fdr_05": false,
+      "survives": "NO"
+    },
+    {
+      "test": "impugnation_bias.spearman_tasa_imp_vs_share_sanchez",
+      "p_value": 0.28674241493467584,
+      "q_value_fdr_bh": 0.3749708502991915,
+      "reject_at_fdr_05": false,
+      "survives": "NO"
+    },
+    {
+      "test": "impugnation_bias.spearman_tasa_imp_vs_share_rla",
+      "p_value": 0.489326361399106,
+      "q_value_fdr_bh": 0.594182010270343,
+      "reject_at_fdr_05": false,
+      "survives": "NO"
+    },
+    {
+      "test": "last_digit.Nieto.chi2",
+      "p_value": 0.549721618134273,
+      "q_value_fdr_bh": 0.6230178338855095,
+      "reject_at_fdr_05": false,
+      "survives": "NO"
+    },
+    {
+      "test": "spatial_cluster.bivariate_rla_impug",
+      "p_value": 0.7877877877877878,
+      "q_value_fdr_bh": 0.8370245245245246,
+      "reject_at_fdr_05": false,
+      "survives": "NO"
+    },
+    {
+      "test": "spatial_cluster.share_sanch",
+      "p_value": 0.8428428428428428,
+      "q_value_fdr_bh": 0.8428428428428428,
+      "reject_at_fdr_05": false,
+      "survives": "NO"
+    }
+  ]
+}
