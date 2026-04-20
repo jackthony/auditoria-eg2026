@@ -128,8 +128,8 @@
     return strip;
   }
 
-  // ═════ FLOATING CASES · para páginas con header propio ═════
-  function buildFloatingCases() {
+  // ═════ CASES MARKUP · reutilizable para float + mount ═════
+  function buildCasesMarkup() {
     const items = CASES.map(c => {
       const active = (c.slug === current) ? ' sn-active' : '';
       const wip = c.wip ? ' sn-wip' : '';
@@ -138,27 +138,78 @@
         <div class="sn-p">${c.p}</div>
       </a>`;
     }).join('');
-
-    const wrap = document.createElement('div');
-    wrap.className = 'sn-float sn-cases';
-    wrap.innerHTML = `
+    return `
       <button class="sn-btn" id="sn-btn" aria-haspopup="true" aria-expanded="false">
         Casos <span class="sn-caret">▼</span>
       </button>
       <div class="sn-dropdown" id="sn-dropdown" role="menu">${items}</div>
     `;
+  }
+
+  // ═════ FLOATING CASES · fallback para header propio sin .sn-mount ═════
+  function buildFloatingCases() {
+    const wrap = document.createElement('div');
+    wrap.className = 'sn-float sn-cases';
+    wrap.innerHTML = buildCasesMarkup();
     return wrap;
+  }
+
+  // ═════ MOUNTED CASES · ancla dentro de <.sn-mount> del header propio ═════
+  function mountCasesInto(target) {
+    target.classList.add('sn-cases');
+    target.innerHTML = buildCasesMarkup();
+  }
+
+  // ═════ SELLO EG2026 · franja roja top (signature visual) ═════
+  function buildSello() {
+    const sello = document.createElement('div');
+    sello.className = 'sn-sello';
+    sello.setAttribute('aria-hidden', 'true');
+    return sello;
+  }
+
+  // ═════ SKIP-TO-CONTENT · WCAG 2.4.1 ═════
+  function buildSkipLink() {
+    const skip = document.createElement('a');
+    skip.className = 'sn-skip';
+    skip.href = '#sn-main';
+    skip.textContent = 'Saltar al contenido';
+    return skip;
+  }
+
+  // Inserta ancla #sn-main en el primer <section>/<article>/<main> tras el header.
+  function ensureMainAnchor() {
+    if (document.getElementById('sn-main')) return;
+    const target =
+      document.querySelector('main') ||
+      document.querySelector('header ~ section, header ~ article, header ~ div.phone-outer, header ~ .scene');
+    if (target) {
+      target.id = target.id || 'sn-main';
+      if (!target.hasAttribute('tabindex')) target.setAttribute('tabindex', '-1');
+    }
   }
 
   // ═════ WIRE UP ═════
   function init() {
+    // Sello rojo primero (siempre al top absoluto)
+    if (!document.querySelector('.sn-sello')) {
+      document.body.insertBefore(buildSello(), document.body.firstChild);
+    }
+    // Skip link para teclado
+    if (!document.querySelector('.sn-skip')) {
+      document.body.insertBefore(buildSkipLink(), document.body.firstChild);
+    }
+    ensureMainAnchor();
     // Regla:
     //  - Si la página NO tiene ningún <header> (ni propio ni .site-header) → inyectar header completo.
     //  - Si tiene header propio (ej. dashboard, chat) → inyectar solo botón flotante "Casos".
     //  - Nunca duplicar headers.
     const hasAnyHeader = document.querySelector('header, .site-header');
+    const mountPoint = document.querySelector('.sn-mount');
     if (!hasAnyHeader) {
-      document.body.insertBefore(buildHeader(), document.body.firstChild);
+      document.body.insertBefore(buildHeader(), document.querySelector('.sn-sello').nextSibling);
+    } else if (mountPoint) {
+      mountCasesInto(mountPoint);
     } else if (!document.querySelector('.sn-float')) {
       document.body.appendChild(buildFloatingCases());
     }

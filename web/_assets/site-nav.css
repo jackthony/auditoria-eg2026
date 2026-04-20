@@ -2,19 +2,33 @@
 /* Inyectado por site-nav.js en las 9 páginas de auditoria-eg2026 */
 
 :root {
-  --sn-ink: #111111;
-  --sn-paper: #faf7f2;
-  --sn-blood: #b0171f;
+  /* ═ Paleta EXPEDIENTE · identidad Auditoría EG2026 ═
+     Distinta de Neuracode.Academy (que es cream + blood clásico).
+     Navy profundo + rojo alerta = prensa investigativa / fiscalía. */
+  --sn-ink: #0c1a2e;           /* navy oscuro · dossier */
+  --sn-ink-soft: #1a3a5c;      /* navy medio · secundario */
+  --sn-paper: #faf7f2;         /* cream · bg */
+  --sn-blood: #e63946;         /* rojo alerta · sello EG2026 */
+  --sn-blood-dark: #b0171f;    /* rojo clásico (hover, compat) */
   --sn-navy: #1a3a5c;
   --sn-muted: #3d3d3d;
   --sn-muted-soft: #5a5a5a;
   --sn-rule: #d4ccbd;
 }
 
+/* ═════ SELLO EG2026 · franja roja sticky top (signature visual) ═════ */
+.sn-sello {
+  position: sticky; top: 0; z-index: 999;
+  height: 3px; background: var(--sn-blood);
+  box-shadow: 0 1px 0 rgba(0,0,0,.04);
+}
+
 /* ═════ HEADER ═════ */
 .site-header {
   position: sticky; top: 0; z-index: 50;
-  background: #fff; border-bottom: 1px solid var(--sn-rule);
+  background: rgba(255, 253, 250, .88);
+  backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
+  border-bottom: 1px solid var(--sn-rule);
   box-shadow: 0 2px 12px rgba(0,0,0,.03);
   font-family: 'Inter', -apple-system, sans-serif;
 }
@@ -148,15 +162,51 @@
   border-top: 1px dashed var(--sn-rule);
 }
 
-/* ═════ MOBILE ═════ */
+/* ═════ MOBILE ≤720 ═════ */
 @media (max-width: 720px) {
   .sn-brand .sn-sub { display: none; }
   .sn-brand img { height: 44px; }
   .sn-brand .sn-wordmark { font-size: 18px; }
-  .sn-btn { padding: 8px 12px; font-size: 13px; }
+  .sn-btn { padding: 10px 14px; font-size: 13px; min-height: 44px; }
   .sn-dropdown { right: 0; left: auto; min-width: min(92vw, 360px); max-width: calc(100vw - 24px); }
-  .sn-float { top: 10px; right: 10px; }
+  .sn-float { top: 13px; right: 10px; }
+  .site-header .sn-bar { padding: 10px 14px; gap: 10px; }
   .site-footer .sn-fbar { grid-template-columns: 1fr; gap: 20px; }
   .sn-social-strip { padding: 18px 16px 0; }
   .sn-social-grid { grid-template-columns: 1fr; gap: 14px; }
+}
+
+/* ═════ MOBILE SMALL ≤420 ═════ */
+@media (max-width: 420px) {
+  .sn-brand img { height: 38px; }
+  .sn-brand .sn-wordmark { font-size: 16px; }
+  .sn-btn { padding: 9px 12px; font-size: 12px; }
+  .site-header .sn-bar { padding: 8px 12px; }
+}
+
+/* ═════ WCAG · focus visible, hit targets, skip link ═════ */
+.sn-btn, .sn-brand, .sn-dropdown a, .sn-social-grid .sn-ss-links a, .sn-case {
+  min-height: 44px;
+}
+.sn-btn:focus-visible, .sn-brand:focus-visible,
+.sn-dropdown a:focus-visible, .sn-case:focus-visible,
+.sn-social-grid .sn-ss-links a:focus-visible {
+  outline: 2px solid var(--sn-blood);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+.sn-skip {
+  position: absolute; left: -9999px; top: 0; z-index: 9999;
+  background: var(--sn-ink); color: #fff;
+  padding: 10px 14px; font-size: 14px; font-weight: 600;
+  text-decoration: none; border-radius: 0 0 6px 0;
+}
+.sn-skip:focus { left: 0; }
+
+/* ═════ Motion reduction · WCAG 2.3.3 ═════ */
+@media (prefers-reduced-motion: reduce) {
+  .sn-brand, .sn-btn, .sn-dropdown a, .sn-social-grid .sn-ss-links a {
+    transition: none !important;
+  }
+  .sn-brand:hover { transform: none; }
 }

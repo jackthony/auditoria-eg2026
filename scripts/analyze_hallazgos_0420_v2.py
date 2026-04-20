@@ -18,9 +18,9 @@ DB = "reports/hallazgos_20260420/eg2026.duckdb"
 OUT = Path("reports/hallazgos_20260420")
 con = duckdb.connect(DB)
 
-# Marcar caveat: 3 prefijos con ratio>1.05 = Tumbes/Moquegua/Madre de Dios
-# + 4 prefijos NO_IDENTIFICADO (prefix 16, 91, 93, 95)
-SOSPECHOSOS = ("Tumbes", "Moquegua", "Madre de Dios")
+# Universo v2 (post walker fix 2026-04-20): 92,766 mesas (88,063 normales +
+# 4,703 especiales 900k+). Captura 100% vs ONPE oficial en los 26 deptos.
+SOSPECHOSOS: tuple[str, ...] = ()
 
 total_mesas = con.execute("SELECT COUNT(*) FROM mesa").fetchone()[0]
 global_imp_pct = con.execute(

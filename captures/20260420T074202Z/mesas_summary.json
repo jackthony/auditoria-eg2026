@@ -1,0 +1,14 @@
+{
+  "ts": "20260420T074202Z",
+  "range": [
+    900001,
+    904703
+  ],
+  "concurrency": 50,
+  "ok": 4703,
+  "skipped": 0,
+  "empty": 0,
+  "errors": 0,
+  "throttled": 0,
+  "elapsed_s": 46.9
+}

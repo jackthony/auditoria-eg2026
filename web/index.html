@@ -316,44 +316,6 @@ footer .mono { font-family: 'Courier New', monospace; font-size: 12px; word-brea
   }
 })();
 
-(function(){
-  const s = document.createElement('style');
-  s.textContent = `
-    .share-fab{position:fixed;right:20px;bottom:20px;z-index:200;background:#0e0d0c;color:#fff;border:0;border-radius:999px;padding:12px 20px;font-weight:600;font-size:14px;cursor:pointer;box-shadow:0 8px 24px rgba(0,0,0,.25);display:inline-flex;gap:8px;align-items:center}
-    .share-fab:hover{background:#b0171f}
-    .share-menu{position:fixed;right:20px;bottom:72px;z-index:200;background:#fff;border:1px solid rgba(0,0,0,.1);border-radius:10px;padding:6px;box-shadow:0 16px 40px rgba(0,0,0,.15);display:none;min-width:200px}
-    .share-menu.open{display:flex;flex-direction:column}
-    .share-menu a{padding:10px 14px;text-decoration:none;color:#0e0d0c;font-size:14px;border-radius:6px;display:flex;gap:10px;align-items:center}
-    .share-menu a:hover{background:rgba(176,23,31,.08);color:#b0171f}
-  `;
-  document.head.appendChild(s);
-  const fab = document.createElement('button');
-  fab.className = 'share-fab';
-  fab.innerHTML = '🔗 Compartir';
-  const menu = document.createElement('div');
-  menu.className = 'share-menu';
-  menu.innerHTML = '<a href="#" data-ch="x">𝕏 Compartir en X</a><a href="#" data-ch="wa">💬 WhatsApp</a><a href="#" data-ch="tg">✈️ Telegram</a><a href="#" data-ch="copy">🔗 Copiar link</a>';
-  document.body.appendChild(fab); document.body.appendChild(menu);
-  const url = (document.querySelector('link[rel="canonical"]') || {}).href || location.href;
-  const text = 'Auditoría EG2026 Perú: análisis forense del escrutinio ONPE. Datos públicos, código abierto, SHA-256 reproducible.';
-  const full = text + ' ' + url;
-  fab.addEventListener('click', async (e) => {
-    e.preventDefault();
-    if (navigator.share) { try { await navigator.share({title:'Auditoría EG2026', text, url}); return; } catch(_){} }
-    menu.classList.toggle('open');
-  });
-  document.addEventListener('click', (e) => { if (!menu.contains(e.target) && !fab.contains(e.target)) menu.classList.remove('open'); });
-  menu.querySelectorAll('a').forEach(a => a.addEventListener('click', async (e) => {
-    e.preventDefault();
-    const enc = encodeURIComponent, ch = a.dataset.ch;
-    let t = '';
-    if (ch === 'x') t = `https://twitter.com/intent/tweet?text=${enc(text)}&url=${enc(url)}`;
-    if (ch === 'wa') t = `https://wa.me/?text=${enc(full)}`;
-    if (ch === 'tg') t = `https://t.me/share/url?url=${enc(url)}&text=${enc(text)}`;
-    if (ch === 'copy') { try { await navigator.clipboard.writeText(full); a.textContent='✅ Copiado'; setTimeout(()=>{a.textContent='🔗 Copiar link';},1500);} catch(_){} return; }
-    window.open(t, '_blank', 'noopener'); menu.classList.remove('open');
-  }));
-})();
 </script>
 
 </body>
