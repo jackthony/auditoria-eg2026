@@ -26,7 +26,7 @@ formal a ONPE y JEE.
 
 ## Contexto
 
-- Margen Sánchez−RLA al 93.17%: **+5,875 votos**.
+- Margen Sánchez−RLA al corte 93.474%: **+13,624 votos** (histórico 93.17%: +5,875).
 - Separación 3º–4º puesto: **<0.04 puntos porcentuales**.
 - Actas aún en JEE (pendientes): **5,555**.
 - Electores que no pudieron votar en Lima el 12-abril por fallas CALAG:
@@ -64,7 +64,7 @@ que el sistema de ONPE tiene integridad de agregación débil.
 votar en Lima. Proveedor contratado vía mecanismo excepcional fuera de la
 Ley de Contrataciones.
 
-**Ratio clave (corte 93.474% al 2026-04-18):** 63,300 afectados / 13,624 margen = **4.64×**. El número
+**Ratio clave (corte 93.474% al 2026-04-18):** 63,300 afectados / 13,624 margen = **4.65×**. El número
 oficial de afectados supera en 4.64 veces al margen que define la elección.
 *Margen vivo en `data/processed/meta.json`; valor histórico al 93.17%: 5,898 (ratio 10.73×).*
 
@@ -122,7 +122,7 @@ Requiere explicación formal de JEE.
 Modelo bayesiano Dirichlet-Multinomial + Beta prior sobre JEE, 10,000
 simulaciones:
 
-- **P(RLA supera a Sánchez) = 42.3% (central) / 43.2% (mixto)**.
+- **P(RLA supera a Sánchez) = 26.9% (central) / 28.9% (mixto)** al corte vigente (histórico 93.17%: 42.3%/43.2%).
 
 Esto significa: **estamos en empate estadístico**. La distribución de
 resultados finales es bimodal — hay probabilidad relevante en ambos

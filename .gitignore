@@ -28,6 +28,12 @@ htmlcov/
 .idea/
 *.swp
 *.swo
+
+# ──────────────────────────────────────────────────────────────
+# Claude Code runtime
+# ──────────────────────────────────────────────────────────────
+.claude/scheduled_tasks.lock
+.claude/worktrees/
 .DS_Store
 Thumbs.db
 

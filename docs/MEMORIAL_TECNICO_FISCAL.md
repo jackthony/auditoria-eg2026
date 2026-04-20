@@ -103,10 +103,10 @@ Aplicación del modelo estándar de election-night forecasting (Dirichlet-Multin
 
 | Escenario | Tasa integración JEE | P(RLA supera Sánchez) | Margen p50 |
 |-----------|----------------------|-------------------------|------------|
-| Pesimista (anti-Sánchez) | 29% | **37.0%** | +5,338 |
-| Central | 50% | **42.6%** | +2,737 |
-| Optimista (pro-Sánchez) | 71% | **49.2%** | +300 |
-| Mixto (máx. incertidumbre) | — | **42.2%** | — |
+| Pesimista (anti-Sánchez) | 29% | **21.6%** | +12,042 |
+| Central | 50% | **26.9%** | +8,606 |
+| Optimista (pro-Sánchez) | 71% | **35.5%** | +5,159 |
+| Mixto (máx. incertidumbre) | — | **28.9%** | — |
 
 Conclusión técnica: **empate estadístico**. La resolución del JEE no es un detalle administrativo — **es la variable que define el resultado**.
 
@@ -127,7 +127,7 @@ Al snapshot **2026-04-17T08:41:14Z (corte 93.17%)**, el endpoint público de ONP
 | enviadasJee | 5,555 | 5,538 | −17 |
 | pendientesJee | 773 | 794 | +21 |
 
-**Métrica consolidada (post red-team metodológico):** `actas_movidas = max(|diff|) = 21`. Es el mínimo número de actas que deben reclasificarse entre categorías para que la vista nacional reconcilie con la vista regional. Con votos promedio por acta ≈ 218, el **universo de votos en zona gris ≈ 4,582 (ratio 0.78× el margen Sánchez−RLA de 5,875)**.
+**Métrica consolidada (post red-team metodológico):** `actas_movidas = max(|diff|) = 21`. Es el mínimo número de actas que deben reclasificarse entre categorías para que la vista nacional reconcilie con la vista regional. Con votos promedio por acta ≈ 218, el **universo de votos en zona gris ≈ 4,582 (ratio 0.34× el margen Sánchez−RLA vigente de 13,624; histórico al 93.17%: 0.78× del margen 5,875)**.
 
 **Interpretación honesta:** este hecho **NO prueba error en el conteo de votos**. Prueba que la **agregación del agregador público de ONPE** (UI/API) no es internamente consistente al mismo timestamp. El autor ciudadano que reportó originalmente el hecho hizo el salto lógico "vista incoherente = conteo incorrecto"; ese salto no se sostiene técnicamente. Pero la inconsistencia del agregador oficial sí requiere **explicación formal** (timestamp desalineado entre endpoints, categoría no reflejada en desagregado, o actas migrando de estado durante el cálculo del snapshot). El **test es reproducible** por cualquier tercero contra cualquier snapshot horario en `captures/`.
 
@@ -140,9 +140,9 @@ Datos **oficiales de ONPE** sobre las fallas del proveedor CALAG / Servicios Gen
 - **Electores oficialmente impedidos de votar:** **63,300**.
 - **Margen final Sánchez − López Aliaga (corte 93.474% al 2026-04-18):** 13,624. *(Valor vivo: `data/processed/meta.json` → `margen_sanch_rla_votos`.)*
 
-**Ratio: 63,300 / 13,624 ≈ 4.64×** al corte vigente. El universo de electores afectados por una falla operativa contratada bajo mecanismo excepcional (fuera del régimen ordinario de la Ley de Contrataciones) supera en **4.64 veces** el margen que define el pase a segunda vuelta.
+**Ratio: 63,300 / 13,624 ≈ 4.65×** al corte vigente. El universo de electores afectados por una falla operativa contratada bajo mecanismo excepcional (fuera del régimen ordinario de la Ley de Contrataciones) supera en **4.65 veces** el margen que define el pase a segunda vuelta.
 
-**Marco jurídico directamente aplicable:** **Artículo 363° de la Ley 26859** (Ley Orgánica de Elecciones) — nulidad parcial cuando concurra un evento que *podría* haber alterado el resultado. El estándar del Art. 363 **no exige probar alteración**, sino acreditar que el evento **tuvo magnitud suficiente** para haberla causado. Un ratio ≥ 1× ya satisface ese umbral; 4.64× lo supera por varios múltiplos.
+**Marco jurídico directamente aplicable:** **Artículo 363° de la Ley 26859** (Ley Orgánica de Elecciones) — nulidad parcial cuando concurra un evento que *podría* haber alterado el resultado. El estándar del Art. 363 **no exige probar alteración**, sino acreditar que el evento **tuvo magnitud suficiente** para haberla causado. Un ratio ≥ 1× ya satisface ese umbral; 4.65× lo supera por varios múltiplos.
 
 Este hecho, combinado con la discrepancia institucional del Hecho 7 (CALAG ↔ ONPE), configura el núcleo de materia que debe conocer el JEE / JNE para resolver la validez del resultado en Lima.
 
