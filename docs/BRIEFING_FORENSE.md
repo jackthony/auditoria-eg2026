@@ -17,18 +17,18 @@ Transferir al perito forense el estado actual de la auditoría técnico-estadís
 
 ---
 
-## 2. Estado al corte 2026-04-17 08:41 UTC
+## 2. Estado al corte 2026-04-18
 
 | Indicador | Valor |
 |---|---|
-| Escrutinio oficial ONPE | ~93.12% |
-| Margen Sánchez − RLA | +5,392 (era +5,898 en corte 92.91%) |
-| Actas impugnadas (JEE) | 5,554 (5.99%) |
-| Actas pendientes | 780 |
+| Escrutinio oficial ONPE | 93.474% |
+| Margen Sánchez − RLA | **+13,624** (histórico 93.17%: +5,875) |
+| Actas impugnadas (JEE) | 5,555 (5.99%) |
+| Actas pendientes | 773 |
 | Solicitudes de nulidad | 98 |
 | Runoff programado | 2026-06-07 |
 
-**Tendencia:** margen cayendo (30k → 7k → 5.4k). RLA recortando.
+**Tendencia:** margen se recompuso del mínimo histórico (5,392) tras integrar actas. Valor vivo en `data/processed/meta.json`.
 
 ---
 

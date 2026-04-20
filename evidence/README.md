@@ -1,8 +1,10 @@
 # evidence/
 
 Carpeta para evidencias complementarias al análisis cuantitativo.
+Subcarpetas se crean on-demand cuando llega el primer archivo real
+(las pobla un agente dedicado, no se mantienen vacías en repo).
 
-## Subcarpetas
+## Subcarpetas sugeridas (crear al subir primer archivo)
 
 ### `legal_references/`
 Copias locales de los textos normativos citados en el informe.

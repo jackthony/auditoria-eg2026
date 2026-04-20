@@ -43,13 +43,13 @@ jobs:
         run: python src/capture/verify_manifest.py captures/${{ steps.cap.outputs.ts }}
 
       - name: Reconcile endpoints
-        run: python src/analysis/reconcile_endpoints.py captures/${{ steps.cap.outputs.ts }} || true
+        run: python src/analysis/reconcile_endpoints.py captures/${{ steps.cap.outputs.ts }}
 
       - name: Build dataset + analyze + dashboard
         run: |
-          python make.py build || true
-          python make.py analyze || true
-          python scripts/build_dashboard_json.py || true
+          python make.py build
+          python make.py analyze
+          python scripts/build_dashboard_json.py
 
       - name: IPFS pin (Web3.Storage) — opcional
         if: env.W3S_TOKEN != ''

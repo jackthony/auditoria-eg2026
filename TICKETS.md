@@ -16,6 +16,7 @@ Marcar `[x]` al completar. `/ecc:plan <ID>` para iniciar.
 - [ ] **BRAND-02** · Rehacer `web/index.html` (949 L monolito AI-looking) heredando `brand.css`. Conservar 4 tabs y funcionalidad (mapa Leaflet, slider diff, slider JEE, findings search, share, hash). Eliminar toggle EN, badge "EN VIVO" pulsante, alertas genéricas. · 6 h · Tony
 - [ ] **BRAND-03** · Landing `/` narrativa tipo `historia/` con CTAs a `/dashboard`, `/chat`, `/historia`, memorial PDF. · 2 h · Tony
 - [ ] **BRAND-04** · OG image unificada (estilo Fraunces+paper+blood), hero "4.703 mesas no aparecen · 2° puesto cambia". Regenerar `build_og_image.py`. · 1 h · Tony
+- [ ] **BRAND-05** · DNS pendiente Tony: en registrar de `neuracode.dev` agregar `CNAME audit → jackthony.github.io` (proxy OFF). Luego repo Settings → Pages → Custom domain `audit.neuracode.dev` + Enforce HTTPS. `web/CNAME` ya commiteado. · 15 min · Tony
 
 ## ✅ Sprint 1 — Quick wins (COMPLETO 2026-04-19)
 

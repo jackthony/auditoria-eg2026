@@ -1,0 +1,155 @@
+/* Neuracode · auditoria-eg2026 · brand tokens (flagship: chat+historia). Autoridad: Jack Aguilar. */
+
+@import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,700;9..144,900&family=Caveat:wght@500;700&family=Inter:wght@400;500;600;700&display=swap');
+
+:root {
+  /* Color · paper/ink/blood (canonical flagship palette) */
+  --color-ink: #111b21;
+  --color-ink-pure: #111111;
+  --color-paper: #faf7f2;
+  --color-blood: #b0171f;
+  --color-muted: #667781;
+  --color-muted-soft: #6b6b6b;
+
+  /* Color · chat (WhatsApp-inspired) */
+  --color-bubble-me: #d9fdd3;
+  --color-bubble-me-dark: #005c4b;
+  --color-bubble-them: #ffffff;
+  --color-bg-chat: #efeae2;
+  --color-wa-green: #00a884;
+  --color-wa-teal: #008069;
+  --color-wa-header: #ffffff;
+  --color-read: #53bdeb;
+  --color-sent: #8696a0;
+
+  /* Color · accents historia */
+  --color-ipsos: #0f766e;
+  --color-datum: #1e40af;
+  --color-dim: #888;
+
+  /* Fonts */
+  --font-serif: 'Fraunces', Georgia, serif;
+  --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --font-hand: 'Caveat', cursive;
+  --font-mono: 'Menlo', 'Consolas', monospace;
+
+  /* Type scale */
+  --text-xs: 11px;
+  --text-sm: 13px;
+  --text-base: 15px;
+  --text-md: 16px;
+  --text-lg: 18px;
+  --text-xl: 22px;
+  --text-2xl: 26px;
+  --text-h3: clamp(22px, 3vw, 32px);
+  --text-h2: clamp(32px, 5vw, 64px);
+  --text-h1: clamp(42px, 7vw, 88px);
+  --text-big: clamp(80px, 14vw, 180px);
+  --text-huge: clamp(120px, 20vw, 260px);
+
+  /* Spacing */
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 24px;
+  --space-6: 32px;
+  --space-7: 48px;
+  --space-8: 64px;
+
+  /* Radius */
+  --radius-sm: 6px;
+  --radius-md: 8px;
+  --radius-lg: 14px;
+  --radius-pill: 999px;
+
+  /* Shadow */
+  --shadow-sm: 0 2px 6px rgba(0,0,0,.08);
+  --shadow-md: 0 6px 20px rgba(0,168,132,.3);
+  --shadow-blood: 0 0 8px rgba(176,23,31,.6);
+}
+
+/* Editorial paper style: fixed light palette. No dark-mode flip.
+   Dark mode via explicit opt-in (.theme-dark on <html>) si se requiere. */
+
+/* ═══ BASE ═══ */
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--color-paper);
+  color: var(--color-ink);
+  font-family: var(--font-sans);
+  font-size: var(--text-lg);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+h1, h2, h3 {
+  font-family: var(--font-serif);
+  font-weight: 900;
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+  color: var(--color-ink);
+}
+h1 { font-size: var(--text-h1); }
+h2 { font-size: var(--text-h2); margin-bottom: var(--space-6); }
+h3 { font-size: var(--text-h3); font-weight: 700; }
+
+p {
+  font-family: var(--font-sans);
+  font-size: var(--text-lg);
+  line-height: 1.6;
+  color: var(--color-ink);
+}
+
+.lead {
+  font-family: var(--font-serif);
+  font-size: var(--text-h3);
+  font-style: italic;
+  font-weight: 400;
+  color: var(--color-ink);
+  max-width: 700px;
+}
+
+a {
+  color: var(--color-blood);
+  text-decoration: none;
+  transition: opacity .2s ease;
+}
+a:hover { opacity: .75; text-decoration: underline; }
+
+blockquote {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: var(--text-xl);
+  border-left: 3px solid var(--color-blood);
+  padding-left: var(--space-4);
+  color: var(--color-muted-soft);
+  margin: var(--space-5) 0;
+}
+
+.handwrite, .kicker, .cta-sub {
+  font-family: var(--font-hand);
+  color: var(--color-blood);
+  font-size: var(--text-2xl);
+}
+
+.btn {
+  display: inline-block;
+  background: var(--color-ink);
+  color: var(--color-paper);
+  padding: 18px 36px;
+  font-family: var(--font-sans);
+  font-weight: 600;
+  font-size: var(--text-md);
+  letter-spacing: .5px;
+  text-decoration: none;
+  border: 0;
+  border-radius: 0;
+  cursor: pointer;
+  transition: background .3s;
+}
+.btn:hover { background: var(--color-blood); opacity: 1; text-decoration: none; }
+.btn--pill { border-radius: var(--radius-pill); padding: 12px 28px; }
