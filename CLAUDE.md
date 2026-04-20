@@ -129,6 +129,10 @@ Mapa hooks → skills en `.claude/settings.json`. SessionStart lee `MEMORY.md` +
 
 ## Pointers
 
+- **Hallazgos vigentes** → `HALLAZGOS_VIGENTES.md` (leer antes de afirmar rankings/%)
+- **Findings consolidado** → `reports/hallazgos_20260420/findings_consolidado_0420.json`
+- **Findings maestro** → `reports/findings.json`
+- **DB autoritativa** → `reports/hallazgos_20260420/eg2026.duckdb` (rebuild: `python scripts/build_duckdb_and_fix.py`)
 - **Tickets vivos** → `TICKETS.md`
 - **Metodología forense** → `METHODOLOGY.md`
 - **Cadena de custodia** → `CHAIN_OF_CUSTODY.md`

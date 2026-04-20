@@ -1,0 +1,292 @@
+{
+  "extranjero_por_subprefix": [
+    {
+      "prefix": "92",
+      "mesas": 1570,
+      "imp": "423",
+      "pct_imp": 26.94
+    },
+    {
+      "prefix": "94",
+      "mesas": 839,
+      "imp": "224",
+      "pct_imp": 26.7
+    },
+    {
+      "prefix": "93",
+      "mesas": 107,
+      "imp": "21",
+      "pct_imp": 19.63
+    },
+    {
+      "prefix": "95",
+      "mesas": 21,
+      "imp": "2",
+      "pct_imp": 9.52
+    },
+    {
+      "prefix": "91",
+      "mesas": 6,
+      "imp": "0",
+      "pct_imp": 0.0
+    }
+  ],
+  "extranjero_top_locales": [
+    {
+      "local_votacion": "COMPLEJO DEPORTIVO BERBÉS",
+      "mesas": 11,
+      "imp": "11",
+      "pct_imp": 100.0
+    },
+    {
+      "local_votacion": "ESCUELA Nº 615 “REPÚBLICA DEL PERÚ”",
+      "mesas": 8,
+      "imp": "6",
+      "pct_imp": 75.0
+    },
+    {
+      "local_votacion": "CONSULADO GENERAL DEL PERÚ EN FRANKFURT",
+      "mesas": 5,
+      "imp": "3",
+      "pct_imp": 60.0
+    },
+    {
+      "local_votacion": "CENTRO CAPITALINAS",
+      "mesas": 27,
+      "imp": "15",
+      "pct_imp": 55.56
+    },
+    {
+      "local_votacion": "PLAYA DE ESTACIONAMIENTO ECOPARKING",
+      "mesas": 11,
+      "imp": "6",
+      "pct_imp": 54.55
+    },
+    {
+      "local_votacion": "ESCUELA LIBERTADOR BERNARDO O'HIGGINS",
+      "mesas": 8,
+      "imp": "4",
+      "pct_imp": 50.0
+    },
+    {
+      "local_votacion": "ESCUELA Nº 11 D.E. 1 - COCHABAMBA 2830",
+      "mesas": 37,
+      "imp": "18",
+      "pct_imp": 48.65
+    },
+    {
+      "local_votacion": "PORTO ANTICO DI GENOVA - CENTRO CONGRESSI",
+      "mesas": 13,
+      "imp": "6",
+      "pct_imp": 46.15
+    },
+    {
+      "local_votacion": "LICEO \"LIBERTADOR GENERAL BERNARDO O'HIGGINS RIQUELME\"",
+      "mesas": 24,
+      "imp": "11",
+      "pct_imp": 45.83
+    },
+    {
+      "local_votacion": "COLEGIO SAGRADO CORAZÓN DE JESÚS",
+      "mesas": 25,
+      "imp": "11",
+      "pct_imp": 44.0
+    },
+    {
+      "local_votacion": "CANVAS EVENT VENUE",
+      "mesas": 21,
+      "imp": "9",
+      "pct_imp": 42.86
+    },
+    {
+      "local_votacion": "COLEGIO JUAN NEPOMUCENO ROJAS DE SEVILLA",
+      "mesas": 14,
+      "imp": "6",
+      "pct_imp": 42.86
+    },
+    {
+      "local_votacion": "CENTRO SOCIAL “CASAL DE BARRI S'ESCORXADOR”",
+      "mesas": 7,
+      "imp": "3",
+      "pct_imp": 42.86
+    },
+    {
+      "local_votacion": "ESCUELA Nº 08 - TALCAHUANO 680",
+      "mesas": 37,
+      "imp": "15",
+      "pct_imp": 40.54
+    },
+    {
+      "local_votacion": "FEDERACIÓN MENDOCINA DE BOX",
+      "mesas": 10,
+      "imp": "4",
+      "pct_imp": 40.0
+    }
+  ],
+  "locales_100pct_impugnados": [
+    {
+      "local_votacion": "COMPLEJO DEPORTIVO BERBÉS",
+      "depto_real": "Extranjero",
+      "mesas": 11
+    },
+    {
+      "local_votacion": "IE NUESTRO SEÑOR DE LOCUMBA",
+      "depto_real": "Tacna",
+      "mesas": 3
+    },
+    {
+      "local_votacion": "IE APARICIO POMARES HILARIO",
+      "depto_real": "Huánuco",
+      "mesas": 3
+    },
+    {
+      "local_votacion": "IE PRIMARIA 16255",
+      "depto_real": "Amazonas",
+      "mesas": 3
+    },
+    {
+      "local_votacion": "CONSULADO DEL PERÚ EN SALTA",
+      "depto_real": "Extranjero",
+      "mesas": 3
+    }
+  ],
+  "universo_locales_3mas": 7314,
+  "selva_breakdown": [
+    {
+      "depto_real": "Extranjero",
+      "locales": 208,
+      "mesas": 2543,
+      "imp": "670",
+      "pct_imp": 26.35,
+      "avg_electores": 476.0
+    },
+    {
+      "depto_real": "Loreto",
+      "locales": 237,
+      "mesas": 2398,
+      "imp": "367",
+      "pct_imp": 15.3,
+      "avg_electores": 294.0
+    },
+    {
+      "depto_real": "Ucayali",
+      "locales": 116,
+      "mesas": 1487,
+      "imp": "178",
+      "pct_imp": 11.97,
+      "avg_electores": 293.0
+    },
+    {
+      "depto_real": "Madre de Dios",
+      "locales": 39,
+      "mesas": 473,
+      "imp": "51",
+      "pct_imp": 10.78,
+      "avg_electores": 294.0
+    },
+    {
+      "depto_real": "San Martín",
+      "locales": 230,
+      "mesas": 2297,
+      "imp": "145",
+      "pct_imp": 6.31,
+      "avg_electores": 289.0
+    },
+    {
+      "depto_real": "Amazonas",
+      "locales": 149,
+      "mesas": 1039,
+      "imp": "65",
+      "pct_imp": 6.26,
+      "avg_electores": 281.0
+    }
+  ],
+  "size_i_vs_d_global": [
+    {
+      "estado_acta": "D",
+      "n": 82263,
+      "avg_electores": 296.2,
+      "avg_emitidos": 220.2,
+      "avg_pct_part": 74.73
+    },
+    {
+      "estado_acta": "I",
+      "n": 5419,
+      "avg_electores": 316.6,
+      "avg_emitidos": 234.5,
+      "avg_pct_part": 0.06
+    }
+  ],
+  "size_i_vs_d_selva": [
+    {
+      "depto_real": "Extranjero",
+      "estado_acta": "D",
+      "n": 1739,
+      "avg_electores": 474.0,
+      "avg_pct_part": 33.59
+    },
+    {
+      "depto_real": "Extranjero",
+      "estado_acta": "I",
+      "n": 670,
+      "avg_electores": 487.0,
+      "avg_pct_part": 0.0
+    },
+    {
+      "depto_real": "Loreto",
+      "estado_acta": "D",
+      "n": 2017,
+      "avg_electores": 294.0,
+      "avg_pct_part": 58.54
+    },
+    {
+      "depto_real": "Loreto",
+      "estado_acta": "I",
+      "n": 367,
+      "avg_electores": 294.0,
+      "avg_pct_part": 0.0
+    },
+    {
+      "depto_real": "Madre de Dios",
+      "estado_acta": "D",
+      "n": 422,
+      "avg_electores": 294.0,
+      "avg_pct_part": 70.43
+    },
+    {
+      "depto_real": "Madre de Dios",
+      "estado_acta": "I",
+      "n": 51,
+      "avg_electores": 293.0,
+      "avg_pct_part": 0.0
+    },
+    {
+      "depto_real": "San Martín",
+      "estado_acta": "D",
+      "n": 2152,
+      "avg_electores": 289.0,
+      "avg_pct_part": 73.09
+    },
+    {
+      "depto_real": "San Martín",
+      "estado_acta": "I",
+      "n": 145,
+      "avg_electores": 290.0,
+      "avg_pct_part": 0.0
+    },
+    {
+      "depto_real": "Ucayali",
+      "estado_acta": "D",
+      "n": 1309,
+      "avg_electores": 293.0,
+      "avg_pct_part": 66.89
+    },
+    {
+      "depto_real": "Ucayali",
+      "estado_acta": "I",
+      "n": 178,
+      "avg_electores": 294.0,
+      "avg_pct_part": 0.0
+    }
+  ]
+}

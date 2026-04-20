@@ -50,6 +50,14 @@ reports/findings.json
 reports/impugnadas_por_region.csv
 reports/serie_temporal.csv
 
+# HuggingFace dataset (419MB, vive en HF — regenerable con build_hf_dataset.py)
+reports/hf_dataset/*.parquet
+reports/hf_dataset/*.csv
+
+# DuckDB regenerable (99MB) — rebuild con scripts/build_duckdb_and_fix.py
+reports/hallazgos_*/eg2026.duckdb
+reports/hallazgos_*/eg2026.duckdb.wal
+
 # Excepciones: mantenemos los README que documentan la carpeta
 !data/processed/.gitkeep
 !reports/figures/.gitkeep

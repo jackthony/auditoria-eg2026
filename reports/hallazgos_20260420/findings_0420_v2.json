@@ -1,0 +1,644 @@
+{
+  "meta": {
+    "fecha": "2026-04-20",
+    "db": "reports/hallazgos_20260420/eg2026.duckdb",
+    "total_mesas": 88063,
+    "tasa_global_impugnadas_pct": 6.154,
+    "caveat_deptos_sospechosos": [
+      "Tumbes",
+      "Moquegua",
+      "Madre de Dios"
+    ]
+  },
+  "geo_bias": [
+    {
+      "depto_real": "Extranjero",
+      "total": 2543,
+      "imp": "670",
+      "pct_imp": 26.35,
+      "z_score": 42.37
+    },
+    {
+      "depto_real": "Loreto",
+      "total": 2398,
+      "imp": "367",
+      "pct_imp": 15.3,
+      "z_score": 18.65
+    },
+    {
+      "depto_real": "Ucayali",
+      "total": 1487,
+      "imp": "178",
+      "pct_imp": 11.97,
+      "z_score": 9.33
+    },
+    {
+      "depto_real": "Madre de Dios",
+      "total": 473,
+      "imp": "51",
+      "pct_imp": 10.78,
+      "z_score": 4.19
+    },
+    {
+      "depto_real": "Ica",
+      "total": 2436,
+      "imp": "230",
+      "pct_imp": 9.44,
+      "z_score": 6.75
+    },
+    {
+      "depto_real": "Tumbes",
+      "total": 626,
+      "imp": "59",
+      "pct_imp": 9.42,
+      "z_score": 3.41
+    },
+    {
+      "depto_real": "Huánuco",
+      "total": 2051,
+      "imp": "183",
+      "pct_imp": 8.92,
+      "z_score": 5.22
+    },
+    {
+      "depto_real": "Piura",
+      "total": 4910,
+      "imp": "398",
+      "pct_imp": 8.11,
+      "z_score": 5.69
+    },
+    {
+      "depto_real": "Áncash",
+      "total": 3060,
+      "imp": "231",
+      "pct_imp": 7.55,
+      "z_score": 3.21
+    },
+    {
+      "depto_real": "La Libertad",
+      "total": 5094,
+      "imp": "367",
+      "pct_imp": 7.2,
+      "z_score": 3.12
+    },
+    {
+      "depto_real": "Pasco",
+      "total": 760,
+      "imp": "51",
+      "pct_imp": 6.71,
+      "z_score": 0.64
+    },
+    {
+      "depto_real": "San Martín",
+      "total": 2297,
+      "imp": "145",
+      "pct_imp": 6.31,
+      "z_score": 0.32
+    },
+    {
+      "depto_real": "Amazonas",
+      "total": 1039,
+      "imp": "65",
+      "pct_imp": 6.26,
+      "z_score": 0.14
+    },
+    {
+      "depto_real": "Cajamarca",
+      "total": 3604,
+      "imp": "194",
+      "pct_imp": 5.38,
+      "z_score": -1.93
+    },
+    {
+      "depto_real": "Huancavelica",
+      "total": 1038,
+      "imp": "55",
+      "pct_imp": 5.3,
+      "z_score": -1.15
+    },
+    {
+      "depto_real": "Tacna",
+      "total": 1023,
+      "imp": "52",
+      "pct_imp": 5.08,
+      "z_score": -1.42
+    },
+    {
+      "depto_real": "Ayacucho",
+      "total": 1685,
+      "imp": "83",
+      "pct_imp": 4.93,
+      "z_score": -2.1
+    },
+    {
+      "depto_real": "Moquegua",
+      "total": 564,
+      "imp": "27",
+      "pct_imp": 4.79,
+      "z_score": -1.35
+    },
+    {
+      "depto_real": "Lambayeque",
+      "total": 3400,
+      "imp": "154",
+      "pct_imp": 4.53,
+      "z_score": -3.94
+    },
+    {
+      "depto_real": "Callao",
+      "total": 2898,
+      "imp": "126",
+      "pct_imp": 4.35,
+      "z_score": -4.05
+    },
+    {
+      "depto_real": "Lima",
+      "total": 29008,
+      "imp": "1250",
+      "pct_imp": 4.31,
+      "z_score": -13.07
+    },
+    {
+      "depto_real": "Apurímac",
+      "total": 1163,
+      "imp": "43",
+      "pct_imp": 3.7,
+      "z_score": -3.49
+    },
+    {
+      "depto_real": "Cusco",
+      "total": 3730,
+      "imp": "137",
+      "pct_imp": 3.67,
+      "z_score": -6.3
+    },
+    {
+      "depto_real": "Junín",
+      "total": 3497,
+      "imp": "123",
+      "pct_imp": 3.52,
+      "z_score": -6.49
+    },
+    {
+      "depto_real": "Puno",
+      "total": 3108,
+      "imp": "92",
+      "pct_imp": 2.96,
+      "z_score": -7.41
+    },
+    {
+      "depto_real": "Arequipa",
+      "total": 4171,
+      "imp": "88",
+      "pct_imp": 2.11,
+      "z_score": -10.87
+    }
+  ],
+  "partido_vs_imp_top": [
+    {
+      "partido": "FUERZA POPULAR",
+      "ALTO": 18.42,
+      "BAJO": 16.23,
+      "delta_pp": 2.19
+    },
+    {
+      "partido": "JUNTOS POR EL PERÚ",
+      "ALTO": 14.256,
+      "BAJO": 13.388,
+      "delta_pp": 0.868
+    },
+    {
+      "partido": "PARTIDO PAÍS PARA TODOS",
+      "ALTO": 8.06,
+      "BAJO": 7.449,
+      "delta_pp": 0.611
+    },
+    {
+      "partido": "ALIANZA PARA EL PROGRESO",
+      "ALTO": 1.424,
+      "BAJO": 1.062,
+      "delta_pp": 0.362
+    },
+    {
+      "partido": "UN CAMINO DIFERENTE",
+      "ALTO": 0.94,
+      "BAJO": 0.591,
+      "delta_pp": 0.349
+    },
+    {
+      "partido": "PARTIDO DEMOCRÁTICO SOMOS PERÚ",
+      "ALTO": 1.126,
+      "BAJO": 0.817,
+      "delta_pp": 0.309
+    },
+    {
+      "partido": "PODEMOS PERÚ",
+      "ALTO": 1.88,
+      "BAJO": 1.603,
+      "delta_pp": 0.277
+    },
+    {
+      "partido": "PARTIDO APRISTA PERUANO",
+      "ALTO": 1.009,
+      "BAJO": 0.903,
+      "delta_pp": 0.106
+    }
+  ],
+  "partido_vs_imp_bot": [
+    {
+      "partido": "PARTIDO FRENTE DE LA ESPERANZA 2021",
+      "ALTO": 1.742,
+      "BAJO": 1.961,
+      "delta_pp": -0.219
+    },
+    {
+      "partido": "PARTIDO POLÍTICO COOPERACIÓN POPULAR",
+      "ALTO": 1.253,
+      "BAJO": 1.589,
+      "delta_pp": -0.336
+    },
+    {
+      "partido": "PRIMERO LA GENTE – COMUNIDAD, ECOLOGÍA, LIBERTAD Y PROGRESO",
+      "ALTO": 2.989,
+      "BAJO": 3.326,
+      "delta_pp": -0.337
+    },
+    {
+      "partido": "PARTIDO SICREO",
+      "ALTO": 2.943,
+      "BAJO": 3.367,
+      "delta_pp": -0.424
+    },
+    {
+      "partido": "PARTIDO CÍVICO OBRAS",
+      "ALTO": 10.275,
+      "BAJO": 10.789,
+      "delta_pp": -0.514
+    },
+    {
+      "partido": "RENOVACIÓN POPULAR",
+      "ALTO": 10.026,
+      "BAJO": 10.751,
+      "delta_pp": -0.725
+    },
+    {
+      "partido": "AHORA NACIÓN - AN",
+      "ALTO": 6.888,
+      "BAJO": 7.842,
+      "delta_pp": -0.954
+    },
+    {
+      "partido": "PARTIDO DEL BUEN GOBIERNO",
+      "ALTO": 9.078,
+      "BAJO": 10.72,
+      "delta_pp": -1.642
+    }
+  ],
+  "nb_global_D": [
+    {
+      "pct_bl": 11.27,
+      "pct_nu": 4.89
+    }
+  ],
+  "nb_por_depto": [
+    {
+      "depto_real": "Piura",
+      "mesas": 4512,
+      "pct_blancos": 15.49,
+      "pct_nulos": 7.13
+    },
+    {
+      "depto_real": "San Martín",
+      "mesas": 2152,
+      "pct_blancos": 19.2,
+      "pct_nulos": 7.07
+    },
+    {
+      "depto_real": "Áncash",
+      "mesas": 2829,
+      "pct_blancos": 14.16,
+      "pct_nulos": 6.91
+    },
+    {
+      "depto_real": "Amazonas",
+      "mesas": 974,
+      "pct_blancos": 16.44,
+      "pct_nulos": 6.89
+    },
+    {
+      "depto_real": "Tumbes",
+      "mesas": 567,
+      "pct_blancos": 15.14,
+      "pct_nulos": 6.45
+    },
+    {
+      "depto_real": "Cajamarca",
+      "mesas": 3410,
+      "pct_blancos": 14.61,
+      "pct_nulos": 6.33
+    },
+    {
+      "depto_real": "La Libertad",
+      "mesas": 4727,
+      "pct_blancos": 13.25,
+      "pct_nulos": 6.05
+    },
+    {
+      "depto_real": "Lambayeque",
+      "mesas": 3246,
+      "pct_blancos": 11.82,
+      "pct_nulos": 5.97
+    },
+    {
+      "depto_real": "Cusco",
+      "mesas": 3560,
+      "pct_blancos": 11.34,
+      "pct_nulos": 5.65
+    },
+    {
+      "depto_real": "Loreto",
+      "mesas": 2017,
+      "pct_blancos": 17.53,
+      "pct_nulos": 5.58
+    },
+    {
+      "depto_real": "Ucayali",
+      "mesas": 1309,
+      "pct_blancos": 19.1,
+      "pct_nulos": 5.53
+    },
+    {
+      "depto_real": "Apurímac",
+      "mesas": 1120,
+      "pct_blancos": 15.02,
+      "pct_nulos": 5.41
+    },
+    {
+      "depto_real": "Pasco",
+      "mesas": 709,
+      "pct_blancos": 14.82,
+      "pct_nulos": 5.3
+    },
+    {
+      "depto_real": "Huánuco",
+      "mesas": 1860,
+      "pct_blancos": 15.81,
+      "pct_nulos": 5.24
+    },
+    {
+      "depto_real": "Junín",
+      "mesas": 3335,
+      "pct_blancos": 13.15,
+      "pct_nulos": 5.22
+    },
+    {
+      "depto_real": "Puno",
+      "mesas": 3013,
+      "pct_blancos": 9.86,
+      "pct_nulos": 5.13
+    },
+    {
+      "depto_real": "Huancavelica",
+      "mesas": 981,
+      "pct_blancos": 14.64,
+      "pct_nulos": 5.09
+    },
+    {
+      "depto_real": "Ayacucho",
+      "mesas": 1602,
+      "pct_blancos": 14.39,
+      "pct_nulos": 5.09
+    },
+    {
+      "depto_real": "Ica",
+      "mesas": 2206,
+      "pct_blancos": 12.2,
+      "pct_nulos": 4.88
+    },
+    {
+      "depto_real": "Extranjero",
+      "mesas": 1739,
+      "pct_blancos": 17.94,
+      "pct_nulos": 4.76
+    },
+    {
+      "depto_real": "Madre de Dios",
+      "mesas": 422,
+      "pct_blancos": 17.44,
+      "pct_nulos": 4.52
+    },
+    {
+      "depto_real": "Callao",
+      "mesas": 2764,
+      "pct_blancos": 9.31,
+      "pct_nulos": 4.36
+    },
+    {
+      "depto_real": "Moquegua",
+      "mesas": 537,
+      "pct_blancos": 9.03,
+      "pct_nulos": 3.91
+    },
+    {
+      "depto_real": "Arequipa",
+      "mesas": 4081,
+      "pct_blancos": 7.46,
+      "pct_nulos": 3.88
+    },
+    {
+      "depto_real": "Lima",
+      "mesas": 27620,
+      "pct_blancos": 8.0,
+      "pct_nulos": 3.69
+    },
+    {
+      "depto_real": "Tacna",
+      "mesas": 971,
+      "pct_blancos": 7.56,
+      "pct_nulos": 3.65
+    }
+  ],
+  "outliers_nb_top20": [
+    {
+      "codigo_mesa": "058680",
+      "depto_real": "Lima",
+      "votos_emitidos": 244,
+      "bl": "0",
+      "nu": "194",
+      "pct_bl": 0.0,
+      "pct_nu": 79.51
+    },
+    {
+      "codigo_mesa": "086018",
+      "depto_real": "Extranjero",
+      "votos_emitidos": 304,
+      "bl": "125",
+      "nu": "28",
+      "pct_bl": 41.12,
+      "pct_nu": 9.21
+    },
+    {
+      "codigo_mesa": "077586",
+      "depto_real": "San Martín",
+      "votos_emitidos": 229,
+      "bl": "71",
+      "nu": "82",
+      "pct_bl": 31.0,
+      "pct_nu": 35.81
+    },
+    {
+      "codigo_mesa": "086019",
+      "depto_real": "Extranjero",
+      "votos_emitidos": 303,
+      "bl": "136",
+      "nu": "15",
+      "pct_bl": 44.88,
+      "pct_nu": 4.95
+    },
+    {
+      "codigo_mesa": "079116",
+      "depto_real": "San Martín",
+      "votos_emitidos": 250,
+      "bl": "61",
+      "nu": "89",
+      "pct_bl": 24.4,
+      "pct_nu": 35.6
+    },
+    {
+      "codigo_mesa": "067073",
+      "depto_real": "Loreto",
+      "votos_emitidos": 161,
+      "bl": "107",
+      "nu": "41",
+      "pct_bl": 66.46,
+      "pct_nu": 25.47
+    },
+    {
+      "codigo_mesa": "086020",
+      "depto_real": "Extranjero",
+      "votos_emitidos": 311,
+      "bl": "100",
+      "nu": "48",
+      "pct_bl": 32.15,
+      "pct_nu": 15.43
+    },
+    {
+      "codigo_mesa": "070799",
+      "depto_real": "Piura",
+      "votos_emitidos": 230,
+      "bl": "76",
+      "nu": "71",
+      "pct_bl": 33.04,
+      "pct_nu": 30.87
+    },
+    {
+      "codigo_mesa": "085994",
+      "depto_real": "Extranjero",
+      "votos_emitidos": 306,
+      "bl": "127",
+      "nu": "15",
+      "pct_bl": 41.5,
+      "pct_nu": 4.9
+    },
+    {
+      "codigo_mesa": "086012",
+      "depto_real": "Extranjero",
+      "votos_emitidos": 299,
+      "bl": "118",
+      "nu": "20",
+      "pct_bl": 39.46,
+      "pct_nu": 6.69
+    },
+    {
+      "codigo_mesa": "086014",
+      "depto_real": "Extranjero",
+      "votos_emitidos": 317,
+      "bl": "120",
+      "nu": "17",
+      "pct_bl": 37.85,
+      "pct_nu": 5.36
+    },
+    {
+      "codigo_mesa": "072592",
+      "depto_real": "Piura",
+      "votos_emitidos": 253,
+      "bl": "48",
+      "nu": "89",
+      "pct_bl": 18.97,
+      "pct_nu": 35.18
+    },
+    {
+      "codigo_mesa": "072297",
+      "depto_real": "Piura",
+      "votos_emitidos": 243,
+      "bl": "33",
+      "nu": "103",
+      "pct_bl": 13.58,
+      "pct_nu": 42.39
+    },
+    {
+      "codigo_mesa": "070800",
+      "depto_real": "Piura",
+      "votos_emitidos": 233,
+      "bl": "72",
+      "nu": "60",
+      "pct_bl": 30.9,
+      "pct_nu": 25.75
+    },
+    {
+      "codigo_mesa": "070135",
+      "depto_real": "Piura",
+      "votos_emitidos": 235,
+      "bl": "33",
+      "nu": "99",
+      "pct_bl": 14.04,
+      "pct_nu": 42.13
+    },
+    {
+      "codigo_mesa": "085836",
+      "depto_real": "Extranjero",
+      "votos_emitidos": 238,
+      "bl": "124",
+      "nu": "8",
+      "pct_bl": 52.1,
+      "pct_nu": 3.36
+    },
+    {
+      "codigo_mesa": "086013",
+      "depto_real": "Extranjero",
+      "votos_emitidos": 315,
+      "bl": "13",
+      "nu": "118",
+      "pct_bl": 4.13,
+      "pct_nu": 37.46
+    },
+    {
+      "codigo_mesa": "042218",
+      "depto_real": "Lima",
+      "votos_emitidos": 253,
+      "bl": "0",
+      "nu": "131",
+      "pct_bl": 0.0,
+      "pct_nu": 51.78
+    },
+    {
+      "codigo_mesa": "025651",
+      "depto_real": "Junín",
+      "votos_emitidos": 226,
+      "bl": "27",
+      "nu": "103",
+      "pct_bl": 11.95,
+      "pct_nu": 45.58
+    },
+    {
+      "codigo_mesa": "077624",
+      "depto_real": "San Martín",
+      "votos_emitidos": 245,
+      "bl": "94",
+      "nu": "35",
+      "pct_bl": 38.37,
+      "pct_nu": 14.29
+    }
+  ],
+  "outliers_nb_total": 4091
+}

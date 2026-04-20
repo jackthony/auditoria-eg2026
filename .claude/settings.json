@@ -8,7 +8,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "printf 'ECC: arranca sesión en auditoria-eg2026.\\n  - Política: usa siempre el ciclo ECC (plan -> tdd -> code-review -> quality-gate -> verify -> e2e -> checkpoint -> save-session).\\n  - UX/UI: ver CLAUDE.md §UX_UI_BACKLOG. Ejecutar /ecc:plan al iniciar cualquier ticket UX.\\n  - Forense: ningún cambio toca captures/. Cualquier captura nueva = carpeta nueva con timestamp UTC y commit inmediato.\\n'"
+            "command": "bash -c 'printf \"ECC: arranca sesión en auditoria-eg2026.\\n  - Política: ciclo ECC (plan -> tdd -> code-review -> quality-gate -> verify -> e2e -> checkpoint -> save-session).\\n  - UX/UI: ver CLAUDE.md §UX_UI_BACKLOG. Ejecutar /ecc:plan al iniciar cualquier ticket UX.\\n  - Forense: ningún cambio toca captures/. Re-captura = carpeta nueva UTC + commit inmediato.\\n  - HALLAZGOS VIGENTES (leer antes de afirmar rankings):\\n\\n\"; if [ -f HALLAZGOS_VIGENTES.md ]; then cat HALLAZGOS_VIGENTES.md; else echo \"(falta HALLAZGOS_VIGENTES.md — regenerar desde reports/hallazgos_*/findings_consolidado_*.json)\"; fi'"
           }
         ]
       }
