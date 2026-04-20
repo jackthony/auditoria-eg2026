@@ -19,7 +19,7 @@ import sys
 from io import StringIO
 from pathlib import Path
 
-from . import reconcile, reconcile_national_vs_regional, impugnation_rates, benford, temporal, jee_simulation, forecast_bayesian, impugnation_bias, impugnation_velocity, last_digit_forensic, spatial_cluster, reconcile_internal, ml_anomalies, ausentismo
+from . import reconcile, reconcile_national_vs_regional, impugnation_rates, benford, temporal, jee_simulation, forecast_bayesian, impugnation_bias, impugnation_velocity, last_digit_forensic, spatial_cluster, reconcile_internal, ml_anomalies, ausentismo, mesa_impugnadas
 
 import sys
 if sys.platform == "win32":
@@ -216,6 +216,22 @@ def main():
                 "margen_vigente": aus["contexto_politico"]["margen_sanchez_rla_votos_corte"],
                 "ratio_calag_vs_margen": aus["contexto_politico"]["ratio_calag_vs_margen"],
             }
+
+        print()
+
+        # 10d. MESA-IMP: Mesas impugnadas estadoActa=I (si hay captura mesa-a-mesa)
+        print("── Mesas impugnadas estadoActa=I (MESA-IMP-1/2) ──")
+        try:
+            imp_out = mesa_impugnadas.run()
+            all_findings.extend(imp_out.get("hallazgos", []))
+            all_results["mesa_impugnadas"] = {
+                "n_impugnadas": imp_out["n_impugnadas"],
+                "pct_impugnadas": imp_out["pct_impugnadas"],
+                "electores_habiles_impugnadas": imp_out["electores_habiles_impugnadas"],
+                "ratio_electores_imp_vs_margen": imp_out["ratio_electores_imp_vs_margen"],
+            }
+        except SystemExit:
+            print("  [skip] sin captura mesa-a-mesa disponible")
 
         print()
 
