@@ -1,35 +1,41 @@
 {
   "method": "Análisis mesas estadoActa=I desde walker 88k (MESA-01)",
-  "capture_ts_utc": "20260419T035056Z",
-  "n_archivos_walker": 88063,
+  "capture_ts_utc": "20260420T003627Z",
+  "n_archivos_walker": 87903,
   "estado_distribution": {
-    "D": 82263,
-    "I": 5419,
-    "L": 11,
-    "A": 262,
-    "H": 19,
+    "D": 82153,
+    "I": 5404,
+    "L": 56,
+    "H": 21,
+    "A": 180,
     "J": 39,
-    "T": 2,
+    "T": 1,
+    "S": 1,
     "N": 48
   },
-  "n_impugnadas": 5419,
-  "n_total_mesas": 88063,
+  "n_impugnadas": 5404,
+  "n_total_mesas": 87903,
   "pct_impugnadas": 6.15,
-  "electores_habiles_impugnadas": 1715680,
-  "electores_habiles_total": 26215556,
+  "electores_habiles_impugnadas": 1711270,
+  "electores_habiles_total": 26168808,
   "margen_sanchez_rla_votos": 13624,
   "margen_sanchez_rla_pct": 0.0860000000000003,
-  "ratio_electores_imp_vs_margen": 125.9,
+  "ratio_electores_imp_vs_margen": 125.6,
   "top20_ubigeo_impugnadas": [
     {
       "ubigeo": 140136,
-      "mesas_imp": 118,
-      "electores_imp": 35242
+      "mesas_imp": 121,
+      "electores_imp": 36139
     },
     {
       "ubigeo": 140141,
-      "mesas_imp": 94,
-      "electores_imp": 28106
+      "mesas_imp": 93,
+      "electores_imp": 27807
+    },
+    {
+      "ubigeo": 921006,
+      "mesas_imp": 84,
+      "electores_imp": 41844
     },
     {
       "ubigeo": 140137,
@@ -38,18 +44,13 @@
     },
     {
       "ubigeo": 920202,
-      "mesas_imp": 79,
-      "electores_imp": 39266
+      "mesas_imp": 80,
+      "electores_imp": 39764
     },
     {
       "ubigeo": 120101,
       "mesas_imp": 76,
       "electores_imp": 22710
-    },
-    {
-      "ubigeo": 921006,
-      "mesas_imp": 75,
-      "electores_imp": 37423
     },
     {
       "ubigeo": 250101,
@@ -77,14 +78,14 @@
       "electores_imp": 17623
     },
     {
-      "ubigeo": 240101,
-      "mesas_imp": 59,
-      "electores_imp": 17639
-    },
-    {
       "ubigeo": 140109,
       "mesas_imp": 58,
       "electores_imp": 17337
+    },
+    {
+      "ubigeo": 240101,
+      "mesas_imp": 58,
+      "electores_imp": 17340
     },
     {
       "ubigeo": 100101,
@@ -97,14 +98,14 @@
       "electores_imp": 14474
     },
     {
+      "ubigeo": 140126,
+      "mesas_imp": 46,
+      "electores_imp": 13443
+    },
+    {
       "ubigeo": 130101,
       "mesas_imp": 45,
       "electores_imp": 13454
-    },
-    {
-      "ubigeo": 140126,
-      "mesas_imp": 45,
-      "electores_imp": 13143
     },
     {
       "ubigeo": 21309,
@@ -131,7 +132,7 @@
       "statistic": 6.15,
       "p_value": null,
       "threshold": 5.0,
-      "interpretation": "5,419 mesas impugnadas de 88,063 (6.15%). Electores hábiles en mesas impugnadas: 1,715,680.",
+      "interpretation": "5,404 mesas impugnadas de 87,903 (6.15%). Electores hábiles en mesas impugnadas: 1,711,270.",
       "limitations": "adVotos=null en impugnadas — desglose candidato no disponible hasta resolución JEE."
     },
     {
@@ -139,10 +140,10 @@
       "severity": "CRÍTICO",
       "test": "Electores impugnados vs margen vigente",
       "h0": "Electores en mesas impugnadas < margen vigente",
-      "statistic": 125.9,
+      "statistic": 125.6,
       "p_value": null,
       "threshold": 1.0,
-      "interpretation": "Electores hábiles en 5,419 mesas impugnadas: 1,715,680. Margen Sánchez−RLA: 13,624 votos. Ratio: 125.9× — si el resultado de mesas impugnadas difiriese del promedio nacional, podría alterar el margen.",
+      "interpretation": "Electores hábiles en 5,404 mesas impugnadas: 1,711,270. Margen Sánchez−RLA: 13,624 votos. Ratio: 125.6× — si el resultado de mesas impugnadas difiriese del promedio nacional, podría alterar el margen.",
       "limitations": "Electores hábiles ≠ votos efectivos (participación ~73%). No implica fraude — impugnación es recurso procesal estándar."
     }
   ],

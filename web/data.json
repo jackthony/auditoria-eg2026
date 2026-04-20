@@ -54,15 +54,137 @@
       "detail": "Diferencias entre la suma de votos por región y el total nacional publicado: todas menores a 0.01%. Descarta hipótesis de manipulación agregada entre niveles."
     },
     {
+      "id": "RECNR1",
+      "severity": "INFO",
+      "test": "Reconciliación Nacional-Regional",
+      "h0": "national.totalActas == sum(regions.totalActas); etc.",
+      "interpretation": "Totales nacionales coinciden con suma regional (tolerancia: 0.1% o 50 actas).",
+      "limitations": "Solo compara campo-a-campo. No valida votos por candidato. Umbrales: 0.1% o 50 actas.",
+      "captura_sha256": "6c20c330356a6d0bd2daf9501522134aba94ea823210e214d2f9155353ff24b8",
+      "captura_ts": "2026-04-18T20:33:09Z",
+      "statistic": null,
+      "p_value": null,
+      "threshold": null,
+      "method": null
+    },
+    {
+      "severity": "MEDIA",
+      "id": "A1",
+      "title": "Regiones con tasa de impugnación anómala (|z|>2): Extranjero (26.35%, z=+3.90)",
+      "detail": "1 región(es) fuera de ±2σ respecto al promedio regional de 7.29% (σ=4.88%)."
+    },
+    {
+      "severity": "MEDIA",
+      "id": "A2",
+      "title": "Diferencia de tasa de impugnación Lima+Callao vs resto del país",
+      "detail": "Lima+Callao: 4.32% · Resto: 7.22% · Diferencia: -2.89pp (z=-17.38, p=0). Estadísticamente significativa al 1%. La asimetría NO es perjudicial para candidatos con mayor votación en Lima+Callao."
+    },
+    {
+      "severity": "INFO",
+      "id": "C1",
+      "title": "Benford (primer dígito, agregado) conforme",
+      "detail": "Pool de 5 candidatos × 26 regiones (n=130): χ²=11.91, p=0.155. No se rechaza H0 de conformidad con Benford. Recordar: este test tiene limitaciones en datos electorales."
+    },
+    {
+      "severity": "INFO",
+      "id": "D1",
+      "title": "Artefactos técnicos de caché en tracking: 72 eventos",
+      "detail": "Se detectaron 72 oscilaciones donde pct baja y sube al mismo valor. Es condición de carrera típica del proxy caché, NO movimiento real de la data ONPE primaria. Se documenta para evitar mala interpretación pública."
+    },
+    {
+      "severity": "INFO",
+      "id": "D2",
+      "title": "Sin saltos anómalos en el conteo temporal",
+      "detail": "Ningún delta entre cortes consecutivos supera 0.5pp para ningún candidato en 117 cortes analizados."
+    },
+    {
+      "severity": "INFO",
+      "id": "D3",
+      "title": "Cruce Sánchez↔RLA único, consistente con flujo natural",
+      "detail": "Se registró 1 cambio de signo entre Sánchez y RLA, atribuible al ingreso progresivo de actas rurales (donde Sánchez tiene ventaja) posterior al procesamiento inicial de Lima y extranjero (donde RLA tiene ventaja)."
+    },
+    {
       "severity": "CRÍTICO",
       "id": "E1",
       "title": "Pase a 2ª vuelta depende de la resolución del JEE",
       "detail": "Margen Sánchez−RLA (+13,624 votos, +0.086pp) es aproximadamente 81× menor que los votos contenidos en actas impugnadas + pendientes (~1,100,045). Bajo distribución proporcional al nacional, el margen final sería +14,570. Para empatar, RLA requiere 52.59% del subgrupo RLA+Sánchez en disputa (vs 49.82% histórico)."
     },
     {
+      "id": "G1",
+      "severity": "MEDIA",
+      "title": "Asociación positiva entre tasa_impugnación y share_RLA por región (Pearson r=0.506, p=0.0083). Si TODAS las actas fuera se integran al ratio regional actual, margen final proyectado = +5,883 votos (vs margen actual +13,624). Empate estadístico. NOTA: correlación sensible a outliers (Spearman r=0.14 p=0.49 NO significativo; bootstrap CI95 incluye 0). La asociación es real en media pero está dominada por Lima y Extranjero."
+    },
+    {
+      "id": "H1",
+      "severity": "MEDIA",
+      "title": "Cambio significativo en velocidad de acumulación de actas JEE alrededor del cruce Sánchez>RLA (ventana ±6h): +182.6 actas/h antes vs +92.4 después (Mann-Whitney p=0.0127). La inflexión puede reflejar procesamiento natural o cambio de política de impugnaciones; requiere explicación formal."
+    },
+    {
+      "id": "H2",
+      "severity": "MEDIA",
+      "title": "Velocidad de acumulación de actas JEE desaceleró tras el cruce (ventana ±12h): +169.0/h antes vs +76.4/h después (ratio 0.45x). Acumuladas pre-cruce: +1522 actas; post-cruce: +556 actas."
+    },
+    {
       "id": "F1",
       "severity": "MEDIA",
       "title": "Modelo bayesiano: P(RLA supera Sánchez) = 26.9% central / 28.9% mixto (n=10,000 simulaciones)"
+    },
+    {
+      "id": "M1",
+      "severity": "INFO",
+      "title": "Último dígito de vote counts regional conforme a uniforme"
+    },
+    {
+      "id": "M2",
+      "severity": "MEDIA",
+      "title": "Clustering espacial positivo significativo en: tasa_impugnacion, share_rla, pct_fuera"
+    },
+    {
+      "id": "M3",
+      "severity": "MEDIA",
+      "test": "IsolationForest saltos temporales",
+      "title": "ML-ANOM: 30 saltos atipicos detectados en serie temporal (contamination=0.05, n=117)",
+      "h0": "Todos los saltos provienen de la misma distribucion generativa",
+      "method": "IsolationForest (n_estimators=200) sobre features [delta_pct, delta_t_min, velocity, delta_jee] por candidato",
+      "interpretation": "Senal complementaria para revision manual. No afirma fraude, identifica cortes con perfil estadisticamente inusual.",
+      "limitations": "Contamination fija 5%; no-supervisado, no identifica causa. Requiere n>=20 cortes."
+    },
+    {
+      "id": "A-AUS-1",
+      "severity": "MEDIA",
+      "title": "Ausentismo 2026 proyectado (26.23%) vs 2016 pre-pandemia (18.21%): +8.02 pp, ~2,198,138 electores adicionales no votaron."
+    },
+    {
+      "id": "A-AUS-2",
+      "severity": "INFO",
+      "title": "Ausentismo 2026 proyectado (26.23%) vs 2021 pandemia (29.15%): -2.92 pp. Comparación válida pre/post-pandemia es 2026 vs 2016."
+    },
+    {
+      "id": "A-AUS-3",
+      "severity": "ALTA_PROCESAL",
+      "title": "Ratio 4.65× entre electores oficialmente afectados por CALAG/Galaga en Lima (63,300) y margen Sánchez−RLA al corte 93.474% (13,624). Abre estándar Art. 363 Ley 26859 (nulidad parcial por evento que altera resultado); no prueba fraude."
+    },
+    {
+      "id": "MESA-IMP-1",
+      "severity": "CRÍTICO",
+      "test": "Mesas impugnadas (estadoActa=I) universo walker",
+      "h0": "Proporción impugnadas no excede umbral procesal 5%",
+      "statistic": 6.15,
+      "p_value": null,
+      "threshold": 5.0,
+      "interpretation": "5,404 mesas impugnadas de 87,903 (6.15%). Electores hábiles en mesas impugnadas: 1,711,270.",
+      "limitations": "adVotos=null en impugnadas — desglose candidato no disponible hasta resolución JEE."
+    },
+    {
+      "id": "MESA-IMP-2",
+      "severity": "CRÍTICO",
+      "test": "Electores impugnados vs margen vigente",
+      "h0": "Electores en mesas impugnadas < margen vigente",
+      "statistic": 125.6,
+      "p_value": null,
+      "threshold": 1.0,
+      "interpretation": "Electores hábiles en 5,404 mesas impugnadas: 1,711,270. Margen Sánchez−RLA: 13,624 votos. Ratio: 125.6× — si el resultado de mesas impugnadas difiriese del promedio nacional, podría alterar el margen.",
+      "limitations": "Electores hábiles ≠ votos efectivos (participación ~73%). No implica fraude — impugnación es recurso procesal estándar."
     },
     {
       "id": "A0",
@@ -2253,7 +2375,7 @@
     ]
   },
   "meta": {
-    "generated_at": "2026-04-19T22:36:20.363314+00:00",
+    "generated_at": "2026-04-20T03:03:10.562328+00:00",
     "source": "ONPE vía proxy CORS + captura atómica con SHA-256",
     "repo": "https://github.com/neuracode/auditoria-eg2026"
   }
