@@ -109,7 +109,8 @@ Cada captura → `captures/{ts}/MANIFEST.jsonl` con: ruta, tamaño, SHA-256, tim
 
 Código bajo **MIT**. Datos ONPE son públicos por naturaleza electoral.
 
-**Autor:** Jack Aguilar — ingeniero de software, fundador de [Neuracode](https://neuracode.com). La firma implica responsabilidad técnica por los cálculos, no vocería política. La revisión, ejecución y validación son responsabilidad humana.
+**Por:** [Neuracode](https://www.neuracode.dev) — empresa de IA aplicada al trabajo real.
+**Coautoría:** Jack Aguilar — Lead Engineer, fundador de Neuracode. La firma implica responsabilidad técnica por los cálculos, no vocería política. La revisión, ejecución y validación son responsabilidad humana.
 
 **Sin afiliación** con ONPE, JNE, Reniec ni partido político.
 
