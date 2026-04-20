@@ -30,15 +30,21 @@ ROOT = Path(__file__).resolve().parent.parent
 HF_REPO = "Neuracode/onpe-eg2026-mesa-a-mesa"
 ID_ELECCION = 10  # presidencial 1ra vuelta 2026
 
-# Mapeo ubigeo → departamento (primeros 2 dígitos)
+# Mapeo ubigeo ONPE (NO INEI) → departamento.
+# ONPE usa orden alfabético, EXCEPTO Callao movido a 24.
+# Extranjero = prefix 91-95 (África+Diplomático/América/Asia/Europa/Oceanía).
+# Validado empíricamente 2026-04-20 por muestreo locales (universidades + IE numbering).
+# Ver scripts/validate_prefix_mapping.py.
 DEPTO_NAMES = {
     "01": "Amazonas", "02": "Áncash", "03": "Apurímac", "04": "Arequipa",
-    "05": "Ayacucho", "06": "Cajamarca", "07": "Callao", "08": "Cusco",
-    "09": "Huancavelica", "10": "Huánuco", "11": "Ica", "12": "Junín",
-    "13": "La Libertad", "14": "Lambayeque", "15": "Lima", "16": "Loreto",
-    "17": "Madre de Dios", "18": "Moquegua", "19": "Pasco", "20": "Piura",
-    "21": "Puno", "22": "San Martín", "23": "Tacna", "24": "Tumbes",
-    "25": "Ucayali", "40": "Extranjero",
+    "05": "Ayacucho", "06": "Cajamarca", "07": "Cusco", "08": "Huancavelica",
+    "09": "Huánuco", "10": "Ica", "11": "Junín", "12": "La Libertad",
+    "13": "Lambayeque", "14": "Lima", "15": "Loreto", "16": "Madre de Dios",
+    "17": "Moquegua", "18": "Pasco", "19": "Piura", "20": "Puno",
+    "21": "San Martín", "22": "Tacna", "23": "Tumbes", "24": "Callao",
+    "25": "Ucayali",
+    "91": "Extranjero", "92": "Extranjero", "93": "Extranjero",
+    "94": "Extranjero", "95": "Extranjero",
 }
 
 

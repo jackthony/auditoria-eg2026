@@ -8,6 +8,7 @@ tags:
 - onpe
 - electoral-audit
 - mesa-a-mesa
+- forensic-statistics
 pretty_name: ONPE EG2026 — Resultados mesa a mesa (primera vuelta)
 size_categories:
 - 1M<n<10M
@@ -16,7 +17,7 @@ size_categories:
 # ONPE EG2026 — Resultados electorales mesa a mesa
 
 **Fuente:** API pública ONPE (`resultadoelectoral.onpe.gob.pe`)
-**Captura:** `20260419T035056Z` UTC — SHA-256 en [MANIFEST.jsonl](https://github.com/jackthony/auditoria-eg2026)
+**Captura:** `20260420T074202Z` UTC — SHA-256 en [MANIFEST.jsonl](https://github.com/jackthony/auditoria-eg2026)
 **Licencia:** CC-BY-4.0 — datos electorales públicos por naturaleza (Ley 26859)
 **Proyecto:** [auditoria-eg2026](https://github.com/jackthony/auditoria-eg2026) · Jack de Neuracode
 
@@ -26,9 +27,18 @@ Dataset long-format con los resultados presidenciales (idEleccion=10) de la prim
 de las Elecciones Generales del Perú 2026 (12 abril 2026), extraídos mesa a mesa desde
 la API oficial de la ONPE.
 
-- **88,063 mesas** | **3,597,343 filas** (1 fila = mesa × partido)
-- Incluye: votos por partido, candidato presidencial, estado del acta, electores hábiles
+- **92,766 mesas** (88,063 normales + 4,703 especiales 900k+) | **3,793,246 filas** (1 fila = mesa × partido)
+- Universo verificado por barrido de bordes (`reports/universe_check.json`)
+- Captura validada al **100% vs totales oficiales ONPE** en los 26 departamentos
 - `estadoActa`: D=Contabilizada, I=Impugnada, P=Pendiente, O=Observada
+
+## Universo de mesas (verificación)
+
+| Grupo | Rango | N | Nota |
+|-------|-------|---|------|
+| Normales | 000001-088064 | 88,063 | Gap conocido en 087704 |
+| Especiales 900k+ | 900001-904703 | 4,703 | Centros excepcionales (universidades, ESSALUD, IE distribuidas) |
+| **TOTAL** | — | **92,766** | Confirmado vs oficial 100% por depto |
 
 ## Schema
 
@@ -43,41 +53,70 @@ la API oficial de la ONPE.
 | `votos_validos` | Int64 | Votos válidos (excluye nulos/blancos) |
 | `pct_participacion` | float32 | % participación ciudadana |
 | `local_votacion` | str | Nombre del local de votación |
-| `partido_codigo` | str | Código agrupación política ONPE |
+| `partido_codigo` | str | Código agrupación política ONPE (`80`=BLANCOS, `81`=NULOS, `82`=IMPUGNADOS) |
 | `partido` | str | Nombre del partido |
 | `candidato` | str | Apellidos, Nombres del candidato presidencial |
 | `votos` | Int64 | Votos obtenidos (null si acta impugnada) |
 | `pct_votos_validos` | float32 | % sobre votos válidos |
-| `es_voto_especial` | bool | True = NULOS o BLANCOS |
+| `es_voto_especial` | bool | True = NULOS o BLANCOS (flag de fila, no de mesa) |
 
-## Uso rápido
+## Uso rápido (Polars + DuckDB recomendado)
 
 ```python
-import pandas as pd
+import polars as pl
 
-df = pd.read_parquet("onpe_eg2026_mesas_20260419T035056Z.parquet")
+df = pl.read_parquet("onpe_eg2026_mesas_20260420T074202Z.parquet")
 
-# Resultados presidenciales nacionales
+# Resultados presidenciales nacionales (excluye blanco/nulo/impugnado)
 nacional = (
-    df[~df.es_voto_especial]
-    .groupby("partido")["votos"]
-    .sum()
-    .sort_values(ascending=False)
+    df.filter(~pl.col("partido_codigo").is_in(["80", "81", "82"]))
+      .group_by("partido")
+      .agg(pl.col("votos").sum())
+      .sort("votos", descending=True)
 )
 
 # Mesas impugnadas por departamento
-imp = df[df.estado_acta == "I"].groupby("departamento")["codigo_mesa"].nunique()
+imp = (df.filter(pl.col("estado_acta") == "I")
+         .group_by("departamento")
+         .agg(pl.col("codigo_mesa").n_unique()))
 ```
 
-## Hallazgos del proyecto de auditoría
+```python
+import duckdb
 
-Ver [reports/findings.json](https://github.com/jackthony/auditoria-eg2026/blob/main/reports/findings.json)
-y el [dashboard público](https://jackthony.github.io/auditoria-eg2026/).
+# SQL sobre parquet directo (sin cargar a memoria)
+duckdb.sql("""
+  SELECT departamento,
+         COUNT(DISTINCT codigo_mesa) AS mesas,
+         SUM(votos) FILTER (WHERE partido_codigo NOT IN ('80','81','82')) AS validos
+  FROM 'onpe_eg2026_mesas_20260420T074202Z.parquet'
+  GROUP BY 1 ORDER BY 2 DESC
+""").pl()
+```
+
+> Nota: pandas funciona pero se cuelga con datasets así de grandes en máquinas modestas.
+> Recomendado polars (Rust-backed) o duckdb (SQL columnar in-process).
+
+## Hallazgos del proyecto de auditoría (versión 0420-v2-92k)
+
+| ID | Severidad | Hallazgo | Métrica |
+|----|-----------|----------|---------|
+| HALL-0420-H1 | CRÍTICO | Sesgo geográfico impugnadas | Extranjero 26.27% (z=42.2) · Loreto 14.87% · Ucayali 12.02% · global 6.16% |
+| HALL-0420-H2 | MEDIA | Partidos concentran en locales alta-imp | FP +2.07pp · JPP +0.88pp · BUEN GOBIERNO -1.62pp |
+| HALL-0420-H3 | MEDIA | Outliers nulos/blancos | 5,304 mesas (5.72%) · San Martín 19.62% blancos #1 · Loreto mesas 900k+ >90% blancos |
+| HALL-0420-H4 | CRÍTICO | JPP concentra en mesas 900k+ | JPP **41.65% en 4,700 mesas especiales** vs 10.91% en normales · ratio **3.82x** · z=698 · Cohen h=0.73 (grande) · IC95 [0.295, 0.308] |
+
+Detalles completos: [findings.json](https://github.com/jackthony/auditoria-eg2026/blob/main/reports/findings.json) ·
+[HALLAZGOS_VIGENTES.md](https://github.com/jackthony/auditoria-eg2026/blob/main/HALLAZGOS_VIGENTES.md)
+
+**Metodología:** z-test 2-prop (Newcombe 1998), Cohen's h (1988), Bootstrap percentil IC95
+(Efron-Tibshirani 1993, B=10,000), Mann-Whitney U. Benford-1 NO usado (criticado para datos
+electorales por Deckert/Myagkov/Ordeshook 2011).
 
 ## Cadena de custodia
 
 Cada captura incluye MANIFEST.jsonl con SHA-256 por archivo, timestamp UTC y URL de origen.
-Verificar con: `python src/capture/verify_manifest.py captures/20260419T035056Z/`
+Verificar con: `python src/capture/verify_manifest.py captures/20260420T074202Z/`
 
 ## Cita
 
@@ -87,7 +126,7 @@ Verificar con: `python src/capture/verify_manifest.py captures/20260419T035056Z/
   title     = {ONPE EG2026 — Resultados mesa a mesa (primera vuelta)},
   year      = {2026},
   publisher = {HuggingFace},
-  url       = {https://huggingface.co/datasets/neuracode/onpe-eg2026-mesa-a-mesa},
-  note      = {Captura 20260419T035056Z UTC. Datos públicos ONPE. CC-BY-4.0.}
+  url       = {https://huggingface.co/datasets/Neuracode/onpe-eg2026-mesa-a-mesa},
+  note      = {Captura 20260420T074202Z UTC. 92,766 mesas. Datos públicos ONPE. CC-BY-4.0.}
 }
 ```
