@@ -1,62 +1,138 @@
-"""Generate viral OG images (1200x630) for each audit page.
+"""Generate viral OG images (1200x630) — Peru election dossier style.
 
-Brand: Neuracode. Style: dark paper with red accent on hero number.
+Aesthetic: cream newspaper + blood red stamp + massive serif headline.
+Matches the 'Algo no cuadra' landing brand. No logo bar noise — the
+HEADLINE is the hero. Neuracode signs at the bottom.
 """
 from pathlib import Path
-from PIL import Image, ImageDraw, ImageFont
+from PIL import Image, ImageDraw, ImageFont, ImageFilter
 
 ROOT = Path(__file__).resolve().parent.parent
 WEB = ROOT / "web"
 LOGO = WEB / "logo-neuracode.png"
 
-BG = (15, 15, 20)
-INK = (245, 245, 245)
-MUTED = (170, 170, 180)
-RED = (220, 38, 38)
-ACCENT = (168, 85, 247)
+PAPER = (250, 247, 242)
+INK = (17, 17, 17)
+MUTED = (90, 90, 90)
+BLOOD = (176, 23, 31)
+RULE = (212, 204, 189)
 
 W, H = 1200, 630
 
-F_BOLD = "C:/Windows/Fonts/arialbd.ttf"
-F_REG = "C:/Windows/Fonts/arial.ttf"
-F_BLACK = "C:/Windows/Fonts/ariblk.ttf"
+F_SERIF_BLACK = "C:/Windows/Fonts/georgiab.ttf"
+F_SERIF = "C:/Windows/Fonts/georgia.ttf"
+F_SERIF_ITALIC = "C:/Windows/Fonts/georgiai.ttf"
+F_SANS = "C:/Windows/Fonts/arial.ttf"
+F_SANS_BOLD = "C:/Windows/Fonts/arialbd.ttf"
+F_IMPACT = "C:/Windows/Fonts/impact.ttf"
 
 
-def font(path: str, size: int) -> ImageFont.FreeTypeFont:
+def f(path: str, size: int) -> ImageFont.FreeTypeFont:
     return ImageFont.truetype(path, size)
 
 
-def draw_base(kicker: str) -> tuple[Image.Image, ImageDraw.ImageDraw]:
-    img = Image.new("RGB", (W, H), BG)
+def paper_texture(img: Image.Image) -> None:
+    """Subtle noise for newsprint feel."""
+    import random
+    random.seed(42)
+    px = img.load()
+    for y in range(0, H, 3):
+        for x in range(0, W, 3):
+            if random.random() < 0.04:
+                r, g, b = px[x, y]
+                d = random.randint(-8, 2)
+                px[x, y] = (max(0, r + d), max(0, g + d), max(0, b + d))
+
+
+def red_stamp(text: str, size: int = 58, angle: float = -8.0) -> Image.Image:
+    font = f(F_IMPACT, size)
+    tmp = Image.new("RGBA", (1400, 200), (0, 0, 0, 0))
+    td = ImageDraw.Draw(tmp)
+    bbox = td.textbbox((0, 0), text, font=font)
+    tw, th = bbox[2] - bbox[0], bbox[3] - bbox[1]
+    pad_x, pad_y = 28, 14
+    box_w, box_h = tw + pad_x * 2, th + pad_y * 2
+    stamp = Image.new("RGBA", (box_w + 80, box_h + 80), (0, 0, 0, 0))
+    sd = ImageDraw.Draw(stamp)
+    # double border
+    sd.rectangle([40, 40, 40 + box_w, 40 + box_h], outline=BLOOD + (230,), width=5)
+    sd.rectangle([48, 48, 32 + box_w, 32 + box_h], outline=BLOOD + (230,), width=2)
+    sd.text((40 + pad_x - bbox[0], 40 + pad_y - bbox[1]), text, font=font, fill=BLOOD + (235,))
+    return stamp.rotate(angle, resample=Image.BICUBIC, expand=True)
+
+
+def draw_strike(d: ImageDraw.ImageDraw, xy: tuple[int, int, int, int], width: int = 10) -> None:
+    x1, y1, x2, y2 = xy
+    d.line([(x1, y1), (x2, y2)], fill=BLOOD, width=width)
+
+
+def base_paper() -> tuple[Image.Image, ImageDraw.ImageDraw]:
+    img = Image.new("RGB", (W, H), PAPER)
     d = ImageDraw.Draw(img)
-    # top red bar
-    d.rectangle([0, 0, W, 6], fill=RED)
-    # logo
-    if LOGO.exists():
-        logo = Image.open(LOGO).convert("RGBA")
-        ratio = 56 / logo.height
-        logo = logo.resize((int(logo.width * ratio), 56), Image.LANCZOS)
-        img.paste(logo, (60, 50), logo)
-    # kicker
-    d.text((60 + 66 + 16, 68), "NEURACODE", font=font(F_BLACK, 24), fill=INK)
-    d.text((60 + 66 + 16, 98), kicker, font=font(F_REG, 18), fill=MUTED)
+    paper_texture(img)
+    # left red rule
+    d.rectangle([0, 0, 10, H], fill=BLOOD)
+    # top hairline
+    d.line([(40, 60), (W - 40, 60)], fill=RULE, width=1)
+    d.line([(40, 64), (W - 40, 64)], fill=RULE, width=1)
+    # kicker bar (dateline)
+    d.text((40, 28), "AUDITORÍA ELECCIONES GENERALES 2026  ·  PERÚ  ·  NEURACODE",
+           font=f(F_SANS_BOLD, 15), fill=INK)
+    d.text((W - 230, 28), "EVIDENCIA PÚBLICA · SHA-256",
+           font=f(F_SANS_BOLD, 15), fill=BLOOD)
     return img, d
 
 
-def render(path: Path, kicker: str, hero: str, hero_label: str, title: str,
-           subtitle: str, footer: str) -> None:
-    img, d = draw_base(kicker)
-    # hero number
-    d.text((60, 180), hero, font=font(F_BLACK, 200), fill=RED)
-    d.text((60, 390), hero_label, font=font(F_BOLD, 28), fill=INK)
-    # title
-    d.text((60, 450), title, font=font(F_BOLD, 38), fill=INK)
-    # subtitle
-    d.text((60, 500), subtitle, font=font(F_REG, 22), fill=MUTED)
-    # footer
-    d.rectangle([0, H - 56, W, H], fill=(25, 25, 32))
-    d.text((60, H - 44), footer, font=font(F_BOLD, 20), fill=INK)
-    d.text((W - 340, H - 44), "auditoria.neuracode.dev", font=font(F_BOLD, 20), fill=ACCENT)
+def bottom_sign(d: ImageDraw.ImageDraw, img: Image.Image, tagline: str) -> None:
+    # bottom rule
+    d.line([(40, H - 92), (W - 40, H - 92)], fill=RULE, width=1)
+    d.line([(40, H - 88), (W - 40, H - 88)], fill=RULE, width=1)
+    # logo
+    if LOGO.exists():
+        logo = Image.open(LOGO).convert("RGBA")
+        ratio = 44 / logo.height
+        logo = logo.resize((int(logo.width * ratio), 44), Image.LANCZOS)
+        img.paste(logo, (40, H - 68), logo)
+        x_after = 40 + logo.width + 14
+    else:
+        x_after = 40
+    d.text((x_after, H - 60), "neuracode", font=f(F_SERIF_BLACK, 22), fill=INK)
+    d.text((x_after, H - 34), tagline, font=f(F_SANS, 14), fill=MUTED)
+    d.text((W - 320, H - 54), "auditoria.neuracode.dev",
+           font=f(F_SERIF_BLACK, 22), fill=BLOOD)
+    d.text((W - 320, H - 28), "datos públicos · código abierto",
+           font=f(F_SANS, 13), fill=MUTED)
+
+
+def render(path: Path, kicker: str, headline1: str, headline2: str,
+           stamp_text: str, sub: str, tagline: str,
+           stamp_pos: tuple[int, int] = (720, 180),
+           stamp_angle: float = -7.0) -> None:
+    img, d = base_paper()
+    # handwritten-style kicker (italic serif, red)
+    d.text((40, 90), kicker, font=f(F_SERIF_ITALIC, 26), fill=BLOOD)
+    # massive headline (auto-fit each line to max width 740px)
+    max_w = 740
+    def fit_size(text: str, start: int = 120, min_size: int = 70) -> int:
+        size = start
+        while size > min_size:
+            font = f(F_SERIF_BLACK, size)
+            bbox = d.textbbox((0, 0), text, font=font)
+            if bbox[2] - bbox[0] <= max_w:
+                return size
+            size -= 4
+        return min_size
+    s1 = fit_size(headline1)
+    s2 = fit_size(headline2)
+    d.text((40, 140), headline1, font=f(F_SERIF_BLACK, s1), fill=INK)
+    d.text((40, 270), headline2, font=f(F_SERIF_BLACK, s2), fill=INK)
+    # strikethrough on second line part
+    # subheadline (italic serif)
+    d.text((40, 410), sub, font=f(F_SERIF_ITALIC, 26), fill=INK)
+    # red stamp diagonal
+    stamp = red_stamp(stamp_text, size=62, angle=stamp_angle)
+    img.paste(stamp, stamp_pos, stamp)
+    bottom_sign(d, img, tagline)
     img.save(path, "PNG", optimize=True)
     print(f"wrote {path}")
 
@@ -64,39 +140,47 @@ def render(path: Path, kicker: str, hero: str, hero_label: str, title: str,
 def main() -> None:
     render(
         WEB / "og-image.png",
-        kicker="Auditoría Elecciones Generales 2026",
-        hero="4,703",
-        hero_label="MESAS DE VOTACIÓN FALTANTES EN LA API ONPE",
-        title="Algo no cuadra.",
-        subtitle="566,233 votos sin cuadrar · margen de 13,624 define 2° puesto",
-        footer="Datos públicos · Código abierto · SHA-256 verificable",
+        kicker="— peritaje ciudadano del escrutinio ONPE",
+        headline1="ALGO NO",
+        headline2="CUADRA.",
+        stamp_text="4,703 MESAS",
+        sub="Mesa por mesa, el 2° puesto cambia. Cualquiera puede volver a contar.",
+        tagline="peritaje ciudadano · EG2026",
+        stamp_pos=(780, 170),
+        stamp_angle=-9.0,
     )
     render(
         WEB / "og-historia.png",
-        kicker="El peritaje público — EG2026",
-        hero="4,703",
-        hero_label="MESAS QUE NO APARECEN EN EL ESCRUTINIO OFICIAL",
-        title="La historia completa.",
-        subtitle="Cómo descubrimos que el 2° puesto cambia al sumar mesa por mesa",
-        footer="Lee el peritaje público paso a paso",
+        kicker="— cómo lo descubrimos, paso a paso",
+        headline1="LA HISTORIA",
+        headline2="COMPLETA.",
+        stamp_text="4,703 MESAS",
+        sub="Mesa por mesa, el 2° puesto cambia. Reconstruimos el camino.",
+        tagline="peritaje público · EG2026",
+        stamp_pos=(760, 170),
+        stamp_angle=-7.0,
     )
     render(
         WEB / "og-chat.png",
-        kicker="Tía María pregunta — EG2026",
-        hero="4,703",
-        hero_label="MESAS QUE LE EXPLIQUÉ A MI TÍA",
-        title="Se lo expliqué a mi tía.",
-        subtitle="Un chat sin jerga. Lee tú lo que pasó con las elecciones.",
-        footer="Explicado para que cualquiera entienda",
+        kicker="— tía María pregunta, yo contesto",
+        headline1="SE LO EXPLIQUÉ",
+        headline2="A MI TÍA.",
+        stamp_text="SIN JERGA",
+        sub="Un chat para que cualquiera entienda qué pasó con las elecciones.",
+        tagline="explicado para todos · EG2026",
+        stamp_pos=(860, 170),
+        stamp_angle=-6.0,
     )
     render(
         WEB / "og-dashboard.png",
-        kicker="Monitor técnico EG2026",
-        hero="4,703",
-        hero_label="MESAS FALTANTES · MONITOR MESA-A-MESA",
-        title="Dashboard en vivo.",
-        subtitle="Verificación independiente del escrutinio ONPE · hashes SHA-256",
-        footer="Explora los datos mesa por mesa",
+        kicker="— monitor técnico en vivo",
+        headline1="MESA POR",
+        headline2="MESA.",
+        stamp_text="SHA-256",
+        sub="Verificación independiente del escrutinio ONPE. Hashes reproducibles.",
+        tagline="dashboard técnico · EG2026",
+        stamp_pos=(840, 190),
+        stamp_angle=-8.0,
     )
 
 
