@@ -10,6 +10,7 @@ const ALLOWED_PATHS = new Set([
   "/presentacion-backend/resumen-general/elecciones",
   "/presentacion-backend/eleccion-presidencial/participantes-ubicacion-geografica-nombre",
   "/presentacion-backend/mesa/totales",
+  "/presentacion-backend/actas",
   "/presentacion-backend/actas/observadas",
   "/presentacion-backend/ubigeos/departamentos",
   "/presentacion-backend/ubigeos/provincias",
@@ -73,15 +74,21 @@ export default {
       const upstream = await fetch(upstreamUrl, {
         method: "GET",
         headers: {
-          "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36",
+          "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36",
           "Accept": "application/json, text/plain, */*",
           "Accept-Language": "es-PE,es;q=0.9,en;q=0.8",
+          "Accept-Encoding": "gzip, deflate",
           "Referer": "https://resultadoelectoral.onpe.gob.pe/",
           "Origin": "https://resultadoelectoral.onpe.gob.pe",
           "X-Requested-With": "XMLHttpRequest",
           "Sec-Fetch-Dest": "empty",
           "Sec-Fetch-Mode": "cors",
           "Sec-Fetch-Site": "same-origin",
+          "Sec-Ch-Ua": '"Not(A:Brand";v="99", "Google Chrome";v="140", "Chromium";v="140"',
+          "Sec-Ch-Ua-Mobile": "?0",
+          "Sec-Ch-Ua-Platform": '"Windows"',
+          "Priority": "u=1, i",
+          "Connection": "keep-alive",
         },
       });
 

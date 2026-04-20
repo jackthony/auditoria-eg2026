@@ -141,6 +141,10 @@ def fetch_endpoint(base: str, path: str, out_path: Path) -> dict:
         "User-Agent": USER_AGENT,
         "Cache-Control": "no-cache, no-store, must-revalidate",
         "Pragma": "no-cache",
+        # Worker CF reenvía header Content-Encoding:gzip pero el body ya viene
+        # descomprimido (CF edge). Con Accept-Encoding:identity evitamos el
+        # loop falso de ungzip y conservamos JSON plaintext.
+        "Accept-Encoding": "identity",
     }
     try:
         resp = requests.get(url, headers=headers, timeout=TIMEOUT, stream=True, allow_redirects=False)
@@ -150,8 +154,11 @@ def fetch_endpoint(base: str, path: str, out_path: Path) -> dict:
             if final_host not in ALLOWED_HOSTS:
                 raise ValueError(f"Redirect no autorizado: {final_host}")
             resp = requests.get(location, headers=headers, timeout=TIMEOUT, stream=True)
+        # decode_content=True: descomprimir gzip/br transparente. iter_content(None)
+        # respeta ese flag vía urllib3. Límite se chequea sobre bytes decodificados.
+        resp.raw.decode_content = True
         content = b""
-        for chunk in resp.iter_content(chunk_size=65536):
+        for chunk in resp.raw.stream(65536, decode_content=True):
             content += chunk
             if len(content) > MAX_RESPONSE_BYTES:
                 raise ValueError(f"Respuesta excede límite: {url}")
@@ -222,6 +229,49 @@ def main():
         flag = "✓" if entry["http_status"] == 200 else f"✗ HTTP {entry['http_status']}"
         print(f"  {flag}  {name:<18}  {entry['bytes']:>7}B  "
               f"sha256={entry['sha256'][:16]}...")
+
+    # CAPTURE-02: per-department presidencial + totales (25 depts).
+    # Patrón confirmado (DevTools 2026-04-19):
+    #   tipoFiltro=ubigeo_nivel_01 + ubigeoNivel1={ubigeo} (presidencial)
+    #   tipoFiltro=ubigeo_nivel_01 + idUbigeoDepartamento={ubigeo} (totales)
+    # El frontend ONPE añade listDepartamento=[object Object] (bug); se omite.
+    print()
+    print("[capture] per-departamento …")
+    ubigeos_path = raw_dir / "ubigeos_departamentos.json"
+    try:
+        depts_doc = json.loads(ubigeos_path.read_text(encoding="utf-8"))
+        depts = depts_doc.get("data") or []
+    except Exception as e:
+        print(f"  ! no se pudo leer ubigeos_departamentos.json: {e}", file=sys.stderr)
+        depts = []
+
+    for d in depts:
+        ubigeo = str(d.get("ubigeo") or "").strip()
+        nombre = str(d.get("nombre") or "").strip()
+        if len(ubigeo) != 6 or not ubigeo.isdigit():
+            continue
+        jobs = [
+            (
+                f"presidencial_{ubigeo}",
+                f"/presentacion-backend/eleccion-presidencial/participantes-ubicacion-geografica-nombre"
+                f"?tipoFiltro=ubigeo_nivel_01&idAmbitoGeografico=1&ubigeoNivel1={ubigeo}&idEleccion=10",
+            ),
+            (
+                f"totales_{ubigeo}",
+                f"/presentacion-backend/resumen-general/totales"
+                f"?idAmbitoGeografico=1&idEleccion=10&tipoFiltro=ubigeo_nivel_01&idUbigeoDepartamento={ubigeo}",
+            ),
+        ]
+        for name, path in jobs:
+            out = raw_dir / f"{name}.json"
+            entry = fetch_endpoint(base, path, out)
+            entry["endpoint"] = name
+            entry["source"] = source
+            entry["ubigeo"] = ubigeo
+            entry["departamento"] = nombre
+            manifest_entries.append(entry)
+            flag = "✓" if entry["http_status"] == 200 else f"✗ {entry['http_status']}"
+            print(f"  {flag}  {name:<28}  {nombre:<16}  {entry['bytes']:>6}B")
 
     # 3. Escribir manifiesto (una línea por entrada)
     manifest_path = capture_dir / "MANIFEST.jsonl"
