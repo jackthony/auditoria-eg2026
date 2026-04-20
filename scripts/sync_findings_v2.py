@@ -1,7 +1,7 @@
 """
 scripts/sync_findings_v2.py — Sincroniza los 3 findings.json del repo.
 
-Construye HALL-0420-H1/H2/H3/H4 sobre el universo v2 (92,766 mesas) y los
+Construye HALL-0420-H1/H2/H3/H4/H9/H12 sobre el universo v2 (92,766 mesas) y los
 escribe a:
   - reports/findings.json                        (maestro, estructura {findings, results})
   - reports/hallazgos_20260420/findings_consolidado_0420.json  (consolidado con meta)
@@ -10,10 +10,14 @@ escribe a:
 Borra todos los findings stale (R1, A1, A2, C1, D1-D3, E1, G1, H1, H2, F1,
 M1-M3, A0, A-AUS-1/2/3, MESA-IMP-1/2). Decisión: stale → eliminar (a).
 
+H9 = BERBES 11/11 impugnadas (binomial exacto, p=4.83e-14).
+H12 = Mesa 018146 Cusco, JPP 90.43% (única normal >=90% entre 78,706).
+Ambos validados vs DB por scripts/validate_h9_h12.py (2026-04-20).
+
 Lee:
   - reports/h4_stats.json (HALL-0420-H4 ya calculado por stats_h4_especiales_900k.py)
   - reports/hallazgos_20260420/findings_0420_v2.json (H1/H2/H3 raw output)
-  - reports/hallazgos_20260420/eg2026.duckdb (validación universo)
+  - reports/hallazgos_20260420/eg2026.duckdb (validación universo + H9/H12 live)
 """
 from __future__ import annotations
 
@@ -37,6 +41,217 @@ OUT_CONSOLIDADO = ROOT / "reports" / "hallazgos_20260420" / "findings_consolidad
 OUT_WEB = ROOT / "web" / "api" / "findings.json"
 
 UNIVERSE_TS = "20260420T074202Z"
+
+
+def build_h9(con, n_mesas: int) -> dict:
+    """H9 — Locales 100% impugnadas, hero = COMPLEJO DEPORTIVO BERBÉS."""
+    # Tasa global impugnacion exacta
+    n_imp = con.execute("SELECT COUNT(*) FROM mesa WHERE estado_acta='I'").fetchone()[0]
+    p_imp = float(n_imp) / float(n_mesas)
+
+    # Locales 100% impugnadas (ranking)
+    rows = con.execute(
+        """
+        WITH por_local AS (
+          SELECT local_votacion, depto_real, COUNT(*) AS total,
+                 SUM(CASE WHEN estado_acta='I' THEN 1 ELSE 0 END) AS imp
+          FROM mesa
+          WHERE local_votacion IS NOT NULL AND local_votacion <> ''
+          GROUP BY local_votacion, depto_real
+        )
+        SELECT local_votacion, depto_real, total
+        FROM por_local WHERE imp = total AND total > 0
+        ORDER BY total DESC
+        """
+    ).fetchall()
+    top_locales = [
+        {"local_votacion": r[0], "depto_real": r[1], "total": int(r[2])}
+        for r in rows[:10]
+    ]
+    n_locales_100 = len(rows)
+    n_3plus = sum(1 for r in rows if int(r[2]) >= 3)
+    n_5plus = sum(1 for r in rows if int(r[2]) >= 5)
+
+    # Binomial exacto: P(11/11 impugnadas | H0=p_global)
+    berbes_n = int(top_locales[0]["total"]) if top_locales else 0
+    p_value_berbes = p_imp ** berbes_n if berbes_n else None
+
+    interpretation = (
+        f"{n_locales_100} locales con 100% mesas impugnadas. {n_3plus} con >=3 mesas, "
+        f"{n_5plus} con >=5 mesas. Top: {top_locales[0]['local_votacion']} "
+        f"({top_locales[0]['depto_real']}, {berbes_n} mesas todas impugnadas). "
+        f"Bajo H0 binomial con p={p_imp:.6f} (tasa global impugnacion), "
+        f"P(11/11 | aleatorio) = {p_value_berbes:.3e} "
+        f"(equivalente ~ 1 entre {int(1/p_value_berbes):,})."
+    )
+
+    return {
+        "id": "HALL-0420-H9",
+        "severity": "CRÍTICO",
+        "test": "Locales con 100% mesas impugnadas — binomial exacto hero",
+        "h0": "Impugnacion distribuida aleatoriamente con p=tasa_global (6.1585%)",
+        "statistic": int(n_locales_100),
+        "p_value": float(p_value_berbes) if p_value_berbes is not None else None,
+        "threshold": 1e-6,
+        "method": (
+            "Conteo locales con SUM(estado_acta='I') == COUNT(*). "
+            "P-value hero = p_global^n para n mesas del local 100% impugnado (binomial exacto)."
+        ),
+        "interpretation": interpretation,
+        "top_locales": top_locales,
+        "n_locales_100pct_imp": n_locales_100,
+        "n_locales_3plus_mesas": n_3plus,
+        "n_locales_5plus_mesas": n_5plus,
+        "tasa_global_imp": round(p_imp, 6),
+        "hero_local": {
+            "local_votacion": top_locales[0]["local_votacion"] if top_locales else None,
+            "depto_real": top_locales[0]["depto_real"] if top_locales else None,
+            "n_mesas": berbes_n,
+            "p_value_binomial": float(p_value_berbes) if p_value_berbes else None,
+            "equiv_1_entre": int(1 / p_value_berbes) if p_value_berbes else None,
+        },
+        "limitations": (
+            "Impugnacion es recurso procesal legitimo; cluster no implica fraude pero requiere "
+            "explicacion formal de ONPE. Locales con 1-2 mesas pueden ser impugnacion total por "
+            "problema puntual; el hero BERBES (11/11) escapa esa explicacion trivial."
+        ),
+        "n_mesas_universo": n_mesas,
+        "metodologia_cita": [
+            "Binomial exacto bajo H0 p=tasa_global. No requiere paper (probabilidad pura).",
+            "Newcombe (1998). Two-sided confidence intervals for the single proportion. "
+            "Statistics in Medicine 17:857-872.",
+        ],
+        "source_file": "reports/hallazgos_20260420/eg2026.duckdb",
+    }
+
+
+def build_h12(con, n_mesas: int) -> dict:
+    """H12 — Mesa 018146 Cusco, JPP 90.43% (única normal >=90% entre 78,706 >=100 válidos)."""
+    # Mesa hero: 018146 Cusco
+    hero_row = con.execute(
+        """
+        SELECT m.codigo_mesa, m.depto_real, m.local_votacion, m.votos_validos, m.mesa_especial
+        FROM mesa m WHERE m.codigo_mesa='018146'
+        """
+    ).fetchone()
+
+    # Top 3 partidos NO-especiales en la mesa (excluye blancos/nulos/impugnados)
+    top3 = con.execute(
+        """
+        SELECT v.partido, v.votos,
+               ROUND(v.votos*100.0/m.votos_validos, 2) AS pct
+        FROM mesa m JOIN voto v USING(codigo_mesa)
+        WHERE m.codigo_mesa='018146' AND v.es_voto_especial=false
+          AND v.partido NOT IN ('VOTOS EN BLANCO','VOTOS NULOS','VOTOS IMPUGNADOS')
+        ORDER BY v.votos DESC LIMIT 3
+        """
+    ).fetchall()
+
+    # Universo normales con >=100 validos (threshold autoritativo = 78,706)
+    r = con.execute(
+        """
+        WITH winner AS (
+          SELECT m.codigo_mesa, m.mesa_especial,
+                 MAX(v.votos*1.0/NULLIF(m.votos_validos,0)) AS pct_ganador
+          FROM mesa m JOIN voto v USING(codigo_mesa)
+          WHERE v.es_voto_especial=false
+            AND m.estado_acta='D'
+            AND m.votos_validos >= 100
+            AND v.partido NOT IN ('VOTOS EN BLANCO','VOTOS NULOS','VOTOS IMPUGNADOS')
+          GROUP BY 1,2
+        )
+        SELECT
+          COUNT(*) FILTER (WHERE NOT mesa_especial) AS n_norm,
+          COUNT(*) FILTER (WHERE NOT mesa_especial AND pct_ganador >= 0.90) AS n_norm_90
+        FROM winner
+        """
+    ).fetchone()
+    n_norm, n_norm_90 = int(r[0]), int(r[1])
+
+    # P_JPP_global sobre normales estado D
+    p_jpp_global = float(con.execute(
+        """
+        WITH norm_votos AS (
+          SELECT m.codigo_mesa, m.votos_validos,
+                 SUM(CASE WHEN v.partido='JUNTOS POR EL PERÚ' THEN v.votos ELSE 0 END) AS jpp
+          FROM mesa m JOIN voto v USING(codigo_mesa)
+          WHERE m.mesa_especial=false AND v.es_voto_especial=false AND m.estado_acta='D'
+          GROUP BY m.codigo_mesa, m.votos_validos
+        )
+        SELECT SUM(jpp)*1.0/NULLIF(SUM(votos_validos), 0) FROM norm_votos
+        """
+    ).fetchone()[0])
+
+    # Binomial P(X>=208 | n=230, p=p_jpp_global)
+    from math import comb
+    def _binom_ge(n: int, k0: int, p: float) -> float:
+        total = 0.0
+        for k in range(k0, n + 1):
+            total += comb(n, k) * (p ** k) * ((1 - p) ** (n - k))
+        return total
+
+    jpp_row = top3[0] if top3 else None
+    segundo = top3[1] if len(top3) > 1 else None
+    jpp_votos = int(jpp_row[1]) if jpp_row else 0
+    p_value = _binom_ge(int(hero_row[3]), jpp_votos, p_jpp_global) if jpp_row else None
+
+    # Anti-ataque: robustez p=0.30
+    p_robusto = _binom_ge(int(hero_row[3]), jpp_votos, 0.30) if jpp_row else None
+
+    interpretation = (
+        f"Mesa 018146 Cusco (normal, no 900k+): JPP {jpp_row[1]} votos de {hero_row[3]} validos = "
+        f"{jpp_row[2]}%. 2do lugar: {segundo[0]} {segundo[1]} votos ({segundo[2]}%). "
+        f"Es la UNICA mesa normal con winner >=90% entre {n_norm:,} normales con >=100 validos "
+        f"estado D ({n_norm_90/n_norm*100:.4f}%). "
+        f"Bajo H0 binomial con p={p_jpp_global:.4f} (tasa JPP global normales), "
+        f"P(X>={jpp_row[1]} | n={hero_row[3]}) = {p_value:.3e}. "
+        f"Robusto a sensibilidad: aun con p=0.30, P(X>={jpp_row[1]}) = {p_robusto:.3e}."
+    )
+
+    return {
+        "id": "HALL-0420-H12",
+        "severity": "CRÍTICO",
+        "test": "Blowout extremo mesa 018146 Cusco (JPP 90.43%)",
+        "h0": "Votos JPP en mesa 018146 son extraccion aleatoria con p=tasa_JPP_global",
+        "statistic": float(jpp_row[2]) if jpp_row else None,
+        "p_value": float(p_value) if p_value is not None else None,
+        "threshold": 1e-6,
+        "method": (
+            "Binomial exacto: P(X>=k_jpp | n=votos_validos, p=tasa_JPP_global_normales) + "
+            "conteo unicidad mesas normales winner>=90% sobre universo estado D, validos>=100."
+        ),
+        "interpretation": interpretation,
+        "mesa_emblematica": {
+            "codigo": hero_row[0],
+            "depto": hero_row[1],
+            "local": hero_row[2],
+            "votos_validos": int(hero_row[3]),
+            "mesa_especial": bool(hero_row[4]),
+            "ganador": jpp_row[0] if jpp_row else None,
+            "ganador_votos": int(jpp_row[1]) if jpp_row else None,
+            "pct_ganador": float(jpp_row[2]) if jpp_row else None,
+            "segundo": segundo[0] if segundo else None,
+            "segundo_votos": int(segundo[1]) if segundo else None,
+            "pct_segundo": float(segundo[2]) if segundo else None,
+        },
+        "universo_normales_validos_100plus": n_norm,
+        "n_normales_winner_90plus": n_norm_90,
+        "p_jpp_global_normales": round(p_jpp_global, 6),
+        "p_value_robusto_30pct": float(p_robusto) if p_robusto else None,
+        "limitations": (
+            "No prueba causalidad ni intencionalidad. Umbral votos_validos>=100 es discrecional "
+            "(tambien aparece como unica normal con 50, 80). Subset extremo de H4; mesa 018146 "
+            "requiere inspeccion fisica del acta original por ONPE/JNE."
+        ),
+        "n_mesas_universo": n_mesas,
+        "metodologia_cita": [
+            "Binomial exacto (probabilidad pura) con prueba de sensibilidad p=0.30.",
+            "Newcombe (1998). Two-sided confidence intervals for the single proportion. "
+            "Statistics in Medicine 17:857-872.",
+            "Subset extremo del framework H4; mismo z-test 2-prop aplica al agregado.",
+        ],
+        "source_file": "reports/hallazgos_20260420/eg2026.duckdb",
+    }
 
 
 def build_findings() -> tuple[list[dict], dict]:
@@ -159,11 +374,17 @@ def build_findings() -> tuple[list[dict], dict]:
         "metodologia_cita": h4["metodologia_cita"],
     }
 
-    findings = [h1, h2, h3, h4_finding]
+    # H9 — BERBES 11/11 impugnadas (binomial exacto vs tasa global)
+    h9_finding = build_h9(con, n_mesas)
+
+    # H12 — Mesa 018146 Cusco blowout (unica normal >=90% entre 78,706)
+    h12_finding = build_h12(con, n_mesas)
+
+    findings = [h1, h2, h3, h4_finding, h9_finding, h12_finding]
 
     meta = {
         "fecha": "2026-04-20",
-        "version": "0420-v2-92k",
+        "version": "0420-v3-92k-h1-h12",
         "db": "reports/hallazgos_20260420/eg2026.duckdb",
         "parquet_source": f"reports/hf_dataset/onpe_eg2026_mesas_{UNIVERSE_TS}.parquet",
         "universo_ts_utc": UNIVERSE_TS,

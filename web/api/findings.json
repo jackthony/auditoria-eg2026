@@ -1,43 +1,4 @@
 {
-  "meta": {
-    "fecha": "2026-04-20",
-    "version": "0420-v3-92k-h1-h12",
-    "db": "reports/hallazgos_20260420/eg2026.duckdb",
-    "parquet_source": "reports/hf_dataset/onpe_eg2026_mesas_20260420T074202Z.parquet",
-    "universo_ts_utc": "20260420T074202Z",
-    "total_mesas": 92766,
-    "mesas_normales": 88063,
-    "mesas_especiales_900k": 4703,
-    "total_actas_voto": 3793246,
-    "tasa_global_impugnadas_pct": 6.159,
-    "mapping_prefix_depto": "ONPE alfabético con Callao=24 (validado 2026-04-20).",
-    "captura_validation_pct_oficial": "100% en los 26 deptos vs regiones.csv ONPE.",
-    "generated_at_utc": "2026-04-20T23:27:35.853386+00:00",
-    "stale_findings_eliminados": [
-      "R1",
-      "RECNR1",
-      "A1",
-      "A2",
-      "C1",
-      "D1",
-      "D2",
-      "D3",
-      "E1",
-      "G1",
-      "H1",
-      "H2",
-      "F1",
-      "M1",
-      "M2",
-      "M3",
-      "A0",
-      "A-AUS-1",
-      "A-AUS-2",
-      "A-AUS-3",
-      "MESA-IMP-1",
-      "MESA-IMP-2"
-    ]
-  },
   "findings": [
     {
       "id": "HALL-0420-H1",
@@ -244,5 +205,14 @@
       ],
       "source_file": "reports/hallazgos_20260420/eg2026.duckdb"
     }
-  ]
+  ],
+  "meta": {
+    "generated_at": "2026-04-20T23:27:35.853386+00:00",
+    "updated_at": "2026-04-20T23:27:35.853386+00:00",
+    "source": "ONPE vía proxy CORS + captura atómica con SHA-256",
+    "repo": "https://github.com/neuracode/auditoria-eg2026",
+    "universo_ts_utc": "20260420T074202Z",
+    "total_mesas": 92766,
+    "consolidado_0420": "reports/hallazgos_20260420/findings_consolidado_0420.json"
+  }
 }
