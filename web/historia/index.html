@@ -50,27 +50,16 @@ body {
   overflow-x: hidden;
 }
 .byline {
-  position: sticky; top: 0; z-index: 100;
-  display: flex; align-items: center; justify-content: space-between; gap: 16px;
-  background: rgba(255, 253, 250, .88); backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
+  background: rgba(250,247,242,.6);
   border-bottom: 1px solid #d4ccbd;
-  padding: 12px 30px;
-  font-family: 'Inter', sans-serif; font-size: 13px; color: var(--muted);
+  padding: 10px 30px;
+  font-family: 'Inter', sans-serif; font-size: 12px; color: var(--muted);
   letter-spacing: .5px; text-transform: uppercase;
+  text-align: center;
 }
 .byline strong { color: var(--ink); }
-.byline .byline-brand {
-  display: inline-flex; align-items: center; gap: 10px;
-  text-decoration: none; color: inherit; min-height: 44px;
-}
-.byline .byline-brand:focus-visible { outline: 2px solid #e63946; outline-offset: 3px; border-radius: 4px; }
-.byline .byline-logo { width: 34px; height: 34px; display: block; filter: drop-shadow(0 2px 4px rgba(0,0,0,.08)); }
-.byline .byline-meta { min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 @media (max-width: 600px) {
-  .byline { padding: 10px 16px; font-size: 11px; gap: 10px; }
-  .byline .byline-meta { letter-spacing: 0; }
-  .byline .byline-logo { width: 28px; height: 28px; }
+  .byline { padding: 8px 16px; font-size: 11px; letter-spacing: 0; }
 }
 .scene {
   min-height: 100vh;
@@ -287,13 +276,7 @@ h2 { font-size: clamp(32px, 5vw, 64px); margin-bottom: 30px; }
 </head>
 <body>
 
-<header class="byline">
-  <a class="byline-brand" href="../" aria-label="Inicio Auditoría EG2026 · Neuracode">
-    <img class="byline-logo" src="/logo-neuracode-tight.png" alt="Neuracode">
-    <span class="byline-meta"><strong>El peritaje público</strong> · Por Jack Aguilar · 19 abr 2026</span>
-  </a>
-  <div class="sn-mount"></div>
-</header>
+<div class="byline"><strong>El peritaje público</strong> · Por Jack Aguilar · 19 abr 2026</div>
 
 <section class="scene" data-scene="1">
   <span class="scene-label">Capítulo uno</span>

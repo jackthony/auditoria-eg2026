@@ -71,43 +71,7 @@ body {
   -webkit-font-smoothing: antialiased;
 }
 
-/* ═══ BRANDBAR ═══ */
-.brandbar {
-  position: sticky; top: 0; z-index: 150;
-  background: rgba(255, 253, 250, .88); backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
-  border-bottom: 1px solid #d4ccbd;
-  padding: 10px 22px; display: flex; align-items: center; justify-content: space-between;
-  gap: 12px;
-}
-.brand { display: inline-flex; align-items: center; gap: 10px; text-decoration: none; color: #0c1a2e; min-height: 44px; }
-.brand-mark-img {
-  width: 34px; height: 34px; display: block;
-  filter: drop-shadow(0 2px 4px rgba(0,0,0,.1));
-}
-.brand-text {
-  font-family: 'Fraunces', serif; font-weight: 900;
-  font-size: 16px; letter-spacing: -.01em; color: #0c1a2e;
-  display: inline-flex; flex-direction: column; line-height: 1.05;
-}
-.brand-text .brand-sub {
-  font-family: 'Inter', sans-serif; font-size: 10px; font-weight: 500;
-  color: #5a5a5a; letter-spacing: 1.5px; text-transform: uppercase;
-  margin-top: 2px;
-}
-.brand-dot { color: #e63946; }
-.brand:focus-visible { outline: 2px solid #e63946; outline-offset: 3px; border-radius: 4px; }
-.brand-tag {
-  font-size: 11px; color: #666; text-transform: uppercase; letter-spacing: 1.2px;
-  font-weight: 500;
-}
-@media (max-width: 520px) { .brand-tag { display: none; } }
-@media (prefers-color-scheme: dark) {
-  .brandbar { background: rgba(11,20,26,.9); border-bottom-color: rgba(255,255,255,.08); }
-  .brand, .brand-text { color: #e9edef; }
-  .brand-text .brand-sub { color: #aebac1; }
-  .brand-tag { color: #aebac1; }
-}
+/* Header unificado viene de site-nav.js (site-header). */
 
 .hero-brand {
   margin-top: 24px; font-size: 13px; color: #777;
@@ -449,17 +413,6 @@ body {
 <body>
 
 <div class="progress" id="prog"></div>
-
-<header class="brandbar">
-  <a class="brand" href="../" aria-label="Inicio Auditoría EG2026 · Neuracode">
-    <img class="brand-mark-img" src="/logo-neuracode-tight.png" alt="Neuracode">
-    <span class="brand-text">
-      Neuracode<span class="brand-dot">.</span>Auditoría
-      <span class="brand-sub">EG2026 · Perú</span>
-    </span>
-  </a>
-  <div class="sn-mount"></div>
-</header>
 
 <section class="hero">
   <div class="kicker">una historia real · 19 abr 2026</div>
