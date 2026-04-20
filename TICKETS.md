@@ -51,23 +51,14 @@ Marcar `[x]` al completar. `/ecc:plan <ID>` para iniciar.
 
 ## 💭 Sueño (sin fecha)
 
-- [ ] **ML-ANOM** · Isolation forest saltos temporales.
-- [ ] **NEEDLE** · Dashboard estilo NYT Election Needle.
-- [ ] **NOTARY** · Hash-chain en blockchain (Polygon).
-- [ ] **PYPI** · Paquete `pip install electoral-audit` (Bolivia/Ecuador/Colombia).
-- [x] **DATA-MARKET** · ✓ 2026-04-20. Dataset 3.6M filas en https://huggingface.co/datasets/Neuracode/onpe-eg2026-mesa-a-mesa · parquet 10.6MB · CC-BY-4.0.
-- [ ] **PEER** · Peer-review MIT Election Lab / Linzer / Mebane.
-- [ ] **CALAG-MAP-01** · Mapa 211 mesas CALAG con popup electores.
-- [ ] **PROC-TL-01** · Timeline procesal denuncia JNE→ONPE auto-actualizado.
-- [ ] **I18N-01** · Multi-idioma EN.
-- [ ] **TIMELINE-BOT** · Cron Telegram cada Δmargen ≥0.1pp (infra `telegram_notify.py` lista).
-- [ ] **REVERSE-CALAG** · Simular ausentismo normal en 211 mesas CALAG vs real 2026.
-- [ ] **BRAND-02** · Rehacer dashboard monolito heredando brand.css. · 6h
+(Limpiado 2026-04-20 — sin tracción/ROI. DATA-MARKET completado, BRAND-02 duplicado en Sprint 0.)
 
 ---
 
 ## ✅ Completados
 
+- [x] **DATA-MARKET** · ✓ 2026-04-20. Dataset 3.6M filas en https://huggingface.co/datasets/Neuracode/onpe-eg2026-mesa-a-mesa · parquet 10.6MB · CC-BY-4.0.
+- [x] **HALL-0420** · ✓ 2026-04-20. H1 sesgo geográfico, H2 partidos vs imp, H3 outliers nb. DB `eg2026.duckdb` + `findings_consolidado_0420.json`. Mapping prefix→depto ONPE corregido (alfabético + Callao=24).
 - [x] **MESA-02** · Reconcile contable cross-endpoint (7 checks, 0 findings). ✓ 2026-04-18 · captura 20260419T025134Z.
 - [x] **RESEARCH-01** · Endpoints mesa-a-mesa confirmados. ✓ 2026-04-18 · `/actas/observadas`, `/actas/{id}` con lineaTiempo T/D/C/O/E, `/ubigeos/{dep,prov,dist}`.
 - [x] **MESA-03** · Worker allowlist ampliada (actas/observadas, actas/{id}, ubigeos/*). ✓ 2026-04-18 · `proxy/onpe-proxy-neuracode/src/worker.js` L13-20.

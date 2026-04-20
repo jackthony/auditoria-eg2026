@@ -417,6 +417,24 @@ body {
   .wordmark { color: #e9edef; }
   .byline { color: #aebac1; }
 }
+.webinar {
+  margin: 48px auto 0; max-width: 700px;
+  background: linear-gradient(135deg, #f8f6f1 0%, #ffffff 100%);
+  border: 1px solid rgba(0,0,0,.08); border-radius: 16px;
+  padding: 28px; display: grid; grid-template-columns: 180px 1fr; gap: 26px;
+  align-items: center; box-shadow: 0 8px 28px rgba(0,0,0,.06);
+}
+.webinar img { width: 100%; height: auto; border-radius: 10px; display: block; box-shadow: 0 4px 14px rgba(0,0,0,.1); }
+.webinar-body { text-align: left; font-family: 'Inter', sans-serif; }
+.webinar-eyebrow { font-size: 11px; letter-spacing: 2px; text-transform: uppercase; color: var(--blood); font-weight: 700; margin-bottom: 8px; }
+.webinar h3 { font-family: 'Fraunces', serif; font-size: 22px; font-weight: 800; color: #111b21; margin: 0 0 8px; line-height: 1.25; }
+.webinar p { font-size: 14px; color: #667781; margin: 0 0 14px; line-height: 1.5; }
+.webinar .cta-webinar { display: inline-block; background: var(--blood); color: #fff; padding: 11px 20px; font-weight: 600; font-size: 13px; text-decoration: none; border-radius: 8px; transition: opacity .2s; }
+.webinar .cta-webinar:hover { opacity: .9; }
+@media (max-width: 620px) {
+  .webinar { grid-template-columns: 1fr; gap: 16px; padding: 20px; }
+  .webinar img { max-width: 200px; margin: 0 auto; }
+}
 </style>
 </head>
 <body>
@@ -718,8 +736,17 @@ body {
     Por <strong style="color:#111">Jack Aguilar</strong> · <span class="wordmark">Neuracode<span class="dot">.</span>Academy</span><br>
     Aporte ciudadano independiente · Sin afiliación política<br><br>
     <a href="../historia/">Versión larga editorial</a> ·
-    <a href="../">Dashboard técnico</a> ·
-    <a href="../MEMORIAL_TECNICO_FISCAL.pdf">Memorial al Fiscal</a>
+    <a href="../">Dashboard técnico</a>
+  </div>
+
+  <div class="webinar">
+    <img src="../neuracode-webinar.png" alt="Webinar Neuracode — Usar la IA te hace más productivo" loading="lazy">
+    <div class="webinar-body">
+      <div class="webinar-eyebrow">Neuracode Academy</div>
+      <h3>¿Quieres aprender a analizar datos así con IA?</h3>
+      <p>Webinar gratis: <strong>Lunes 8PM · Zoom</strong>. Pipelines, forense de datos y automatización con Python + Claude. Dictado por Jack Aguilar.</p>
+      <a class="cta-webinar" href="https://www.neuracode.dev/comunidad" target="_blank" rel="noopener">Regístrate ahora →</a>
+    </div>
   </div>
 </section>
 

@@ -1,0 +1,396 @@
+{
+  "depto": "San Martín",
+  "ranking_partidos_sm": [
+    {
+      "partido": "FUERZA POPULAR",
+      "votos_sm": "77944",
+      "pct_sm": 23.196
+    },
+    {
+      "partido": "JUNTOS POR EL PERÚ",
+      "votos_sm": "74985",
+      "pct_sm": 22.315
+    },
+    {
+      "partido": "PARTIDO CÍVICO OBRAS",
+      "votos_sm": "39101",
+      "pct_sm": 11.636
+    },
+    {
+      "partido": "RENOVACIÓN POPULAR",
+      "votos_sm": "20579",
+      "pct_sm": 6.124
+    },
+    {
+      "partido": "PARTIDO PAÍS PARA TODOS",
+      "votos_sm": "17876",
+      "pct_sm": 5.32
+    },
+    {
+      "partido": "PARTIDO DEL BUEN GOBIERNO",
+      "votos_sm": "16056",
+      "pct_sm": 4.778
+    },
+    {
+      "partido": "AHORA NACIÓN - AN",
+      "votos_sm": "15531",
+      "pct_sm": 4.622
+    },
+    {
+      "partido": "ALIANZA PARA EL PROGRESO",
+      "votos_sm": "7448",
+      "pct_sm": 2.216
+    },
+    {
+      "partido": "PARTIDO SICREO",
+      "votos_sm": "7199",
+      "pct_sm": 2.142
+    },
+    {
+      "partido": "PODEMOS PERÚ",
+      "votos_sm": "6811",
+      "pct_sm": 2.027
+    }
+  ],
+  "locales_top_impugnacion": [
+    {
+      "local_votacion": "IE CAHUIDE",
+      "mesas": 9,
+      "imp": "4",
+      "pct_imp": 44.44,
+      "avg_electores": 291.0
+    },
+    {
+      "local_votacion": "IE 0091 ABRAHAM GARCIA TORRES",
+      "mesas": 14,
+      "imp": "6",
+      "pct_imp": 42.86,
+      "avg_electores": 282.0
+    },
+    {
+      "local_votacion": "IE 00516 HORACIO ZEBALLOS GAMEZ - SECUNDARIA",
+      "mesas": 6,
+      "imp": "2",
+      "pct_imp": 33.33,
+      "avg_electores": 273.0
+    },
+    {
+      "local_votacion": "IE 0010 JULIO PIZARRO CARDENAS",
+      "mesas": 3,
+      "imp": "1",
+      "pct_imp": 33.33,
+      "avg_electores": 251.0
+    },
+    {
+      "local_votacion": "IE FRANCISCO BOLOGNESI",
+      "mesas": 3,
+      "imp": "1",
+      "pct_imp": 33.33,
+      "avg_electores": 289.0
+    },
+    {
+      "local_votacion": "IE 0313 VISTA ALEGRE",
+      "mesas": 3,
+      "imp": "1",
+      "pct_imp": 33.33,
+      "avg_electores": 300.0
+    },
+    {
+      "local_votacion": "IE NICANOR REATEGUI DEL AGUILA",
+      "mesas": 11,
+      "imp": "3",
+      "pct_imp": 27.27,
+      "avg_electores": 294.0
+    },
+    {
+      "local_votacion": "IE 0482 CIRO SALDAÑA GIRALDO",
+      "mesas": 11,
+      "imp": "3",
+      "pct_imp": 27.27,
+      "avg_electores": 294.0
+    },
+    {
+      "local_votacion": "IE 0636",
+      "mesas": 13,
+      "imp": "3",
+      "pct_imp": 23.08,
+      "avg_electores": 294.0
+    },
+    {
+      "local_votacion": "IE 0005 ANTONIO RAYMONDI",
+      "mesas": 13,
+      "imp": "3",
+      "pct_imp": 23.08,
+      "avg_electores": 289.0
+    },
+    {
+      "local_votacion": "IE 0084 ANDRES AVELINO CACERES DOREGARAY",
+      "mesas": 18,
+      "imp": "4",
+      "pct_imp": 22.22,
+      "avg_electores": 296.0
+    },
+    {
+      "local_votacion": "IE 0714",
+      "mesas": 9,
+      "imp": "2",
+      "pct_imp": 22.22,
+      "avg_electores": 300.0
+    },
+    {
+      "local_votacion": "IE 0101 LUIS WALTER ALVARADO BARTRA",
+      "mesas": 9,
+      "imp": "2",
+      "pct_imp": 22.22,
+      "avg_electores": 293.0
+    },
+    {
+      "local_votacion": "IE 00958 LA MOLINA",
+      "mesas": 14,
+      "imp": "3",
+      "pct_imp": 21.43,
+      "avg_electores": 300.0
+    },
+    {
+      "local_votacion": "IE ARTURO BARTRA GARCIA",
+      "mesas": 10,
+      "imp": "2",
+      "pct_imp": 20.0,
+      "avg_electores": 284.0
+    }
+  ],
+  "bucket_quintiles": {
+    "q20": 0.0,
+    "q80": 0.125
+  },
+  "partidos_por_bucket": [
+    {
+      "partido": "JUNTOS POR EL PERÚ",
+      "pct_alto": 23.502,
+      "pct_bajo": 21.548,
+      "delta_pp": 1.954
+    },
+    {
+      "partido": "FUERZA POPULAR",
+      "pct_alto": 24.113,
+      "pct_bajo": 22.792,
+      "delta_pp": 1.321
+    },
+    {
+      "partido": "PARTIDO PAÍS PARA TODOS",
+      "pct_alto": 5.46,
+      "pct_bajo": 5.298,
+      "delta_pp": 0.161
+    },
+    {
+      "partido": "PODEMOS PERÚ",
+      "pct_alto": 2.147,
+      "pct_bajo": 2.016,
+      "delta_pp": 0.131
+    },
+    {
+      "partido": "UNIDAD NACIONAL",
+      "pct_alto": 0.611,
+      "pct_bajo": 0.493,
+      "delta_pp": 0.118
+    },
+    {
+      "partido": "PARTIDO POLÍTICO PRIN",
+      "pct_alto": 0.304,
+      "pct_bajo": 0.228,
+      "delta_pp": 0.076
+    },
+    {
+      "partido": "FE EN EL PERÚ",
+      "pct_alto": 0.245,
+      "pct_bajo": 0.174,
+      "delta_pp": 0.072
+    },
+    {
+      "partido": "ALIANZA ELECTORAL VENCEREMOS",
+      "pct_alto": 0.905,
+      "pct_bajo": 0.846,
+      "delta_pp": 0.059
+    },
+    {
+      "partido": "PARTIDO POLÍTICO INTEGRIDAD DEMOCRÁTICA",
+      "pct_alto": 0.367,
+      "pct_bajo": 0.311,
+      "delta_pp": 0.057
+    },
+    {
+      "partido": "FUERZA Y LIBERTAD",
+      "pct_alto": 0.207,
+      "pct_bajo": 0.15,
+      "delta_pp": 0.057
+    },
+    {
+      "partido": "PARTIDO DEMÓCRATA UNIDO PERÚ",
+      "pct_alto": 0.933,
+      "pct_bajo": 0.883,
+      "delta_pp": 0.05
+    },
+    {
+      "partido": "SALVEMOS AL PERÚ",
+      "pct_alto": 0.184,
+      "pct_bajo": 0.152,
+      "delta_pp": 0.031
+    },
+    {
+      "partido": "PARTIDO POLÍTICO PERÚ ACCIÓN",
+      "pct_alto": 0.272,
+      "pct_bajo": 0.249,
+      "delta_pp": 0.023
+    },
+    {
+      "partido": "PARTIDO DEMOCRATICO FEDERAL",
+      "pct_alto": 0.185,
+      "pct_bajo": 0.168,
+      "delta_pp": 0.018
+    },
+    {
+      "partido": "PARTIDO POLÍTICO COOPERACIÓN POPULAR",
+      "pct_alto": 0.685,
+      "pct_bajo": 0.668,
+      "delta_pp": 0.017
+    },
+    {
+      "partido": "LIBERTAD POPULAR",
+      "pct_alto": 0.197,
+      "pct_bajo": 0.182,
+      "delta_pp": 0.015
+    },
+    {
+      "partido": "AVANZA PAÍS - PARTIDO DE INTEGRACIÓN SOCIAL",
+      "pct_alto": 0.649,
+      "pct_bajo": 0.642,
+      "delta_pp": 0.007
+    },
+    {
+      "partido": "UN CAMINO DIFERENTE",
+      "pct_alto": 0.362,
+      "pct_bajo": 0.36,
+      "delta_pp": 0.003
+    },
+    {
+      "partido": "PARTIDO POLÍTICO NACIONAL PERÚ LIBRE",
+      "pct_alto": 0.766,
+      "pct_bajo": 0.773,
+      "delta_pp": -0.007
+    },
+    {
+      "partido": "PERÚ MODERNO",
+      "pct_alto": 0.042,
+      "pct_bajo": 0.049,
+      "delta_pp": -0.007
+    },
+    {
+      "partido": "PARTIDO DEMÓCRATA VERDE",
+      "pct_alto": 0.526,
+      "pct_bajo": 0.543,
+      "delta_pp": -0.017
+    },
+    {
+      "partido": "PARTIDO DE LOS TRABAJADORES Y EMPRENDEDORES PTE - PERÚ",
+      "pct_alto": 0.063,
+      "pct_bajo": 0.082,
+      "delta_pp": -0.018
+    },
+    {
+      "partido": "PARTIDO PATRIÓTICO DEL PERÚ",
+      "pct_alto": 1.09,
+      "pct_bajo": 1.112,
+      "delta_pp": -0.022
+    },
+    {
+      "partido": "PROGRESEMOS",
+      "pct_alto": 0.255,
+      "pct_bajo": 0.285,
+      "delta_pp": -0.029
+    },
+    {
+      "partido": "PARTIDO DEMOCRÁTICO SOMOS PERÚ",
+      "pct_alto": 1.119,
+      "pct_bajo": 1.156,
+      "delta_pp": -0.038
+    },
+    {
+      "partido": "PARTIDO MORADO",
+      "pct_alto": 0.476,
+      "pct_bajo": 0.536,
+      "delta_pp": -0.06
+    },
+    {
+      "partido": "PARTIDO FRENTE DE LA ESPERANZA 2021",
+      "pct_alto": 0.903,
+      "pct_bajo": 1.053,
+      "delta_pp": -0.149
+    },
+    {
+      "partido": "ALIANZA PARA EL PROGRESO",
+      "pct_alto": 2.207,
+      "pct_bajo": 2.387,
+      "delta_pp": -0.18
+    },
+    {
+      "partido": "PRIMERO LA GENTE – COMUNIDAD, ECOLOGÍA, LIBERTAD Y PROGRESO",
+      "pct_alto": 1.601,
+      "pct_bajo": 1.788,
+      "delta_pp": -0.187
+    },
+    {
+      "partido": "PARTIDO APRISTA PERUANO",
+      "pct_alto": 0.997,
+      "pct_bajo": 1.188,
+      "delta_pp": -0.191
+    },
+    {
+      "partido": "RENOVACIÓN POPULAR",
+      "pct_alto": 6.141,
+      "pct_bajo": 6.343,
+      "delta_pp": -0.202
+    },
+    {
+      "partido": "PARTIDO POLÍTICO PERÚ PRIMERO",
+      "pct_alto": 0.945,
+      "pct_bajo": 1.198,
+      "delta_pp": -0.253
+    },
+    {
+      "partido": "PARTIDO SICREO",
+      "pct_alto": 1.81,
+      "pct_bajo": 2.272,
+      "delta_pp": -0.462
+    },
+    {
+      "partido": "AHORA NACIÓN - AN",
+      "pct_alto": 4.433,
+      "pct_bajo": 4.965,
+      "delta_pp": -0.532
+    },
+    {
+      "partido": "PARTIDO DEL BUEN GOBIERNO",
+      "pct_alto": 4.181,
+      "pct_bajo": 5.046,
+      "delta_pp": -0.865
+    },
+    {
+      "partido": "PARTIDO CÍVICO OBRAS",
+      "pct_alto": 11.115,
+      "pct_bajo": 12.064,
+      "delta_pp": -0.95
+    },
+    {
+      "partido": "FRENTE POPULAR AGRÍCOLA FÍA DEL PERÚ",
+      "pct_alto": null,
+      "pct_bajo": null,
+      "delta_pp": null
+    },
+    {
+      "partido": "PARTIDO CIUDADANOS POR EL PERÚ",
+      "pct_alto": null,
+      "pct_bajo": null,
+      "delta_pp": null
+    }
+  ]
+}
