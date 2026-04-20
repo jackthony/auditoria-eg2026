@@ -97,11 +97,14 @@ secrets/
 reports/perito/
 
 # ──────────────────────────────────────────────────────────────
-# Claude Code — contexto interno, NO publicar
-# Excepción: settings.json (hooks ECC compartidos del proyecto)
+# Claude Code — público = showcase metodológico Neuracode Academy
+# Publicados: settings.json (hooks), agents/ (storytelling + fiscal),
+#             rules/cavernicola-rtk.md (política proyecto)
+# NO publicar: settings.local.json (tokens), scheduled_tasks.lock, worktrees/
 # ──────────────────────────────────────────────────────────────
-.claude/*
-!.claude/settings.json
+.claude/settings.local.json
+.claude/scheduled_tasks.lock
+.claude/worktrees/
 
 # ──────────────────────────────────────────────────────────────
 # Informe privado para cliente original (RP) — NO publicar
