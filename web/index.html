@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Auditoría Elecciones Generales 2026 por Neuracode — Algo no cuadra</title>
-<meta name="description" content="Neuracode auditó mesa por mesa el escrutinio ONPE EG2026. 4,703 mesas faltantes. 566,233 votos sin cuadrar. Datos públicos, código abierto, SHA-256 verificable. Sin afiliación política.">
+<meta name="description" content="Neuracode auditó mesa por mesa el escrutinio ONPE EG2026. 4,703 mesas faltantes. 566,233 votos sin cuadrar. Datos públicos, código abierto, SHA-256 verificable. Cualquiera reproduce el análisis.">
 <meta name="author" content="Neuracode · Coautoría: Jack Aguilar">
 <meta property="fb:app_id" content="1527540298384685">
 <meta property="og:site_name" content="Auditoría EG2026 · Neuracode">
@@ -200,12 +200,16 @@ footer .mono { font-family: 'Courier New', monospace; font-size: 12px; word-brea
   .webinar img { max-width: 200px; margin: 0 auto; }
 }
 </style>
+<link rel="stylesheet" href="/_assets/site-nav.css">
+<script src="/_assets/site-nav.js" defer></script>
+<link rel="stylesheet" href="/_assets/site-share.css">
+<script src="/_assets/site-share.js" defer></script>
 </head>
 <body>
 <div class="wrap">
 
   <div class="byline">
-    <img src="logo-neuracode.png" alt="Neuracode" style="height:28px;vertical-align:middle;margin-right:10px;display:inline-block;">
+    <img src="logo-neuracode-tight.png" alt="Neuracode" style="height:28px;vertical-align:middle;margin-right:10px;display:inline-block;">
     <strong>Neuracode</strong> · auditoría ciudadana · <span id="corte">cargando corte…</span>
   </div>
 
@@ -270,12 +274,6 @@ footer .mono { font-family: 'Courier New', monospace; font-size: 12px; word-brea
 
   <footer>
     <div>SHA-256 <span class="mono" id="hash-val">calculando…</span> · <a href="#" id="verify-inline">verificar inline</a></div>
-    <div style="margin-top:10px;">
-      <a href="https://github.com/jackthony/auditoria-eg2026" target="_blank" rel="noopener">GitHub</a> ·
-      <a href="https://www.tiktok.com/@neuracode" target="_blank" rel="noopener">TikTok</a> ·
-      <a href="https://instagram.com/neuracode.dev" target="_blank" rel="noopener">Instagram</a> ·
-      <a href="https://www.neuracode.dev/comunidad" target="_blank" rel="noopener">Neuracode Academy</a>
-    </div>
     <div style="margin-top:10px;">Por <strong>Neuracode</strong> · Coautoría: Jack Aguilar</div>
 
     <div class="webinar">
@@ -336,7 +334,7 @@ footer .mono { font-family: 'Courier New', monospace; font-size: 12px; word-brea
   menu.className = 'share-menu';
   menu.innerHTML = '<a href="#" data-ch="x">𝕏 Compartir en X</a><a href="#" data-ch="wa">💬 WhatsApp</a><a href="#" data-ch="tg">✈️ Telegram</a><a href="#" data-ch="copy">🔗 Copiar link</a>';
   document.body.appendChild(fab); document.body.appendChild(menu);
-  const url = 'https://jackthony.github.io/auditoria-eg2026/';
+  const url = (document.querySelector('link[rel="canonical"]') || {}).href || location.href;
   const text = 'Auditoría EG2026 Perú: análisis forense del escrutinio ONPE. Datos públicos, código abierto, SHA-256 reproducible.';
   const full = text + ' ' + url;
   fab.addEventListener('click', async (e) => {

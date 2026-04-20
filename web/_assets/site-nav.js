@@ -12,25 +12,38 @@
   })();
 
   const CASES = [
-    { slug: '/',                 t: 'Dashboard técnico',       p: 'Monitor SHA-256 + hallazgos' },
-    { slug: '/chat/',            t: 'Tía María pregunta',      p: 'Sin jerga, solo lo esencial' },
-    { slug: '/historia/',        t: 'Historia editorial',      p: 'Narrativa mesa a mesa' },
-    { slug: '/impugnadas/',      t: 'Impugnadas Lima+Exterior',p: 'z=3.9 sobre rural' },
-    { slug: '/mesas-faltantes/', t: 'Mesas faltantes',         p: '4,703 sin acta publicada' },
-    { slug: '/mesas-lentas/',    t: 'Mesas lentas',            p: 'Retraso anómalo de escrutinio' },
-    { slug: '/ranking-cambia/',  t: 'Ranking cambia',          p: '2° puesto cambia al sumar' },
-    { slug: '/fdr/',             t: 'FDR (falsos descubrimientos)', p: 'Corrección Benjamini-Hochberg' },
+    { slug: '/',                 t: 'Inicio',                        p: 'Landing · hallazgos principales' },
+    { slug: '/chat/',            t: 'Tía María pregunta',            p: 'Sin jerga, solo lo esencial' },
+    { slug: '/historia/',        t: 'Historia editorial',            p: 'Narrativa mesa a mesa' },
+    { slug: '/impugnadas/',      t: 'Impugnadas Lima+Exterior',      p: 'z=3.9 sobre rural' },
+    { slug: '/mesas-faltantes/', t: 'Mesas faltantes',               p: '4,703 sin acta publicada' },
+    { slug: '/mesas-lentas/',    t: 'Mesas lentas',                  p: 'Retraso anómalo de escrutinio' },
+    { slug: '/ranking-cambia/',  t: 'Ranking cambia',                p: '2° puesto cambia al sumar' },
+    { slug: '/fdr/',             t: 'FDR (falsos descubrimientos)',  p: 'Corrección Benjamini-Hochberg' },
+    { slug: '/dashboard/',       t: 'Dashboard técnico',             p: 'WIP · info desactualizada',  wip: true },
   ];
 
-  const SOCIAL = [
-    { href: 'https://github.com/jackthony/auditoria-eg2026', t: 'GitHub' },
-    { href: 'https://www.linkedin.com/in/jackaguilarc/',     t: 'LinkedIn' },
-    { href: 'https://x.com/JackTonyAC',                      t: 'X' },
-    { href: 'https://www.tiktok.com/@jack.de.neura.code',    t: 'TikTok' },
-    { href: 'https://www.instagram.com/neuracode.dev/',      t: 'IG Neuracode' },
-    { href: 'https://www.instagram.com/jackdeneuracode/',    t: 'IG Jack' },
-    { href: 'https://www.facebook.com/neuracode/',           t: 'FB Neuracode' },
-    { href: 'https://www.neuracode.dev/comunidad',           t: 'Neuracode Academy' },
+  const SOCIAL_GROUPS = [
+    {
+      label: 'Jack',
+      items: [
+        { href: 'https://www.linkedin.com/in/jackaguilarc/',  t: 'LinkedIn' },
+        { href: 'https://x.com/JackTonyAC',                   t: 'X' },
+        { href: 'https://www.tiktok.com/@jack.de.neura.code', t: 'TikTok' },
+        { href: 'https://www.instagram.com/jackdeneuracode/', t: 'IG' },
+        { href: 'https://www.instagram.com/jacktonyac/',      t: 'IG personal' },
+        { href: 'https://www.facebook.com/jack.tony.1804',    t: 'FB' },
+      ],
+    },
+    {
+      label: 'Neuracode',
+      items: [
+        { href: 'https://www.instagram.com/neuracode.dev/',      t: 'IG' },
+        { href: 'https://www.facebook.com/neuracode/',           t: 'FB' },
+        { href: 'https://www.neuracode.dev/comunidad',           t: 'Academy' },
+        { href: 'https://github.com/jackthony/auditoria-eg2026', t: 'GitHub' },
+      ],
+    },
   ];
 
   const current = location.pathname.replace(/index\.html$/, '').replace(/\/+$/, '/') || '/';
@@ -40,7 +53,8 @@
     const logo = ROOT + '/logo-neuracode-tight.png';
     const items = CASES.map(c => {
       const active = (c.slug === current) ? ' sn-active' : '';
-      return `<a class="sn-case${active}" href="${c.slug}">
+      const wip = c.wip ? ' sn-wip' : '';
+      return `<a class="sn-case${active}${wip}" href="${c.slug}">
         <div class="sn-t">${c.t}</div>
         <div class="sn-p">${c.p}</div>
       </a>`;
@@ -69,13 +83,24 @@
     return header;
   }
 
+  // ═════ SOCIAL · render reutilizable en 3 columnas ═════
+  function renderSocialGroups() {
+    return SOCIAL_GROUPS.map(g => {
+      const links = g.items.map(s =>
+        `<a href="${s.href}" target="_blank" rel="noopener">${s.t}</a>`
+      ).join('');
+      return `
+        <div class="sn-ss-col">
+          <div class="sn-ss-label">${g.label}</div>
+          <div class="sn-ss-links">${links}</div>
+        </div>
+      `;
+    }).join('');
+  }
+
   // ═════ FOOTER ═════
   function buildFooter() {
     const logo = ROOT + '/logo-neuracode-tight.png';
-    const social = SOCIAL.map(s =>
-      `<a href="${s.href}" target="_blank" rel="noopener">${s.t}</a>`
-    ).join('');
-
     const footer = document.createElement('footer');
     footer.className = 'site-footer';
     footer.innerHTML = `
@@ -85,8 +110,8 @@
           <span class="sn-wordmark">Neuracode<span class="sn-dot">.</span>Auditoría</span>
         </div>
         <div class="sn-fbody">
-          Auditoría ciudadana EG2026 · Por <strong>Jack Aguilar</strong> · Sin afiliación política.
-          <div class="sn-social">${social}</div>
+          Autoría: <strong>Jack Aguilar</strong>. Análisis técnico reproducible. Cualquiera verifica.
+          <div class="sn-social-grid">${renderSocialGroups()}</div>
           <div class="sn-meta" id="sn-sha">SHA-256: calculando…</div>
           <div class="sn-license">Licencia MIT (código) · CC-BY-4.0 (datos) · Datos públicos ONPE.</div>
         </div>
@@ -95,14 +120,55 @@
     return footer;
   }
 
+  // ═════ STRIP SOCIAL · para footers preexistentes ═════
+  function buildSocialStrip() {
+    const strip = document.createElement('div');
+    strip.className = 'sn-social-strip';
+    strip.innerHTML = `<div class="sn-social-grid">${renderSocialGroups()}</div>`;
+    return strip;
+  }
+
+  // ═════ FLOATING CASES · para páginas con header propio ═════
+  function buildFloatingCases() {
+    const items = CASES.map(c => {
+      const active = (c.slug === current) ? ' sn-active' : '';
+      const wip = c.wip ? ' sn-wip' : '';
+      return `<a class="sn-case${active}${wip}" href="${c.slug}">
+        <div class="sn-t">${c.t}</div>
+        <div class="sn-p">${c.p}</div>
+      </a>`;
+    }).join('');
+
+    const wrap = document.createElement('div');
+    wrap.className = 'sn-float sn-cases';
+    wrap.innerHTML = `
+      <button class="sn-btn" id="sn-btn" aria-haspopup="true" aria-expanded="false">
+        Casos <span class="sn-caret">▼</span>
+      </button>
+      <div class="sn-dropdown" id="sn-dropdown" role="menu">${items}</div>
+    `;
+    return wrap;
+  }
+
   // ═════ WIRE UP ═════
   function init() {
-    // Injector: si la página trae su propio header/footer, se respeta; si no, se prepone/apende.
-    if (!document.querySelector('.site-header')) {
+    // Regla:
+    //  - Si la página NO tiene ningún <header> (ni propio ni .site-header) → inyectar header completo.
+    //  - Si tiene header propio (ej. dashboard, chat) → inyectar solo botón flotante "Casos".
+    //  - Nunca duplicar headers.
+    const hasAnyHeader = document.querySelector('header, .site-header');
+    if (!hasAnyHeader) {
       document.body.insertBefore(buildHeader(), document.body.firstChild);
+    } else if (!document.querySelector('.sn-float')) {
+      document.body.appendChild(buildFloatingCases());
     }
-    if (!document.querySelector('.site-footer')) {
+    const existingFooter = document.querySelector('footer, .site-footer');
+    if (!existingFooter) {
+      // Sin footer propio → inyectar completo
       document.body.appendChild(buildFooter());
+    } else if (!existingFooter.querySelector('.sn-social-strip')) {
+      // Con footer propio → anexar solo el strip social
+      existingFooter.appendChild(buildSocialStrip());
     }
 
     // Dropdown toggle
