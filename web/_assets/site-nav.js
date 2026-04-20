@@ -13,13 +13,14 @@
 
   const CASES = [
     { slug: '/',                 t: 'Inicio',                        p: 'Landing · hallazgos principales' },
-    { slug: '/chat/',            t: 'Tía María pregunta',            p: 'Sin jerga, solo lo esencial' },
-    { slug: '/historia/',        t: 'Historia editorial',            p: 'Narrativa mesa a mesa' },
-    { slug: '/impugnadas/',      t: 'Impugnadas Lima+Exterior',      p: 'z=3.9 sobre rural' },
-    { slug: '/mesas-faltantes/', t: 'Mesas faltantes',               p: '4,703 sin acta publicada' },
-    { slug: '/mesas-lentas/',    t: 'Mesas lentas',                  p: 'Retraso anómalo de escrutinio' },
+    { slug: '/h4/',              t: 'H4 · JPP 41% mesas 900k+',      p: 'Hallazgo crítico · voto especial' },
+    { slug: '/impugnadas/',      t: 'H1 · Impugnadas Lima+Exterior', p: 'Sesgo geográfico · z=3.9' },
     { slug: '/ranking-cambia/',  t: 'Ranking cambia',                p: '2° puesto cambia al sumar' },
     { slug: '/fdr/',             t: 'FDR (falsos descubrimientos)',  p: 'Corrección Benjamini-Hochberg' },
+    { slug: '/mesas-faltantes/', t: 'Mesas faltantes',               p: '4,703 sin acta publicada' },
+    { slug: '/mesas-lentas/',    t: 'Mesas lentas',                  p: 'Retraso anómalo de escrutinio' },
+    { slug: '/chat/',            t: 'Tía María pregunta',            p: 'Sin jerga, solo lo esencial' },
+    { slug: '/historia/',        t: 'Historia editorial',            p: 'Narrativa mesa a mesa' },
     { slug: '/dashboard/',       t: 'Dashboard técnico',             p: 'WIP · info desactualizada',  wip: true },
   ];
 

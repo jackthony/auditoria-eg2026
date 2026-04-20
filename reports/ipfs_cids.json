@@ -1,0 +1,53 @@
+{
+  "meta": {
+    "generated_at_utc": "2026-04-20T11:25:22.937640+00:00",
+    "universo_ts": "20260420T074202Z",
+    "total_mesas": 92766,
+    "primary_provider": "filebase",
+    "backup_provider": "pinata",
+    "filebase_pinned_count": 3,
+    "errors": 1
+  },
+  "filebase_pins": [
+    {
+      "file": "captures/20260420T074202Z/MESAS_MANIFEST.jsonl",
+      "description": "Manifest SHA-256 de 92,766 mesas (cadena custodia v2)",
+      "size_bytes": 22780459,
+      "sha256_local": "06008ae355bf83a13d5f4f79785282fac1e3c1aeadc5250bb474a7f3c1d11cdd",
+      "ipfs_cid": "QmSxcH2NQ22PTHDyQR6r4nkYHWvT71mAZqAh26mvpPynwS",
+      "filebase_bucket": "neuracode-audit-eg2026",
+      "filebase_s3_key": "captures/20260420T074202Z/MESAS_MANIFEST.jsonl",
+      "primary_url": "https://ipfs.filebase.io/ipfs/QmSxcH2NQ22PTHDyQR6r4nkYHWvT71mAZqAh26mvpPynwS",
+      "dedicated_url_pending": "https://neuracode-audit-eg2026.myfilebase.com/ipfs/QmSxcH2NQ22PTHDyQR6r4nkYHWvT71mAZqAh26mvpPynwS",
+      "ipfs_io_url": "https://ipfs.io/ipfs/QmSxcH2NQ22PTHDyQR6r4nkYHWvT71mAZqAh26mvpPynwS",
+      "dweb_url": "https://dweb.link/ipfs/QmSxcH2NQ22PTHDyQR6r4nkYHWvT71mAZqAh26mvpPynwS"
+    },
+    {
+      "file": "reports/hf_dataset/onpe_eg2026_mesas_20260420T074202Z.parquet",
+      "description": "Parquet 3.79M actas (dataset HF Neuracode)",
+      "size_bytes": 10856324,
+      "sha256_local": "02fa363e0b095e6139955dc31cc9bb47660cfaaec239ed5df500cb8ac4f2dbd1",
+      "ipfs_cid": "QmVCan4WeK2sq8LipRfP7PEz6QQV5kttFgwkhi6q62YX5L",
+      "filebase_bucket": "neuracode-audit-eg2026",
+      "filebase_s3_key": "reports/hf_dataset/onpe_eg2026_mesas_20260420T074202Z.parquet",
+      "primary_url": "https://ipfs.filebase.io/ipfs/QmVCan4WeK2sq8LipRfP7PEz6QQV5kttFgwkhi6q62YX5L",
+      "dedicated_url_pending": "https://neuracode-audit-eg2026.myfilebase.com/ipfs/QmVCan4WeK2sq8LipRfP7PEz6QQV5kttFgwkhi6q62YX5L",
+      "ipfs_io_url": "https://ipfs.io/ipfs/QmVCan4WeK2sq8LipRfP7PEz6QQV5kttFgwkhi6q62YX5L",
+      "dweb_url": "https://dweb.link/ipfs/QmVCan4WeK2sq8LipRfP7PEz6QQV5kttFgwkhi6q62YX5L"
+    },
+    {
+      "file": "reports/hallazgos_20260420/findings_consolidado_0420.json",
+      "description": "Findings H1-H4 consolidados v2-92k",
+      "size_bytes": 5526,
+      "sha256_local": "f00e1e21c865e4f42ab0ecdf6827c11b03d951f5df747cf378be107dd9667da1",
+      "ipfs_cid": "QmUopL1zep7UkJACBUVpBVKdAU6zcsPqwgbUwY97jLwPPp",
+      "filebase_bucket": "neuracode-audit-eg2026",
+      "filebase_s3_key": "reports/hallazgos_20260420/findings_consolidado_0420.json",
+      "primary_url": "https://ipfs.filebase.io/ipfs/QmUopL1zep7UkJACBUVpBVKdAU6zcsPqwgbUwY97jLwPPp",
+      "dedicated_url_pending": "https://neuracode-audit-eg2026.myfilebase.com/ipfs/QmUopL1zep7UkJACBUVpBVKdAU6zcsPqwgbUwY97jLwPPp",
+      "ipfs_io_url": "https://ipfs.io/ipfs/QmUopL1zep7UkJACBUVpBVKdAU6zcsPqwgbUwY97jLwPPp",
+      "dweb_url": "https://dweb.link/ipfs/QmUopL1zep7UkJACBUVpBVKdAU6zcsPqwgbUwY97jLwPPp"
+    }
+  ],
+  "pinata_pins": []
+}

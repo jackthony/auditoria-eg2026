@@ -94,9 +94,11 @@
 <link rel="stylesheet" href="styles/brand.css">
 <style>
 :root {
-  --ink: #111111;
+  /* Paleta Expediente · identidad Auditoría EG2026 (distinta de Neuracode.Academy) */
+  --ink: #0c1a2e;
   --paper: #faf7f2;
-  --blood: #b0171f;
+  --blood: #e63946;
+  --blood-dark: #b0171f;
   --navy: #1a3a5c;
   --muted: #3d3d3d;
   --muted-soft: #5a5a5a;
@@ -219,24 +221,22 @@ footer .mono { font-family: 'Courier New', monospace; font-size: 12px; word-brea
 
   <section class="prose">
 
-    <p class="meme">🧮 <strong>Imagínate esto:</strong></p>
-    <p>ONPE dice: "procesamos <strong>X mesas</strong>". <br>
-    Tú sumas las mesas que publican → faltan <strong>4.703</strong>. <br>
-    ¿Dónde están? Nadie contesta.</p>
+    <p class="meme">🚨 <strong>El hallazgo más fuerte:</strong></p>
+    <p>Hay <strong>4,703 mesas</strong> (ID 900001-904703) que ONPE no publica por default: militar, policial, penales, exterior. <br>
+    Cuando las recuperas y sumas, un partido saca <strong>41.65%</strong>. <br>
+    En el resto del país ese mismo partido saca <strong>10.91%</strong>. <br>
+    Cuatro veces más. En mesas que nadie revisa.</p>
 
-    <p class="meme">📊 <strong>El 2° puesto:</strong></p>
-    <p>Se decide por <strong>13.624 votos</strong>. <br>
-    Eso es menos gente que la que cabe en el Monumental.<br>
-    Con eso decides quién va a segunda vuelta.</p>
+    <p class="meme">🧮 <strong>Sesgo geográfico impugnadas:</strong></p>
+    <p>El promedio nacional de actas impugnadas es <strong>6.15%</strong>. <br>
+    En el extranjero es <strong>26.35%</strong>. En Loreto <strong>15.3%</strong>. En Ucayali <strong>12%</strong>. <br>
+    Distribución geográfica no aleatoria. p &lt; 0.001.</p>
 
-    <p class="meme">🚪 <strong>Y en Lima:</strong></p>
-    <p>El día de la elección, <strong>211 mesas no abrieron</strong>. <br>
-    Proveedor: CALAG. <strong>63.300 peruanos</strong> se quedaron sin votar. <br>
-    Eso es <strong>4,6 veces el margen</strong> que define el 2° puesto. Léelo otra vez.</p>
-
-    <p class="meme">🎲 <strong>Las probabilidades:</strong></p>
-    <p>Según los datos actuales, <strong>hay 26,9% de chance</strong> de que Renovación Popular pase a Sánchez. <br>
-    No es brujería, es matemática pública. Puedes revisar el código.</p>
+    <p class="meme">📊 <strong>Concentración por partido:</strong></p>
+    <p>Fuerza Popular concentra <strong>+2.19 puntos</strong> en locales de alta impugnación. <br>
+    Juntos por el Perú concentra <strong>+0.87 puntos</strong>. <br>
+    Partido del Buen Gobierno <strong>-1.64 puntos</strong>. <br>
+    Patrón inconsistente con azar.</p>
 
     <p class="meme">⚖️ <strong>Importante:</strong></p>
     <p>Esto <strong>no dice "fraude"</strong>. <br>
@@ -247,26 +247,45 @@ footer .mono { font-family: 'Courier New', monospace; font-size: 12px; word-brea
 
   <hr class="hr">
 
-  <h2>Cuatro puertas.</h2>
+  <h2>Los hallazgos.</h2>
   <div class="cards">
 
-    <a class="card" href="dashboard/">
-      <h3>Dashboard en vivo</h3>
-      <p>Tests, mapas, forecast, findings en tiempo real.</p>
+    <a class="card" href="h4/">
+      <span class="tag">crítico</span>
+      <h3>JPP 41% en mesas 900k+</h3>
+      <p>4 veces el promedio nacional. 4,703 mesas que ONPE no publica por default.</p>
+      <div class="arrow">H4 · abrir →</div>
+    </a>
+
+    <a class="card" href="impugnadas/">
+      <h3>Impugnadas Lima+Exterior</h3>
+      <p>Extranjero 26.35% vs global 6.15%. z=3.9. Sesgo geográfico no aleatorio.</p>
+      <div class="arrow">H1 · abrir →</div>
+    </a>
+
+    <a class="card" href="ranking-cambia/">
+      <h3>Ranking cambia al sumar</h3>
+      <p>JPP pasa de #2 a #4. 235,389 votos de diferencia entre agregado y mesa-a-mesa.</p>
       <div class="arrow">abrir →</div>
     </a>
 
-    <a class="card" href="chat/">
-      <span class="tag">bandera</span>
-      <h3>El chat</h3>
-      <p>Conversación pública: qué se pregunta, qué se responde con datos.</p>
+    <a class="card" href="fdr/">
+      <h3>4 de 17 pasan el filtro</h3>
+      <p>Corrección Benjamini-Hochberg. Anomalías robustas al ajuste FDR.</p>
       <div class="arrow">abrir →</div>
     </a>
 
     <a class="card" href="historia/">
-      <span class="tag">bandera</span>
-      <h3>La historia</h3>
-      <p>Narrativa escénica: cómo 4.703 mesas cambian el 2° puesto.</p>
+      <span class="tag">narrativa</span>
+      <h3>La historia editorial</h3>
+      <p>Narrativa escénica: cómo 4,703 mesas cambian el 2° puesto.</p>
+      <div class="arrow">abrir →</div>
+    </a>
+
+    <a class="card" href="chat/">
+      <span class="tag">tía María</span>
+      <h3>Le expliqué a mi tía</h3>
+      <p>Chat ficticio con cuentas reales. 2 minutos, entiendes todo.</p>
       <div class="arrow">abrir →</div>
     </a>
 
