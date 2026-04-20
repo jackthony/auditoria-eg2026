@@ -53,7 +53,7 @@ fig.text(0.125, 0.04,
          fontsize=9, color="#666")
 fig.text(0.125, 0.015,
          "Análisis: Jack de Neuracode · github.com/jackthony/auditoria-eg2026 · "
-         "audit.neuracode.com",
+         "auditoria.neuracode.dev",
          fontsize=9, color="#b0171f", fontweight="bold")
 
 out = Path("web/og-mesas-lentas.png")
