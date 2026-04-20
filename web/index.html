@@ -176,6 +176,53 @@ h2 {
   font-size: 13px; font-weight: 600; color: var(--blood);
   letter-spacing: .5px; text-transform: uppercase;
 }
+.hero-cta {
+  display: block; text-decoration: none;
+  background: var(--ink); color: var(--paper);
+  padding: 36px 32px; border-radius: 14px;
+  border: 1px solid var(--ink);
+  position: relative; overflow: hidden;
+  transition: transform .25s, box-shadow .25s;
+  box-shadow: 0 16px 40px rgba(12,26,46,.18);
+}
+.hero-cta::before {
+  content: ""; position: absolute; inset: 0;
+  background: radial-gradient(circle at 15% 20%, rgba(230,57,70,.12), transparent 55%);
+  pointer-events: none;
+}
+.hero-cta:hover { transform: translateY(-3px); box-shadow: 0 22px 50px rgba(12,26,46,.28); }
+.hero-cta-tag {
+  display: inline-block; background: var(--blood); color: #fff;
+  font-family: 'JetBrains Mono', 'Consolas', monospace;
+  font-size: 11px; letter-spacing: 2px; font-weight: 700;
+  padding: 5px 10px; border-radius: 3px; margin-bottom: 18px;
+  position: relative;
+}
+.hero-cta-title {
+  font-family: 'Fraunces', Georgia, serif;
+  font-weight: 900; font-size: clamp(28px, 4vw, 42px);
+  line-height: 1.1; letter-spacing: -.01em;
+  margin-bottom: 14px; position: relative;
+}
+.hero-cta-body {
+  font-size: 16px; line-height: 1.55;
+  color: #cfd9e6; max-width: 640px;
+  margin-bottom: 22px; position: relative;
+}
+.hero-cta-arrow {
+  font-family: 'Inter', sans-serif;
+  font-size: 14px; font-weight: 600; letter-spacing: 1px;
+  text-transform: uppercase; color: #fff;
+  border-top: 1px dashed rgba(255,255,255,.15);
+  padding-top: 18px; position: relative;
+}
+.hero-cta-arrow::after {
+  content: "→"; margin-left: 8px; transition: margin-left .2s;
+}
+.hero-cta:hover .hero-cta-arrow::after { margin-left: 14px; }
+@media (max-width: 620px) {
+  .hero-cta { padding: 26px 22px; }
+}
 footer {
   margin-top: 80px; padding-top: 32px;
   border-top: 1px solid var(--rule);
@@ -183,8 +230,63 @@ footer {
 }
 footer a { color: var(--blood); text-decoration: underline; font-weight: 500; }
 footer .mono { font-family: 'Courier New', monospace; font-size: 12px; word-break: break-all; }
+.stack {
+  margin-top: 64px; padding-top: 40px;
+  border-top: 1px solid var(--rule);
+}
+.stack h2 { margin-bottom: 6px; }
+.stack-sub {
+  font-size: 15px; color: var(--muted-soft, #5a5a5a);
+  font-style: italic; margin-bottom: 26px;
+}
+.stack-grid {
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+  gap: 14px;
+}
+.stack-item {
+  background: #fff; border: 1px solid var(--rule);
+  padding: 16px 18px; border-left: 3px solid var(--ink);
+  transition: border-left-color .2s, transform .2s;
+}
+.stack-item:hover { border-left-color: var(--blood); transform: translateX(2px); }
+.stack-name {
+  font-family: 'JetBrains Mono', 'Consolas', monospace;
+  font-size: 14px; font-weight: 700; color: var(--ink);
+  letter-spacing: -.01em;
+}
+.stack-role {
+  font-size: 12px; color: var(--muted-soft, #5a5a5a);
+  margin-top: 4px; line-height: 1.45;
+}
+.built-with {
+  display: inline-flex; align-items: center; gap: 6px;
+  margin-top: 26px;
+  font-family: 'JetBrains Mono', 'Consolas', monospace;
+  font-size: 12px; color: var(--ink);
+  text-decoration: none;
+  padding: 8px 14px; border: 1px solid var(--ink);
+  border-radius: 4px; background: #fff;
+  transition: background .2s, color .2s;
+}
+.built-with:hover { background: var(--ink); color: var(--paper); }
+.built-with .bw-label { color: var(--muted-soft, #5a5a5a); }
+.built-with:hover .bw-label { color: #cfd9e6; }
+.built-with strong { color: inherit; }
+.built-with .bw-meta { color: var(--muted-soft, #5a5a5a); }
+.built-with:hover .bw-meta { color: #cfd9e6; }
+.webinar-separator {
+  margin-top: 48px; padding-top: 20px;
+  border-top: 2px solid var(--rule);
+  font-family: 'JetBrains Mono', 'Consolas', monospace;
+  font-size: 10px; letter-spacing: 2px; text-transform: uppercase;
+  color: var(--muted-soft, #5a5a5a);
+}
+.webinar-disclaimer {
+  font-size: 11px; color: var(--muted-soft, #5a5a5a);
+  margin: 4px 0 12px; font-style: italic;
+}
 .webinar {
-  margin-top: 60px; max-width: 100%;
+  margin-top: 12px; max-width: 100%;
   background: linear-gradient(135deg, #f8f6f1 0%, #ffffff 100%);
   border: 1px solid var(--rule); border-radius: 14px;
   padding: 28px; display: grid; grid-template-columns: 180px 1fr; gap: 26px;
@@ -192,7 +294,7 @@ footer .mono { font-family: 'Courier New', monospace; font-size: 12px; word-brea
 }
 .webinar img { width: 100%; height: auto; border-radius: 10px; display: block; box-shadow: 0 4px 14px rgba(0,0,0,.08); }
 .webinar-body { text-align: left; }
-.webinar-eyebrow { font-size: 11px; letter-spacing: 2px; text-transform: uppercase; color: var(--blood); font-weight: 700; margin-bottom: 8px; }
+.webinar-eyebrow { font-size: 11px; letter-spacing: 2px; text-transform: uppercase; color: var(--ink); font-weight: 700; margin-bottom: 8px; }
 .webinar h3 { font-family: 'Fraunces', Georgia, serif; font-size: 22px; font-weight: 800; color: var(--ink); margin: 0 0 8px; line-height: 1.25; }
 .webinar p { font-size: 14px; color: var(--muted); margin: 0 0 14px; line-height: 1.5; }
 .webinar .cta-webinar { display: inline-block; background: var(--blood); color: #fff; padding: 11px 20px; font-weight: 600; font-size: 13px; text-decoration: none; border-radius: 8px; transition: opacity .2s; }
@@ -221,84 +323,81 @@ footer .mono { font-family: 'Courier New', monospace; font-size: 12px; word-brea
 
   <section class="prose">
 
-    <p class="meme">🚨 <strong>El hallazgo más fuerte:</strong></p>
-    <p>Hay <strong>4,703 mesas</strong> (ID 900001-904703) que ONPE no publica por default: militar, policial, penales, exterior. <br>
-    Cuando las recuperas y sumas, un partido saca <strong>41.65%</strong>. <br>
-    En el resto del país ese mismo partido saca <strong>10.91%</strong>. <br>
-    Cuatro veces más. En mesas que nadie revisa.</p>
-
-    <p class="meme">🧮 <strong>Sesgo geográfico impugnadas:</strong></p>
-    <p>El promedio nacional de actas impugnadas es <strong>6.15%</strong>. <br>
-    En el extranjero es <strong>26.35%</strong>. En Loreto <strong>15.3%</strong>. En Ucayali <strong>12%</strong>. <br>
-    Distribución geográfica no aleatoria. p &lt; 0.001.</p>
-
-    <p class="meme">📊 <strong>Concentración por partido:</strong></p>
-    <p>Fuerza Popular concentra <strong>+2.19 puntos</strong> en locales de alta impugnación. <br>
-    Juntos por el Perú concentra <strong>+0.87 puntos</strong>. <br>
-    Partido del Buen Gobierno <strong>-1.64 puntos</strong>. <br>
-    Patrón inconsistente con azar.</p>
-
     <p class="meme">⚖️ <strong>Importante:</strong></p>
-    <p>Esto <strong>no dice "fraude"</strong>. <br>
-    Dice: "ONPE, explícate". <br>
-    Si encuentras un error en mis cuentas, abre un issue en GitHub y lo arreglo. Así funciona.</p>
+    <p>Esto <strong>no dice "fraude"</strong>. Dice: "ONPE, explícate".<br>
+    Si encuentras error en las cuentas, abre issue en GitHub y lo arreglo. Así funciona.</p>
 
   </section>
 
   <hr class="hr">
 
-  <h2>Los hallazgos.</h2>
-  <div class="cards">
+  <h2>El hallazgo.</h2>
 
-    <a class="card" href="h4/">
-      <span class="tag">crítico</span>
-      <h3>JPP 41% en mesas 900k+</h3>
-      <p>4 veces el promedio nacional. 4,703 mesas que ONPE no publica por default.</p>
-      <div class="arrow">H4 · abrir →</div>
+  <a class="hero-cta" href="h4/">
+    <div class="hero-cta-tag">HALL-0420-H4 · CRÍTICO</div>
+    <div class="hero-cta-title">JPP 41% en 4,703 mesas 900k+</div>
+    <div class="hero-cta-body">4 veces el promedio nacional. Mesas que ONPE no publica por default: militar, policial, penales, exterior. z=698 · Cohen h=0.73 · p&lt;10⁻³⁰⁰.</div>
+    <div class="hero-cta-arrow">abrir análisis completo →</div>
+  </a>
+
+  <!-- CARDS REMOVIDAS (impugnadas, ranking-cambia, fdr, historia, chat): restaurar cuando /impugnadas, /ranking-cambia, /fdr, /historia, /chat vuelvan a existir. Sesión paralela purgó en commit 26b4cde. -->
+
+  <section class="stack">
+    <h2>Stack técnico.</h2>
+    <p class="stack-sub">Herramientas usadas. Todo abierto. Cualquiera reproduce.</p>
+    <div class="stack-grid">
+      <div class="stack-item">
+        <div class="stack-name">Polars + DuckDB + PyArrow</div>
+        <div class="stack-role">procesa 92,766 mesas · 3.79M actas</div>
+      </div>
+      <div class="stack-item">
+        <div class="stack-name">Python 3.11 · asyncio</div>
+        <div class="stack-role">walker mesa-a-mesa · 21 min · 0 errores</div>
+      </div>
+      <div class="stack-item">
+        <div class="stack-name">Cloudflare Worker</div>
+        <div class="stack-role">proxy ONPE con allowlist</div>
+      </div>
+      <div class="stack-item">
+        <div class="stack-name">HuggingFace Datasets</div>
+        <div class="stack-role">parquet público · 3.79M filas</div>
+      </div>
+      <div class="stack-item">
+        <div class="stack-name">IPFS · Filebase + Pinata</div>
+        <div class="stack-role">cadena custodia nivel 4 · CIDs verificables</div>
+      </div>
+      <div class="stack-item">
+        <div class="stack-name">GitHub + SHA-256</div>
+        <div class="stack-role">MIT · hash inmutable · commits firmados</div>
+      </div>
+      <div class="stack-item">
+        <div class="stack-name">scipy · numpy</div>
+        <div class="stack-role">z-test Newcombe · Cohen h · bootstrap</div>
+      </div>
+      <div class="stack-item">
+        <div class="stack-name">matplotlib · python-docx</div>
+        <div class="stack-role">figuras forenses · informe reproducible</div>
+      </div>
+    </div>
+
+    <a class="built-with" href="https://claude.com/claude-code" target="_blank" rel="noopener">
+      <span class="bw-label">Built with</span>
+      <strong>Claude Code</strong>
+      <span class="bw-meta">· Anthropic</span>
     </a>
-
-    <a class="card" href="impugnadas/">
-      <h3>Impugnadas Lima+Exterior</h3>
-      <p>Extranjero 26.35% vs global 6.15%. z=3.9. Sesgo geográfico no aleatorio.</p>
-      <div class="arrow">H1 · abrir →</div>
-    </a>
-
-    <a class="card" href="ranking-cambia/">
-      <h3>Ranking cambia al sumar</h3>
-      <p>JPP pasa de #2 a #4. 235,389 votos de diferencia entre agregado y mesa-a-mesa.</p>
-      <div class="arrow">abrir →</div>
-    </a>
-
-    <a class="card" href="fdr/">
-      <h3>4 de 17 pasan el filtro</h3>
-      <p>Corrección Benjamini-Hochberg. Anomalías robustas al ajuste FDR.</p>
-      <div class="arrow">abrir →</div>
-    </a>
-
-    <a class="card" href="historia/">
-      <span class="tag">narrativa</span>
-      <h3>La historia editorial</h3>
-      <p>Narrativa escénica: cómo 4,703 mesas cambian el 2° puesto.</p>
-      <div class="arrow">abrir →</div>
-    </a>
-
-    <a class="card" href="chat/">
-      <span class="tag">tía María</span>
-      <h3>Le expliqué a mi tía</h3>
-      <p>Chat ficticio con cuentas reales. 2 minutos, entiendes todo.</p>
-      <div class="arrow">abrir →</div>
-    </a>
-
-  </div>
+  </section>
 
   <footer>
     <div>SHA-256 <span class="mono" id="hash-val">calculando…</span> · <a href="#" id="verify-inline">verificar inline</a></div>
     <div style="margin-top:10px;">Por <strong>Neuracode</strong> · Coautoría: Jack Aguilar</div>
 
+    <div class="webinar-separator">— Capacitación —</div>
+    <div class="webinar-disclaimer">Contenido comercial · el análisis forense es MIT y open data.</div>
+
     <div class="webinar">
       <img src="neuracode-webinar.png" alt="Webinar Neuracode — Usar la IA te hace más productivo" loading="lazy">
       <div class="webinar-body">
-        <div class="webinar-eyebrow">Neuracode Academy</div>
+        <div class="webinar-eyebrow">Neuracode Academy · Capacitación</div>
         <h3>¿Quieres aprender a analizar datos así con IA?</h3>
         <p>Webinar gratis: <strong>Lunes 8PM · Zoom</strong>. Pipelines, forense de datos y automatización con Python + Claude. Dictado por Jack Aguilar.</p>
         <a class="cta-webinar" href="https://www.neuracode.dev/comunidad" target="_blank" rel="noopener">Regístrate ahora →</a>
