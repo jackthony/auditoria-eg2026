@@ -35,17 +35,14 @@ Marcar `[x]` al completar. `/ecc:plan <ID>` para iniciar.
 - [x] **FCAST-INT-01** · Slider fcast-slider 20-80% integración JEE en cliente.
 - [x] **TG-BOT-01** · `scripts/telegram_notify.py` dispara en Δmargen ≥0.1pp o finding CRÍTICO.
 - [x] **API-01** · 7 endpoints en `web/api/` (findings, forecast, state, regions, series, projection, findings_gap).
-- [ ] **HIST-01** · Comparador 2026 vs 2021 vs 2016 (ausentismo + impugnación). · 4 h
+- [ ] **HIST-01** · Comparador 2026 vs 2021 vs 2016 — tabla en informe, no script nuevo. Ya parcialmente cubierto por `ausentismo.py`.
 
 ## 🔵 Sprint 3 — Diferenciación absoluta (~1 semana)
 
-- [ ] **MESA-01** · Walker mesa-a-mesa universo JEE (`/actas/observadas` + `/actas/{id}`). Ref: artvepa80/onpe-2026-forecast. · 6 h · Tony
-- [x] **MESA-04** · ✓ 2026-04-19. Endpoints confirmados en `docs/ONPE_API_ENDPOINTS.md`: `/actas?pagina=` (lista) + `/actas/{id}` (votos por candidato, `detalle[]`). Desbloquea MESA-01.
-- [ ] **CALAG-MAP-01** · Mapa 211 mesas no instaladas (CALAG) con popup electores.
-- [ ] **PROC-TL-01** · Timeline procesal denuncia JNE→ONPE auto-actualizado.
+- [x] **MESA-01** · ✓ 2026-04-20. 5,419 impugnadas / 88,063 (6.15% CRÍTICO). Electores en juego: 1,715,680 (ratio 125.9× vs margen). `src/analysis/mesa_impugnadas.py`.
+- [x] **MESA-04** · ✓ 2026-04-19. Endpoints confirmados en `docs/ONPE_API_ENDPOINTS.md`.
 - [ ] **IPFS-01** · IPFS pinning + hash IPFS junto al SHA-256.
 - [ ] **PERITO-01** · ZIP firmado captura + análisis + memorial para Fiscalía.
-- [ ] **I18N-01** · Multi-idioma EN.
 
 ## ⚫ Post-cierre escrutinio (bloquea firma fiscal)
 
@@ -60,6 +57,12 @@ Marcar `[x]` al completar. `/ecc:plan <ID>` para iniciar.
 - [ ] **PYPI** · Paquete `pip install electoral-audit` (Bolivia/Ecuador/Colombia).
 - [x] **DATA-MARKET** · ✓ 2026-04-20. Dataset 3.6M filas en https://huggingface.co/datasets/Neuracode/onpe-eg2026-mesa-a-mesa · parquet 10.6MB · CC-BY-4.0.
 - [ ] **PEER** · Peer-review MIT Election Lab / Linzer / Mebane.
+- [ ] **CALAG-MAP-01** · Mapa 211 mesas CALAG con popup electores.
+- [ ] **PROC-TL-01** · Timeline procesal denuncia JNE→ONPE auto-actualizado.
+- [ ] **I18N-01** · Multi-idioma EN.
+- [ ] **TIMELINE-BOT** · Cron Telegram cada Δmargen ≥0.1pp (infra `telegram_notify.py` lista).
+- [ ] **REVERSE-CALAG** · Simular ausentismo normal en 211 mesas CALAG vs real 2026.
+- [ ] **BRAND-02** · Rehacer dashboard monolito heredando brand.css. · 6h
 
 ---
 
