@@ -61,6 +61,7 @@ ENDPOINTS_ONPE = {
     "presidencial":      "/presentacion-backend/eleccion-presidencial/participantes-ubicacion-geografica-nombre?idEleccion=10&tipoFiltro=eleccion",
     "mesa_totales":      "/presentacion-backend/mesa/totales?tipoFiltro=eleccion",
     "ubigeos_departamentos": "/presentacion-backend/ubigeos/departamentos?idEleccion=10&idAmbitoGeografico=1",
+    "ubigeos_continentales":  "/presentacion-backend/ubigeos/departamentos?idEleccion=10&idAmbitoGeografico=2",
 }
 
 # Si ONPE_DIRECT=1 (IP peruana verificada), va directo; si no, via Worker.
@@ -245,33 +246,45 @@ def main():
         print(f"  ! no se pudo leer ubigeos_departamentos.json: {e}", file=sys.stderr)
         depts = []
 
-    for d in depts:
-        ubigeo = str(d.get("ubigeo") or "").strip()
-        nombre = str(d.get("nombre") or "").strip()
-        if len(ubigeo) != 6 or not ubigeo.isdigit():
-            continue
-        jobs = [
-            (
-                f"presidencial_{ubigeo}",
-                f"/presentacion-backend/eleccion-presidencial/participantes-ubicacion-geografica-nombre"
-                f"?tipoFiltro=ubigeo_nivel_01&idAmbitoGeografico=1&ubigeoNivel1={ubigeo}&idEleccion=10",
-            ),
-            (
-                f"totales_{ubigeo}",
-                f"/presentacion-backend/resumen-general/totales"
-                f"?idAmbitoGeografico=1&idEleccion=10&tipoFiltro=ubigeo_nivel_01&idUbigeoDepartamento={ubigeo}",
-            ),
-        ]
-        for name, path in jobs:
-            out = raw_dir / f"{name}.json"
-            entry = fetch_endpoint(base, path, out)
-            entry["endpoint"] = name
-            entry["source"] = source
-            entry["ubigeo"] = ubigeo
-            entry["departamento"] = nombre
-            manifest_entries.append(entry)
-            flag = "✓" if entry["http_status"] == 200 else f"✗ {entry['http_status']}"
-            print(f"  {flag}  {name:<28}  {nombre:<16}  {entry['bytes']:>6}B")
+    # CAPTURE-03: también extranjero (ambitoGeografico=2, continentes).
+    ubigeos_ext_path = raw_dir / "ubigeos_continentales.json"
+    depts_ext: list[dict] = []
+    try:
+        ext_doc = json.loads(ubigeos_ext_path.read_text(encoding="utf-8"))
+        depts_ext = ext_doc.get("data") or []
+    except Exception as e:
+        print(f"  ! no se pudo leer ubigeos_continentales.json: {e}", file=sys.stderr)
+
+    # ambito=1 para Perú (25 deptos), ambito=2 para exterior (5 continentes)
+    for ambito, lista in ((1, depts), (2, depts_ext)):
+        for d in lista:
+            ubigeo = str(d.get("ubigeo") or "").strip()
+            nombre = str(d.get("nombre") or "").strip()
+            if len(ubigeo) != 6 or not ubigeo.isdigit():
+                continue
+            jobs = [
+                (
+                    f"presidencial_{ubigeo}",
+                    f"/presentacion-backend/eleccion-presidencial/participantes-ubicacion-geografica-nombre"
+                    f"?tipoFiltro=ubigeo_nivel_01&idAmbitoGeografico={ambito}&ubigeoNivel1={ubigeo}&idEleccion=10",
+                ),
+                (
+                    f"totales_{ubigeo}",
+                    f"/presentacion-backend/resumen-general/totales"
+                    f"?idAmbitoGeografico={ambito}&idEleccion=10&tipoFiltro=ubigeo_nivel_01&idUbigeoDepartamento={ubigeo}",
+                ),
+            ]
+            for name, path in jobs:
+                out = raw_dir / f"{name}.json"
+                entry = fetch_endpoint(base, path, out)
+                entry["endpoint"] = name
+                entry["source"] = source
+                entry["ubigeo"] = ubigeo
+                entry["departamento"] = nombre
+                entry["ambito_geografico"] = ambito
+                manifest_entries.append(entry)
+                flag = "✓" if entry["http_status"] == 200 else f"✗ {entry['http_status']}"
+                print(f"  {flag}  {name:<28}  {nombre:<16}  {entry['bytes']:>6}B  amb={ambito}")
 
     # 3. Escribir manifiesto (una línea por entrada)
     manifest_path = capture_dir / "MANIFEST.jsonl"
