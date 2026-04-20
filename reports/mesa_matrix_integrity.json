@@ -1,0 +1,26 @@
+{
+  "capture_dir": "captures\\20260419T035056Z\\mesas",
+  "eleccion": 10,
+  "n_ok": 88059,
+  "n_err": 4,
+  "ratio_err": 4.542202741219354e-05,
+  "max_err_ratio": 0.01,
+  "errores": [
+    {
+      "codigoMesa": "037122",
+      "motivo": "Value error, suma detalle(0) != emitidos(231)"
+    },
+    {
+      "codigoMesa": "058771",
+      "motivo": "Value error, suma detalle(0) != emitidos(244)"
+    },
+    {
+      "codigoMesa": "058773",
+      "motivo": "Value error, suma detalle(0) != emitidos(237)"
+    },
+    {
+      "codigoMesa": "074788",
+      "motivo": "Value error, suma detalle(0) != emitidos(226)"
+    }
+  ]
+}

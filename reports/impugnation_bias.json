@@ -7,11 +7,11 @@
   },
   "correlaciones": {
     "pearson_tasa_imp_vs_share_rla": {
-      "r": 0.5060750038523367,
+      "r": 0.5060750038523366,
       "p_value": 0.008344380988231597,
       "ci_95": [
-        -0.3204616651155535,
-        0.8694224232776347
+        -0.3204616651155536,
+        0.8694224232776345
       ],
       "significativa_05": true
     },
@@ -21,11 +21,11 @@
     },
     "spearman_tasa_imp_vs_share_rla": {
       "r": 0.14188034188034188,
-      "p_value": 0.489326361399106
+      "p_value": 0.4893263613991061
     },
     "spearman_tasa_imp_vs_share_sanchez": {
       "r": -0.2170940170940171,
-      "p_value": 0.28674241493467584
+      "p_value": 0.2867424149346758
     }
   },
   "proyeccion_integracion_total": {

@@ -40,7 +40,7 @@ Marcar `[x]` al completar. `/ecc:plan <ID>` para iniciar.
 ## 🔵 Sprint 3 — Diferenciación absoluta (~1 semana)
 
 - [ ] **MESA-01** · Walker mesa-a-mesa universo JEE (`/actas/observadas` + `/actas/{id}`). Ref: artvepa80/onpe-2026-forecast. · 6 h · Tony
-- [ ] **MESA-04** · Inspeccionar Network tab `/main/acta-detalle/{id}` para confirmar endpoint votos/candidato/mesa. · 30 min · Tony (browser DevTools)
+- [x] **MESA-04** · ✓ 2026-04-19. Endpoints confirmados en `docs/ONPE_API_ENDPOINTS.md`: `/actas?pagina=` (lista) + `/actas/{id}` (votos por candidato, `detalle[]`). Desbloquea MESA-01.
 - [ ] **CALAG-MAP-01** · Mapa 211 mesas no instaladas (CALAG) con popup electores.
 - [ ] **PROC-TL-01** · Timeline procesal denuncia JNE→ONPE auto-actualizado.
 - [ ] **IPFS-01** · IPFS pinning + hash IPFS junto al SHA-256.
