@@ -58,6 +58,7 @@ Marcar `[x]` al completar. `/ecc:plan <ID>` para iniciar.
 - [ ] **NEEDLE** · Dashboard estilo NYT Election Needle.
 - [ ] **NOTARY** · Hash-chain en blockchain (Polygon).
 - [ ] **PYPI** · Paquete `pip install electoral-audit` (Bolivia/Ecuador/Colombia).
+- [x] **DATA-MARKET** · ✓ 2026-04-20. Dataset 3.6M filas en https://huggingface.co/datasets/Neuracode/onpe-eg2026-mesa-a-mesa · parquet 10.6MB · CC-BY-4.0.
 - [ ] **PEER** · Peer-review MIT Election Lab / Linzer / Mebane.
 
 ---
