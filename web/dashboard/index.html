@@ -208,6 +208,10 @@ input[type="search"]:focus{ outline: 2px solid var(--color-blood); outline-offse
 #gap-hero-wrap .kpi{ border-left-color: var(--color-blood); }
 #gap-hero-wrap .kpi .val{ color: var(--color-blood); }
 </style>
+<link rel="stylesheet" href="/_assets/site-nav.css">
+<script src="/_assets/site-nav.js" defer></script>
+<link rel="stylesheet" href="/_assets/site-share.css">
+<script src="/_assets/site-share.js" defer></script>
 </head>
 <body>
 <header>
@@ -403,14 +407,8 @@ input[type="search"]:focus{ outline: 2px solid var(--color-blood); outline-offse
 </section>
 
 <footer>
-  <p><strong>Autoría:</strong> Neuracode — Jack Aguilar · Aporte ciudadano independiente. Sin afiliación política.</p>
+  <p><strong>Autoría:</strong> Jack Aguilar. Análisis técnico reproducible. Cualquiera verifica.</p>
   <p>Código: MIT · Documentos: CC-BY-4.0</p>
-  <p style="margin:.6rem 0">
-    <a href="https://www.tiktok.com/@jackdeneuracode" target="_blank" style="margin:0 .5rem">TikTok @JackDeNeuracode</a> ·
-    <a href="https://instagram.com/neuracode" target="_blank" style="margin:0 .5rem">IG @neuracode</a> ·
-    <a href="https://facebook.com/neuracode" target="_blank" style="margin:0 .5rem">FB @neuracode</a> ·
-    <a href="https://github.com/jackthony/auditoria-eg2026" target="_blank" style="margin:0 .5rem">GitHub @jackthony</a>
-  </p>
   <p style="font-size:.8rem;margin-top:.4rem">
     <strong>API pública:</strong>
     <a href="../api/findings.json" target="_blank" class="mono">findings</a> ·
@@ -486,19 +484,19 @@ async function updateHashAndShare() {
   el.title = hash;
   document.getElementById('hash-verify').onclick = (e) => {
     e.preventDefault();
-    alert(`SHA-256 completo de data.json (calculado en tu navegador):\n\n${hash}\n\nReproducible con:\n  curl -s https://jackthony.github.io/auditoria-eg2026/data.json | sha256sum`);
+    alert(`SHA-256 completo de data.json (calculado en tu navegador):\n\n${hash}\n\nReproducible con:\n  curl -s https://auditoria.neuracode.dev/data.json | sha256sum`);
   };
 
   // Share buttons.
   const s = _lastData?.state;
   if (!s) return;
-  const url = 'https://jackthony.github.io/auditoria-eg2026/';
+  const url = (document.querySelector('link[rel="canonical"]') || {}).href || location.href;
   const fmt = new Intl.NumberFormat('es-PE');
   const sign = s.margen_sanch_rla >= 0 ? '+' : '';
   const msg = `📊 Auditoría EG2026 · al ${s.pct.toFixed(2)}% escrutado:\n` +
               `Margen Sánchez−López Aliaga = ${sign}${fmt.format(s.margen_sanch_rla)} votos\n` +
               `Actas en JEE: ${fmt.format(s.actas_jee)}\n\n` +
-              `Data verificable + memorial al Fiscal: ${url}`;
+              `Data verificable · SHA-256 reproducible: ${url}`;
   const enc = encodeURIComponent(msg);
   const buttons = [
     {label:'X / Twitter', href:`https://twitter.com/intent/tweet?text=${enc}`, bg:'#000'},

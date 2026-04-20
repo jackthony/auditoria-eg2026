@@ -263,6 +263,10 @@ h2 { font-size: clamp(32px, 5vw, 64px); margin-bottom: 30px; }
   .webinar img { max-width: 200px; margin: 0 auto; }
 }
 </style>
+<link rel="stylesheet" href="/_assets/site-nav.css">
+<script src="/_assets/site-nav.js" defer></script>
+<link rel="stylesheet" href="/_assets/site-share.css">
+<script src="/_assets/site-share.js" defer></script>
 </head>
 <body>
 
@@ -399,7 +403,7 @@ h2 { font-size: clamp(32px, 5vw, 64px); margin-bottom: 30px; }
   <p class="cta-sub">código abierto · datos públicos · huella SHA-256 sellada</p>
   <p class="caption" style="margin-top:60px">
     Por <strong style="color:var(--ink)">Jack Aguilar</strong> · Neuracode Academy<br>
-    Aporte ciudadano independiente. Sin afiliación política.<br>
+    Análisis técnico reproducible. Cualquiera verifica.<br>
     <a href="../index.html" style="color:var(--blood)">Ver dashboard técnico</a>
   </p>
   <p class="caption" style="margin-top:18px; font-size:13px;">
@@ -495,7 +499,7 @@ function animateDots() {
 (function(){
   const fab = document.getElementById('shareFab');
   const menu = document.getElementById('shareMenu');
-  const url = 'https://jackthony.github.io/auditoria-eg2026/historia/';
+  const url = (document.querySelector('link[rel="canonical"]') || {}).href || location.href;
   const text = '4 fuentes miran el 2° puesto. Dos dicen RLA, dos dicen JPP. Las cuentas no cuadran. Datos ONPE, código abierto, SHA-256 reproducible.';
   const full = text + ' ' + url;
 
