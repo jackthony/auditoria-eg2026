@@ -8,7 +8,7 @@ Marcar `[x]` al completar. `/ecc:plan <ID>` para iniciar.
 ## 🔴 Urgente (datos stale — bloquea publicación nueva)
 
 - [x] **AUS-02** · ✓ 2026-04-19. Actualizado ratio 4.64× (margen 13,624) en `MEMORIAL_TECNICO_FISCAL.md`, `EVIDENCIA_CIUDADANA.md`, `dossier-perito/00_RESUMEN_EJECUTIVO.md`, `dossier-perito/02_HALLAZGOS.md`. Notas: `HIPOTESIS_CIENTIFICAS.md` no tenía el ratio; perito zip (Apr 18) congelado — se regenerará post-AUS-01.
-- [ ] **AUS-01** · Crear `src/analysis/ausentismo.py` que regenere `reports/ausentismo_comparacion.json` desde `data/processed/meta.json` cada corte. Citar URL JNE/ONPE para padrón 2016 (22,901,954) y 2021 (25,287,954). · 2 h · Tony
+- [x] **AUS-01** · ✓ 2026-04-20. `src/analysis/ausentismo.py` completo y wired en `run_all.py`. Regenera `reports/ausentismo_comparacion.json` desde `meta.json` cada corte. Ratio 4.65× auto-calculado.
 
 ## 🟠 Sprint 0 — Rebrand editorial Neuracode (bloquea sprints siguientes)
 
