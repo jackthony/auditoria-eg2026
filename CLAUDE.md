@@ -73,6 +73,26 @@ tests/              # pytest
 - Informe docx generado SOLO por `src/report/build_report.py`. Nunca editar a mano.
 - PDF fiscal generado SOLO por `scripts/build_pdf_v3.py` (bloqueado hasta ticket PDF-01).
 
+## Agente memorial-fiscal — cuándo activar
+
+Agente: `.claude/agents/memorial-fiscal.md`. **NO invocar hasta:**
+1. `findings.json` estable (análisis cerrado, sin cambios pendientes).
+2. `captures/` cerrado y MANIFEST validado (`py make.py verify` limpio).
+3. Decisión explícita de presentar ante JNE/Fiscalía.
+
+Antes de esos 3 puntos el agente no agrega valor y contamina contexto.
+
+## Flujo análisis → publicación
+
+```
+capture → build → analyze → data-engineer/Haiku (QA datos)
+                                    ↓
+                    memorial-fiscal/Opus ←→ storytelling-pe/Opus
+                    (JNE/Fiscalía)              (TV/redes/prensa)
+```
+
+Mismo `findings.json` validado alimenta ambos. Un dato, dos salidas. ECC no aplica a este flujo.
+
 ## Agents & Workflow
 
 **Topología:** pipeline (capture → build → analyze → report). Fan-out para análisis independientes.
