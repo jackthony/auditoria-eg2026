@@ -142,6 +142,22 @@ OK reports\ausentismo_comparacion.json
    corte 93.474% · margen 13,624 · ratio CALAG 4.65×
    Ratio 4.65× entre electores oficialmente afectados por CALAG/Galaga en Lima (63,300) y margen Sánchez−RLA al corte 93.474% (13,624). Abre estándar Art. 363 Ley 26859 (nulidad parcial por evento que altera resultado); no prueba fraude.
 
+── Mesas impugnadas estadoActa=I (MESA-IMP-1/2) ──
+[MESA-01] ts=20260420T003627Z  archivos=87,903
+   10000/87903  imp=442
+   20000/87903  imp=947
+   30000/87903  imp=1596
+   40000/87903  imp=2054
+   50000/87903  imp=2467
+   60000/87903  imp=2957
+   70000/87903  imp=3780
+   80000/87903  imp=4353
+
+OK → reports\mesa_impugnadas.json
+   5,404 impugnadas / 87,903 mesas (6.15%)
+   electores en juego: 1,711,270
+   ratio vs margen: 125.6×
+
 ── A0: Reconciliacion interna ONPE ──
   Snapshot: 20260418T203307Z
   totalActas  nat=92766 sum=92766 diff=+0
@@ -174,4 +190,6 @@ OK reports\ausentismo_comparacion.json
   [MEDIA  ] A-AUS-1  Ausentismo 2026 proyectado (26.23%) vs 2016 pre-pandemia (18.21%): +8.02 pp, ~2,198,138 electores adicionales no votaron.
   [INFO   ] A-AUS-2  Ausentismo 2026 proyectado (26.23%) vs 2021 pandemia (29.15%): -2.92 pp. Comparación válida pre/post-pandemia es 2026 vs 2016.
   [ALTA_PROCESAL] A-AUS-3  Ratio 4.65× entre electores oficialmente afectados por CALAG/Galaga en Lima (63,300) y margen Sánchez−RLA al corte 93.474% (13,624). Abre estándar Art. 363 Ley 26859 (nulidad parcial por evento que altera resultado); no prueba fraude.
+  [CRÍTICO] MESA-IMP-1  5,404 mesas impugnadas de 87,903 (6.15%). Electores hábiles en mesas impugnadas: 1,711,270.
+  [CRÍTICO] MESA-IMP-2  Electores hábiles en 5,404 mesas impugnadas: 1,711,270. Margen Sánchez−RLA: 13,624 votos. Ratio: 125.6× — si el resultado de mesas impugnadas difiriese del promedio nacional, podría alterar el margen.
   [INFO   ] A0  Reconciliacion interna ONPE OK: nacional == suma regiones.
