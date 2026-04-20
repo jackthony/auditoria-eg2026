@@ -113,10 +113,65 @@ Detalles completos: [findings.json](https://github.com/jackthony/auditoria-eg202
 (Efron-Tibshirani 1993, B=10,000), Mann-Whitney U. Benford-1 NO usado (criticado para datos
 electorales por Deckert/Myagkov/Ordeshook 2011).
 
-## Cadena de custodia
+## Cadena de custodia (4 niveles)
 
-Cada captura incluye MANIFEST.jsonl con SHA-256 por archivo, timestamp UTC y URL de origen.
-Verificar con: `python src/capture/verify_manifest.py captures/20260420T074202Z/`
+| Nivel | Ubicación | Prueba inmutable |
+|-------|-----------|------------------|
+| 1 · Local | `captures/20260420T074202Z/MESAS_MANIFEST.jsonl` | SHA-256 por archivo + UA + IP |
+| 2 · GitHub | [jackthony/auditoria-eg2026](https://github.com/jackthony/auditoria-eg2026) | Commit `916e77d` · tag `v2-92k` |
+| 3 · HuggingFace | Este dataset (parquet) | Revisión inmutable HF |
+| 4 · IPFS Filebase | Content-addressed (ver abajo) | CID = hash del contenido |
+
+Verificar SHA-256 local: `python src/capture/verify_manifest.py captures/20260420T074202Z/`
+
+## Verificación IPFS (content-addressed)
+
+Los 3 artefactos críticos están pineados en IPFS via Filebase. Cualquier gateway IPFS los sirve:
+
+| Archivo | CID | URL pública |
+|---------|-----|-------------|
+| MESAS_MANIFEST.jsonl | `QmSxcH2NQ22PTHDyQR6r4nkYHWvT71mAZqAh26mvpPynwS` | [ipfs.filebase.io](https://ipfs.filebase.io/ipfs/QmSxcH2NQ22PTHDyQR6r4nkYHWvT71mAZqAh26mvpPynwS) |
+| parquet 3.79M actas | `QmVCan4WeK2sq8LipRfP7PEz6QQV5kttFgwkhi6q62YX5L` | [ipfs.filebase.io](https://ipfs.filebase.io/ipfs/QmVCan4WeK2sq8LipRfP7PEz6QQV5kttFgwkhi6q62YX5L) |
+| findings H1-H4 | `QmUopL1zep7UkJACBUVpBVKdAU6zcsPqwgbUwY97jLwPPp` | [ipfs.filebase.io](https://ipfs.filebase.io/ipfs/QmUopL1zep7UkJACBUVpBVKdAU6zcsPqwgbUwY97jLwPPp) |
+
+Gateways alternativos (mismo CID, distinta ruta): `ipfs.io/ipfs/<CID>` · `dweb.link/ipfs/<CID>`.
+El CID **es** el hash del archivo: si alguien altera 1 byte, el CID cambia. No hay forma de falsificar.
+
+## Seguridad de datos
+
+**Principio:** datos públicos electorales (Ley 26859) + código open-source + metodología reproducible.
+
+| Qué | Política |
+|-----|----------|
+| Datos ONPE | Públicos. CC-BY-4.0. Fuente: `resultadoelectoral.onpe.gob.pe` |
+| Tokens HF / Filebase / Pinata | En `.env` local (gitignored). **Nunca** commiteados. Rotados ante cualquier exposición |
+| `.claude/settings.local.json` | Gitignored. Solo `.claude/settings.json` + `agents/` + `rules/` son públicos |
+| MANIFEST SHA-256 | Commit firmado en GitHub. Inmutable por convención + content-addressing IPFS |
+| Capturas `captures/{ts}/` | Inmutables. Re-captura = carpeta nueva UTC + commit inmediato |
+
+Si detectas una credencial en este repo, abre un issue privado. El proyecto tiene política de rotación inmediata.
+
+## Reproducibilidad
+
+```bash
+# 1. Clonar y preparar entorno
+git clone https://github.com/jackthony/auditoria-eg2026 && cd auditoria-eg2026
+python -m venv .venv && .venv/Scripts/pip install -r requirements.txt
+
+# 2. Descargar parquet desde HuggingFace o IPFS
+huggingface-cli download Neuracode/onpe-eg2026-mesa-a-mesa --repo-type dataset
+# o: curl -L -o dataset.parquet https://ipfs.filebase.io/ipfs/QmVCan4WeK2sq8LipRfP7PEz6QQV5kttFgwkhi6q62YX5L
+
+# 3. Rebuild DuckDB autoritativa
+python scripts/build_duckdb_and_fix.py
+
+# 4. Re-ejecutar análisis (genera findings_consolidado_0420.json)
+python scripts/analyze_hallazgos_0420_v2.py
+python scripts/stats_h4_especiales_900k.py
+
+# 5. Pinear a IPFS (requiere FILEBASE_* en .env)
+python scripts/pin_to_filebase.py
+```
 
 ## Cita
 
