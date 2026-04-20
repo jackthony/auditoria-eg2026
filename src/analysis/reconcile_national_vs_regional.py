@@ -50,14 +50,42 @@ def _find_capture_ts(capture_dir: Path) -> str:
 
 
 def _load_snapshot(raw_dir: Path) -> dict | None:
-    """Carga primer snap*.json encontrado."""
+    """Construye {national, regions} desde totales.json + totales_{ubigeo}.json.
+
+    CAPTURE-02 dropped snap*.json en favor de capturas per-departamento.
+    Fallback: si hay snap*.json viejo, lo usa.
+    """
+    # Preferir formato CAPTURE-02
+    totales_file = raw_dir / "totales.json"
+    dept_files = sorted(raw_dir.glob("totales_*.json"))
+    if totales_file.exists() and dept_files:
+        try:
+            MAX = 20 * 1024 * 1024
+            nat_doc = json.loads(totales_file.read_text(encoding="utf-8"))
+            nat = nat_doc.get("data") or {}
+            regions: list[dict] = []
+            for fp in dept_files:
+                if fp.stat().st_size > MAX:
+                    raise ValueError(f"Archivo excede límite: {fp}")
+                reg_doc = json.loads(fp.read_text(encoding="utf-8"))
+                reg = reg_doc.get("data") or {}
+                if reg:
+                    regions.append(reg)
+            if len(regions) > 50:
+                raise ValueError(f"regions excede 50: {len(regions)}")
+            logger.info(f"CAPTURE-02: {len(regions)} departamentos")
+            return {"national": nat, "regions": regions}
+        except (json.JSONDecodeError, IOError, ValueError) as e:
+            logger.error(f"Error cargando CAPTURE-02: {e}")
+
+    # Fallback viejo
     snap_files = sorted(raw_dir.glob("snap*.json"))
     if not snap_files:
-        logger.warning(f"No snap*.json en {raw_dir}")
+        logger.warning(f"No CAPTURE-02 ni snap*.json en {raw_dir}")
         return None
 
     snap_file = snap_files[0]
-    logger.info(f"Cargando {snap_file.name}")
+    logger.info(f"Fallback: cargando {snap_file.name}")
     try:
         MAX_SNAP_BYTES = 20 * 1024 * 1024
         content = snap_file.read_text(encoding="utf-8")
