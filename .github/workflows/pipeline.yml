@@ -68,12 +68,19 @@ jobs:
           ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
           PERPLEXITY_API_KEY: ${{ secrets.PERPLEXITY_API_KEY }}
         run: |
+          set +e
           if [ "${{ steps.target.outputs.mode }}" = "finding" ]; then
-            python scripts/run_pipeline.py --finding "${{ steps.target.outputs.value }}" > pipeline_result.json
+            python scripts/run_pipeline.py --finding "${{ steps.target.outputs.value }}" > pipeline_result.json 2> pipeline_stderr.log
           else
-            python scripts/run_pipeline.py --signal "${{ steps.target.outputs.value }}" > pipeline_result.json
+            python scripts/run_pipeline.py --signal "${{ steps.target.outputs.value }}" > pipeline_result.json 2> pipeline_stderr.log
           fi
-          cat pipeline_result.json
+          RC=$?
+          echo "===== STDOUT ====="
+          cat pipeline_result.json || true
+          echo "===== STDERR ====="
+          cat pipeline_stderr.log || true
+          echo "===== RC=$RC ====="
+          exit $RC
 
       - name: Parse result
         id: result
