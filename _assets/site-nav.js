@@ -14,7 +14,8 @@
   const CASES = [
     { slug: '/',     t: 'Inicio',                   p: 'Landing · hallazgos principales' },
     { slug: '/h4/',  t: 'H4 · JPP 41% mesas 900k+', p: 'Hallazgo crítico · voto especial' },
-    { slug: null,    t: 'Roadmap · H1/H2/H9/H12',   p: 'Pronto', wip: true },
+    { slug: '/h9/',  t: 'H9 · BERBÉS 11/11',        p: 'Cluster impugnadas · 1 entre 20 billones' },
+    { slug: null,    t: 'Roadmap · H1/H2/H12',      p: 'Pronto', wip: true },
   ];
 
   const SOCIAL_GROUPS = [
