@@ -4,8 +4,10 @@ Paleta: paper #faf7f2, ink navy #0c1a2e, blood #e63946.
 
 Uso:
     py scripts/build_og_image.py                    # landing: "Algo no cuadra"
-    py scripts/build_og_image.py --finding h4      # OG para /h4/
-    py scripts/build_og_image.py --finding h9      # OG para /h9/
+    py scripts/build_og_image.py --finding h1      # OG para /h1/ (sesgo geográfico)
+    py scripts/build_og_image.py --finding h4      # OG para /h4/ (JPP 41% 900k+)
+    py scripts/build_og_image.py --finding h9      # OG para /h9/ (BERBÉS 11/11)
+    py scripts/build_og_image.py --finding h12     # OG para /h12/ (mesa Cusco 90.43%)
 """
 from __future__ import annotations
 
@@ -125,17 +127,77 @@ def render_h9() -> Image.Image:
     return img
 
 
+def render_h12() -> Image.Image:
+    """H12: Mesa 018146 Cusco JPP 90.43%. p=1.6e-171."""
+    img = Image.new("RGB", (W, H), PAPER)
+    dr = ImageDraw.Draw(img)
+
+    # Kicker
+    dr.text((60, 60), "HALLAZGO H12 · BLOWOUT EMBLEMÁTICO", font=font(20, True), fill=BLOOD)
+    dr.rectangle([60, 100, 380, 103], fill=INK_NAVY)
+
+    # Big number (90.43%)
+    dr.text((60, 140), "90.43%", font=font(160, True, serif=True), fill=BLOOD)
+    # Label
+    dr.text((60, 310), "JPP en mesa 018146 Cusco", font=font(48, True), fill=INK_NAVY)
+    dr.text((60, 380), "Única mesa normal ≥90% entre 78,706.",
+            font=font(26), fill=MUTED)
+    dr.text((60, 430), "Binomial p=1.6×10⁻¹⁷¹.",
+            font=font(26), fill=MUTED)
+
+    # Footer
+    dr.rectangle([60, 505, W - 60, 508], fill=RULE)
+    dr.text((60, 520), "208/230 votos válidos. 2do lugar: Cívico Obras 4.35%.",
+            font=font(16), fill=MUTED)
+    dr.text((60, H - 42), "auditoria.neuracode.dev · Neuracode · MIT",
+            font=font(17, True), fill=INK_NAVY)
+    return img
+
+
+def render_h1() -> Image.Image:
+    """H1: Extranjero 26.27% impugnadas vs 6.16% global. z=42.2."""
+    img = Image.new("RGB", (W, H), PAPER)
+    dr = ImageDraw.Draw(img)
+
+    # Kicker
+    dr.text((60, 60), "HALLAZGO H1 · SESGO GEOGRÁFICO", font=font(20, True), fill=BLOOD)
+    dr.rectangle([60, 100, 380, 103], fill=INK_NAVY)
+
+    # Big number (26.27%)
+    dr.text((60, 140), "26.27%", font=font(160, True, serif=True), fill=BLOOD)
+    # Label
+    dr.text((60, 310), "Mesas impugnadas en Extranjero", font=font(48, True), fill=INK_NAVY)
+    dr.text((60, 380), "vs 6.16% global. 4.3 veces más.",
+            font=font(26), fill=MUTED)
+    dr.text((60, 430), "z=42.2, χ²=2,897.",
+            font=font(26), fill=MUTED)
+
+    # Footer
+    dr.rectangle([60, 505, W - 60, 508], fill=RULE)
+    dr.text((60, 520), "Loreto 14.87%, Ucayali 12.02%, Ica 9.41%.",
+            font=font(16), fill=MUTED)
+    dr.text((60, H - 42), "auditoria.neuracode.dev · Neuracode · MIT",
+            font=font(17, True), fill=INK_NAVY)
+    return img
+
+
 def main() -> None:
     parser = argparse.ArgumentParser(description="Genera OG images para auditoria.neuracode.dev")
-    parser.add_argument("--finding", choices=["h4", "h9"], help="Genera OG para finding específico")
+    parser.add_argument("--finding", choices=["h1", "h4", "h9", "h12"], help="Genera OG para finding específico")
     args = parser.parse_args()
 
-    if args.finding == "h4":
+    if args.finding == "h1":
+        img = render_h1()
+        out = ROOT / "web" / "h1" / "og.png"
+    elif args.finding == "h4":
         img = render_h4()
         out = ROOT / "web" / "h4" / "og.png"
     elif args.finding == "h9":
         img = render_h9()
         out = ROOT / "web" / "h9" / "og.png"
+    elif args.finding == "h12":
+        img = render_h12()
+        out = ROOT / "web" / "h12" / "og.png"
     else:
         # Landing
         img = render_landing()

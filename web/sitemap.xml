@@ -11,6 +11,16 @@
     <priority>0.9</priority>
   </url>
   <url>
+    <loc>https://auditoria.neuracode.dev/h12/</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://auditoria.neuracode.dev/h1/</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
     <loc>https://auditoria.neuracode.dev/h9/</loc>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
