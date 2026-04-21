@@ -1,4 +1,10 @@
 User-agent: *
 Allow: /
+Disallow: /ascii-preview/
+Disallow: /bento-preview/
+Disallow: /dual-voice-preview/
+Disallow: /scrollama-preview/
+Disallow: /storytelling-preview/
+Disallow: /timeline-preview/
 
 Sitemap: https://auditoria.neuracode.dev/sitemap.xml

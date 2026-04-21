@@ -12,16 +12,9 @@
   })();
 
   const CASES = [
-    { slug: '/',                 t: 'Inicio',                        p: 'Landing · hallazgos principales' },
-    { slug: '/h4/',              t: 'H4 · JPP 41% mesas 900k+',      p: 'Hallazgo crítico · voto especial' },
-    { slug: '/impugnadas/',      t: 'H1 · Impugnadas Lima+Exterior', p: 'Sesgo geográfico · z=3.9' },
-    { slug: '/ranking-cambia/',  t: 'Ranking cambia',                p: '2° puesto cambia al sumar' },
-    { slug: '/fdr/',             t: 'FDR (falsos descubrimientos)',  p: 'Corrección Benjamini-Hochberg' },
-    { slug: '/mesas-faltantes/', t: 'Mesas faltantes',               p: '4,703 sin acta publicada' },
-    { slug: '/mesas-lentas/',    t: 'Mesas lentas',                  p: 'Retraso anómalo de escrutinio' },
-    { slug: '/chat/',            t: 'Tía María pregunta',            p: 'Sin jerga, solo lo esencial' },
-    { slug: '/historia/',        t: 'Historia editorial',            p: 'Narrativa mesa a mesa' },
-    { slug: '/dashboard/',       t: 'Dashboard técnico',             p: 'WIP · info desactualizada',  wip: true },
+    { slug: '/',     t: 'Inicio',                   p: 'Landing · hallazgos principales' },
+    { slug: '/h4/',  t: 'H4 · JPP 41% mesas 900k+', p: 'Hallazgo crítico · voto especial' },
+    { slug: null,    t: 'Roadmap · H1/H2/H9/H12',   p: 'Pronto', wip: true },
   ];
 
   const SOCIAL_GROUPS = [
@@ -53,12 +46,15 @@
   function buildHeader() {
     const logo = ROOT + '/logo-neuracode-tight.png';
     const items = CASES.map(c => {
-      const active = (c.slug === current) ? ' sn-active' : '';
+      const active = (c.slug && c.slug === current) ? ' sn-active' : '';
       const wip = c.wip ? ' sn-wip' : '';
-      return `<a class="sn-case${active}${wip}" href="${c.slug}">
+      const tag = c.slug ? 'a' : 'span';
+      const href = c.slug ? ` href="${c.slug}"` : '';
+      const role = c.slug ? '' : ' aria-disabled="true"';
+      return `<${tag} class="sn-case${active}${wip}"${href}${role}>
         <div class="sn-t">${c.t}</div>
         <div class="sn-p">${c.p}</div>
-      </a>`;
+      </${tag}>`;
     }).join('');
 
     const header = document.createElement('header');
@@ -132,15 +128,18 @@
   // ═════ CASES MARKUP · reutilizable para float + mount ═════
   function buildCasesMarkup() {
     const items = CASES.map(c => {
-      const active = (c.slug === current) ? ' sn-active' : '';
+      const active = (c.slug && c.slug === current) ? ' sn-active' : '';
       const wip = c.wip ? ' sn-wip' : '';
-      return `<a class="sn-case${active}${wip}" href="${c.slug}">
+      const tag = c.slug ? 'a' : 'span';
+      const href = c.slug ? ` href="${c.slug}"` : '';
+      const role = c.slug ? '' : ' aria-disabled="true"';
+      return `<${tag} class="sn-case${active}${wip}"${href}${role}>
         <div class="sn-t">${c.t}</div>
         <div class="sn-p">${c.p}</div>
-      </a>`;
+      </${tag}>`;
     }).join('');
     return `
-      <button class="sn-btn" id="sn-btn" aria-haspopup="true" aria-expanded="false">
+      <button class="sn-btn" id="sn-btn" aria-haspopup="true" aria-expanded="false" aria-label="Menú de casos">
         Casos <span class="sn-caret">▼</span>
       </button>
       <div class="sn-dropdown" id="sn-dropdown" role="menu">${items}</div>
@@ -203,7 +202,7 @@
     ensureMainAnchor();
     // Regla:
     //  - Si la página NO tiene ningún <header> (ni propio ni .site-header) → inyectar header completo.
-    //  - Si tiene header propio (ej. dashboard, chat) → inyectar solo botón flotante "Casos".
+    //  - Si tiene header propio → inyectar solo botón flotante "Casos".
     //  - Nunca duplicar headers.
     const hasAnyHeader = document.querySelector('header, .site-header');
     const mountPoint = document.querySelector('.sn-mount');
