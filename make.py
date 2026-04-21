@@ -1,17 +1,20 @@
 """
-make.py — Orquestador simple tipo Makefile para Windows.
+make.py — Orquestador CLI para auditoria-eg2026.
 
 Uso:
-    py make.py                   # ejecuta todo: capture -> build -> analyze -> report
-    py make.py capture           # captura backend agregado ONPE
-    py make.py capture-mesas     # walker mesa-a-mesa (async, vía Worker)
-    py make.py build             # sólo consolidación
-    py make.py analyze           # sólo análisis agregado (run_all)
-    py make.py analyze-mesas     # análisis mesa-a-mesa (requiere capture-mesas previa)
-    py make.py report            # sólo informe final
-    py make.py verify            # verifica integridad de capturas
-    py make.py test              # corre los tests pytest
-    py make.py clean             # borra outputs regenerables
+    py make.py verify          # verifica integridad MANIFEST SHA-256
+    py make.py analyze         # corre análisis vivos (H1-H3 + ausentismo + impugnadas)
+    py make.py report          # genera figuras + docx
+    py make.py test            # pytest (15 tests)
+    py make.py sync            # sincroniza findings H1-H12 en los 3 JSONs
+    py make.py rebuild-db      # rebuild eg2026.duckdb desde parquet
+    py make.py clean           # borra outputs regenerables
+
+Comandos archivados (captura cerrada — conteo terminado):
+    capture        → src/capture/fetch_onpe.py (requiere IP peruana + Worker)
+    capture-mesas  → src/capture/fetch_onpe_mesas_async.py
+    build          → src/process/build_dataset.py
+    analyze-mesas  → scripts análisis mesa-a-mesa
 """
 
 from __future__ import annotations
@@ -21,31 +24,21 @@ import subprocess
 import sys
 from pathlib import Path
 
-
 ROOT = Path(__file__).resolve().parent
 PY = sys.executable
 
 
-def run(args, cwd=None):
-    print(f"\n$ {' '.join(args)}")
+def run(args: list[str], cwd: Path | None = None) -> None:
+    print(f"\n$ {' '.join(str(a) for a in args)}")
     r = subprocess.run(args, cwd=cwd or ROOT)
     if r.returncode != 0:
         sys.exit(r.returncode)
 
 
-def capture():
-    run([PY, str(ROOT / "src" / "capture" / "fetch_onpe.py")])
-
-
-def capture_mesas():
-    run([PY, str(ROOT / "src" / "capture" / "fetch_onpe_mesas_async.py"),
-         "--ts", "auto", "--concurrency", "50"])
-
-
-def verify():
+def verify() -> None:
     captures = sorted(
-        [p for p in (ROOT / "captures").iterdir()
-         if p.is_dir() and p.name[0].isdigit()]
+        p for p in (ROOT / "captures").iterdir()
+        if p.is_dir() and p.name[0].isdigit()
     )
     if not captures:
         print("No hay capturas para verificar.")
@@ -54,64 +47,36 @@ def verify():
         run([PY, str(ROOT / "src" / "capture" / "verify_manifest.py"), str(c)])
 
 
-def build():
-    run([PY, str(ROOT / "src" / "process" / "build_dataset.py")])
-
-
-def analyze():
+def analyze() -> None:
     run([PY, "-m", "src.analysis.run_all"])
 
 
-def analyze_mesas():
-    caps = sorted(
-        (p for p in (ROOT / "captures").iterdir()
-         if p.is_dir() and (p / "mesas").is_dir()),
-        key=lambda p: p.name,
-    )
-    if not caps:
-        print("No hay captura mesa-a-mesa. Ejecuta: py make.py capture-mesas")
-        sys.exit(1)
-    ts = caps[-1].name
-    print(f"[analyze-mesas] ts={ts}")
-    run([PY, str(ROOT / "src" / "analysis" / "reconcile_endpoints.py"), str(caps[-1])])
-    run([PY, "-m", "src.analysis.reconcile_gap", ts])
-    run([PY, str(ROOT / "src" / "analysis" / "validate_acta_vs_mesa.py"), ts])
-    run([PY, "-m", "src.analysis.extract_mesa_votes", ts])
-
-
-def report():
+def report() -> None:
     run([PY, str(ROOT / "src" / "report" / "figures.py")])
     run([PY, str(ROOT / "src" / "report" / "build_report.py")])
 
 
-def test():
+def test() -> None:
     run([PY, "-m", "pytest", "tests/", "-v"])
 
 
-def clean():
+def sync() -> None:
+    run([PY, str(ROOT / "scripts" / "sync_findings_v2.py")])
+
+
+def rebuild_db() -> None:
+    run([PY, str(ROOT / "scripts" / "build_duckdb_and_fix.py")])
+
+
+def clean() -> None:
     reports = ROOT / "reports"
-    # NO borrar: ausentismo_comparacion.json (input manual histórico), perito/ (artefactos firmados)
     targets = [
-        ROOT / "data" / "processed",
         reports / "figures",
-        reports / "findings.json",
-        reports / "findings_gap.json",
-        reports / "forecast.json",
-        reports / "reconcile_endpoints.json",
-        reports / "reconcile_internal.json",
-        reports / "last_digit.json",
-        reports / "spatial_cluster.json",
-        reports / "ml_anomalies.json",
-        reports / "impugnation_bias.json",
-        reports / "impugnation_velocity.json",
-        reports / "mesas_summary.json",
-        reports / "mesas_presidencial.csv",
-        reports / "impugnadas_por_region.csv",
         reports / "summary.txt",
-        reports / "validate_acta_vs_mesa.log",
+        reports / "impugnation_bias.json",
+        reports / "ausentismo_comparacion.json",
         reports / "Informe_Tecnico_v1.docx",
         reports / "Informe_Tecnico_v1.txt",
-        reports / "Informe_Tecnico_RP_v3.pdf",
     ]
     for t in targets:
         if t.is_dir():
@@ -123,37 +88,28 @@ def clean():
             print(f"  borrado: {t.relative_to(ROOT)}")
 
 
-def all_():
-    build()    # asume que ya hay captura
-    analyze()
-    report()
-
-
-ACTIONS = {
-    "capture":       capture,
-    "capture-mesas": capture_mesas,
-    "verify":        verify,
-    "build":   build,
-    "analyze":       analyze,
-    "analyze-mesas": analyze_mesas,
-    "report":  report,
-    "test":    test,
-    "clean":   clean,
-    "all":     all_,
+ACTIONS: dict[str, object] = {
+    "verify":     verify,
+    "analyze":    analyze,
+    "report":     report,
+    "test":       test,
+    "sync":       sync,
+    "rebuild-db": rebuild_db,
+    "clean":      clean,
 }
 
 
-def main():
+def main() -> None:
     if len(sys.argv) == 1:
-        all_()
-        return
+        print(__doc__)
+        sys.exit(0)
     action = sys.argv[1]
     fn = ACTIONS.get(action)
     if not fn:
-        print(f"Acción desconocida: {action}")
-        print(f"Acciones: {', '.join(ACTIONS.keys())}")
+        print(f"Acción desconocida: {action!r}")
+        print(f"Acciones disponibles: {', '.join(ACTIONS)}")
         sys.exit(2)
-    fn()
+    fn()  # type: ignore[operator]
 
 
 if __name__ == "__main__":

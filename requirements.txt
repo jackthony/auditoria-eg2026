@@ -1,56 +1,36 @@
 # auditoria-eg2026 — dependencias Python
-# Pinneadas para reproducibilidad. Última revisión: 2026-04-17
-# Activar venv primero:  py -m venv .venv && .\.venv\Scripts\Activate.ps1
-# Instalar:  pip install -r requirements.txt
+# Última revisión: 2026-04-21
+# Activar venv: py -m venv .venv && .\.venv\Scripts\Activate.ps1
+# Instalar:     pip install -r requirements.txt
 
-# ──────────────────────────────────────────────────────────────
-# Core: manipulación de datos y estadística
-# ──────────────────────────────────────────────────────────────
-pandas==2.2.3
+# ── Core datos (Pandas PROHIBIDO para >100k filas) ──
+polars==1.6.0
+duckdb==1.2.1
+pyarrow==18.0.0
 numpy==2.1.3
 scipy==1.14.1
 
-# ──────────────────────────────────────────────────────────────
-# HTTP y parseo
-# ──────────────────────────────────────────────────────────────
+# ── HTTP ──
 requests==2.32.3
-urllib3==2.2.3
-beautifulsoup4==4.12.3
+aiohttp==3.11.18
 
-# ──────────────────────────────────────────────────────────────
-# Visualización
-# ──────────────────────────────────────────────────────────────
+# ── Visualización ──
 matplotlib==3.9.2
-seaborn==0.13.2
 
-# ──────────────────────────────────────────────────────────────
-# Generación de informes
-# ──────────────────────────────────────────────────────────────
+# ── Informes ──
 python-docx==1.1.2
 Pillow==11.0.0
 
-# ──────────────────────────────────────────────────────────────
-# PDFs y OCR (para cuando tengas acceso a las actas digitalizadas)
-# ──────────────────────────────────────────────────────────────
-pypdf==5.1.0
-pdfplumber==0.11.4
-# pytesseract==0.3.13        # descomentar cuando instales Tesseract OCR
+# ── IPFS / HuggingFace ──
+boto3==1.35.74
+huggingface-hub==0.26.2
 
-# ──────────────────────────────────────────────────────────────
-# Análisis geográfico (opcional, para mapas a nivel ODPE)
-# ──────────────────────────────────────────────────────────────
-# geopandas==1.0.1
-# folium==0.18.0
+# ── Telegram ──
+python-telegram-bot==21.9
 
-# ──────────────────────────────────────────────────────────────
-# Notebooks
-# ──────────────────────────────────────────────────────────────
-jupyter==1.1.1
-jupyterlab==4.3.1
-ipywidgets==8.1.5
+# ── Entorno ──
+python-dotenv==1.0.1
 
-# ──────────────────────────────────────────────────────────────
-# Testing y calidad de código
-# ──────────────────────────────────────────────────────────────
+# ── Testing ──
 pytest==8.3.4
 pytest-cov==6.0.0
