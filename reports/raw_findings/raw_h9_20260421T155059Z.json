@@ -1,0 +1,88 @@
+{
+  "id": "raw_h9_berbes_salta",
+  "ts_utc": "20260421T155059Z",
+  "db_path": "reports/hallazgos_20260420/eg2026.duckdb",
+  "db_sha256": "5fa8f523278b7af9375f98334437a432605747e30fb73a5780764c464821bf4b",
+  "universo_n": 92766,
+  "query": "SELECT ... FROM mesa WHERE local_votacion='COMPLEJO DEPORTIVO BERBÉS'",
+  "metrics": {
+    "local": "COMPLEJO DEPORTIVO BERBÉS",
+    "pais": "Argentina (Consulado Salta)",
+    "n_mesas_local": 11,
+    "n_mesas_impugnadas": 11,
+    "pct_local": 100.0,
+    "tasa_global_imp": 0.061585,
+    "n_imp_total": 5713,
+    "n_mesas_total_db": 92766,
+    "locales_100pct_imp_con_n_ge3": 5
+  },
+  "breakdown": [
+    {
+      "mesa": "087675",
+      "depto": "Extranjero",
+      "estado": "I",
+      "votos_emitidos": null
+    },
+    {
+      "mesa": "087676",
+      "depto": "Extranjero",
+      "estado": "I",
+      "votos_emitidos": null
+    },
+    {
+      "mesa": "087677",
+      "depto": "Extranjero",
+      "estado": "I",
+      "votos_emitidos": null
+    },
+    {
+      "mesa": "087678",
+      "depto": "Extranjero",
+      "estado": "I",
+      "votos_emitidos": null
+    },
+    {
+      "mesa": "087679",
+      "depto": "Extranjero",
+      "estado": "I",
+      "votos_emitidos": null
+    },
+    {
+      "mesa": "087680",
+      "depto": "Extranjero",
+      "estado": "I",
+      "votos_emitidos": null
+    },
+    {
+      "mesa": "087681",
+      "depto": "Extranjero",
+      "estado": "I",
+      "votos_emitidos": null
+    },
+    {
+      "mesa": "087682",
+      "depto": "Extranjero",
+      "estado": "I",
+      "votos_emitidos": null
+    },
+    {
+      "mesa": "087683",
+      "depto": "Extranjero",
+      "estado": "I",
+      "votos_emitidos": null
+    },
+    {
+      "mesa": "087684",
+      "depto": "Extranjero",
+      "estado": "I",
+      "votos_emitidos": null
+    },
+    {
+      "mesa": "087685",
+      "depto": "Extranjero",
+      "estado": "I",
+      "votos_emitidos": null
+    }
+  ],
+  "errors": []
+}

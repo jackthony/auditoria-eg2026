@@ -1,0 +1,83 @@
+{
+  "id": "raw_h2",
+  "ts_utc": "20260421T160159Z",
+  "db_sha256": "5fa8f523278b7af9375f98334437a432605747e30fb73a5780764c464821bf4b",
+  "metrics": {
+    "q80_tasa_imp": 0.125,
+    "n_partidos": 38
+  },
+  "top5_shift_positivo": [
+    {
+      "cod": "00000008",
+      "partido": "FUERZA POPULAR",
+      "pct_alto": 19.52,
+      "pct_resto": 16.71,
+      "shift_pp": 2.81
+    },
+    {
+      "cod": "00000023",
+      "partido": "PARTIDO PAÍS PARA TODOS",
+      "pct_alto": 8.75,
+      "pct_resto": 7.84,
+      "shift_pp": 0.91
+    },
+    {
+      "cod": "00000010",
+      "partido": "JUNTOS POR EL PERÚ",
+      "pct_alto": 12.3,
+      "pct_resto": 11.41,
+      "shift_pp": 0.89
+    },
+    {
+      "cod": "00000001",
+      "partido": "ALIANZA PARA EL PROGRESO",
+      "pct_alto": 1.55,
+      "pct_resto": 1.05,
+      "shift_pp": 0.5
+    },
+    {
+      "cod": "00000020",
+      "partido": "PARTIDO DEMOCRÁTICO SOMOS PERÚ",
+      "pct_alto": 1.27,
+      "pct_resto": 0.83,
+      "shift_pp": 0.44
+    }
+  ],
+  "top5_shift_negativo": [
+    {
+      "cod": "00000014",
+      "partido": "PARTIDO CÍVICO OBRAS",
+      "pct_alto": 9.7,
+      "pct_resto": 10.26,
+      "shift_pp": -0.56
+    },
+    {
+      "cod": "00000031",
+      "partido": "PARTIDO SICREO",
+      "pct_alto": 2.91,
+      "pct_resto": 3.5,
+      "shift_pp": -0.59
+    },
+    {
+      "cod": "00000035",
+      "partido": "RENOVACIÓN POPULAR",
+      "pct_alto": 11.17,
+      "pct_resto": 12.22,
+      "shift_pp": -1.05
+    },
+    {
+      "cod": "00000002",
+      "partido": "AHORA NACIÓN - AN",
+      "pct_alto": 6.42,
+      "pct_resto": 7.54,
+      "shift_pp": -1.12
+    },
+    {
+      "cod": "00000016",
+      "partido": "PARTIDO DEL BUEN GOBIERNO",
+      "pct_alto": 9.39,
+      "pct_resto": 11.5,
+      "shift_pp": -2.12
+    }
+  ]
+}

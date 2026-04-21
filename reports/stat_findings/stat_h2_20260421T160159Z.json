@@ -1,0 +1,20 @@
+{
+  "id": "HALL-0420-H2",
+  "severity": "MEDIA",
+  "raw_ref": "reports\\raw_findings\\raw_h2_20260421T160159Z.json",
+  "h0": "pct voto partido X en locales alta-imp == pct en resto",
+  "test": "diferencia de proporciones con Cohen h",
+  "method_citation": [
+    "newcombe1998",
+    "cohen1988"
+  ],
+  "interpretation": "Top shift: FUERZA POPULAR +2.81pp. Bottom: PARTIDO DEL BUEN GOBIERNO -2.12pp. Q80 tasa_imp=0.1250.",
+  "limitations": [
+    "Locales alta-imp correlacionan con geografía (rural, Loreto, extranjero) — confounder.",
+    "Efecto pequeño (~1-2pp) vs H4 efecto grande."
+  ],
+  "anti_ataque": [
+    "Correlación no implica causación — ver limitations"
+  ],
+  "regla_oro": "anomalía menor; H4 es el hero, no H2"
+}

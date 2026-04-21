@@ -1,0 +1,16 @@
+{
+  "id": "HALL-0420-H3",
+  "severity": "MEDIA",
+  "raw_ref": "reports\\raw_findings\\raw_h3_20260421T160159Z.json",
+  "h0": "Distribución pct_blancos/nulos homogénea entre mesas",
+  "test": "z-score outliers + Mann-Whitney esp vs norm",
+  "method_citation": [
+    "mannwhitney1947"
+  ],
+  "interpretation": "2320 mesas outlier (2.68%). Top depto blancos: San Martín 19.62%.",
+  "limitations": [
+    "Outliers pueden ser legítimos (analfabetismo, protesta, error logístico).",
+    "No implica fraude por sí sola."
+  ],
+  "regla_oro": "anomalía descriptiva; requiere análisis por mesa"
+}

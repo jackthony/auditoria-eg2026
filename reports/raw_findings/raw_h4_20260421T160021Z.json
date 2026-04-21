@@ -1,0 +1,17 @@
+{
+  "id": "raw_h4_jpp_900k",
+  "ts_utc": "20260421T160021Z",
+  "db_sha256": "5fa8f523278b7af9375f98334437a432605747e30fb73a5780764c464821bf4b",
+  "metrics": {
+    "n_esp": 4392,
+    "n_norm": 82305,
+    "val_esp": 565060,
+    "val_norm": 15196245,
+    "jpp_esp": 235331,
+    "jpp_norm": 1657500,
+    "pct_esp": 41.6471,
+    "pct_norm": 10.9073,
+    "ratio": 3.818,
+    "diff_pp": 30.7398
+  }
+}

@@ -1,0 +1,36 @@
+{
+  "id": "HALL-0420-H9",
+  "severity": "CRITICO",
+  "raw_ref": "reports/raw_findings/raw_h9_20260421T155059Z.json",
+  "h0": "Cada mesa BERBÉS es Bernoulli iid con p_imp=0.061585 (tasa global)",
+  "h1": "Local concentra impugnación anómalamente",
+  "test": "binomial exacto 1-cola (11/11)",
+  "statistic": {
+    "k_impugnadas": 11,
+    "n_mesas": 11,
+    "p_global": 0.061585,
+    "log10_p": -13.32,
+    "p_value_notation": "4.83e-14"
+  },
+  "p_value": "4.83e-14",
+  "method_citation": [
+    "clopper1934 (IC binomial)",
+    "binomial exacto no requiere paper adicional"
+  ],
+  "assumptions_checked": {
+    "iid_mesas": "bajo H0 aleatorio; realidad cuestiona esto (local único)",
+    "p_global_estimador": "5713/92766 mesas DB"
+  },
+  "interpretation": "Local BERBÉS 11/11 mesas impugnadas. P bajo H0 aleatorio = 4.83e-14. Contexto: 5 locales total con 100% imp y n>=3.",
+  "limitations": [
+    "Post-hoc: local identificado por búsqueda. Multiplicidad: con 58 locales 100%, este es el más extremo del grupo.",
+    "p_global incluye mesas no contabilizadas (estado != D). Podría variar ±1pp.",
+    "No implica intencionalidad — puede ser problema logístico del consulado. Requiere revisión de actas físicas."
+  ],
+  "anti_ataque": [
+    "'Es solo 1 local' → Sí, pero la probabilidad bajo sorteo es 1 en 20 trillones. No se explica por azar.",
+    "'Problema logístico del consulado' → Posible, pero ONPE debe explicar qué pasó específicamente.",
+    "'Múltiples tests inflan p' → Aun Bonferroni sobre 58 locales (α=8.6e-4) pasa por 12 órdenes de magnitud."
+  ],
+  "regla_oro": "anomalía que ONPE debe explicar — no afirmamos fraude"
+}

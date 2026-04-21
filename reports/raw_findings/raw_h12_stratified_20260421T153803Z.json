@@ -1,0 +1,56 @@
+{
+  "id": "raw_h12_mesa_018146",
+  "ts_utc": "2026-04-21T15:38:03Z",
+  "db_path": "reports/hallazgos_20260420/eg2026.duckdb",
+  "db_sha256": "5fa8f523278b7af9375f98334437a432605747e30fb73a5780764c464821bf4b",
+  "universo_n": 92766,
+  "claim_revisado": "Mesa 018146 Cusco: \u00fanica normal contabilizada con JPP>=90% Y votos_validos>100 (n=230). Dos mesas Loreto (067284, 067285) tambi\u00e9n >=90% pero con n<=48.",
+  "metrics": {
+    "mesa_id": "018146",
+    "depto": "CUSCO",
+    "jpp_votos": 208,
+    "votos_validos": 230,
+    "jpp_pct": 90.435,
+    "segundo_pct": 4.348,
+    "jpp_partido_codigo": "00000010"
+  },
+  "stratified_universe": {
+    "votos_validos_gt_0": {
+      "n_universo": 82305,
+      "n_jpp_ge_90": 3,
+      "pct": 0.003645
+    },
+    "votos_validos_gt_50": {
+      "n_universo": 81965,
+      "n_jpp_ge_90": 1,
+      "pct": 0.00122
+    },
+    "votos_validos_gt_100": {
+      "n_universo": 78605,
+      "n_jpp_ge_90": 1,
+      "pct": 0.001272
+    },
+    "votos_validos_gt_200": {
+      "n_universo": 33673,
+      "n_jpp_ge_90": 1,
+      "pct": 0.00297
+    }
+  },
+  "otras_mesas_ge_90": [
+    {
+      "mesa": "067284",
+      "depto": "Loreto",
+      "jpp": 44,
+      "validos": 48,
+      "pct": 91.667
+    },
+    {
+      "mesa": "067285",
+      "depto": "Loreto",
+      "jpp": 38,
+      "validos": 42,
+      "pct": 90.476
+    }
+  ],
+  "errors": []
+}

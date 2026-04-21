@@ -1,0 +1,28 @@
+{
+  "id": "raw_h3",
+  "ts_utc": "20260421T160159Z",
+  "db_sha256": "5fa8f523278b7af9375f98334437a432605747e30fb73a5780764c464821bf4b",
+  "metrics": {
+    "n_mesas": 86697,
+    "n_outliers": 2320,
+    "pct_outliers": 2.68,
+    "mu_blancos": 12.22,
+    "sd_blancos": 6.7,
+    "mu_nulos": 5.09,
+    "sd_nulos": 3.49
+  },
+  "top_deptos_blancos": [
+    {
+      "depto": "San Martín",
+      "pct": 19.62
+    },
+    {
+      "depto": "Ucayali",
+      "pct": 19.44
+    },
+    {
+      "depto": "Loreto",
+      "pct": 18.66
+    }
+  ]
+}
