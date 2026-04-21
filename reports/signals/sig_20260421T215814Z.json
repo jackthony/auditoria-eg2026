@@ -1,0 +1,13 @@
+{
+  "id": "sig_20260421T215814Z",
+  "ts_utc": "2026-04-21T21:58:14.304934+00:00",
+  "capture_ts": "20260420T074202Z",
+  "trigger": "db_changed",
+  "diff": {
+    "files_delta": 0,
+    "bytes_delta": 0,
+    "db_changed": true
+  },
+  "priority": "high",
+  "action": "dispatch_pipeline"
+}
