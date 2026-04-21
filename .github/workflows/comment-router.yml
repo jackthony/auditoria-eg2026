@@ -101,9 +101,7 @@ jobs:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           gh issue comment ${{ steps.body.outputs.issue_num }} \
-            --body "${{ steps.classify.outputs.reply }}
-
-— FORENSIS · auditor forense IA de Neuracode"
+            --body "${{ steps.classify.outputs.reply }}"
 
       - name: Escalate to expert-synthesizer
         if: steps.classify.outputs.escalate == 'expert-synthesizer'
@@ -118,18 +116,20 @@ jobs:
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
+          ISSUE_NUM="${{ steps.body.outputs.issue_num }}"
+          CONTENT="${{ steps.body.outputs.content }}"
+          BODY=$(cat <<EOF
+          @JackTonyAC comment detectado como amenaza legal en issue #$ISSUE_NUM.
+
+          FORENSIS no respondio. Tu decides.
+
+          Copia del comment:
+          $CONTENT
+          EOF
+          )
           gh issue create \
-            --title "urgent-jack-legal: issue #${{ steps.body.outputs.issue_num }}" \
-            --body "@JackTonyAC comment detectado como amenaza legal en issue #${{ steps.body.outputs.issue_num }}.
-
-FORENSIS no respondió. Tú decides.
-
-Copia del comment:
----
-${{ steps.body.outputs.content }}
----
-
-— FORENSIS" \
+            --title "urgent-jack-legal: issue #$ISSUE_NUM" \
+            --body "$BODY" \
             --label "jack-attention,urgent,legal"
 
       - name: Log community event

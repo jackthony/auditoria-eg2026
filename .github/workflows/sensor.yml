@@ -52,14 +52,15 @@ jobs:
           git push origin main || true
 
           SIGNAL_FILE=$(ls -1t reports/signals/ | head -1)
+          BODY=$(cat <<EOF
+          Sensor detecto cambio. Archivo: reports/signals/$SIGNAL_FILE
+
+          Ejecutar pipeline con: gh workflow run pipeline.yml -f signal=reports/signals/$SIGNAL_FILE
+          EOF
+          )
           gh issue create \
             --title "new-signal: $SIGNAL_FILE" \
-            --body "Sensor detectó cambio. Archivo: \`reports/signals/$SIGNAL_FILE\`
-
-Ejecutar pipeline con:
-\`\`\`
-gh workflow run forensis-pipeline.yml -f signal=reports/signals/$SIGNAL_FILE
-\`\`\`" \
+            --body "$BODY" \
             --label "new-signal,forensis"
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}

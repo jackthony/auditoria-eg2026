@@ -105,25 +105,32 @@ jobs:
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          BODY="## FORENSIS finding ${{ steps.result.outputs.finding }}
+          FINDING="${{ steps.result.outputs.finding }}"
+          TIER="${{ steps.result.outputs.tier }}"
+          SCORE="${{ steps.result.outputs.score }}"
+          BRANCH="${{ steps.result.outputs.branch }}"
+          BODY=$(cat <<EOF
+          ## FORENSIS finding $FINDING
 
-**Tier:** ${{ steps.result.outputs.tier }}
-**Confidence score:** ${{ steps.result.outputs.score }}
-**Branch:** ${{ steps.result.outputs.branch }}
+          **Tier:** $TIER
+          **Confidence score:** $SCORE
+          **Branch:** $BRANCH
 
-### Artefactos
-- \`reports/stat_findings/stat_${{ steps.result.outputs.finding }}_*.json\`
-- \`reports/challenges/${{ steps.result.outputs.finding }}_*.md\`
-- \`reports/narratives/${{ steps.result.outputs.finding }}/\`
-- \`web/${{ steps.result.outputs.finding }}/index.html\`
+          ### Artefactos
+          - \`reports/stat_findings/stat_${FINDING}_*.json\`
+          - \`reports/challenges/${FINDING}_*.md\`
+          - \`reports/narratives/${FINDING}/\`
+          - \`web/${FINDING}/index.html\`
 
-### Acción requerida Jack
-- [ ] Revisar landing en staging (gh-pages branch preview)
-- [ ] Verificar números con DB
-- [ ] Si OK: merge
-- [ ] Si refutable: cerrar + abrir issue \`retract-${{ steps.result.outputs.finding }}\`
+          ### Accion requerida Jack
+          - [ ] Revisar landing en staging
+          - [ ] Verificar numeros con DB
+          - [ ] Si OK: merge
+          - [ ] Si refutable: cerrar + abrir issue \`retract-${FINDING}\`
 
-— FORENSIS · auditor forense IA de Neuracode"
+          FORENSIS auditor forense IA de Neuracode
+          EOF
+          )
 
           gh pr create \
             --title "forensis: ${{ steps.result.outputs.finding }} (${{ steps.result.outputs.tier }})" \
@@ -149,12 +156,12 @@ jobs:
 
           if [ "$OK" = "1" ]; then
             gh pr merge "$BRANCH" --squash --delete-branch --auto
-            py scripts/notify.py \
+            python scripts/notify.py \
               "Auto-merge $FINDING" \
               "tier=AUTO score=$SCORE. Merged + deployed. Landing: https://auditoria.neuracode.dev/$FINDING/" \
               INFO
           else
-            py scripts/notify.py \
+            python scripts/notify.py \
               "PR pendiente $FINDING" \
               "tier=AUTO pero score=$SCORE <0.95. No auto-merge. Revisa PR." \
               URGENT
@@ -167,21 +174,24 @@ jobs:
           TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
           TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
         run: |
+          FINDING="${{ steps.result.outputs.finding }}"
+          SCORE="${{ steps.result.outputs.score }}"
+          BODY=$(cat <<EOF
+          @JackTonyAC FORENSIS necesita que verifiques el hallazgo $FINDING.
+
+          **Score:** $SCORE
+          **Tier:** PENDING-JACK
+          **Landing preview:** https://auditoria.neuracode.dev/${FINDING}/
+
+          FORENSIS no publicara en produccion hasta tu merge.
+          EOF
+          )
           gh issue create \
-            --title "urgent-jack: verificar ${{ steps.result.outputs.finding }}" \
-            --body "@JackTonyAC FORENSIS necesita que verifiques el hallazgo ${{ steps.result.outputs.finding }}.
-
-**Score:** ${{ steps.result.outputs.score }}
-**Tier:** PENDING-JACK (entre 0.70 y 0.89)
-**Landing preview:** https://auditoria.neuracode.dev/${{ steps.result.outputs.finding }}/
-**PR:** ver pipeline step
-
-FORENSIS no publicará en producción hasta tu merge.
-
-— FORENSIS" \
+            --title "urgent-jack: verificar $FINDING" \
+            --body "$BODY" \
             --label "jack-attention,urgent"
 
-          py scripts/notify.py \
+          python scripts/notify.py \
             "PENDING-JACK ${{ steps.result.outputs.finding }}" \
             "score=${{ steps.result.outputs.score }}. Revisa PR + issue urgent-jack." \
             URGENT

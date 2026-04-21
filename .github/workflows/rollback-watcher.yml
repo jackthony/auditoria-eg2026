@@ -103,7 +103,7 @@ jobs:
               --label "forensis,retract,urgent"
 
             # Notify Jack URGENT
-            py scripts/notify.py \
+            python scripts/notify.py \
               "Rollback auto $F" \
               "3 refutas válidas fuertes en 24h. PR retract abierto. Merge URGENTE." \
               URGENT
