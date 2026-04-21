@@ -97,16 +97,15 @@ secrets/
 reports/perito/
 
 # ──────────────────────────────────────────────────────────────
-# Claude Code — estructura PRIVADA (monetizable para comunidad)
-# Público solo menciona que usamos Claude. Los detalles NO se regalan:
-# agents, rules, hooks, settings = IP de Neuracode Academy.
+# Claude Code — mayoría PRIVADA, EXCEPTO FORENSIS público
+# Razón forense: prompts de agentes FORENSIS deben ser auditables públicamente
+# para credibilidad del agente autónomo. agents/ + rules/ del proyecto = OSS.
+# settings/worktrees/locks = privados.
 # ──────────────────────────────────────────────────────────────
 .claude/settings.local.json
 .claude/settings.json
 .claude/scheduled_tasks.lock
 .claude/worktrees/
-.claude/agents/
-.claude/rules/
 
 # ──────────────────────────────────────────────────────────────
 # Informe privado para cliente original (RP) — NO publicar

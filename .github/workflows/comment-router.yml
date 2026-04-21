@@ -1,0 +1,145 @@
+name: forensis-comment-router
+
+on:
+  issue_comment:
+    types: [created]
+  issues:
+    types: [opened]
+
+permissions:
+  contents: write
+  issues: write
+  pull-requests: write
+
+jobs:
+  route:
+    if: |
+      (github.event.issue.labels.*.name contains 'comment' ||
+       startsWith(github.event.issue.title, 'giscus:')) &&
+      github.event.comment.user.login != 'forensis-bot' &&
+      github.event.issue.user.login != 'forensis-bot'
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+          cache: pip
+
+      - name: Install deps
+        run: |
+          pip install -r requirements.txt
+          pip install anthropic
+
+      - name: Extract comment body
+        id: body
+        run: |
+          if [ "${{ github.event_name }}" = "issue_comment" ]; then
+            echo "content<<EOF" >> "$GITHUB_OUTPUT"
+            echo "${{ github.event.comment.body }}" >> "$GITHUB_OUTPUT"
+            echo "EOF" >> "$GITHUB_OUTPUT"
+            echo "issue_num=${{ github.event.issue.number }}" >> "$GITHUB_OUTPUT"
+          else
+            echo "content<<EOF" >> "$GITHUB_OUTPUT"
+            echo "${{ github.event.issue.body }}" >> "$GITHUB_OUTPUT"
+            echo "EOF" >> "$GITHUB_OUTPUT"
+            echo "issue_num=${{ github.event.issue.number }}" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Classify via comment-router agent
+        id: classify
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          PERPLEXITY_API_KEY: ${{ secrets.PERPLEXITY_API_KEY }}
+        run: |
+          cat > /tmp/classify.py <<'PYEOF'
+          import os, json, sys
+          from pathlib import Path
+          from anthropic import Anthropic
+
+          AGENT_PATH = Path(".claude/agents/comment-router.md")
+          content = AGENT_PATH.read_text(encoding="utf-8")
+          body = content.split("---", 2)[2].strip()
+
+          comment = sys.stdin.read()
+          prompt = f"Comment recibido:\n---\n{comment}\n---\n\nClasifica en 1 de 6 tipos (SPAM/SALUDO/PREGUNTA COMÚN/APORTA DATO/REFUTA TÉCNICA/AMENAZA/LEGAL). Devuelve JSON:\n{{\"tipo\":\"<tipo>\",\"tono\":\"comun|tecnica\",\"reply\":\"<respuesta si aplica>\",\"escalate\":\"<expert-synthesizer|jack|null>\"}}"
+
+          client = Anthropic(api_key=os.environ["ANTHROPIC_API_KEY"])
+          resp = client.messages.create(
+              model="claude-haiku-4-5-20251001",
+              max_tokens=1500,
+              system=body,
+              messages=[{"role":"user","content":prompt}],
+          )
+          text = "".join(b.text for b in resp.content if hasattr(b,"text"))
+          import re
+          m = re.search(r"\{.*\}", text, re.DOTALL)
+          if m:
+              print(m.group(0))
+          else:
+              print('{"tipo":"SPAM","tono":"","reply":"","escalate":null}')
+          PYEOF
+          echo "${{ steps.body.outputs.content }}" | python /tmp/classify.py > /tmp/decision.json
+          cat /tmp/decision.json
+
+          TIPO=$(jq -r '.tipo' /tmp/decision.json)
+          REPLY=$(jq -r '.reply // ""' /tmp/decision.json)
+          ESCALATE=$(jq -r '.escalate // ""' /tmp/decision.json)
+          echo "tipo=$TIPO" >> "$GITHUB_OUTPUT"
+          echo "reply<<EOF" >> "$GITHUB_OUTPUT"
+          echo "$REPLY" >> "$GITHUB_OUTPUT"
+          echo "EOF" >> "$GITHUB_OUTPUT"
+          echo "escalate=$ESCALATE" >> "$GITHUB_OUTPUT"
+
+      - name: Auto-reply
+        if: |
+          steps.classify.outputs.tipo == 'PREGUNTA COMÚN' ||
+          steps.classify.outputs.tipo == 'APORTA DATO'
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          gh issue comment ${{ steps.body.outputs.issue_num }} \
+            --body "${{ steps.classify.outputs.reply }}
+
+— FORENSIS · auditor forense IA de Neuracode"
+
+      - name: Escalate to expert-synthesizer
+        if: steps.classify.outputs.escalate == 'expert-synthesizer'
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          gh issue edit ${{ steps.body.outputs.issue_num }} \
+            --add-label "expert-refutation,pending-synthesis"
+
+      - name: Escalate to Jack (amenaza legal)
+        if: steps.classify.outputs.escalate == 'jack'
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          gh issue create \
+            --title "urgent-jack-legal: issue #${{ steps.body.outputs.issue_num }}" \
+            --body "@JackTonyAC comment detectado como amenaza legal en issue #${{ steps.body.outputs.issue_num }}.
+
+FORENSIS no respondió. Tú decides.
+
+Copia del comment:
+---
+${{ steps.body.outputs.content }}
+---
+
+— FORENSIS" \
+            --label "jack-attention,urgent,legal"
+
+      - name: Log community event
+        run: |
+          mkdir -p reports
+          cat >> reports/community_log.jsonl <<EOF
+          {"ts_utc":"$(date -u +%FT%TZ)","issue_num":${{ steps.body.outputs.issue_num }},"tipo":"${{ steps.classify.outputs.tipo }}","escalate":"${{ steps.classify.outputs.escalate }}"}
+          EOF
+          git config user.name "forensis-bot"
+          git config user.email "bot@neuracode.dev"
+          git add reports/community_log.jsonl
+          git diff --cached --quiet || git commit -m "chore(community): log comment ${{ steps.body.outputs.issue_num }}"
+          git push origin main || true

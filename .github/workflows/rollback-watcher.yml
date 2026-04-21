@@ -1,0 +1,110 @@
+name: forensis-rollback-watcher
+
+on:
+  schedule:
+    - cron: "0 */1 * * *"   # cada hora
+  workflow_dispatch: {}
+
+permissions:
+  contents: write
+  issues: write
+  pull-requests: write
+
+jobs:
+  watch:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+          cache: pip
+
+      - name: Install deps
+        run: pip install requests
+
+      - name: Scan refuta-valida-fuerte issues
+        id: scan
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          # Issues últimas 24h con label refuta-valida-fuerte
+          ISSUES=$(gh issue list --label "refuta-valida-fuerte" --state all \
+            --json number,title,labels,createdAt \
+            --search "created:>=$(date -u -d '24 hours ago' +%Y-%m-%dT%H:%M:%SZ)")
+          echo "$ISSUES" > /tmp/issues.json
+          cat /tmp/issues.json
+
+          # Agrupar por finding_id (primera label que empieza con H)
+          py -c "
+          import json
+          from collections import Counter
+          issues = json.load(open('/tmp/issues.json'))
+          findings = Counter()
+          for i in issues:
+              for l in i.get('labels', []):
+                  name = l.get('name', '')
+                  if name.startswith('H') and name[1:].isdigit():
+                      findings[name] += 1
+                      break
+          # Imprimir findings con >=3 refutaciones fuertes
+          rollback_list = [f for f, n in findings.items() if n >= 3]
+          print('rollback_list=' + ','.join(rollback_list))
+          " >> "$GITHUB_OUTPUT"
+
+      - name: Auto-revert si rollback_list no vacío
+        if: steps.scan.outputs.rollback_list != 'rollback_list='
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+        run: |
+          ROLLBACK_LIST=$(echo "${{ steps.scan.outputs.rollback_list }}" | sed 's/rollback_list=//')
+          IFS=',' read -ra FINDINGS <<< "$ROLLBACK_LIST"
+
+          git config user.name "forensis-bot"
+          git config user.email "bot@neuracode.dev"
+
+          for F in "${FINDINGS[@]}"; do
+            if [ -z "$F" ]; then continue; fi
+            echo "Rolling back $F"
+
+            # Branch rollback
+            BRANCH="forensis/rollback-${F}-$(date -u +%Y%m%dT%H%M%SZ)"
+            git checkout -B "$BRANCH"
+
+            # Borrar landing
+            rm -rf "web/$F" 2>/dev/null || true
+
+            # Marcar retracted en reports/
+            mkdir -p reports/retractions
+            cat > "reports/retractions/${F}_retracted.md" <<EOF
+          # Retracción $F
+
+          Fecha: $(date -u +%FT%TZ)
+          Motivo: 3+ refutaciones válidas fuertes recibidas en 24h.
+          Acción: landing removida, badge RETRACTADO aplicado.
+          Ver: issues con label refuta-valida-fuerte + $F
+          EOF
+
+            git add web/ reports/retractions/
+            git commit -m "retract($F): auto-rollback por 3+ refutas válidas"
+            git push origin "$BRANCH"
+
+            gh pr create \
+              --title "retract: $F auto-rollback" \
+              --body "Auto-rollback disparado. 3+ refutas válidas fuertes. Merge URGENTE." \
+              --head "$BRANCH" \
+              --base main \
+              --label "forensis,retract,urgent"
+
+            # Notify Jack URGENT
+            py scripts/notify.py \
+              "Rollback auto $F" \
+              "3 refutas válidas fuertes en 24h. PR retract abierto. Merge URGENTE." \
+              URGENT
+          done

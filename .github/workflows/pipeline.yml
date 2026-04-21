@@ -1,0 +1,201 @@
+name: forensis-pipeline
+
+on:
+  workflow_dispatch:
+    inputs:
+      signal:
+        description: "Path a signal.json (opcional)"
+        required: false
+        type: string
+      finding:
+        description: "finding_id H<N> (alternativa a signal)"
+        required: false
+        type: string
+
+  issues:
+    types: [opened, labeled]
+
+concurrency:
+  group: pipeline-${{ github.event.inputs.finding || github.event.issue.number }}
+  cancel-in-progress: false
+
+permissions:
+  contents: write
+  pull-requests: write
+  issues: write
+
+jobs:
+  pipeline:
+    if: |
+      github.event_name == 'workflow_dispatch' ||
+      (github.event_name == 'issues' && contains(github.event.issue.labels.*.name, 'new-signal'))
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+          cache: pip
+
+      - name: Install deps
+        run: |
+          pip install -r requirements.txt
+          pip install anthropic
+
+      - name: Determine target
+        id: target
+        run: |
+          if [ -n "${{ github.event.inputs.finding }}" ]; then
+            echo "mode=finding" >> "$GITHUB_OUTPUT"
+            echo "value=${{ github.event.inputs.finding }}" >> "$GITHUB_OUTPUT"
+          elif [ -n "${{ github.event.inputs.signal }}" ]; then
+            echo "mode=signal" >> "$GITHUB_OUTPUT"
+            echo "value=${{ github.event.inputs.signal }}" >> "$GITHUB_OUTPUT"
+          elif [ "${{ github.event_name }}" = "issues" ]; then
+            SIGNAL_FILE=$(echo "${{ github.event.issue.title }}" | sed -n 's/new-signal: //p')
+            echo "mode=signal" >> "$GITHUB_OUTPUT"
+            echo "value=reports/signals/$SIGNAL_FILE" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Run pipeline
+        id: pipe
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          PERPLEXITY_API_KEY: ${{ secrets.PERPLEXITY_API_KEY }}
+        run: |
+          if [ "${{ steps.target.outputs.mode }}" = "finding" ]; then
+            python scripts/run_pipeline.py --finding "${{ steps.target.outputs.value }}" > pipeline_result.json
+          else
+            python scripts/run_pipeline.py --signal "${{ steps.target.outputs.value }}" > pipeline_result.json
+          fi
+          cat pipeline_result.json
+
+      - name: Parse result
+        id: result
+        run: |
+          STATUS=$(jq -r '.status' pipeline_result.json)
+          BRANCH=$(jq -r '.branch // empty' pipeline_result.json)
+          TIER=$(jq -r '.tier // empty' pipeline_result.json)
+          FINDING=$(jq -r '.finding_id // empty' pipeline_result.json)
+          SCORE=$(jq -r '.score // empty' pipeline_result.json)
+          echo "status=$STATUS" >> "$GITHUB_OUTPUT"
+          echo "branch=$BRANCH" >> "$GITHUB_OUTPUT"
+          echo "tier=$TIER" >> "$GITHUB_OUTPUT"
+          echo "finding=$FINDING" >> "$GITHUB_OUTPUT"
+          echo "score=$SCORE" >> "$GITHUB_OUTPUT"
+
+      - name: Commit + push branch forensis/*
+        if: steps.result.outputs.status == 'ready_to_commit'
+        run: |
+          git config user.name "forensis-bot"
+          git config user.email "bot@neuracode.dev"
+          BRANCH="${{ steps.result.outputs.branch }}"
+          git checkout -b "$BRANCH"
+          git add web/ reports/
+          git commit -m "forensis: finding ${{ steps.result.outputs.finding }} tier=${{ steps.result.outputs.tier }} score=${{ steps.result.outputs.score }}" || exit 0
+          git push origin "$BRANCH" --force-with-lease
+
+      - name: Open PR
+        if: steps.result.outputs.status == 'ready_to_commit'
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          BODY="## FORENSIS finding ${{ steps.result.outputs.finding }}
+
+**Tier:** ${{ steps.result.outputs.tier }}
+**Confidence score:** ${{ steps.result.outputs.score }}
+**Branch:** ${{ steps.result.outputs.branch }}
+
+### Artefactos
+- \`reports/stat_findings/stat_${{ steps.result.outputs.finding }}_*.json\`
+- \`reports/challenges/${{ steps.result.outputs.finding }}_*.md\`
+- \`reports/narratives/${{ steps.result.outputs.finding }}/\`
+- \`web/${{ steps.result.outputs.finding }}/index.html\`
+
+### Acción requerida Jack
+- [ ] Revisar landing en staging (gh-pages branch preview)
+- [ ] Verificar números con DB
+- [ ] Si OK: merge
+- [ ] Si refutable: cerrar + abrir issue \`retract-${{ steps.result.outputs.finding }}\`
+
+— FORENSIS · auditor forense IA de Neuracode"
+
+          gh pr create \
+            --title "forensis: ${{ steps.result.outputs.finding }} (${{ steps.result.outputs.tier }})" \
+            --body "$BODY" \
+            --head "${{ steps.result.outputs.branch }}" \
+            --base "main" \
+            --label "forensis,finding-${{ steps.result.outputs.finding }},${{ steps.result.outputs.tier }}"
+
+      - name: Auto-merge si tier AUTO y score >= 0.95
+        if: steps.result.outputs.tier == 'AUTO'
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+        run: |
+          SCORE="${{ steps.result.outputs.score }}"
+          THRESHOLD="0.95"
+          FINDING="${{ steps.result.outputs.finding }}"
+          BRANCH="${{ steps.result.outputs.branch }}"
+
+          # Comparación float con awk
+          OK=$(awk -v s="$SCORE" -v t="$THRESHOLD" 'BEGIN{print (s>=t)?1:0}')
+
+          if [ "$OK" = "1" ]; then
+            gh pr merge "$BRANCH" --squash --delete-branch --auto
+            py scripts/notify.py \
+              "Auto-merge $FINDING" \
+              "tier=AUTO score=$SCORE. Merged + deployed. Landing: https://auditoria.neuracode.dev/$FINDING/" \
+              INFO
+          else
+            py scripts/notify.py \
+              "PR pendiente $FINDING" \
+              "tier=AUTO pero score=$SCORE <0.95. No auto-merge. Revisa PR." \
+              URGENT
+          fi
+
+      - name: Notify Jack si PENDING-JACK
+        if: steps.result.outputs.tier == 'PENDING-JACK'
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+        run: |
+          gh issue create \
+            --title "urgent-jack: verificar ${{ steps.result.outputs.finding }}" \
+            --body "@JackTonyAC FORENSIS necesita que verifiques el hallazgo ${{ steps.result.outputs.finding }}.
+
+**Score:** ${{ steps.result.outputs.score }}
+**Tier:** PENDING-JACK (entre 0.70 y 0.89)
+**Landing preview:** https://auditoria.neuracode.dev/${{ steps.result.outputs.finding }}/
+**PR:** ver pipeline step
+
+FORENSIS no publicará en producción hasta tu merge.
+
+— FORENSIS" \
+            --label "jack-attention,urgent"
+
+          py scripts/notify.py \
+            "PENDING-JACK ${{ steps.result.outputs.finding }}" \
+            "score=${{ steps.result.outputs.score }}. Revisa PR + issue urgent-jack." \
+            URGENT
+
+      - name: Append audit log commit
+        if: always()
+        run: |
+          git config user.name "forensis-bot"
+          git config user.email "bot@neuracode.dev"
+          git add reports/audit_log.jsonl 2>/dev/null || true
+          git diff --cached --quiet || {
+            git stash
+            git checkout main
+            git stash pop || true
+            git add reports/audit_log.jsonl
+            git commit -m "chore(forensis): audit_log update" || true
+            git push origin main || true
+          }

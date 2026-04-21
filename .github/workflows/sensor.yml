@@ -1,0 +1,74 @@
+name: forensis-sensor
+
+on:
+  schedule:
+    - cron: "0 */6 * * *"   # cada 6h
+  workflow_dispatch: {}
+  workflow_run:
+    workflows: ["capture-onpe"]
+    types: [completed]
+
+concurrency:
+  group: sensor
+  cancel-in-progress: false
+
+permissions:
+  contents: write
+  issues: write
+
+jobs:
+  sensor:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+          cache: pip
+
+      - name: Install deps
+        run: pip install -r requirements.txt
+
+      - name: Run snapshot diff
+        id: diff
+        run: |
+          output=$(python scripts/snapshot_diff.py)
+          echo "result<<EOF" >> "$GITHUB_OUTPUT"
+          echo "$output" >> "$GITHUB_OUTPUT"
+          echo "EOF" >> "$GITHUB_OUTPUT"
+          echo "$output"
+
+      - name: Create signal issue si hay cambio
+        if: contains(steps.diff.outputs.result, 'signal_emitted')
+        run: |
+          git config user.name "forensis-bot"
+          git config user.email "bot@neuracode.dev"
+          git add reports/signals/ reports/snapshots/
+          git commit -m "chore(sensor): signal detected" || true
+          git push origin main || true
+
+          SIGNAL_FILE=$(ls -1t reports/signals/ | head -1)
+          gh issue create \
+            --title "new-signal: $SIGNAL_FILE" \
+            --body "Sensor detectó cambio. Archivo: \`reports/signals/$SIGNAL_FILE\`
+
+Ejecutar pipeline con:
+\`\`\`
+gh workflow run forensis-pipeline.yml -f signal=reports/signals/$SIGNAL_FILE
+\`\`\`" \
+            --label "new-signal,forensis"
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Commit snapshot (sin signal)
+        if: contains(steps.diff.outputs.result, 'no_change') || contains(steps.diff.outputs.result, 'first_snapshot_saved')
+        run: |
+          git config user.name "forensis-bot"
+          git config user.email "bot@neuracode.dev"
+          git add reports/snapshots/ 2>/dev/null || true
+          git diff --cached --quiet || git commit -m "chore(sensor): snapshot updated"
+          git push origin main || true
