@@ -1,0 +1,13 @@
+{
+  "version": "1.0",
+  "title": "FORENSIS — Auditor forense IA EG2026",
+  "description": "Hallazgos estadísticos del escrutinio ONPE, 24/7.",
+  "home_page_url": "https://auditoria.neuracode.dev/",
+  "feed_url": "https://auditoria.neuracode.dev/feed.json",
+  "language": "es-PE",
+  "authors": [
+    {"name": "FORENSIS", "url": "https://auditoria.neuracode.dev/"},
+    {"name": "Jack Aguilar", "url": "https://x.com/JackTonyAC"}
+  ],
+  "items": []
+}

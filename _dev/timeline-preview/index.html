@@ -1,0 +1,246 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Timeline Preview · cómo lo hice · Auditoría EG2026</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:wght@700;900&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+
+<style>
+:root {
+  --ink: #0c1a2e;
+  --paper: #faf7f2;
+  --blood: #e63946;
+  --rule: #d4ccbd;
+  --muted: #5a5a5a;
+  --green: #1a7a4f;
+}
+* { box-sizing: border-box; }
+body {
+  margin: 0; background: var(--paper); color: var(--ink);
+  font-family: 'Inter', sans-serif; line-height: 1.65;
+}
+.preview-tag {
+  position: fixed; top: 10px; left: 50%; transform: translateX(-50%);
+  background: var(--blood); color: #fff;
+  padding: 5px 12px; font-size: 11px; font-weight: 800;
+  letter-spacing: 2px; text-transform: uppercase;
+  border-radius: 3px; z-index: 100;
+}
+.wrap { max-width: 820px; margin: 0 auto; padding: 80px 32px; }
+
+h1 {
+  font-family: 'Fraunces', serif; font-weight: 900;
+  font-size: clamp(34px, 5vw, 52px); line-height: 1.1;
+  letter-spacing: -.02em; margin: 0 0 12px;
+}
+.lead {
+  font-family: 'Fraunces', serif; font-style: italic;
+  font-size: 20px; color: var(--muted); margin-bottom: 48px;
+}
+
+/* ═════ TIMELINE ═════ */
+.timeline {
+  position: relative;
+  padding-left: 40px;
+  border-left: 2px solid var(--ink);
+}
+.tl-item {
+  position: relative; padding: 0 0 38px 28px;
+}
+.tl-item::before {
+  content: ""; position: absolute;
+  left: -47px; top: 8px;
+  width: 14px; height: 14px; border-radius: 50%;
+  background: var(--paper); border: 3px solid var(--ink);
+  transition: background .3s, border-color .3s;
+}
+.tl-item.alert::before {
+  background: var(--blood); border-color: var(--blood);
+  box-shadow: 0 0 0 5px rgba(230,57,70,.15);
+}
+.tl-item.success::before {
+  background: var(--green); border-color: var(--green);
+}
+
+.tl-time {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px; font-weight: 700; letter-spacing: 1.5px;
+  color: var(--muted); text-transform: uppercase;
+  margin-bottom: 4px;
+}
+.tl-item.alert .tl-time { color: var(--blood); }
+.tl-item.success .tl-time { color: var(--green); }
+
+.tl-title {
+  font-family: 'Fraunces', serif; font-weight: 800;
+  font-size: 22px; color: var(--ink); margin: 0 0 8px;
+  line-height: 1.25;
+}
+.tl-body {
+  font-size: 16px; color: var(--ink); line-height: 1.55;
+  margin: 0 0 10px; max-width: 580px;
+}
+.tl-stack {
+  display: inline-flex; flex-wrap: wrap; gap: 6px;
+  margin-top: 8px;
+}
+.tl-tag {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px; font-weight: 700; letter-spacing: 1px;
+  padding: 3px 8px; border-radius: 3px;
+  background: #fff; border: 1px solid var(--rule);
+  color: var(--ink); text-transform: uppercase;
+}
+.tl-tag.hl { background: var(--ink); color: var(--paper); border-color: var(--ink); }
+.tl-tag.blood { background: var(--blood); color: #fff; border-color: var(--blood); }
+
+.tl-metric {
+  display: inline-block;
+  font-family: 'Fraunces', serif; font-weight: 900;
+  font-size: 28px; color: var(--blood); letter-spacing: -.02em;
+  line-height: 1; margin-right: 14px;
+  font-variant-numeric: tabular-nums;
+}
+.tl-metric + .tl-metric-lbl {
+  font-family: 'Inter', sans-serif; font-size: 13px;
+  color: var(--muted); font-weight: 500;
+}
+
+/* ═════ SUMMARY ═════ */
+.summary {
+  margin-top: 40px; padding: 28px 30px;
+  background: var(--ink); color: var(--paper);
+  border-radius: 6px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 13px; line-height: 1.8;
+}
+.summary h3 {
+  font-family: 'Fraunces', serif; font-size: 20px;
+  font-weight: 900; color: var(--paper); margin: 0 0 14px;
+}
+.summary b { color: var(--blood); }
+</style>
+</head>
+<body>
+
+<span class="preview-tag">PREVIEW · timeline · cómo lo hice</span>
+
+<div class="wrap">
+
+  <h1>Cómo lo hice.</h1>
+  <p class="lead">Cronología real. 12 abril al 20 abril. Un humano, un laptop, IP peruana.</p>
+
+  <div class="timeline">
+
+    <div class="tl-item">
+      <div class="tl-time">2026-04-12 · 18:00 PET</div>
+      <div class="tl-title">Empieza el escrutinio ONPE</div>
+      <p class="tl-body">La página <code>resultadoshistorico.onpe.gob.pe</code> empieza a publicar mesas procesadas. Decido: no espero, descargo todo.</p>
+      <div class="tl-stack">
+        <span class="tl-tag">observación</span>
+        <span class="tl-tag">ONPE web</span>
+      </div>
+    </div>
+
+    <div class="tl-item">
+      <div class="tl-time">2026-04-13 · 03:00 PET</div>
+      <div class="tl-title">Cloudflare Worker proxy</div>
+      <p class="tl-body">ONPE bloquea datacenters (403/451). Monto un proxy en Cloudflare Worker con allowlist. Así puedo disparar desde Python sin que ONPE me corte.</p>
+      <div class="tl-stack">
+        <span class="tl-tag hl">Cloudflare Worker</span>
+        <span class="tl-tag">allowlist</span>
+      </div>
+    </div>
+
+    <div class="tl-item">
+      <div class="tl-time">2026-04-14 · 10:00 PET</div>
+      <div class="tl-title">Walker async · primer test</div>
+      <p class="tl-body">Python 3.11 + asyncio + aiohttp. 100 mesas de prueba. Funciona. Escalamos a 88,064.</p>
+      <div class="tl-stack">
+        <span class="tl-tag hl">Python 3.11</span>
+        <span class="tl-tag hl">asyncio</span>
+        <span class="tl-tag">aiohttp</span>
+      </div>
+    </div>
+
+    <div class="tl-item success">
+      <div class="tl-time">2026-04-15 · 14:00 PET</div>
+      <div class="tl-title">88,063 mesas descargadas</div>
+      <p class="tl-body">
+        <span class="tl-metric">21:04</span><span class="tl-metric-lbl">min total</span>
+      </p>
+      <p class="tl-body">0 errores. SHA-256 sellado por archivo. MANIFEST.jsonl inmutable.</p>
+      <div class="tl-stack">
+        <span class="tl-tag">SHA-256</span>
+        <span class="tl-tag">MANIFEST.jsonl</span>
+      </div>
+    </div>
+
+    <div class="tl-item alert">
+      <div class="tl-time">2026-04-17 · 22:00 PET</div>
+      <div class="tl-title">Descubro el rango 900k+</div>
+      <p class="tl-body">Boundary probe detecta códigos 900001-904703. Militar, policial, penales, exterior. ONPE no las muestra por default. Corro el walker otra vez con rangos especiales.</p>
+      <div class="tl-stack">
+        <span class="tl-tag blood">boundary probe</span>
+        <span class="tl-tag">códigos 900k+</span>
+      </div>
+    </div>
+
+    <div class="tl-item success">
+      <div class="tl-time">2026-04-18 · 01:30 PET</div>
+      <div class="tl-title">Universo completo: 92,766 mesas</div>
+      <p class="tl-body">88,063 normales + 4,703 especiales. 3.79M actas. Cierra con el conteo oficial ONPE por depto.</p>
+      <div class="tl-stack">
+        <span class="tl-tag">universo v2</span>
+        <span class="tl-tag hl">DuckDB</span>
+        <span class="tl-tag hl">Polars</span>
+      </div>
+    </div>
+
+    <div class="tl-item alert">
+      <div class="tl-time">2026-04-19 · 16:00 PET</div>
+      <div class="tl-title">H4 aparece en el análisis</div>
+      <p class="tl-body">
+        <span class="tl-metric">41.65%</span><span class="tl-metric-lbl">JPP en mesas 900k+ vs 10.91% normales</span>
+      </p>
+      <p class="tl-body">z = 698 · Cohen h = 0.73 (efecto grande) · IC95 [29.5pp, 30.8pp] · p &lt; 10⁻³⁰⁰.</p>
+      <div class="tl-stack">
+        <span class="tl-tag hl">scipy</span>
+        <span class="tl-tag">z-test Newcombe</span>
+        <span class="tl-tag">Cohen h</span>
+        <span class="tl-tag">bootstrap</span>
+      </div>
+    </div>
+
+    <div class="tl-item">
+      <div class="tl-time">2026-04-20 · 07:42 UTC</div>
+      <div class="tl-title">Cadena custodia nivel 4</div>
+      <p class="tl-body">Parquet a HuggingFace · CID a IPFS (Filebase primary, Pinata backup) · commits firmados a GitHub. Cualquiera verifica.</p>
+      <div class="tl-stack">
+        <span class="tl-tag hl">HuggingFace</span>
+        <span class="tl-tag hl">IPFS Filebase</span>
+        <span class="tl-tag hl">Pinata</span>
+        <span class="tl-tag">GitHub</span>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="summary">
+    <h3>Resumen ejecutivo</h3>
+    input: <b>ONPE público</b> · 92,766 mesas · 3.79M actas<br>
+    duración end-to-end: <b>~8 días</b> (humano solo · IP peruana)<br>
+    tooling: <b>Python 3.11 · Polars · DuckDB · PyArrow · scipy · CF Worker · HF · IPFS</b><br>
+    output: <b>4 findings vivos</b> (H1-H4) · SHA-256 inmutable · cadena 4 niveles<br>
+    costo infra: <b>$0</b> · free tier todo<br>
+    reproducible: <b>git clone + py make.py capture</b>
+  </div>
+
+</div>
+
+</body>
+</html>

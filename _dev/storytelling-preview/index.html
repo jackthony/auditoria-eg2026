@@ -1,0 +1,141 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Sistema Storytelling · Preview · Auditoría EG2026</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,700;9..144,900&family=Caveat:wght@500;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="/_assets/site-nav.css">
+<script src="/_assets/site-nav.js" defer></script>
+<link rel="stylesheet" href="/_assets/storytelling.css">
+<script src="/_assets/storytelling.js" defer></script>
+
+<style>
+  body {
+    margin: 0;
+    background: var(--sn-paper, #faf7f2);
+    color: var(--sn-ink, #0c1a2e);
+    font-family: 'Inter', -apple-system, sans-serif;
+  }
+  .preview-tag {
+    position: fixed; top: 10px; left: 50%; transform: translateX(-50%);
+    background: var(--sn-blood, #e63946); color: #fff;
+    padding: 5px 12px; font-size: 11px; font-weight: 800;
+    letter-spacing: 2px; text-transform: uppercase;
+    border-radius: 3px; z-index: 100;
+  }
+</style>
+</head>
+<body>
+
+<span class="preview-tag">PREVIEW · sistema storytelling · opción A</span>
+
+<div class="storytelling">
+
+  <!-- Scene 1 · intro editorial -->
+  <section class="scene" data-scene="1">
+    <span class="scene-label">Capítulo uno</span>
+    <h1>Había una vez<br>92,766 mesas.</h1>
+    <p class="lead">Una por cada pedacito del Perú donde alguien fue a votar el 12 de abril.</p>
+  </section>
+
+  <!-- Scene 2 · big number H4 -->
+  <section class="scene" data-scene="2">
+    <span class="scene-label">Hasta que un día</span>
+    <h2>Alguien miró las<br>mesas 900k+ aparte.</h2>
+    <div class="big-number" style="margin: 30px 0">41.65%</div>
+    <p class="lead">Juntos por el Perú, en esas 4,703 mesas.<br>En el resto del país: 10.91%.</p>
+    <p class="handwrite" data-fade>4 veces más →</p>
+  </section>
+
+  <!-- Scene 3 · counter + terminal -->
+  <section class="scene" data-scene="3">
+    <span class="scene-label">El walker</span>
+    <h2>88,063 mesas normales<br>contadas una por una.</h2>
+    <div class="counter-wrap" style="margin-top: 40px">
+      <div class="counter" data-counter-to="88063" data-counter-dur="2200">0</div>
+      <div class="counter-label">mesas procesadas</div>
+    </div>
+    <div class="terminal" style="margin-top: 40px">
+      <div><span class="prompt">$</span> py scripts/fetch_onpe_mesas_async.py --range 1 88064 900001 904703</div>
+      <div><span class="ok">✓</span> mesa 00001/92766 ... ok</div>
+      <div><span class="ok">✓</span> mesa 00002/92766 ... ok</div>
+      <div style="color:#666">... 21 minutos después ...</div>
+      <div><span class="ok">✓</span> mesa 92766/92766 ... ok</div>
+      <div><span class="ok">✓</span> 3,790,214 actas · 0 errores · SHA-256 sellado</div>
+    </div>
+  </section>
+
+  <!-- Scene 4 · dots grid -->
+  <section class="scene" data-scene="4">
+    <span class="scene-label">Por eso descubrió que...</span>
+    <h2>4,703 mesas<br>tienen otro color.</h2>
+    <div class="big-number" style="margin: 30px 0; font-size: clamp(80px, 14vw, 180px)">4,703</div>
+    <p class="lead">Militar. Exterior. Penal. Hospitalario.<br>Código 900001 a 904703. ONPE no las muestra por default.</p>
+    <div class="dots-grid" data-dots-total="800" data-dots-off="41"></div>
+    <div class="legend">
+      <span class="legend-item"><span class="legend-dot legend-ok"></span> mesa normal (88,063)</span>
+      <span class="legend-item"><span class="legend-dot legend-off"></span> mesa 900k+ (4,703)</span>
+    </div>
+  </section>
+
+  <!-- Scene 5 · podios 3 universos -->
+  <section class="scene" data-scene="5">
+    <span class="scene-label">Y la brecha...</span>
+    <h2>JPP saca 4× más<br>donde nadie mira.</h2>
+    <p class="lead">Mismo partido. Tres poblaciones distintas. Datos ONPE.</p>
+    <div class="podios cols-3">
+      <div class="podio-col">
+        <div class="podio-title">Mesas normales</div>
+        <div class="podio-source">88,063 mesas · 3.62M actas</div>
+        <div class="rank-row" data-rank-delay="100"><span class="rank-pos">1°</span><span class="rank-name">Fuerza Popular</span><span class="rank-pct">17.1%</span></div>
+        <div class="rank-row" data-rank-delay="200"><span class="rank-pos">2°</span><span class="rank-name">Renovación Popular</span><span class="rank-pct">12.3%</span></div>
+        <div class="rank-row" data-rank-delay="300"><span class="rank-pos">3°</span><span class="rank-name">Buen Gobierno</span><span class="rank-pct">11.4%</span></div>
+        <div class="rank-row" data-rank-delay="400"><span class="rank-pos">4°</span><span class="rank-name">Juntos por el Perú</span><span class="rank-pct">10.91%</span></div>
+      </div>
+      <div class="podio-col alt">
+        <div class="podio-title">Mesas 900k+</div>
+        <div class="podio-source">4,703 mesas · 172k actas</div>
+        <div class="rank-row highlight" data-rank-delay="500"><span class="rank-pos">1°</span><span class="rank-name">Juntos por el Perú</span><span class="rank-pct">41.65%</span><span class="rank-arrow">↑↑↑</span></div>
+        <div class="rank-row" data-rank-delay="600"><span class="rank-pos">2°</span><span class="rank-name">Fuerza Popular</span><span class="rank-pct">14.8%</span></div>
+        <div class="rank-row" data-rank-delay="700"><span class="rank-pos">3°</span><span class="rank-name">Renovación Popular</span><span class="rank-pct">9.2%</span></div>
+        <div class="rank-row" data-rank-delay="800"><span class="rank-pos">4°</span><span class="rank-name">Buen Gobierno</span><span class="rank-pct">7.5%</span></div>
+      </div>
+      <div class="podio-col">
+        <div class="podio-title">Consolidado 92,766</div>
+        <div class="podio-source">total · 3.79M actas · SHA-256</div>
+        <div class="rank-row" data-rank-delay="900"><span class="rank-pos">1°</span><span class="rank-name">Fuerza Popular</span><span class="rank-pct">17.0%</span></div>
+        <div class="rank-row" data-rank-delay="1000"><span class="rank-pos">2°</span><span class="rank-name">Renovación Popular</span><span class="rank-pct">12.1%</span></div>
+        <div class="rank-row" data-rank-delay="1100"><span class="rank-pos">3°</span><span class="rank-name">Juntos por el Perú</span><span class="rank-pct">12.0%</span></div>
+        <div class="rank-row" data-rank-delay="1200"><span class="rank-pos">4°</span><span class="rank-name">Buen Gobierno</span><span class="rank-pct">11.2%</span></div>
+      </div>
+    </div>
+    <p class="caption">
+      Ratio <strong>3.82×</strong> entre 41.65% y 10.91%.<br>
+      z = 698 · Cohen h = 0.73 (efecto grande) · p &lt; 10⁻³⁰⁰.<br>
+      <span style="font-style:italic">No afirmamos fraude. Afirmamos que ONPE debe explicar la brecha.</span>
+    </p>
+  </section>
+
+  <!-- Scene 6 · CTA final -->
+  <section class="scene" data-scene="6">
+    <span class="scene-label">Y desde ese día</span>
+    <h2>Cualquiera,<br>con el mismo código,<br>puede volver a contar.</h2>
+    <a class="cta" href="https://github.com/jackthony/auditoria-eg2026" target="_blank" rel="noopener">
+      Verifícalo tú mismo →
+    </a>
+    <p class="cta-sub">código abierto · datos públicos · SHA-256 sellado</p>
+    <p class="caption" style="margin-top: 40px">
+      Por <strong>Jack Aguilar</strong> · Neuracode<br>
+      Análisis técnico reproducible. Cualquiera verifica.
+    </p>
+  </section>
+
+</div>
+
+</body>
+</html>
