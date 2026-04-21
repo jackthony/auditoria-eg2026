@@ -4,3 +4,6 @@
 {"event": "pipeline_start", "finding_id": "H12", "ts": "20260421T215948Z", "ts_utc": "2026-04-21T21:59:48.663931+00:00"}
 {"event": "stage_start", "stage": "data-forensic", "finding_id": "H12", "ts_utc": "2026-04-21T21:59:48.664029+00:00"}
 {"event": "pipeline_blocked", "reason": "no raw_finding, ejecutar data-forensic local", "ts_utc": "2026-04-21T21:59:48.664225+00:00"}
+{"event": "pipeline_start", "finding_id": "H12", "ts": "20260421T220631Z", "ts_utc": "2026-04-21T22:06:31.941754+00:00"}
+{"event": "stage_start", "stage": "data-forensic", "finding_id": "H12", "ts_utc": "2026-04-21T22:06:31.941833+00:00"}
+{"event": "pipeline_blocked", "reason": "no raw_finding, ejecutar data-forensic local", "ts_utc": "2026-04-21T22:06:31.942008+00:00"}
