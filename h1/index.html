@@ -1,0 +1,543 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Extranjero 26% impugnadas · Hallazgo H1</title>
+<meta name="description" content="Extranjero 26.27% mesas impugnadas vs 6.16% global. z=42.2, χ²=2,897. Loreto 14.87%, Ucayali 12.02%. Anomalía que ONPE debe explicar.">
+
+<!-- OG (Facebook/WhatsApp/LinkedIn/Telegram) -->
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://auditoria.neuracode.dev/h1/">
+<meta property="og:title" content="Extranjero 26% impugnadas · Hallazgo H1">
+<meta property="og:description" content="Extranjero 26.27% mesas impugnadas vs 6.16% global. z=42.2, χ²=2,897. Loreto 14.87%, Ucayali 12.02%. Anomalía que ONPE debe explicar.">
+<meta property="og:image" content="https://auditoria.neuracode.dev/h1/og.png">
+<meta property="og:image:secure_url" content="https://auditoria.neuracode.dev/h1/og.png">
+<meta property="og:image:type" content="image/png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Neuracode H1: Extranjero 26% impugnadas vs 6% global">
+<meta property="og:site_name" content="Auditoría EG2026 · Neuracode">
+<meta property="og:locale" content="es_PE">
+
+<!-- Twitter/X -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:site" content="@JackDeNeuracode">
+<meta name="twitter:creator" content="@JackDeNeuracode">
+<meta name="twitter:title" content="Extranjero 26% impugnadas · Hallazgo H1">
+<meta name="twitter:description" content="Extranjero 26.27% mesas impugnadas vs 6.16% global. z=42.2, χ²=2,897. Loreto 14.87%, Ucayali 12.02%. Anomalía que ONPE debe explicar.">
+<meta name="twitter:image" content="https://auditoria.neuracode.dev/h1/og.png">
+<meta name="twitter:image:alt" content="Neuracode H1: Extranjero 26% impugnadas vs 6% global">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,700;9..144,900&family=Caveat:wght@500;700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="/_assets/site-nav.css">
+<script src="/_assets/site-nav.js" defer></script>
+<link rel="stylesheet" href="/_assets/site-share.css">
+<script src="/_assets/site-share.js" defer></script>
+
+<style>
+:root {
+  --ink: #0c1a2e;
+  --ink-soft: #1a3a5c;
+  --paper: #faf7f2;
+  --blood: #e63946;
+  --blood-dark: #b0171f;
+  --rule: #d4ccbd;
+  --muted: #5a5a5a;
+  --muted-soft: #7a7a7a;
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; padding: 0; }
+body {
+  background: var(--paper);
+  color: var(--ink);
+  font-family: 'Inter', -apple-system, sans-serif;
+  line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ═════ DUAL VOICE (default pop) ═════ */
+body[data-voice="pop"] .voice-tech { display: none; }
+body[data-voice="tech"] .voice-pop { display: none; }
+
+/* ═════ HERO ═════ */
+.hero {
+  max-width: 1080px;
+  margin: 0 auto;
+  padding: 80px 32px 24px;
+  text-align: center;
+}
+.hero .pill {
+  display: inline-flex; align-items: center; gap: 8px;
+  background: var(--blood-dark); color: #fff;
+  font-size: 11px; font-weight: 800; letter-spacing: 2px;
+  text-transform: uppercase;
+  padding: 6px 12px; border-radius: 4px;
+  margin-bottom: 18px;
+}
+.hero .pill::before {
+  content: ""; width: 6px; height: 6px; border-radius: 50%;
+  background: #fff; animation: pulse 1.6s ease-in-out infinite;
+}
+@keyframes pulse { 0%,100% { opacity: 1; } 50% { opacity: .4; } }
+
+.hero .kicker {
+  font-family: 'Caveat', cursive;
+  font-size: 26px; color: var(--blood);
+  transform: rotate(-2deg); display: inline-block;
+  margin-bottom: 8px;
+}
+.hero h1 {
+  font-family: 'Fraunces', Georgia, serif;
+  font-weight: 900; font-size: clamp(38px, 6.5vw, 68px);
+  line-height: 1.06; letter-spacing: -.02em;
+  margin: 10px 0 18px;
+}
+.hero h1 .hl { color: var(--blood); }
+.hero .sub {
+  font-family: 'Fraunces', serif; font-style: italic;
+  font-size: clamp(17px, 2vw, 22px);
+  color: var(--muted);
+  max-width: 640px; margin: 0 auto 28px;
+}
+
+/* ═════ VOICE TOGGLE (sticky) ═════ */
+.voice-toggle-wrap {
+  position: sticky; top: 16px; z-index: 60;
+  display: flex; justify-content: center;
+  padding: 10px 16px;
+  pointer-events: none;
+}
+.voice-toggle {
+  display: inline-flex; gap: 0;
+  background: #fff; border: 1px solid var(--ink);
+  border-radius: 100px; padding: 4px;
+  box-shadow: 0 4px 14px rgba(12,26,46,.10);
+  pointer-events: auto;
+}
+.voice-toggle button {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px; font-weight: 700; letter-spacing: 1px;
+  text-transform: uppercase;
+  background: transparent; color: var(--muted);
+  border: 0; padding: 9px 18px; cursor: pointer;
+  border-radius: 100px;
+  transition: background .25s, color .25s;
+  min-height: 38px;
+}
+.voice-toggle button.is-active {
+  background: var(--ink); color: var(--paper);
+}
+.voice-toggle button:not(.is-active):hover { color: var(--ink); }
+.voice-toggle button:focus-visible {
+  outline: 2px solid var(--blood); outline-offset: 3px;
+}
+
+/* ═ Skip-to-content ═ */
+.skip-link {
+  position: absolute; left: -9999px; top: 0;
+  background: var(--ink); color: #fff;
+  padding: 10px 14px; font-size: 14px; font-weight: 600;
+  text-decoration: none; border-radius: 0 0 6px 0;
+  z-index: 9999;
+}
+.skip-link:focus { left: 0; }
+
+/* ═════ STAT BLOCK ═════ */
+.stat-block {
+  max-width: 920px; margin: 10px auto 50px;
+  padding: 0 32px;
+  display: grid; grid-template-columns: 1fr;
+  gap: 24px; text-align: center;
+}
+.stat-hero {
+  background: var(--ink); color: #fff;
+  padding: 48px 32px;
+  border-radius: 8px;
+  box-shadow: 0 8px 30px rgba(12,26,46,.15);
+}
+.stat-hero .big {
+  font-family: 'Fraunces', serif; font-weight: 900;
+  font-size: clamp(76px, 14vw, 144px); line-height: .95;
+  color: #fff; font-variant-numeric: tabular-nums;
+  letter-spacing: -.03em;
+  margin: 0;
+}
+.stat-hero .big .slash { color: var(--blood); }
+.stat-hero .big-label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 13px; letter-spacing: 2px;
+  color: #ffb3b8; text-transform: uppercase;
+  margin-top: 14px;
+}
+.stat-hero .big-sub {
+  font-family: 'Fraunces', serif; font-style: italic;
+  font-size: 18px; color: #e9e2d2;
+  margin-top: 16px;
+}
+.stat-hero .big-sub strong { color: #fff; }
+
+/* ═════ CONTEXT · mesa rango ═════ */
+.context {
+  max-width: 820px; margin: 0 auto 60px;
+  padding: 0 32px;
+}
+.context h2 {
+  font-family: 'Fraunces', serif; font-weight: 900;
+  font-size: clamp(26px, 3.6vw, 36px);
+  line-height: 1.1; margin: 0 0 14px;
+}
+.context h2 .hl { color: var(--blood); }
+.context .voice-pop,
+.context .voice-tech {
+  font-size: 17px; line-height: 1.65;
+  color: var(--muted);
+  margin: 0 0 14px;
+}
+.context .voice-tech {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 14px; line-height: 1.7;
+  background: #f4f1ea; padding: 14px 16px;
+  border-radius: 4px; color: var(--ink);
+}
+.context .voice-tech strong { color: var(--blood); }
+.context ul {
+  padding-left: 20px; margin: 14px 0;
+  font-size: 15px; color: var(--ink);
+}
+.context li { margin-bottom: 6px; }
+.context code {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 13px; background: #f4f1ea;
+  padding: 2px 6px; border-radius: 3px;
+}
+
+/* ═════ COMPARADOR BARRAS ═════ */
+.comparator {
+  max-width: 820px; margin: 0 auto 60px;
+  padding: 0 32px;
+}
+.comparator h3 {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px; letter-spacing: 2px; color: var(--muted);
+  text-transform: uppercase; margin: 0 0 20px;
+}
+.bar-row {
+  margin-bottom: 26px;
+}
+.bar-row .bar-label {
+  display: flex; justify-content: space-between;
+  align-items: baseline; margin-bottom: 8px;
+  font-size: 14px;
+}
+.bar-row .bar-label .name {
+  font-weight: 600; color: var(--ink);
+}
+.bar-row .bar-label .pct {
+  font-family: 'JetBrains Mono', monospace;
+  font-weight: 700; font-variant-numeric: tabular-nums;
+  font-size: 16px;
+}
+.bar-row.global .pct { color: var(--muted); }
+.bar-row.extranjero .pct { color: var(--blood-dark); }
+.bar-track {
+  width: 100%; height: 22px;
+  background: #eae3d3; border-radius: 3px;
+  overflow: hidden;
+  position: relative;
+}
+.bar-fill {
+  height: 100%;
+  background: #b3aa97;
+  transition: width 1.2s cubic-bezier(.2,.8,.2,1);
+  width: 0;
+}
+.bar-row.extranjero .bar-fill {
+  background: var(--blood-dark);
+  box-shadow: 0 0 0 1px rgba(176,23,31,.25);
+}
+.bar-row.is-ready .bar-fill[data-pct="6.16"] { width: 6.16%; }
+.bar-row.is-ready .bar-fill[data-pct="26.27"] { width: 26.27%; }
+
+/* ═════ LIMITACIONES ═════ */
+.limits {
+  max-width: 820px; margin: 0 auto 60px;
+  padding: 20px 24px;
+  background: #fff;
+  border-left: 3px solid var(--rule);
+  border-radius: 0 6px 6px 0;
+}
+.limits h3 {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px; letter-spacing: 2px; color: var(--muted);
+  text-transform: uppercase; margin: 0 0 12px;
+}
+.limits ul { margin: 0; padding-left: 18px; }
+.limits li {
+  font-size: 14px; color: var(--ink);
+  margin-bottom: 8px; line-height: 1.55;
+}
+
+/* ═════ CTA OUTRO ═════ */
+.outro {
+  max-width: 860px; margin: 0 auto;
+  padding: 40px 32px 120px;
+  text-align: center;
+}
+.outro h2 {
+  font-family: 'Fraunces', serif; font-weight: 900;
+  font-size: clamp(28px, 4.5vw, 46px);
+  line-height: 1.1; letter-spacing: -.02em;
+  margin: 0 0 18px;
+}
+.outro h2 .hl { color: var(--blood); }
+.outro .sub {
+  font-family: 'Fraunces', serif; font-style: italic;
+  font-size: 18px; color: var(--muted);
+  margin-bottom: 32px;
+}
+.ctas {
+  display: flex; flex-wrap: wrap; gap: 12px;
+  justify-content: center;
+  margin: 0 0 36px;
+}
+.ctas a, .ctas span.cta-soon {
+  display: inline-flex; align-items: center; gap: 8px;
+  padding: 13px 20px; border-radius: 6px;
+  font-size: 14px; font-weight: 600;
+  text-decoration: none; transition: transform .15s;
+  font-family: 'Inter', sans-serif;
+}
+.ctas a:hover { transform: translateY(-1px); }
+.ctas .cta-primary { background: var(--blood-dark); color: #fff; }
+.ctas .cta-ghost {
+  background: transparent; color: var(--ink);
+  border: 1px solid var(--rule);
+}
+.ctas .cta-soon {
+  background: transparent; color: var(--muted);
+  border: 1px dashed var(--rule); cursor: default;
+}
+.ctas a:focus-visible, .voice-toggle button:focus-visible {
+  outline: 2px solid var(--blood); outline-offset: 3px;
+}
+.outro .note {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px; letter-spacing: 1.5px;
+  color: var(--muted); text-transform: uppercase;
+  padding-top: 24px; border-top: 1px dashed var(--rule);
+  max-width: 640px; margin: 30px auto 0;
+  line-height: 1.8;
+}
+.outro .disclaimer {
+  margin: 24px auto 0; max-width: 620px;
+  padding: 16px 20px;
+  background: var(--ink); color: #fff;
+  border-radius: 6px;
+  font-size: 13px; line-height: 1.7;
+  text-align: left;
+}
+.outro .disclaimer strong { color: #ffb3b8; }
+
+/* ═════ MOBILE ═════ */
+@media (max-width: 560px) {
+  .hero { padding: 60px 20px 20px; }
+  .stat-block { padding: 0 16px; }
+  .stat-hero { padding: 36px 18px; }
+  .context, .comparator, .limits, .outro { padding-left: 16px; padding-right: 16px; }
+}
+@media (max-width: 480px) {
+  .voice-toggle-wrap {
+    position: fixed; top: 10px; left: 0; right: 0;
+    padding: 6px 12px; z-index: 70;
+  }
+  .voice-toggle { box-shadow: 0 6px 20px rgba(12,26,46,.18); }
+  .hero { padding-top: 84px; }
+  .stat-hero .big { font-size: 76px; }
+}
+
+/* ═════ REDUCED MOTION ═════ */
+@media (prefers-reduced-motion: reduce) {
+  .hero .pill::before { animation: none; }
+  .bar-fill { transition: none !important; }
+}
+</style>
+</head>
+<body data-voice="pop">
+<a class="skip-link" href="#sn-main">Saltar al contenido</a>
+<main id="sn-main" tabindex="-1">
+
+<section class="hero">
+  <span class="pill">CRÍTICO · H1 · SESGO GEOGRÁFICO</span>
+  <div class="kicker">HALL-0420-H1 · 2026-04-20</div>
+  <h1>Extranjero: 26 de <span class="hl">cada 100</span> impugnadas.</h1>
+  <p class="sub">En el resto del país, 6 de cada 100. Cuatro veces más, en un solo grupo. z=42.2, χ²=2,897.</p>
+</section>
+
+<div class="voice-toggle-wrap">
+  <div class="voice-toggle" role="tablist" aria-label="Tono de lectura">
+    <button class="is-active" data-voice="pop" aria-pressed="true" aria-label="Cambiar a modo pueblo">Modo Pueblo</button>
+    <button data-voice="tech" aria-pressed="false" aria-label="Cambiar a modo técnico">Modo Técnico</button>
+  </div>
+</div>
+
+<section class="stat-block" aria-live="polite">
+  <div class="stat-hero">
+    <div class="big">26.27<span class="slash">%</span></div>
+    <div class="big-label">mesas impugnadas · Extranjero</div>
+    <div class="big-sub voice-pop">
+      En mesas del Extranjero, <strong>26 de cada 100 quedan impugnadas.</strong>
+      En el resto del país, solo <strong>6 de cada 100.</strong> Cuatro veces más.
+    </div>
+    <div class="big-sub voice-tech">
+      Proporción binomial por depto · z-score vs tasa global 6.1585%.
+      Extranjero: 26.27% · z=42.18 · Loreto 14.87% · Ucayali 12.02%.
+      χ²=2,897 agregado (Bonferroni pasa).
+    </div>
+  </div>
+</section>
+
+<section class="context">
+  <h2>Sesgo geográfico: deptos <span class="hl">concentran impugnaciones</span>.</h2>
+  <p class="voice-pop">
+    Mesas del Extranjero: 26.27% impugnadas (4.3× global).
+    Le siguen: Loreto 14.87%, Ucayali 12.02%, Madre de Dios 10.65%, Ica 9.41%.
+    Piso: Arequipa 1.83%, Puno 3.03%.
+  </p>
+  <p class="voice-tech">
+    Mapping: prefijo→depto ONPE alfabético (Callao=24).
+    Tasa impugnación global: 6.1585% (92,766 mesas).
+    Top 5 deptos alto: Extranjero 26.27%, Loreto 14.87%, Ucayali 12.02%, Madre de Dios 10.65%, Ica 9.41%.
+    Top 5 deptos bajo: Arequipa 1.83%, Puno 3.03%, Junín 4.31%, Apurímac 4.70%, Cusco 5.06%.
+  </p>
+  <ul>
+    <li>Universo: <strong>92,766</strong> mesas (88,063 normales + 4,703 especiales 900k+).</li>
+    <li>Tasa global impugnación: <strong>6.1585%</strong>.</li>
+    <li>z-score Extranjero vs global: <strong>42.18</strong>.</li>
+    <li>χ² agregado 26 deptos: <strong>2,897</strong> (Bonferroni pasa threshold Bonf=2.0).</li>
+    <li>Cadena custodia: <code>eg2026.duckdb</code> · MANIFEST SHA-256 · HF · IPFS Filebase.</li>
+  </ul>
+</section>
+
+<section class="comparator" aria-live="polite">
+  <h3>Extranjero vs tasa global</h3>
+
+  <div class="bar-row global" data-reveal>
+    <div class="bar-label">
+      <span class="name">Tasa global (92,766 mesas)</span>
+      <span class="pct">6.16%</span>
+    </div>
+    <div class="bar-track"><div class="bar-fill" data-pct="6.16"></div></div>
+  </div>
+
+  <div class="bar-row extranjero" data-reveal>
+    <div class="bar-label">
+      <span class="name">Extranjero · todas mesas</span>
+      <span class="pct">26.27%</span>
+    </div>
+    <div class="bar-track"><div class="bar-fill" data-pct="26.27"></div></div>
+  </div>
+</section>
+
+<section class="limits">
+  <h3>Limitaciones honestas</h3>
+  <ul>
+    <li>Impugnación es recurso procesal legítimo. Concentración geográfica no implica fraude; requiere explicación formal de ONPE.</li>
+    <li>Extranjero incluye locales consulares + mesas de exterior con procedimientos distintos (padrones reducidos, validación especial).</li>
+    <li>Sensibilidad: resultado robusto a sensibilidad depto (Loreto, Ucayali, Ica mantienen diferencias significativas vs global).</li>
+    <li>Causa potencial: procedimiento especial validación exterior vs mesas normales. Pendiente: análisis causal cuidadoso de ONPE.</li>
+  </ul>
+</section>
+
+<section class="outro">
+  <h2>Datos, código MIT, CIDs IPFS: <span class="hl">audítalo tú mismo</span>.</h2>
+  <p class="sub">Esto no dice "fraude". Dice: <strong>anomalía estadística que ONPE debe explicar</strong>.</p>
+
+  <div class="ctas">
+    <a class="cta-primary" href="/h4/">Ver H4 hero · JPP 41% mesas 900k+ →</a>
+    <a class="cta-ghost" href="/h12/">Ver H12 · mesa Cusco 90% →</a>
+    <a class="cta-ghost" href="https://huggingface.co/datasets/Neuracode/onpe-eg2026-mesa-a-mesa" target="_blank" rel="noopener">Dataset público (HF) →</a>
+    <a class="cta-ghost" href="https://github.com/jackthony/auditoria-eg2026" target="_blank" rel="noopener">Código + scripts (GitHub) →</a>
+    <a class="cta-ghost" href="/">← Volver a hallazgos</a>
+  </div>
+
+  <div class="disclaimer">
+    <strong>Regla de oro:</strong> jamás "fraude". Siempre <strong>"anomalía que ONPE debe explicar"</strong>.
+    Autoría: Jack Aguilar. Cero afiliación partidaria. Código MIT.
+    Verifica en <code>eg2026.duckdb</code> del repo.
+  </div>
+
+  <div class="note">
+    Finding ID: HALL-0420-H1 · binomial proporciones z-score por depto · z=42.18 (Extranjero)<br>
+    H0: tasa_imp homogénea across deptos (~6.16% global) · χ²=2,897 (Bonferroni pasa).
+    Método: proporción binomial + z-score · Newcombe 1998 · Mapping ONPE alfabético<br>
+    Custodia: GitHub + HuggingFace + IPFS Filebase + Pinata
+  </div>
+</section>
+
+</main>
+
+<script>
+(function () {
+  'use strict';
+
+  // Voice toggle (compartido con /h4/)
+  function initVoice() {
+    const body = document.body;
+    const buttons = document.querySelectorAll('.voice-toggle button');
+    buttons.forEach(btn => {
+      btn.addEventListener('click', () => {
+        const voice = btn.dataset.voice;
+        body.dataset.voice = voice;
+        buttons.forEach(b => {
+          b.classList.toggle('is-active', b === btn);
+          b.setAttribute('aria-pressed', b === btn ? 'true' : 'false');
+        });
+        try { localStorage.setItem('voice-pref', voice); } catch(_) {}
+      });
+    });
+    try {
+      const saved = localStorage.getItem('voice-pref');
+      if (saved === 'tech' || saved === 'pop') {
+        document.querySelector('.voice-toggle button[data-voice="' + saved + '"]')?.click();
+      }
+    } catch(_) {}
+  }
+
+  // Barras: reveal cuando entran en viewport (o instant si reduced motion)
+  function initBars() {
+    const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const rows = document.querySelectorAll('.bar-row[data-reveal]');
+    if (reduced || !('IntersectionObserver' in window)) {
+      rows.forEach(r => r.classList.add('is-ready'));
+      return;
+    }
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          e.target.classList.add('is-ready');
+          io.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.3 });
+    rows.forEach(r => io.observe(r));
+  }
+
+  function init() {
+    initVoice();
+    initBars();
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', init);
+  } else {
+    init();
+  }
+})();
+</script>
+
+</body>
+</html>
