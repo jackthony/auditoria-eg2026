@@ -162,7 +162,7 @@ def run_pipeline(finding_id: str, signal_path: Path | None = None) -> dict:
     log({"event": "stage_start", "stage": "confidence_scorer"})
     score_proc = subprocess.run(
         [sys.executable, str(ROOT / "scripts" / "confidence_scorer.py"), str(stat_path), str(challenge_path)],
-        capture_output=True, text=True, check=True,
+        capture_output=True, text=True, check=True, encoding="utf-8",
     )
     score_json = json.loads(score_proc.stdout)
     log({"event": "stage_done", "stage": "confidence_scorer", "score": score_json["score"], "tier": score_json["tier"]})
@@ -174,7 +174,7 @@ def run_pipeline(finding_id: str, signal_path: Path | None = None) -> dict:
 
     router_proc = subprocess.run(
         [sys.executable, str(ROOT / "scripts" / "hitl_router.py"), str(score_path)],
-        capture_output=True, text=True, check=True,
+        capture_output=True, text=True, check=True, encoding="utf-8",
     )
     decision = json.loads(router_proc.stdout)
     log({"event": "stage_done", "stage": "hitl_router", "tier": decision["tier"], "publish": decision["publish"]})

@@ -87,6 +87,7 @@ def main() -> int:
     score_json = json.loads(score_path.read_text(encoding="utf-8"))
 
     decision = route(score_json)
+    sys.stdout.reconfigure(encoding="utf-8")
     print(json.dumps(decision, indent=2, ensure_ascii=False))
     return 0
 
