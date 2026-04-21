@@ -192,7 +192,7 @@ h2 {
 }
 .hero-cta:hover { transform: translateY(-3px); box-shadow: 0 22px 50px rgba(12,26,46,.28); }
 .hero-cta-tag {
-  display: inline-block; background: var(--blood); color: #fff;
+  display: inline-block; background: var(--blood-dark); color: #fff;
   font-family: 'JetBrains Mono', 'Consolas', monospace;
   font-size: 11px; letter-spacing: 2px; font-weight: 700;
   padding: 5px 10px; border-radius: 3px; margin-bottom: 18px;
@@ -297,11 +297,95 @@ footer .mono { font-family: 'Courier New', monospace; font-size: 12px; word-brea
 .webinar-eyebrow { font-size: 11px; letter-spacing: 2px; text-transform: uppercase; color: var(--ink); font-weight: 700; margin-bottom: 8px; }
 .webinar h3 { font-family: 'Fraunces', Georgia, serif; font-size: 22px; font-weight: 800; color: var(--ink); margin: 0 0 8px; line-height: 1.25; }
 .webinar p { font-size: 14px; color: var(--muted); margin: 0 0 14px; line-height: 1.5; }
-.webinar .cta-webinar { display: inline-block; background: var(--blood); color: #fff; padding: 11px 20px; font-weight: 600; font-size: 13px; text-decoration: none; border-radius: 8px; transition: opacity .2s; }
+.webinar .cta-webinar { display: inline-block; background: var(--blood-dark); color: #fff; padding: 11px 20px; font-weight: 600; font-size: 13px; text-decoration: none; border-radius: 8px; transition: opacity .2s; }
 .webinar .cta-webinar:hover { opacity: .9; }
 @media (max-width: 620px) {
   .webinar { grid-template-columns: 1fr; gap: 16px; padding: 20px; }
   .webinar img { max-width: 200px; margin: 0 auto; }
+}
+
+/* ═ Findings grid 2×2 (H4 live · H1/H9/H12 pronto) ═ */
+.findings-grid {
+  display: grid; grid-template-columns: repeat(2, 1fr);
+  gap: 14px; margin-top: 30px;
+}
+.finding-card {
+  display: block; text-decoration: none; color: var(--ink);
+  background: #fff; border: 1px solid var(--rule);
+  padding: 20px 20px; border-radius: 8px;
+  transition: border-color .2s, transform .2s;
+  position: relative;
+}
+.finding-card:hover,
+.finding-card:focus-visible {
+  border-color: var(--ink); transform: translateY(-2px);
+  outline: 2px solid var(--blood); outline-offset: 2px;
+}
+.finding-card.is-soon {
+  opacity: .72; cursor: default;
+}
+.finding-card.is-soon:hover { transform: none; border-color: var(--rule); }
+.finding-card .fc-tag {
+  font-family: 'JetBrains Mono', 'Consolas', monospace;
+  font-size: 10px; font-weight: 700; letter-spacing: 2px;
+  color: var(--blood); text-transform: uppercase;
+  margin-bottom: 6px;
+}
+.finding-card .fc-num {
+  font-family: 'Fraunces', Georgia, serif;
+  font-weight: 900; font-size: clamp(28px, 4vw, 38px);
+  line-height: 1.05; color: var(--ink); margin-bottom: 6px;
+  font-variant-numeric: tabular-nums;
+}
+.finding-card .fc-body {
+  font-size: 14px; color: var(--muted); line-height: 1.5;
+  margin-bottom: 10px;
+}
+.finding-card .fc-arrow {
+  font-family: 'Inter', sans-serif;
+  font-size: 12px; font-weight: 600; letter-spacing: 1px;
+  text-transform: uppercase; color: var(--blood);
+}
+.finding-card .fc-soon {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px; font-weight: 700; letter-spacing: 2px;
+  color: var(--muted-soft); text-transform: uppercase;
+}
+@media (max-width: 620px) {
+  .findings-grid { grid-template-columns: 1fr; }
+}
+
+/* ═ Proof bar ═ */
+.proof-bar {
+  display: flex; flex-wrap: wrap; align-items: center;
+  gap: 14px 22px; margin-top: 30px;
+  padding: 14px 18px; border: 1px dashed var(--rule);
+  border-radius: 6px; background: #fff;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px; letter-spacing: 1px;
+  color: var(--muted); text-transform: uppercase;
+}
+.proof-bar strong { color: var(--ink); font-weight: 700; }
+.proof-bar a { color: var(--ink); text-decoration: none; border-bottom: 1px solid var(--blood); }
+.proof-bar a:hover { color: var(--blood); }
+
+/* ═ Skip-to-content · WCAG 2.4.1 (refuerzo, site-nav ya provee uno) ═ */
+.skip-link {
+  position: absolute; left: -9999px; top: 0;
+  background: var(--ink); color: #fff;
+  padding: 10px 14px; font-size: 14px; font-weight: 600;
+  text-decoration: none; border-radius: 0 0 6px 0;
+  z-index: 9999;
+}
+.skip-link:focus { left: 0; }
+
+/* ═ Focus ring consistente ═ */
+.hero-cta:focus-visible,
+.card:focus-visible,
+.stack-item:focus-visible,
+.built-with:focus-visible,
+.cta-webinar:focus-visible {
+  outline: 2px solid var(--blood); outline-offset: 3px;
 }
 </style>
 <link rel="stylesheet" href="/_assets/site-nav.css">
@@ -310,7 +394,8 @@ footer .mono { font-family: 'Courier New', monospace; font-size: 12px; word-brea
 <script src="/_assets/site-share.js" defer></script>
 </head>
 <body>
-<div class="wrap">
+<a class="skip-link" href="#sn-main">Saltar al contenido</a>
+<main id="sn-main" tabindex="-1"><div class="wrap">
 
   <div class="byline">
     <img src="logo-neuracode-tight.png" alt="Neuracode" style="height:28px;vertical-align:middle;margin-right:10px;display:inline-block;">
@@ -333,14 +418,45 @@ footer .mono { font-family: 'Courier New', monospace; font-size: 12px; word-brea
 
   <h2>El hallazgo.</h2>
 
-  <a class="hero-cta" href="h4/">
+  <a class="hero-cta" href="h4/" aria-label="Auditar hallazgo H4: JPP 41% en mesas 900k+">
     <div class="hero-cta-tag">HALL-0420-H4 · CRÍTICO</div>
-    <div class="hero-cta-title">JPP 41% en 4,703 mesas 900k+</div>
+    <div class="hero-cta-title">Audita H4: JPP 41% en 4,703 mesas 900k+</div>
     <div class="hero-cta-body">4 veces el promedio nacional. Mesas que ONPE no publica por default: militar, policial, penales, exterior. z=698 · Cohen h=0.73 · p&lt;10⁻³⁰⁰.</div>
     <div class="hero-cta-arrow">abrir análisis completo →</div>
   </a>
 
-  <!-- CARDS REMOVIDAS (impugnadas, ranking-cambia, fdr, historia, chat): restaurar cuando /impugnadas, /ranking-cambia, /fdr, /historia, /chat vuelvan a existir. Sesión paralela purgó en commit 26b4cde. -->
+  <div class="findings-grid" role="list" aria-label="Hallazgos forenses vigentes">
+    <a class="finding-card" href="h4/" role="listitem" aria-label="H4 JPP mesas 900k+ · análisis completo">
+      <div class="fc-tag">H4 · crítico · live</div>
+      <div class="fc-num">41.65%</div>
+      <div class="fc-body">JPP en 4,703 mesas especiales 900k+ vs 10.91% en normales. Ratio 3.82×.</div>
+      <div class="fc-arrow">ver análisis →</div>
+    </a>
+    <div class="finding-card is-soon" role="listitem" aria-label="H9 Salta 11 de 11 · pronto">
+      <div class="fc-tag">H9 · crítico · pronto</div>
+      <div class="fc-num">11/11</div>
+      <div class="fc-body">BERBÉS Salta 11 de 11 mesas impugnadas. p=4.83×10⁻¹⁴.</div>
+      <div class="fc-soon">landing en construcción</div>
+    </div>
+    <div class="finding-card is-soon" role="listitem" aria-label="H12 mesa Cusco 90% · pronto">
+      <div class="fc-tag">H12 · crítico · pronto</div>
+      <div class="fc-num">90.43%</div>
+      <div class="fc-body">Mesa 018146 Cusco JPP 90.43%. Única ≥90% en el universo.</div>
+      <div class="fc-soon">landing en construcción</div>
+    </div>
+    <div class="finding-card is-soon" role="listitem" aria-label="H1 impugnadas Lima Exterior · pronto">
+      <div class="fc-tag">H1 · media · pronto</div>
+      <div class="fc-num">z=3.9</div>
+      <div class="fc-body">Impugnadas concentradas en Lima + Exterior. Sesgo geográfico.</div>
+      <div class="fc-soon">landing en construcción</div>
+    </div>
+  </div>
+
+  <div class="proof-bar" aria-label="Stack de confianza">
+    <span><strong>Built with</strong> Claude Code</span>
+    <span><strong>Dataset</strong> HuggingFace público</span>
+    <span><strong>MIT</strong> · datos ONPE CC-BY 4.0</span>
+  </div>
 
   <section class="stack">
     <h2>Stack técnico.</h2>
@@ -407,7 +523,7 @@ footer .mono { font-family: 'Courier New', monospace; font-size: 12px; word-brea
     <div style="margin-top:20px;">Licencia: MIT (código) · CC-BY-4.0 (datos derivados) · Datos públicos ONPE.</div>
   </footer>
 
-</div>
+</div></main>
 
 <script>
 (async () => {

@@ -53,7 +53,7 @@ body[data-voice="tech"] .voice-pop { display: none; }
 }
 .hero .pill {
   display: inline-flex; align-items: center; gap: 8px;
-  background: var(--blood); color: #fff;
+  background: var(--blood-dark); color: #fff;
   font-size: 11px; font-weight: 800; letter-spacing: 2px;
   text-transform: uppercase;
   padding: 6px 12px; border-radius: 4px;
@@ -113,6 +113,22 @@ body[data-voice="tech"] .voice-pop { display: none; }
   background: var(--ink); color: var(--paper);
 }
 .voice-toggle button:not(.is-active):hover { color: var(--ink); }
+.voice-toggle button:focus-visible {
+  outline: 2px solid var(--blood); outline-offset: 3px;
+}
+.ctas a:focus-visible {
+  outline: 2px solid var(--blood); outline-offset: 3px;
+}
+
+/* ═ Skip-to-content · WCAG 2.4.1 ═ */
+.skip-link {
+  position: absolute; left: -9999px; top: 0;
+  background: var(--ink); color: #fff;
+  padding: 10px 14px; font-size: 14px; font-weight: 600;
+  text-decoration: none; border-radius: 0 0 6px 0;
+  z-index: 9999;
+}
+.skip-link:focus { left: 0; }
 
 .scroll-hint {
   display: block; text-align: center;
@@ -174,13 +190,13 @@ body[data-voice="tech"] .voice-pop { display: none; }
   aspect-ratio: 2/3;
 }
 .dot {
-  background: rgba(12,26,46,.22); border-radius: 50%;
+  background: rgba(12,26,46,.30); border-radius: 50%;
   aspect-ratio: 1;
   transition: background .35s ease, box-shadow .35s ease, transform .35s ease;
 }
 .dot.off {
-  background: var(--blood);
-  box-shadow: 0 0 7px rgba(230,57,70,.6);
+  background: var(--blood-dark);
+  box-shadow: 0 0 0 1px rgba(176,23,31,.35), 0 0 7px rgba(176,23,31,.55);
   transform: scale(1.12);
 }
 
@@ -256,7 +272,7 @@ body[data-voice="tech"] .voice-pop { display: none; }
   font-family: 'Inter', sans-serif;
 }
 .ctas a:hover { transform: translateY(-1px); }
-.ctas .cta-primary { background: var(--blood); color: #fff; }
+.ctas .cta-primary { background: var(--blood-dark); color: #fff; }
 .ctas .cta-ghost {
   background: transparent; color: var(--ink);
   border: 1px solid var(--rule);
@@ -295,6 +311,15 @@ body[data-voice="tech"] .voice-pop { display: none; }
   .hero { padding: 60px 20px 28px; }
   .scrolly { padding: 0 16px 80px; }
 }
+@media (max-width: 480px) {
+  .voice-toggle-wrap {
+    position: fixed; top: 10px; left: 0; right: 0;
+    padding: 6px 12px; z-index: 70;
+  }
+  .voice-toggle { box-shadow: 0 6px 20px rgba(12,26,46,.18); }
+  .hero { padding-top: 84px; }
+  .dots-grid { grid-template-columns: repeat(32, 1fr); max-width: 300px; }
+}
 
 /* ═════ REDUCED MOTION ═════ */
 @media (prefers-reduced-motion: reduce) {
@@ -307,6 +332,8 @@ body[data-voice="tech"] .voice-pop { display: none; }
 </style>
 </head>
 <body data-voice="pop">
+<a class="skip-link" href="#sn-main">Saltar al contenido</a>
+<main id="sn-main" tabindex="-1">
 
 <section class="hero">
   <span class="pill">CRÍTICO · H4</span>
@@ -317,8 +344,8 @@ body[data-voice="tech"] .voice-pop { display: none; }
 
 <div class="voice-toggle-wrap">
   <div class="voice-toggle" role="tablist" aria-label="Tono de lectura">
-    <button class="is-active" data-voice="pop" aria-pressed="true">Modo Pueblo</button>
-    <button data-voice="tech" aria-pressed="false">Modo Técnico</button>
+    <button class="is-active" data-voice="pop" aria-pressed="true" aria-label="Cambiar a modo pueblo">Modo Pueblo</button>
+    <button data-voice="tech" aria-pressed="false" aria-label="Cambiar a modo técnico">Modo Técnico</button>
   </div>
 </div>
 
@@ -421,6 +448,8 @@ body[data-voice="tech"] .voice-pop { display: none; }
     Custodia: GitHub + HuggingFace + IPFS Filebase + Pinata
   </div>
 </section>
+
+</main>
 
 <!-- Scrollama CDN (2.5 KB) -->
 <script src="https://unpkg.com/intersection-observer@0.12.2/intersection-observer.js" defer></script>
