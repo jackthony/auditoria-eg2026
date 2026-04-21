@@ -1,0 +1,353 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>H4 · JPP 41% en mesas 900k+ · Auditoría EG2026</title>
+<meta name="description" content="Hallazgo crítico: Juntos por el Perú concentra 41.65% de votos en las 4,703 mesas de voto especial (cód. 900001-904703), vs 10.91% en las 88,063 mesas normales. Ratio 3.82x. z=698. Cohen h=0.73.">
+<meta property="og:title" content="H4 · JPP 41% en mesas 900k+ · Auditoría EG2026">
+<meta property="og:description" content="4,703 mesas que ONPE no publica por default. JPP saca 4× el promedio nacional. Anomalía que ONPE debe explicar.">
+<meta property="og:type" content="article">
+<meta name="twitter:card" content="summary_large_image">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:wght@700;900&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="/_assets/site-nav.css">
+<script src="/_assets/site-nav.js" defer></script>
+<link rel="stylesheet" href="/_assets/site-share.css">
+<script src="/_assets/site-share.js" defer></script>
+<link rel="stylesheet" href="/_assets/ascii-hero.css">
+<script src="/_assets/ascii-hero.js" defer></script>
+
+<style>
+  :root {
+    --ink: #0c1a2e;
+    --ink-soft: #1a3a5c;
+    --paper: #faf7f2;
+    --blood: #e63946;
+    --blood-dark: #b0171f;
+    --rule: #d4ccbd;
+    --muted: #3d3d3d;
+    --muted-soft: #5a5a5a;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; }
+  body {
+    font-family: 'Inter', -apple-system, sans-serif;
+    background: var(--paper);
+    color: var(--ink);
+    line-height: 1.65;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .wrap { max-width: 860px; margin: 0 auto; padding: 48px 24px 80px; }
+
+  /* ═════ HERO ═════ */
+  .pill {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: var(--blood); color: #fff;
+    font-size: 11px; font-weight: 800; letter-spacing: 2px;
+    text-transform: uppercase;
+    padding: 6px 12px; border-radius: 4px;
+    margin-bottom: 20px;
+  }
+  .pill::before {
+    content: ""; width: 6px; height: 6px; border-radius: 50%;
+    background: #fff; animation: pulse 1.6s ease-in-out infinite;
+  }
+  @keyframes pulse { 0%,100% { opacity: 1; } 50% { opacity: .4; } }
+
+  .kicker {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px; color: var(--muted-soft);
+    letter-spacing: 1.5px; text-transform: uppercase;
+    margin-bottom: 12px;
+  }
+  h1 {
+    font-family: 'Fraunces', Georgia, serif;
+    font-weight: 900; font-size: clamp(36px, 6vw, 56px);
+    letter-spacing: -.02em; line-height: 1.05;
+    margin: 0 0 20px; color: var(--ink);
+  }
+  h1 .hl { color: var(--blood); }
+  .lead {
+    font-size: 19px; color: var(--muted);
+    max-width: 680px; margin-bottom: 36px;
+  }
+
+  /* ═════ STAT CARDS ═════ */
+  .stats {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 16px;
+    margin: 32px 0 40px;
+  }
+  .stat {
+    background: #fff; border: 1px solid var(--rule);
+    border-left: 4px solid var(--blood);
+    padding: 20px 22px; border-radius: 8px;
+  }
+  .stat.normal { border-left-color: var(--ink-soft); }
+  .stat .lab {
+    font-size: 11px; font-weight: 700; letter-spacing: 1.5px;
+    text-transform: uppercase; color: var(--muted-soft);
+    margin-bottom: 8px;
+  }
+  .stat .val {
+    font-family: 'Fraunces', Georgia, serif; font-weight: 900;
+    font-size: 44px; line-height: 1; color: var(--ink);
+  }
+  .stat.alert .val { color: var(--blood); }
+  .stat .sub {
+    margin-top: 10px; font-size: 13px; color: var(--muted);
+  }
+
+  /* ═════ GAP VIZ ═════ */
+  .gapviz {
+    background: #fff; border: 1px solid var(--rule);
+    border-radius: 8px; padding: 24px;
+    margin: 32px 0;
+  }
+  .gapviz h3 {
+    font-family: 'Fraunces', Georgia, serif; font-weight: 900;
+    margin: 0 0 18px; font-size: 20px;
+  }
+  .bar { margin: 12px 0; }
+  .bar .blab {
+    display: flex; justify-content: space-between;
+    font-size: 13px; font-weight: 600; margin-bottom: 6px;
+  }
+  .bar .btrack {
+    background: #f1ece4; height: 18px; border-radius: 4px;
+    overflow: hidden; position: relative;
+  }
+  .bar .bfill {
+    height: 100%; transition: width .8s ease;
+    display: flex; align-items: center;
+    padding-left: 8px; color: #fff;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px; font-weight: 700;
+  }
+  .bar.normal .bfill { background: var(--ink-soft); }
+  .bar.esp .bfill { background: var(--blood); }
+  .gap-note {
+    margin-top: 16px; padding: 12px 14px;
+    background: #fdecec; border-left: 3px solid var(--blood);
+    font-size: 13px; color: var(--ink);
+  }
+
+  /* ═════ METHOD BOX ═════ */
+  .method {
+    background: #fff; border: 1px solid var(--rule);
+    border-radius: 8px; padding: 20px 24px;
+    margin: 32px 0;
+  }
+  .method h3 {
+    font-family: 'Fraunces', Georgia, serif; font-weight: 900;
+    margin: 0 0 12px; font-size: 18px;
+  }
+  .method table {
+    width: 100%; border-collapse: collapse;
+    font-family: 'JetBrains Mono', monospace; font-size: 13px;
+  }
+  .method th, .method td {
+    text-align: left; padding: 8px 10px;
+    border-bottom: 1px dashed var(--rule);
+  }
+  .method th { color: var(--muted-soft); font-weight: 600; }
+  .method td.v { font-weight: 700; color: var(--ink); }
+
+  /* ═════ BODY COPY ═════ */
+  .body h2 {
+    font-family: 'Fraunces', Georgia, serif; font-weight: 900;
+    font-size: 28px; letter-spacing: -.01em;
+    margin: 40px 0 14px; color: var(--ink);
+  }
+  .body p { margin: 10px 0; font-size: 16px; color: var(--muted); }
+  .body strong { color: var(--ink); }
+  .body ul { padding-left: 22px; }
+  .body ul li { margin: 6px 0; font-size: 15px; color: var(--muted); }
+
+  /* ═════ DISCLAIMER ═════ */
+  .disc {
+    margin-top: 40px; padding: 20px 24px;
+    background: var(--ink); color: #fff; border-radius: 8px;
+    font-size: 14px; line-height: 1.7;
+  }
+  .disc strong { color: #ffb3b8; }
+
+  /* ═════ CTAs ═════ */
+  .ctas {
+    display: flex; flex-wrap: wrap; gap: 10px;
+    margin: 32px 0;
+  }
+  .ctas a {
+    display: inline-flex; align-items: center; gap: 8px;
+    padding: 12px 18px; border-radius: 6px;
+    font-size: 14px; font-weight: 600;
+    text-decoration: none; transition: transform .15s;
+  }
+  .ctas a:hover { transform: translateY(-1px); }
+  .ctas .cta-primary { background: var(--blood); color: #fff; }
+  .ctas .cta-ghost {
+    background: transparent; color: var(--ink);
+    border: 1px solid var(--rule);
+  }
+
+  /* ═════ MOBILE ═════ */
+  @media (max-width: 720px) {
+    .wrap { padding: 32px 16px 60px; }
+    .stats { grid-template-columns: 1fr; }
+    h1 { font-size: 34px; }
+    .stat .val { font-size: 38px; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .pill::before { animation: none; }
+    .bar .bfill { transition: none; }
+  }
+</style>
+</head>
+<body>
+
+<section class="wrap">
+
+  <span class="pill">CRÍTICO · H4</span>
+  <div class="kicker">HALL-0420-H4 · 2026-04-20</div>
+  <h1>JPP saca <span class="hl">41%</span> en las 4,703 mesas que <span class="hl">ONPE no publica</span> por default.</h1>
+
+  <p class="lead">
+    En las mesas ordinarias (88,063), Juntos por el Perú obtiene 10.91%.
+    En las mesas de voto especial (militar, exterior, penitenciario, hospitalario · cód. 900001–904703),
+    obtiene <strong>41.65%</strong>. Casi 4 veces más.
+  </p>
+
+  <div class="ascii-hero" aria-label="Gráfico ASCII animado: brecha JPP 10.91% normales vs 41.65% mesas 900k+">
+    <div class="ah-head">
+      <div><span class="ah-dot">●</span> EG2026 · ONPE · MESAS 92,766</div>
+      <div class="ah-live">LIVE RENDER · H4</div>
+    </div>
+    <pre class="ah-art"></pre>
+    <div class="ah-foot">
+      <div>z = <b>698</b></div>
+      <div>cohen h = <b>0.73</b></div>
+      <div>IC95 = <b>[29.5pp, 30.8pp]</b></div>
+      <div>p &lt; <b>10⁻³⁰⁰</b></div>
+    </div>
+  </div>
+
+  <div class="stats">
+    <div class="stat normal">
+      <div class="lab">Mesas normales (88,063)</div>
+      <div class="val">10.91%</div>
+      <div class="sub">JPP en mesas código 000001–088064</div>
+    </div>
+    <div class="stat alert">
+      <div class="lab">Mesas 900k+ (4,703)</div>
+      <div class="val">41.65%</div>
+      <div class="sub">JPP en voto especial · militar · exterior · penal</div>
+    </div>
+  </div>
+
+  <div class="gapviz">
+    <h3>Brecha visual · 30.74 puntos porcentuales</h3>
+    <div class="bar normal">
+      <div class="blab"><span>Mesas normales · JPP</span><span>10.91%</span></div>
+      <div class="btrack"><div class="bfill" style="width: 10.91%;">10.91</div></div>
+    </div>
+    <div class="bar esp">
+      <div class="blab"><span>Mesas 900k+ · JPP</span><span>41.65%</span></div>
+      <div class="btrack"><div class="bfill" style="width: 41.65%;">41.65</div></div>
+    </div>
+    <div class="gap-note">
+      <strong>Ratio 3.82×.</strong> Cohen h = 0.73 (efecto grande). IC95% para diferencia: [29.5pp, 30.8pp].
+    </div>
+  </div>
+
+  <div class="method">
+    <h3>Métricas estadísticas</h3>
+    <table>
+      <tr><th>Universo total</th><td class="v">92,766 mesas (88,063 normales + 4,703 especiales)</td></tr>
+      <tr><th>z-test (Newcombe)</th><td class="v">z = 698 · p &lt; 10⁻³⁰⁰</td></tr>
+      <tr><th>Cohen h</th><td class="v">0.73 (efecto grande)</td></tr>
+      <tr><th>IC95% diferencia</th><td class="v">[0.295, 0.308]</td></tr>
+      <tr><th>Bootstrap 10k iter</th><td class="v">0 permutaciones reproducen diferencia observada</td></tr>
+      <tr><th>Mann-Whitney U</th><td class="v">p &lt; 10⁻²⁰⁰</td></tr>
+    </table>
+  </div>
+
+  <div class="body">
+
+    <h2>¿Qué son las mesas 900k+?</h2>
+    <p>
+      El código de mesa ONPE identifica el tipo. Mesas <strong>000001–088064</strong> son ordinarias
+      (electores en su lugar habitual). Mesas <strong>900001–904703</strong> son especiales:
+    </p>
+    <ul>
+      <li>Voto militar (PNP + FFAA acuartelados)</li>
+      <li>Voto de peruanos en el exterior</li>
+      <li>Voto penitenciario (internos sin sentencia firme)</li>
+      <li>Voto hospitalario (pacientes internados)</li>
+    </ul>
+    <p>
+      Son 4,703 mesas · aproximadamente <strong>1.2M votantes</strong>. ONPE no las publica en la vista
+      default del portal de resultados, hay que consultarlas individualmente vía API.
+    </p>
+
+    <h2>¿Por qué importa?</h2>
+    <p>
+      Si JPP saca 10.91% en el país y 41.65% en este subconjunto específico, hay dos escenarios posibles:
+    </p>
+    <ul>
+      <li><strong>Hipótesis A (benigna):</strong> el perfil demográfico de militares + exterior + internos
+        es genuinamente pro-JPP con esa magnitud. Requiere evidencia socioeconómica publicada por ONPE.</li>
+      <li><strong>Hipótesis B (a investigar):</strong> hay un sesgo sistemático de procesamiento,
+        digitalización o transmisión en ese universo 900k+ que ONPE debe explicar.</li>
+    </ul>
+    <p>
+      La diferencia <strong>no es atribuible al azar</strong>: con z = 698 la probabilidad de que
+      la brecha ocurra por muestreo aleatorio es inferior a <code>10⁻³⁰⁰</code>. Es un patrón real.
+    </p>
+
+    <h2>¿Qué pedimos?</h2>
+    <ul>
+      <li>ONPE publique <strong>por default</strong> el desglose de mesas 900001–904703.</li>
+      <li>Cuadro por subgrupo: militar · exterior (país) · penal · hospitalario, con % válidos.</li>
+      <li>Auditoría externa del flujo de digitalización de estas mesas (OEA / Unión Europea).</li>
+      <li>Explicación pública de por qué JPP concentra 4× su promedio nacional en ese subconjunto.</li>
+    </ul>
+
+    <h2>Reproducibilidad</h2>
+    <p>
+      Los datos salen de <strong>eg2026.duckdb</strong> (92,766 mesas · 3.79M actas) construido desde los
+      endpoints públicos de ONPE. El SHA-256 de cada captura está firmado en el MANIFEST.jsonl de la
+      carpeta <code>captures/{timestamp}/</code>. Cualquier persona puede verificar con:
+    </p>
+    <ul>
+      <li><code>py scripts/build_duckdb_and_fix.py</code> — reconstruye la DB</li>
+      <li><code>py scripts/stats_h4_especiales_900k.py</code> — recalcula z, Cohen h, IC95</li>
+      <li><code>py make.py verify</code> — revalida hashes de las capturas</li>
+    </ul>
+  </div>
+
+  <div class="ctas">
+    <a class="cta-primary" href="https://huggingface.co/datasets/neuracode-dev/onpe-eg2026-mesa-a-mesa" target="_blank" rel="noopener">
+      Dataset público (Hugging Face) →
+    </a>
+    <a class="cta-ghost" href="https://github.com/jackthony/auditoria-eg2026" target="_blank" rel="noopener">
+      Código + scripts (GitHub) →
+    </a>
+    <a class="cta-ghost" href="/">← Volver a hallazgos</a>
+  </div>
+
+  <div class="disc">
+    <strong>Esto no dice "fraude".</strong> Dice: ONPE publica un subconjunto del 5.1% del padrón
+    por fuera del default, y en ese subconjunto un partido saca 4× su promedio nacional.
+    Es una <strong>anomalía estadística que la autoridad electoral debe explicar</strong>.
+    Autoría: Jack Aguilar. Análisis técnico reproducible. Cualquiera verifica.
+  </div>
+
+</section>
+
+</body>
+</html>

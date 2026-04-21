@@ -2,977 +2,438 @@
 <html lang="es">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Monitor EG2026 · Auditoría Técnica</title>
-<meta name="description" content="Monitor técnico-estadístico del escrutinio de las Elecciones Generales 2026 del Perú. Data pública, hashes SHA-256, reproducible.">
-<meta property="og:title" content="Monitor EG2026 · Auditoría Técnica Perú">
-<meta property="og:description" content="Margen Sánchez vs López Aliaga en vivo. Data ONPE con hashes SHA-256. Memorial al Fiscal de la Nación.">
-<meta property="og:image" content="https://jackthony.github.io/auditoria-eg2026/og-image.png">
-<meta property="og:url" content="https://jackthony.github.io/auditoria-eg2026/">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Auditoría Elecciones Generales 2026 por Neuracode — Algo no cuadra</title>
+<meta name="description" content="Neuracode auditó mesa por mesa el escrutinio ONPE EG2026. 4,703 mesas faltantes. 566,233 votos sin cuadrar. Datos públicos, código abierto, SHA-256 verificable. Cualquiera reproduce el análisis.">
+<meta name="author" content="Neuracode · Coautoría: Jack Aguilar">
+<meta property="fb:app_id" content="1527540298384685">
+<meta property="og:site_name" content="Auditoría EG2026 · Neuracode">
+<meta property="og:locale" content="es_PE">
 <meta property="og:type" content="website">
+<meta property="og:url" content="https://auditoria.neuracode.dev/">
+<meta property="og:title" content="Auditoría Elecciones Generales 2026 por Neuracode — Algo no cuadra">
+<meta property="og:description" content="4,703 mesas faltantes. 566,233 votos sin cuadrar. Margen de 13,624 define el 2° puesto. Datos públicos, SHA-256 reproducible.">
+<meta property="og:image" content="https://auditoria.neuracode.dev/og-image.png">
+<meta property="og:image:secure_url" content="https://auditoria.neuracode.dev/og-image.png">
+<meta property="og:image:type" content="image/png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Neuracode — Auditoría EG2026: 4,703 mesas faltantes en el escrutinio ONPE">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="Monitor EG2026 · Auditoría Técnica Perú">
-<meta name="twitter:description" content="Margen Sánchez vs López Aliaga en vivo. Reproducible. Memorial al Fiscal.">
-<meta name="twitter:image" content="https://jackthony.github.io/auditoria-eg2026/og-image.png">
-<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
-<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
-  integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="">
-<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
-  integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+<meta name="twitter:site" content="@JackDeNeuracode">
+<meta name="twitter:creator" content="@JackDeNeuracode">
+<meta name="twitter:title" content="Auditoría Elecciones Generales 2026 por Neuracode — Algo no cuadra">
+<meta name="twitter:description" content="4,703 mesas faltantes. 566,233 votos sin cuadrar. Margen de 13,624 define el 2° puesto. Datos públicos, SHA-256 reproducible.">
+<meta name="twitter:image" content="https://auditoria.neuracode.dev/og-image.png">
+<meta name="twitter:image:alt" content="Neuracode — Auditoría EG2026: 4,703 mesas faltantes">
+<link rel="canonical" href="https://auditoria.neuracode.dev/">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Article",
+      "@id": "https://auditoria.neuracode.dev/#article",
+      "headline": "Auditoría Elecciones Generales 2026 por Neuracode — Algo no cuadra",
+      "description": "4,703 mesas faltantes. 566,233 votos sin cuadrar. Margen de 13,624 define el 2° puesto. Datos públicos, código abierto, SHA-256 verificable.",
+      "url": "https://auditoria.neuracode.dev/",
+      "image": "https://auditoria.neuracode.dev/og-image.png",
+      "inLanguage": "es",
+      "author": {
+        "@type": "Person",
+        "@id": "https://www.neuracode.dev/#jack-aguilar",
+        "name": "Jack Aguilar",
+        "alternateName": "Jack de NeuraCode",
+        "jobTitle": "CEO & Founder, NeuraCode",
+        "url": "https://www.neuracode.dev",
+        "sameAs": [
+          "https://www.tiktok.com/@jack.de.neura.code",
+          "https://www.instagram.com/jackdeneuracode/",
+          "https://www.linkedin.com/in/jackaguilarc/"
+        ]
+      },
+      "publisher": {
+        "@type": "Organization",
+        "@id": "https://www.neuracode.dev/#organization",
+        "name": "NeuraCode",
+        "url": "https://www.neuracode.dev",
+        "logo": "https://www.neuracode.dev/logo.png"
+      },
+      "datePublished": "2026-04-19",
+      "dateModified": "2026-04-19",
+      "about": {
+        "@type": "Thing",
+        "name": "Auditoría electoral Perú EG2026",
+        "description": "Análisis técnico de datos ONPE de las Elecciones Generales 2026"
+      },
+      "keywords": ["auditoría", "ONPE", "elecciones 2026", "Neuracode", "Jack Aguilar", "EG2026", "Perú"]
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "NeuraCode",
+          "item": "https://www.neuracode.dev"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Auditoría EG2026",
+          "item": "https://auditoria.neuracode.dev/"
+        }
+      ]
+    }
+  ]
+}
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,700;9..144,900&family=Caveat:wght@500;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles/brand.css">
 <style>
-  :root{
-    --navy:#0B2A4A; --accent:#C8A24B; --text:#1A1A1A; --muted:#5C6770;
-    --bg-soft:#F4F1EA; --bg:#FFFFFF; --line:#D6D6D6;
-    --red:#B4332B; --orange:#C77B1E; --green:#2E6B3F;
-  }
-  *{box-sizing:border-box}
-  body{margin:0;font-family:-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif;
-       color:var(--text);background:var(--bg);line-height:1.5}
-  header{background:var(--navy);color:#fff;padding:1.2rem 1.5rem;border-bottom:4px solid var(--accent)}
-  header h1{margin:0;font-size:1.4rem}
-  header .sub{opacity:.85;font-size:.9rem;margin-top:.25rem}
-  .grid{display:grid;gap:1rem;padding:1.5rem;max-width:1200px;margin:0 auto}
-  @media(min-width:900px){.grid-main{grid-template-columns:2fr 1fr}}
-  .card{border:1px solid var(--line);border-radius:8px;padding:1rem 1.2rem;background:#fff}
-  .card h2{margin:0 0 .6rem;font-size:1.05rem;color:var(--navy)}
-  .kpi-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:.8rem}
-  .kpi{border-left:4px solid var(--accent);padding:.6rem .9rem;background:var(--bg-soft)}
-  .kpi .lbl{font-size:.78rem;color:var(--muted);text-transform:uppercase;letter-spacing:.04em}
-  .kpi .val{font-size:1.5rem;font-weight:700;color:var(--navy);margin-top:.2rem}
-  .kpi .delta{font-size:.8rem;margin-top:.2rem}
-  .delta.up{color:var(--red)}.delta.down{color:var(--green)}.delta.neutral{color:var(--muted)}
-  .alert{padding:.8rem 1rem;border-radius:6px;margin:.4rem 0;font-size:.92rem;border-left:4px solid}
-  .alert.critical{background:#FDEEEC;border-color:var(--red);color:#6B1D17}
-  .alert.warning{background:#FFF4E5;border-color:var(--orange);color:#6B3D10}
-  .alert.info{background:#EEF4FB;border-color:var(--navy);color:var(--navy)}
-  table{width:100%;border-collapse:collapse;font-size:.88rem}
-  th,td{padding:.5rem .6rem;border-bottom:1px solid var(--line);text-align:left}
-  th{background:var(--navy);color:#fff;font-weight:600}
-  tr:nth-child(even) td{background:#F8F9FB}
-  .tag{display:inline-block;padding:.12rem .5rem;border-radius:3px;font-size:.72rem;font-weight:700;color:#fff}
-  .tag.crit{background:var(--red)}.tag.med{background:var(--orange)}.tag.info{background:var(--navy)}
-  footer{padding:1.5rem;text-align:center;color:var(--muted);font-size:.85rem;border-top:1px solid var(--line);margin-top:2rem}
-  a{color:var(--navy)}
-  .chart-wrap{position:relative;height:320px}
-  .mono{font-family:Consolas,Monaco,monospace;font-size:.85rem}
-  .right{text-align:right}
-  .updated{font-size:.8rem;color:var(--muted);margin-top:.5rem}
-  #map-peru{height:520px;width:100%;border-radius:6px;border:1px solid var(--line)}
-  .map-legend{background:#fff;padding:.6rem .8rem;border:1px solid var(--line);
-    border-radius:4px;font-size:.78rem;line-height:1.5;box-shadow:0 1px 3px rgba(0,0,0,.08)}
-  .map-legend .scale{display:flex;align-items:center;gap:.3rem;margin-top:.3rem}
-  .map-legend .swatch{width:18px;height:14px;border:1px solid #888;display:inline-block}
-  .leaflet-tooltip.region-tip{background:var(--navy);color:#fff;border:0;font-size:.85rem;
-    padding:.5rem .7rem;border-radius:4px;box-shadow:0 2px 6px rgba(0,0,0,.25)}
-  .leaflet-tooltip.region-tip strong{color:var(--accent)}
-  .live-badge{display:inline-flex;align-items:center;gap:.4rem;background:rgba(46,107,63,.15);
-    color:#A8E6B4;padding:.25rem .7rem;border-radius:99px;font-size:.78rem;font-weight:600;
-    border:1px solid rgba(168,230,180,.4);margin-left:.6rem;vertical-align:middle}
-  .live-badge .dot{width:8px;height:8px;border-radius:50%;background:#3BD16F;
-    box-shadow:0 0 0 0 rgba(59,209,111,.7);animation:pulse 1.6s infinite}
-  .live-badge.stale{background:rgba(199,123,30,.15);color:#FFD9A8;border-color:rgba(255,217,168,.4)}
-  .live-badge.stale .dot{background:#C77B1E;animation:none}
-  @keyframes pulse{0%{box-shadow:0 0 0 0 rgba(59,209,111,.7)}
-    70%{box-shadow:0 0 0 10px rgba(59,209,111,0)}
-    100%{box-shadow:0 0 0 0 rgba(59,209,111,0)}}
-  .refresh-spinner{display:inline-block;width:10px;height:10px;border:2px solid #fff;
-    border-top-color:transparent;border-radius:50%;animation:spin .8s linear infinite;
-    vertical-align:middle;margin-left:.4rem;opacity:0;transition:opacity .2s}
-  .refresh-spinner.on{opacity:1}
-  @keyframes spin{to{transform:rotate(360deg)}}
-  .tabs-nav{max-width:1200px;margin:0 auto;padding:.6rem 1.5rem 0;display:flex;gap:.3rem;
-    border-bottom:1px solid var(--line);overflow-x:auto;flex-wrap:wrap}
-  .tab-btn{background:transparent;border:0;border-bottom:3px solid transparent;
-    padding:.7rem 1.1rem;font-size:.95rem;font-weight:600;color:var(--muted);
-    cursor:pointer;font-family:inherit;white-space:nowrap;transition:all .15s}
-  .tab-btn:hover{color:var(--navy);background:var(--bg-soft)}
-  .tab-btn.active{color:var(--navy);border-bottom-color:var(--accent)}
-  .tab-btn .badge{background:var(--red);color:#fff;font-size:.7rem;padding:.05rem .4rem;
-    border-radius:99px;margin-left:.4rem;font-weight:700}
-  [data-tab]{display:none}
-  [data-tab].active{display:block}
-  .chip{padding:.35rem .8rem;border:1px solid var(--line);border-radius:99px;
-    background:#fff;cursor:pointer;font-size:.82rem;font-weight:600;color:var(--muted);
-    transition:all .15s;font-family:inherit}
-  .chip:hover{border-color:var(--navy);color:var(--navy)}
-  .chip.active{background:var(--navy);color:#fff;border-color:var(--navy)}
-  .chip.crit.active{background:var(--red);border-color:var(--red)}
-  .chip.med.active{background:var(--orange);border-color:var(--orange)}
-  .chip.baja.active{background:var(--green);border-color:var(--green)}
-  th[data-sort]:hover{background:#1a3d68}
-  .sort-arr{font-size:.75rem;opacity:.7;margin-left:.2rem}
-  .finding-detail{font-size:.85rem;color:var(--muted);padding:.4rem 0 .8rem;line-height:1.5}
+:root {
+  /* Paleta Expediente · identidad Auditoría EG2026 (distinta de Neuracode.Academy) */
+  --ink: #0c1a2e;
+  --paper: #faf7f2;
+  --blood: #e63946;
+  --blood-dark: #b0171f;
+  --navy: #1a3a5c;
+  --muted: #3d3d3d;
+  --muted-soft: #5a5a5a;
+  --rule: #d4ccbd;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  background: var(--paper); color: var(--ink);
+  font-family: 'Inter', -apple-system, sans-serif;
+  font-size: 18px; line-height: 1.65;
+}
+.wrap { max-width: 920px; margin: 0 auto; padding: 60px 32px 100px; }
+.byline {
+  font-family: 'Inter', sans-serif; font-size: 13px; color: var(--ink);
+  letter-spacing: .5px; text-transform: uppercase; margin-bottom: 48px;
+  font-weight: 500;
+}
+.byline strong { color: var(--blood); }
+.kicker {
+  font-family: 'Caveat', cursive; font-size: 30px; color: var(--blood);
+  transform: rotate(-2deg); display: inline-block; margin-bottom: 14px;
+}
+h1 {
+  font-family: 'Fraunces', Georgia, serif;
+  font-weight: 900; line-height: 1.05; letter-spacing: -0.02em;
+  font-size: clamp(44px, 7vw, 84px); color: var(--ink);
+  margin-bottom: 28px;
+}
+.sub {
+  font-family: 'Fraunces', Georgia, serif;
+  font-size: clamp(20px, 2.4vw, 26px);
+  font-style: italic; font-weight: 500; color: var(--ink);
+  max-width: 720px; margin-bottom: 60px;
+}
+section.prose { margin: 48px 0; max-width: 720px; }
+section.prose p { margin-bottom: 14px; font-size: 19px; }
+section.prose p strong { color: var(--blood); font-weight: 700; }
+section.prose p.meme {
+  margin-top: 40px; margin-bottom: 10px;
+  font-family: 'Fraunces', Georgia, serif;
+  font-size: 24px; font-weight: 900; color: var(--ink);
+  border-left: 4px solid var(--blood); padding-left: 14px;
+}
+section.prose p.meme strong { color: var(--ink); }
+.hr { border: 0; border-top: 1px solid var(--rule); margin: 56px 0; }
+h2 {
+  font-family: 'Fraunces', Georgia, serif;
+  font-weight: 900; font-size: 28px; margin-bottom: 28px;
+  letter-spacing: -0.01em;
+}
+.cards {
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 18px;
+}
+.card {
+  display: block; text-decoration: none; color: var(--ink);
+  background: #fff; border: 1px solid var(--rule);
+  padding: 24px 22px; transition: transform .2s, border-color .2s;
+  position: relative;
+}
+.card:hover { transform: translateY(-2px); border-color: var(--ink); }
+.card .tag {
+  position: absolute; top: 12px; right: 12px;
+  font-family: 'Caveat', cursive; font-size: 18px;
+  color: var(--blood); transform: rotate(4deg);
+}
+.card h3 {
+  font-family: 'Fraunces', Georgia, serif;
+  font-weight: 700; font-size: 22px; margin-bottom: 8px;
+}
+.card p { font-size: 15px; color: var(--muted); line-height: 1.55; }
+.card .arrow {
+  margin-top: 14px; font-family: 'Inter', sans-serif;
+  font-size: 13px; font-weight: 600; color: var(--blood);
+  letter-spacing: .5px; text-transform: uppercase;
+}
+.hero-cta {
+  display: block; text-decoration: none;
+  background: var(--ink); color: var(--paper);
+  padding: 36px 32px; border-radius: 14px;
+  border: 1px solid var(--ink);
+  position: relative; overflow: hidden;
+  transition: transform .25s, box-shadow .25s;
+  box-shadow: 0 16px 40px rgba(12,26,46,.18);
+}
+.hero-cta::before {
+  content: ""; position: absolute; inset: 0;
+  background: radial-gradient(circle at 15% 20%, rgba(230,57,70,.12), transparent 55%);
+  pointer-events: none;
+}
+.hero-cta:hover { transform: translateY(-3px); box-shadow: 0 22px 50px rgba(12,26,46,.28); }
+.hero-cta-tag {
+  display: inline-block; background: var(--blood); color: #fff;
+  font-family: 'JetBrains Mono', 'Consolas', monospace;
+  font-size: 11px; letter-spacing: 2px; font-weight: 700;
+  padding: 5px 10px; border-radius: 3px; margin-bottom: 18px;
+  position: relative;
+}
+.hero-cta-title {
+  font-family: 'Fraunces', Georgia, serif;
+  font-weight: 900; font-size: clamp(28px, 4vw, 42px);
+  line-height: 1.1; letter-spacing: -.01em;
+  margin-bottom: 14px; position: relative;
+}
+.hero-cta-body {
+  font-size: 16px; line-height: 1.55;
+  color: #cfd9e6; max-width: 640px;
+  margin-bottom: 22px; position: relative;
+}
+.hero-cta-arrow {
+  font-family: 'Inter', sans-serif;
+  font-size: 14px; font-weight: 600; letter-spacing: 1px;
+  text-transform: uppercase; color: #fff;
+  border-top: 1px dashed rgba(255,255,255,.15);
+  padding-top: 18px; position: relative;
+}
+.hero-cta-arrow::after {
+  content: "→"; margin-left: 8px; transition: margin-left .2s;
+}
+.hero-cta:hover .hero-cta-arrow::after { margin-left: 14px; }
+@media (max-width: 620px) {
+  .hero-cta { padding: 26px 22px; }
+}
+footer {
+  margin-top: 80px; padding-top: 32px;
+  border-top: 1px solid var(--rule);
+  font-size: 14px; color: var(--ink); line-height: 1.9;
+}
+footer a { color: var(--blood); text-decoration: underline; font-weight: 500; }
+footer .mono { font-family: 'Courier New', monospace; font-size: 12px; word-break: break-all; }
+.stack {
+  margin-top: 64px; padding-top: 40px;
+  border-top: 1px solid var(--rule);
+}
+.stack h2 { margin-bottom: 6px; }
+.stack-sub {
+  font-size: 15px; color: var(--muted-soft, #5a5a5a);
+  font-style: italic; margin-bottom: 26px;
+}
+.stack-grid {
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+  gap: 14px;
+}
+.stack-item {
+  background: #fff; border: 1px solid var(--rule);
+  padding: 16px 18px; border-left: 3px solid var(--ink);
+  transition: border-left-color .2s, transform .2s;
+}
+.stack-item:hover { border-left-color: var(--blood); transform: translateX(2px); }
+.stack-name {
+  font-family: 'JetBrains Mono', 'Consolas', monospace;
+  font-size: 14px; font-weight: 700; color: var(--ink);
+  letter-spacing: -.01em;
+}
+.stack-role {
+  font-size: 12px; color: var(--muted-soft, #5a5a5a);
+  margin-top: 4px; line-height: 1.45;
+}
+.built-with {
+  display: inline-flex; align-items: center; gap: 6px;
+  margin-top: 26px;
+  font-family: 'JetBrains Mono', 'Consolas', monospace;
+  font-size: 12px; color: var(--ink);
+  text-decoration: none;
+  padding: 8px 14px; border: 1px solid var(--ink);
+  border-radius: 4px; background: #fff;
+  transition: background .2s, color .2s;
+}
+.built-with:hover { background: var(--ink); color: var(--paper); }
+.built-with .bw-label { color: var(--muted-soft, #5a5a5a); }
+.built-with:hover .bw-label { color: #cfd9e6; }
+.built-with strong { color: inherit; }
+.built-with .bw-meta { color: var(--muted-soft, #5a5a5a); }
+.built-with:hover .bw-meta { color: #cfd9e6; }
+.webinar-separator {
+  margin-top: 48px; padding-top: 20px;
+  border-top: 2px solid var(--rule);
+  font-family: 'JetBrains Mono', 'Consolas', monospace;
+  font-size: 10px; letter-spacing: 2px; text-transform: uppercase;
+  color: var(--muted-soft, #5a5a5a);
+}
+.webinar-disclaimer {
+  font-size: 11px; color: var(--muted-soft, #5a5a5a);
+  margin: 4px 0 12px; font-style: italic;
+}
+.webinar {
+  margin-top: 12px; max-width: 100%;
+  background: linear-gradient(135deg, #f8f6f1 0%, #ffffff 100%);
+  border: 1px solid var(--rule); border-radius: 14px;
+  padding: 28px; display: grid; grid-template-columns: 180px 1fr; gap: 26px;
+  align-items: center; box-shadow: 0 6px 24px rgba(0,0,0,.05);
+}
+.webinar img { width: 100%; height: auto; border-radius: 10px; display: block; box-shadow: 0 4px 14px rgba(0,0,0,.08); }
+.webinar-body { text-align: left; }
+.webinar-eyebrow { font-size: 11px; letter-spacing: 2px; text-transform: uppercase; color: var(--ink); font-weight: 700; margin-bottom: 8px; }
+.webinar h3 { font-family: 'Fraunces', Georgia, serif; font-size: 22px; font-weight: 800; color: var(--ink); margin: 0 0 8px; line-height: 1.25; }
+.webinar p { font-size: 14px; color: var(--muted); margin: 0 0 14px; line-height: 1.5; }
+.webinar .cta-webinar { display: inline-block; background: var(--blood); color: #fff; padding: 11px 20px; font-weight: 600; font-size: 13px; text-decoration: none; border-radius: 8px; transition: opacity .2s; }
+.webinar .cta-webinar:hover { opacity: .9; }
+@media (max-width: 620px) {
+  .webinar { grid-template-columns: 1fr; gap: 16px; padding: 20px; }
+  .webinar img { max-width: 200px; margin: 0 auto; }
+}
 </style>
+<link rel="stylesheet" href="/_assets/site-nav.css">
+<script src="/_assets/site-nav.js" defer></script>
+<link rel="stylesheet" href="/_assets/site-share.css">
+<script src="/_assets/site-share.js" defer></script>
 </head>
 <body>
-<header>
-  <h1 data-i18n="h1">Monitor técnico-estadístico · Elecciones Generales 2026 Perú</h1>
-  <div class="sub">
-    <span class="live-badge" id="live-badge"><span class="dot"></span><span id="live-text">EN VIVO</span></span>
-    <span class="refresh-spinner" id="refresh-spin"></span>
-    <span data-i18n="subtitle">Aporte ciudadano · data pública · hashes SHA-256 · reproducible</span> ·
-    <a href="https://github.com/neuracode/auditoria-eg2026" style="color:#fff" target="_blank">repo</a> ·
-    <a href="MEMORIAL_TECNICO_FISCAL.pdf" style="color:#fff;background:var(--accent);padding:.2rem .6rem;border-radius:3px;font-weight:600" target="_blank"><span data-i18n="memorial_cta">📄 Memorial técnico al Fiscal de la Nación</span></a> ·
-    <button id="lang-toggle" style="background:transparent;border:1px solid #fff;color:#fff;padding:.15rem .5rem;border-radius:3px;cursor:pointer;font-size:.8rem" title="Change language">🌐 EN</button>
-  </div>
-</header>
+<div class="wrap">
 
-<nav class="tabs-nav" id="tabs-nav" role="tablist">
-  <button class="tab-btn active" data-tab-btn="resultado" role="tab" data-i18n="tab_result">Resultado</button>
-  <button class="tab-btn" data-tab-btn="hallazgos" role="tab"><span data-i18n="tab_findings">Hallazgos</span> <span class="badge" id="badge-crit">·</span></button>
-  <button class="tab-btn" data-tab-btn="forecast" role="tab" data-i18n="tab_forecast">Forecast</button>
-  <button class="tab-btn" data-tab-btn="verif" role="tab" data-i18n="tab_verif">Verificación</button>
-</nav>
-
-<div class="grid" style="padding-bottom:0">
-  <section class="card" style="border-left:6px solid var(--accent);background:#FDF9F0">
-    <h2 style="margin-top:0">Memorial técnico ciudadano — Fiscal de la Nación</h2>
-    <p style="margin:.3rem 0">
-      Solicitud formal de <strong>peritaje forense informático y medidas cautelares técnicas</strong>
-      sobre el proceso de escrutinio, basada en los hechos estadísticos reproducibles de este dashboard.
-    </p>
-    <p style="margin:.3rem 0">
-      <strong>NO imputa delito.</strong> Solicita entrega obligatoria de 10 variables de trazabilidad
-      (logs SIRE-DMS, código fuente, contrato ONPE-CALAG, detalle por acta, etc.) y 5 medidas cautelares
-      que preserven la integridad probatoria hasta el pronunciamiento del JNE.
-    </p>
-    <p style="margin:.6rem 0 0">
-      <a href="MEMORIAL_TECNICO_FISCAL.pdf" target="_blank" style="background:var(--navy);color:#fff;padding:.5rem 1rem;border-radius:4px;text-decoration:none;font-weight:600">📄 Descargar Memorial (PDF)</a>
-      &nbsp;
-      <a href="https://github.com/neuracode/auditoria-eg2026/blob/main/docs/MEMORIAL_TECNICO_FISCAL.md" target="_blank">Ver en Markdown</a>
-    </p>
-  </section>
-</div>
-
-<div class="grid" style="padding-bottom:0" id="prime-hero-wrap"></div>
-
-<div class="grid">
-
-  <section class="card active" data-tab="resultado">
-    <h2>Estado del escrutinio</h2>
-    <div class="kpi-grid">
-      <div class="kpi"><div class="lbl">Escrutinio oficial</div><div class="val" id="kpi-pct">—</div><div class="updated" id="kpi-pct-ts"></div></div>
-      <div class="kpi"><div class="lbl">Keiko Fujimori</div><div class="val" id="kpi-fuji">—</div><div class="delta neutral" id="kpi-fuji-d"></div></div>
-      <div class="kpi"><div class="lbl">Roberto Sánchez</div><div class="val" id="kpi-sanch">—</div><div class="delta neutral" id="kpi-sanch-d"></div></div>
-      <div class="kpi"><div class="lbl">López Aliaga</div><div class="val" id="kpi-rla">—</div><div class="delta neutral" id="kpi-rla-d"></div></div>
-      <div class="kpi"><div class="lbl">Margen Sánchez − RLA</div><div class="val" id="kpi-margen">—</div><div class="delta neutral" id="kpi-margen-d"></div></div>
-      <div class="kpi"><div class="lbl">Actas impugnadas (JEE)</div><div class="val" id="kpi-jee">—</div></div>
-      <div class="kpi" id="kpi-proj-card" style="display:none;border-left-color:#c026d3"><div class="lbl">Proyección lineal @100% · Sánchez − RLA (pp)</div><div class="val" id="kpi-proj">—</div><div class="delta neutral" id="kpi-proj-sub"></div></div>
-    </div>
-  </section>
-
-  <section class="card active" data-tab="resultado">
-    <h2>Mapa por región — margen Sánchez vs López Aliaga</h2>
-    <p style="font-size:.9rem;color:var(--muted);margin:.2rem 0 .8rem">
-      Cada departamento coloreado por margen absoluto <strong>Sánchez − RLA</strong> al corte actual.
-      Rojo = RLA gana · Verde = Sánchez gana · Tonalidad ∝ magnitud del margen.
-      Hover para ver detalle por región.
-    </p>
-    <div id="map-peru"></div>
-  </section>
-
-  <section class="card" data-tab="resultado">
-    <h2>Comparar cortes — antes vs ahora</h2>
-    <p style="font-size:.9rem;color:var(--muted);margin:.2rem 0 .8rem">
-      Mové el slider para elegir un corte histórico y comparar contra el corte actual.
-      Δ = corte actual − corte seleccionado (en puntos porcentuales).
-    </p>
-    <div style="display:flex;align-items:center;gap:1rem;flex-wrap:wrap;margin-bottom:.8rem">
-      <input type="range" id="diff-slider" min="0" max="0" value="0" step="1" style="flex:1;min-width:200px">
-      <div style="font-size:.9rem"><strong>Corte A:</strong> <span id="diff-ts" class="mono">—</span></div>
-    </div>
-    <table id="diff-table">
-      <thead><tr>
-        <th>Candidato</th>
-        <th class="right">Corte A</th>
-        <th class="right">Ahora</th>
-        <th class="right">Δ pp</th>
-      </tr></thead>
-      <tbody></tbody>
-    </table>
-  </section>
-
-  <div class="grid grid-main" data-tab="resultado" style="padding:0;margin-top:0">
-    <section class="card">
-      <h2>Serie temporal — 5 candidatos</h2>
-      <div class="chart-wrap"><canvas id="chart-time"></canvas></div>
-      <div class="updated">Fuente: snapshots ONPE vía proxy. Timestamps UTC.</div>
-    </section>
-
-    <section class="card">
-      <h2>Alertas en vivo</h2>
-      <div id="alerts"></div>
-    </section>
+  <div class="byline">
+    <img src="logo-neuracode-tight.png" alt="Neuracode" style="height:28px;vertical-align:middle;margin-right:10px;display:inline-block;">
+    <strong>Neuracode</strong> · auditoría ciudadana · <span id="corte">cargando corte…</span>
   </div>
 
-  <section class="card" data-tab="hallazgos">
-    <h2>Hallazgos al corte</h2>
-    <div class="findings-toolbar" style="display:flex;gap:.6rem;flex-wrap:wrap;margin:.4rem 0 .8rem">
-      <input type="search" id="findings-search" placeholder="Buscar por título, detalle o ID…"
-        style="flex:1;min-width:200px;padding:.5rem .7rem;border:1px solid var(--line);border-radius:4px;font-size:.9rem">
-      <div id="findings-filters" style="display:flex;gap:.3rem;flex-wrap:wrap"></div>
+  <span class="kicker">Auditoría Elecciones Generales 2026 por Neuracode</span>
+  <h1>Algo no<br>cuadra.</h1>
+  <p class="sub">Agarré la página de ONPE, descargué mesa por mesa y me puse a sumar. Spoiler: las cuentas no dan.</p>
+
+  <section class="prose">
+
+    <p class="meme">⚖️ <strong>Importante:</strong></p>
+    <p>Esto <strong>no dice "fraude"</strong>. Dice: "ONPE, explícate".<br>
+    Si encuentras error en las cuentas, abre issue en GitHub y lo arreglo. Así funciona.</p>
+
+  </section>
+
+  <hr class="hr">
+
+  <h2>El hallazgo.</h2>
+
+  <a class="hero-cta" href="h4/">
+    <div class="hero-cta-tag">HALL-0420-H4 · CRÍTICO</div>
+    <div class="hero-cta-title">JPP 41% en 4,703 mesas 900k+</div>
+    <div class="hero-cta-body">4 veces el promedio nacional. Mesas que ONPE no publica por default: militar, policial, penales, exterior. z=698 · Cohen h=0.73 · p&lt;10⁻³⁰⁰.</div>
+    <div class="hero-cta-arrow">abrir análisis completo →</div>
+  </a>
+
+  <!-- CARDS REMOVIDAS (impugnadas, ranking-cambia, fdr, historia, chat): restaurar cuando /impugnadas, /ranking-cambia, /fdr, /historia, /chat vuelvan a existir. Sesión paralela purgó en commit 26b4cde. -->
+
+  <section class="stack">
+    <h2>Stack técnico.</h2>
+    <p class="stack-sub">Herramientas usadas. Todo abierto. Cualquiera reproduce.</p>
+    <div class="stack-grid">
+      <div class="stack-item">
+        <div class="stack-name">Polars + DuckDB + PyArrow</div>
+        <div class="stack-role">procesa 92,766 mesas · 3.79M actas</div>
+      </div>
+      <div class="stack-item">
+        <div class="stack-name">Python 3.11 · asyncio</div>
+        <div class="stack-role">walker mesa-a-mesa · 21 min · 0 errores</div>
+      </div>
+      <div class="stack-item">
+        <div class="stack-name">Cloudflare Worker</div>
+        <div class="stack-role">proxy ONPE con allowlist</div>
+      </div>
+      <div class="stack-item">
+        <div class="stack-name">HuggingFace Datasets</div>
+        <div class="stack-role">parquet público · 3.79M filas</div>
+      </div>
+      <div class="stack-item">
+        <div class="stack-name">IPFS · Filebase + Pinata</div>
+        <div class="stack-role">cadena custodia nivel 4 · CIDs verificables</div>
+      </div>
+      <div class="stack-item">
+        <div class="stack-name">GitHub + SHA-256</div>
+        <div class="stack-role">MIT · hash inmutable · commits firmados</div>
+      </div>
+      <div class="stack-item">
+        <div class="stack-name">scipy · numpy</div>
+        <div class="stack-role">z-test Newcombe · Cohen h · bootstrap</div>
+      </div>
+      <div class="stack-item">
+        <div class="stack-name">matplotlib · python-docx</div>
+        <div class="stack-role">figuras forenses · informe reproducible</div>
+      </div>
     </div>
-    <table id="findings">
-      <thead><tr>
-        <th data-sort="id" style="cursor:pointer;user-select:none">ID <span class="sort-arr"></span></th>
-        <th data-sort="severity" style="cursor:pointer;user-select:none">Severidad <span class="sort-arr"></span></th>
-        <th data-sort="title" style="cursor:pointer;user-select:none">Hallazgo <span class="sort-arr"></span></th>
-        <th></th>
-      </tr></thead>
-      <tbody></tbody>
-    </table>
-    <p style="font-size:.8rem;color:var(--muted);margin-top:.5rem" id="findings-count"></p>
+
+    <a class="built-with" href="https://claude.com/claude-code" target="_blank" rel="noopener">
+      <span class="bw-label">Built with</span>
+      <strong>Claude Code</strong>
+      <span class="bw-meta">· Anthropic</span>
+    </a>
   </section>
 
-  <section class="card" data-tab="forecast" id="forecast-card">
-    <h2>Proyección bayesiana — P(2° lugar)</h2>
-    <p style="font-size:.9rem;color:var(--muted)">
-      Modelo jerárquico bayesiano Dirichlet-Multinomial con prior Beta sobre tasa de integración
-      de actas JEE (10,000 simulaciones). Metodología basada en Linzer (2013) JASA + NYT Election Needle.
-    </p>
-    <div class="kpi-grid" id="forecast-kpis" style="margin-bottom:1rem"></div>
-    <table>
-      <thead><tr><th>Escenario</th><th class="right">Tasa integración JEE</th><th class="right">P(RLA supera Sánchez)</th><th class="right">Margen p5</th><th class="right">Margen p50</th><th class="right">Margen p95</th></tr></thead>
-      <tbody id="forecast-scenarios"></tbody>
-    </table>
-    <div class="chart-wrap" style="height:240px;margin-top:1rem"><canvas id="chart-forecast"></canvas></div>
-    <p style="font-size:.82rem;color:var(--muted);margin-top:.8rem">
-      Interpretación: el margen final depende crucialmente de cuántas actas impugnadas se integran
-      al conteo (vs se anulan). En los tres escenarios considerados, la probabilidad de que
-      López Aliaga pase a 2ª vuelta está entre <strong id="forecast-range">37-49%</strong> — empate técnico estadístico.
-      <br/>Referencias: <em>Linzer D. (2013) JASA</em> · <em>Cohn N. (NYT Upshot)</em> · <em>Gelman & Hill (2007)</em>.
-    </p>
-  </section>
+  <footer>
+    <div>SHA-256 <span class="mono" id="hash-val">calculando…</span> · <a href="#" id="verify-inline">verificar inline</a></div>
+    <div style="margin-top:10px;">Por <strong>Neuracode</strong> · Coautoría: Jack Aguilar</div>
 
-  <section class="card" data-tab="forecast" id="fcast-int-card">
-    <h2>Forecast interactivo — ¿Y si la tasa JEE fuera…?</h2>
-    <p style="font-size:.9rem;color:var(--muted)">
-      Mueve el slider para simular distintas tasas de integración de actas impugnadas JEE.
-      La probabilidad se interpola entre los 3 escenarios (pesimista 0.29, central 0.50, optimista 0.71).
-    </p>
-    <label for="fcast-slider" class="mono" style="font-size:.85rem">
-      Tasa integración JEE: <strong id="fcast-rate-label">50%</strong>
-    </label>
-    <input type="range" id="fcast-slider" min="20" max="80" step="1" value="50"
-           style="width:100%;margin:.5rem 0 1rem">
-    <div class="kpi-grid" id="fcast-int-kpis"></div>
-    <p style="font-size:.8rem;color:var(--muted);margin-top:.6rem">
-      Interpolación lineal sobre los 3 escenarios del modelo. No re-simula MCMC —
-      es una lectura rápida de sensibilidad, no un modelo nuevo.
-    </p>
-  </section>
+    <div class="webinar-separator">— Capacitación —</div>
+    <div class="webinar-disclaimer">Contenido comercial · el análisis forense es MIT y open data.</div>
 
-  <section class="card" data-tab="forecast">
-    <h2>Regiones pivote (forecast)</h2>
-    <p style="font-size:.9rem;color:var(--muted)">
-      Top 10 regiones con mayor impacto esperado en el margen, ordenadas por
-      <span class="mono">votos_fuera × (share_Sánchez − share_RLA)</span>.
-    </p>
-    <table id="tbl-pivote">
-      <thead><tr><th>Región</th><th class="right">Actas fuera</th><th class="right">Votos fuera</th><th class="right">Share S</th><th class="right">Share RLA</th><th class="right">Δ esperado</th></tr></thead>
-      <tbody></tbody>
-    </table>
-  </section>
+    <div class="webinar">
+      <img src="neuracode-webinar.png" alt="Webinar Neuracode — Usar la IA te hace más productivo" loading="lazy">
+      <div class="webinar-body">
+        <div class="webinar-eyebrow">Neuracode Academy · Capacitación</div>
+        <h3>¿Quieres aprender a analizar datos así con IA?</h3>
+        <p>Webinar gratis: <strong>Lunes 8PM · Zoom</strong>. Pipelines, forense de datos y automatización con Python + Claude. Dictado por Jack Aguilar.</p>
+        <a class="cta-webinar" href="https://www.neuracode.dev/comunidad" target="_blank" rel="noopener">Regístrate ahora →</a>
+      </div>
+    </div>
 
-  <section class="card" data-tab="forecast">
-    <h2>Proyección contrafactual por región</h2>
-    <p style="font-size:.9rem;color:var(--muted)">
-      Ganancia / pérdida neta RLA vs Sánchez si todas las actas impugnadas y pendientes
-      se resuelven al ratio regional actual.
-    </p>
-    <table id="contrafactual">
-      <thead><tr><th>Región</th><th class="right">Actas fuera</th><th class="right">RLA %</th><th class="right">Sánch %</th><th class="right">Δ RLA−S</th></tr></thead>
-      <tbody></tbody>
-    </table>
-  </section>
-
-  <section class="card" data-tab="hallazgos">
-    <h2>Contexto — "Teoría morrocoy" (comparada)</h2>
-    <p>
-      <strong>Hipótesis comparada.</strong> En el contexto venezolano se ha denominado "morrocoy"
-      (tortuga, lento) a la estrategia de extender deliberadamente el conteo electoral para
-      disipar la atención pública, facilitar impugnaciones masivas, y generar
-      agotamiento en la contraparte. Se atribuye a los procesos que consolidaron a Hugo Chávez
-      y Nicolás Maduro. Es una <em>hipótesis con antecedentes comparados</em>, no una demostración.
-    </p>
-    <p>
-      <strong>Qué dice la data peruana al corte.</strong> Actas pendientes: 780. Impugnadas: 5,554.
-      Plazo legal JEE para audiencia: 2 días hábiles (Res. 0180-2025-JNE). Runoff: 2026-06-07.
-      Hasta que el conteo llegue a 100% y todas las actas sean resueltas, no es posible
-      discriminar entre "demora logística razonable" y "dilación estratégica". Se requiere
-      evidencia directa (logs, testimonios firmados, comunicaciones internas), que esta
-      auditoría <strong>no tiene</strong>.
-    </p>
-  </section>
-
-  <section class="card" data-tab="verif">
-    <h2>Metodología</h2>
-    <ul>
-      <li>Captura atómica endpoints públicos ONPE con SHA-256 inmediato.</li>
-      <li>Cadena de custodia documentada (MANIFEST.jsonl con IP, hostname, git commit).</li>
-      <li>Tests: reconciliación Σ regional↔nacional, z-score impugnación, z-test Lima vs resto,
-          Benford gl=8, serie temporal 116 cortes, simulación contrafactual.</li>
-      <li>Todo el código y data son reproducibles por terceros:
-        <span class="mono">py src/analysis/run_all.py</span></li>
-    </ul>
-  </section>
+    <div style="margin-top:20px;">Licencia: MIT (código) · CC-BY-4.0 (datos derivados) · Datos públicos ONPE.</div>
+  </footer>
 
 </div>
-
-<section class="card" style="max-width:1200px;margin:1rem auto;background:var(--bg-soft)">
-  <h2 style="margin-top:0">Compartir este corte</h2>
-  <p style="font-size:.9rem;color:var(--muted);margin:.2rem 0 .8rem">
-    Texto pre-armado con el margen actual. Se actualiza automáticamente.
-  </p>
-  <div id="share-buttons" style="display:flex;flex-wrap:wrap;gap:.5rem"></div>
-</section>
-
-<footer>
-  <p><strong>Autoría:</strong> Neuracode — Jack Aguilar · Aporte ciudadano independiente. Sin afiliación política.</p>
-  <p>Código: MIT · Documentos: CC-BY-4.0</p>
-  <p style="margin:.6rem 0">
-    <a href="https://www.tiktok.com/@jackdeneuracode" target="_blank" style="margin:0 .5rem">TikTok @JackDeNeuracode</a> ·
-    <a href="https://instagram.com/neuracode" target="_blank" style="margin:0 .5rem">IG @neuracode</a> ·
-    <a href="https://facebook.com/neuracode" target="_blank" style="margin:0 .5rem">FB @neuracode</a> ·
-    <a href="https://github.com/jackthony/auditoria-eg2026" target="_blank" style="margin:0 .5rem">GitHub @jackthony</a> ·
-    <a href="MEMORIAL_TECNICO_FISCAL.pdf" target="_blank" style="margin:0 .5rem;font-weight:600;color:var(--navy)">📄 Memorial PDF</a>
-  </p>
-  <p style="font-size:.8rem;margin-top:.4rem">
-    <strong>API pública:</strong>
-    <a href="api/findings.json" target="_blank" class="mono">findings</a> ·
-    <a href="api/forecast.json" target="_blank" class="mono">forecast</a> ·
-    <a href="api/state.json" target="_blank" class="mono">state</a> ·
-    <a href="api/regions.json" target="_blank" class="mono">regions</a> ·
-    <a href="api/series.json" target="_blank" class="mono">series</a>
-  </p>
-  <p class="mono" id="data-hash" style="font-size:.75rem;margin-top:.6rem;color:var(--muted)">
-    SHA-256 data.json: <span id="hash-val">—</span>
-    <a href="#" id="hash-verify" style="margin-left:.4rem">verificar</a>
-  </p>
-</footer>
 
 <script>
-const FMT_INT = new Intl.NumberFormat('es-PE');
-const FMT_PCT = n => (n==null?'—':n.toFixed(3)+'%');
-
-let _lastData = null;
-let _lastDataTs = null;
-function setSpin(on) {
-  document.getElementById('refresh-spin').classList.toggle('on', on);
-}
-function relativeTime(iso) {
-  if (!iso) return '';
-  const diff = (Date.now() - new Date(iso).getTime()) / 1000;
-  if (diff < 60) return `hace ${Math.round(diff)} s`;
-  if (diff < 3600) return `hace ${Math.round(diff/60)} min`;
-  if (diff < 86400) return `hace ${Math.round(diff/3600)} h`;
-  return `hace ${Math.round(diff/86400)} d`;
-}
-function refreshLiveBadge() {
-  const badge = document.getElementById('live-badge');
-  const txt = document.getElementById('live-text');
-  if (!_lastDataTs) { txt.textContent = 'cargando…'; return; }
-  const ageMin = (Date.now() - new Date(_lastDataTs).getTime()) / 60000;
-  // Stale > 30 min: badge naranja, sin pulso.
-  badge.classList.toggle('stale', ageMin > 30);
-  txt.textContent = ageMin > 30
-    ? `actualizado ${relativeTime(_lastDataTs)}`
-    : `EN VIVO · ${relativeTime(_lastDataTs)}`;
-}
-async function load() {
-  setSpin(true);
+(async () => {
   try {
     const r = await fetch('data.json?t=' + Date.now());
-    const d = await r.json();
-    _lastData = d;
-    _lastDataTs = (d.meta && d.meta.generated_at) || (d.state && d.state.ts) || new Date().toISOString();
-    render(d);
-    refreshLiveBadge();
+    if (!r.ok) throw new Error('fetch');
+    const buf = await r.clone().arrayBuffer();
+    const data = await r.json();
+    const corte = data?.meta?.ts_iso || data?.meta?.fecha_corte || data?.ts_iso || '—';
+    document.getElementById('corte').textContent = 'corte ' + corte;
+    const hashBuf = await crypto.subtle.digest('SHA-256', buf);
+    const hex = Array.from(new Uint8Array(hashBuf)).map(b => b.toString(16).padStart(2, '0')).join('');
+    document.getElementById('hash-val').textContent = hex;
+    const vi = document.getElementById('verify-inline');
+    vi.addEventListener('click', async (e) => {
+      e.preventDefault();
+      try { await navigator.clipboard.writeText(hex); vi.textContent = '✅ hash copiado'; }
+      catch(_) { vi.textContent = hex; }
+      setTimeout(() => { vi.textContent = 'verificar inline'; }, 2500);
+    });
   } catch (e) {
-    document.getElementById('alerts').innerHTML =
-      '<div class="alert critical">No se pudo cargar data.json — ¿ya corriste el pipeline?</div>';
-  } finally {
-    setSpin(false);
+    document.getElementById('corte').textContent = 'corte no disponible';
+    document.getElementById('hash-val').textContent = 'no disponible';
   }
-}
-setInterval(refreshLiveBadge, 30 * 1000);
-
-async function computeHash(text) {
-  const buf = new TextEncoder().encode(text);
-  const h = await crypto.subtle.digest('SHA-256', buf);
-  return Array.from(new Uint8Array(h)).map(b => b.toString(16).padStart(2,'0')).join('');
-}
-async function updateHashAndShare() {
-  if (!_lastData) return;
-  const txt = JSON.stringify(_lastData);
-  const hash = await computeHash(txt);
-  const short = hash.slice(0,12) + '…' + hash.slice(-8);
-  const el = document.getElementById('hash-val');
-  el.textContent = short;
-  el.title = hash;
-  document.getElementById('hash-verify').onclick = (e) => {
-    e.preventDefault();
-    alert(`SHA-256 completo de data.json (calculado en tu navegador):\n\n${hash}\n\nReproducible con:\n  curl -s https://jackthony.github.io/auditoria-eg2026/data.json | sha256sum`);
-  };
-
-  // Share buttons.
-  const s = _lastData?.state;
-  if (!s) return;
-  const url = 'https://jackthony.github.io/auditoria-eg2026/';
-  const fmt = new Intl.NumberFormat('es-PE');
-  const sign = s.margen_sanch_rla >= 0 ? '+' : '';
-  const msg = `📊 Auditoría EG2026 · al ${s.pct.toFixed(2)}% escrutado:\n` +
-              `Margen Sánchez−RLA = ${sign}${fmt.format(s.margen_sanch_rla)} votos\n` +
-              `Actas en JEE: ${fmt.format(s.actas_jee)}\n\n` +
-              `Data verificable + memorial al Fiscal: ${url}`;
-  const enc = encodeURIComponent(msg);
-  const buttons = [
-    {label:'X / Twitter', href:`https://twitter.com/intent/tweet?text=${enc}`, bg:'#000'},
-    {label:'WhatsApp',    href:`https://wa.me/?text=${enc}`, bg:'#25D366'},
-    {label:'Telegram',    href:`https://t.me/share/url?url=${encodeURIComponent(url)}&text=${enc}`, bg:'#229ED9'},
-    {label:'Copiar texto',href:'#copy', bg:'var(--navy)'},
-  ];
-  document.getElementById('share-buttons').innerHTML = buttons.map(b =>
-    `<a href="${b.href}" target="_blank" rel="noopener"
-        style="background:${b.bg};color:#fff;padding:.5rem 1rem;border-radius:4px;
-        text-decoration:none;font-weight:600;font-size:.88rem">${b.label}</a>`
-  ).join('');
-  document.querySelector('#share-buttons a[href="#copy"]').onclick = (e) => {
-    e.preventDefault();
-    navigator.clipboard.writeText(msg).then(() =>
-      e.target.textContent = '✓ Copiado'
-    );
-    setTimeout(() => { e.target.textContent = 'Copiar texto'; }, 2500);
-  };
-}
-const _origLoad = load;
-load = async function() { await _origLoad(); await updateHashAndShare(); updateBadges(); };
-
-let _mapInstance = null;
-
-// I18N-01 — toggle ES/EN minimalista (solo strings de alto nivel).
-const I18N = {
-  es: {
-    h1: 'Monitor técnico-estadístico · Elecciones Generales 2026 Perú',
-    subtitle: 'Aporte ciudadano · data pública · hashes SHA-256 · reproducible',
-    memorial_cta: '📄 Memorial técnico al Fiscal de la Nación',
-    tab_result: 'Resultado', tab_findings: 'Hallazgos',
-    tab_forecast: 'Forecast', tab_verif: 'Verificación',
-  },
-  en: {
-    h1: 'Technical-statistical monitor · Peru General Election 2026',
-    subtitle: 'Citizen contribution · public data · SHA-256 hashes · reproducible',
-    memorial_cta: '📄 Technical memorial to the Attorney General',
-    tab_result: 'Results', tab_findings: 'Findings',
-    tab_forecast: 'Forecast', tab_verif: 'Verification',
-  },
-};
-function applyLang(lang) {
-  const dict = I18N[lang] || I18N.es;
-  document.querySelectorAll('[data-i18n]').forEach(el => {
-    const k = el.dataset.i18n;
-    if (dict[k]) el.textContent = dict[k];
-  });
-  document.documentElement.lang = lang;
-  const btn = document.getElementById('lang-toggle');
-  if (btn) btn.textContent = lang === 'es' ? '🌐 EN' : '🌐 ES';
-  try { localStorage.setItem('lang', lang); } catch (_) {}
-}
-(function initLang() {
-  let lang = 'es';
-  try { lang = localStorage.getItem('lang') || 'es'; } catch (_) {}
-  applyLang(lang);
-  const btn = document.getElementById('lang-toggle');
-  if (btn) btn.onclick = () => applyLang(
-    (localStorage.getItem('lang') || 'es') === 'es' ? 'en' : 'es');
 })();
 
-// Tabs.
-function setTab(name) {
-  document.querySelectorAll('[data-tab-btn]').forEach(b =>
-    b.classList.toggle('active', b.dataset.tabBtn === name));
-  document.querySelectorAll('[data-tab]').forEach(s =>
-    s.classList.toggle('active', s.dataset.tab === name));
-  if (location.hash.slice(1) !== name) history.replaceState(null, '', '#' + name);
-  // Mapa Leaflet necesita invalidateSize si tab cambia (oculto al inicio).
-  if (name === 'resultado' && _mapInstance) setTimeout(() => _mapInstance.invalidateSize(), 50);
-}
-document.querySelectorAll('[data-tab-btn]').forEach(b =>
-  b.addEventListener('click', () => setTab(b.dataset.tabBtn)));
-const initialTab = (location.hash.slice(1) || 'resultado');
-setTab(['resultado','hallazgos','forecast','verif'].includes(initialTab) ? initialTab : 'resultado');
-
-function updateBadges() {
-  if (!_lastData || !_lastData.findings) return;
-  const crit = _lastData.findings.filter(f => f.severity === 'CRÍTICO').length;
-  const b = document.getElementById('badge-crit');
-  if (crit > 0) { b.textContent = crit; b.style.display = ''; }
-  else b.style.display = 'none';
-}
-
-function render(d) {
-  // KPIs
-  const s = d.state;
-  document.getElementById('kpi-pct').textContent = s.pct.toFixed(3) + '%';
-  document.getElementById('kpi-pct-ts').textContent = 'corte: ' + s.ts_human;
-  document.getElementById('kpi-fuji').textContent = FMT_PCT(s.fujimori);
-  document.getElementById('kpi-sanch').textContent = FMT_PCT(s.sanchez);
-  document.getElementById('kpi-rla').textContent = FMT_PCT(s.rla);
-  document.getElementById('kpi-margen').textContent =
-    (s.margen_sanch_rla >= 0 ? '+' : '') + FMT_INT.format(s.margen_sanch_rla);
-  document.getElementById('kpi-jee').textContent = FMT_INT.format(s.actas_jee);
-  // Proyección lineal al 100% (tipo Renzo)
-  if (d.projection) {
-    const p = d.projection;
-    const m = p.margin_sanchez_rla_100;
-    const el = document.getElementById('kpi-proj');
-    const sub = document.getElementById('kpi-proj-sub');
-    document.getElementById('kpi-proj-card').style.display = '';
-    el.textContent = (m >= 0 ? '+' : '') + m.toFixed(2) + ' pp';
-    el.style.color = m < 0 ? '#b91c1c' : '#0a7a3b';
-    sub.textContent = `Sánchez ${p.sanchez.toFixed(2)} · RLA ${p.rla.toFixed(2)} · regresión tail-${p.window_points} vs %escrutado`;
-  }
-
-  // Deltas vs corte anterior
-  if (d.delta) {
-    setDelta('kpi-fuji-d', d.delta.fujimori);
-    setDelta('kpi-sanch-d', d.delta.sanchez, true);  // Sánchez sube es malo para RLA
-    setDelta('kpi-rla-d', d.delta.rla, false);       // RLA sube es bueno
-    const m = d.delta.margen_sanch_rla;
-    const md = document.getElementById('kpi-margen-d');
-    md.textContent = (m >= 0 ? '↑' : '↓') + ' ' + FMT_INT.format(Math.abs(m)) + ' vs corte previo';
-    md.className = 'delta ' + (m > 0 ? 'up' : m < 0 ? 'down' : 'neutral');
-  }
-
-  // Chart (destruir instancia previa para auto-refresh sin leak).
-  const ctx = document.getElementById('chart-time').getContext('2d');
-  if (window._chartTime) window._chartTime.destroy();
-  window._chartTime = new Chart(ctx, {
-    type: 'line',
-    data: {
-      labels: d.series.map(p => p.ts.substring(5, 16)),
-      datasets: [
-        {label:'Fujimori', data: d.series.map(p=>p.fujimori), borderColor:'#E85D3D', tension:.3, pointRadius:0},
-        {label:'RLA',      data: d.series.map(p=>p.rla),      borderColor:'#0B2A4A', tension:.3, pointRadius:0},
-        {label:'Nieto',    data: d.series.map(p=>p.nieto),    borderColor:'#7D4F9F', tension:.3, pointRadius:0},
-        {label:'Belmont',  data: d.series.map(p=>p.belmont),  borderColor:'#4E7A4E', tension:.3, pointRadius:0},
-        {label:'Sánchez',  data: d.series.map(p=>p.sanchez),  borderColor:'#C77B1E', tension:.3, pointRadius:0},
-      ]
-    },
-    options: {
-      responsive:true, maintainAspectRatio:false,
-      interaction:{mode:'index',intersect:false},
-      scales:{ y:{title:{display:true,text:'% votos válidos'}} },
-      plugins:{ legend:{position:'bottom'} }
-    }
-  });
-
-  // Alerts
-  const al = document.getElementById('alerts');
-  al.innerHTML = d.alerts.map(a =>
-    `<div class="alert ${a.level}"><strong>[${a.level.toUpperCase()}]</strong> ${a.msg}</div>`
-  ).join('');
-
-  // Findings Prime (mesa-a-mesa) — hero card
-  if (d.findings_prime) renderPrimeHero(d.findings_prime);
-
-  // Findings (con sort/filter/search)
-  _findings = d.findings;
-  renderFindings();
-
-  // Mapa choropleth
-  if (d.regions) renderMap(d.regions);
-
-  // DIFF slider snapshots
-  if (d.series && d.series.length > 1) renderDiff(d.series);
-
-  // Forecast bayesiano (si existe)
-  if (d.forecast) { renderForecast(d.forecast); renderForecastInteractive(d.forecast); }
-
-  // Contrafactual
-  document.querySelector('#contrafactual tbody').innerHTML = (d.contrafactual||[]).map(r => {
-    const c = r.delta > 0 ? 'var(--green)' : (r.delta < -1000 ? 'var(--red)' : 'var(--muted)');
-    const sign = r.delta >= 0 ? '+' : '';
-    return `<tr><td>${r.name}</td>
-      <td class="right">${FMT_INT.format(r.actas_fuera)}</td>
-      <td class="right">${r.rla.toFixed(2)}</td>
-      <td class="right">${r.sanch.toFixed(2)}</td>
-      <td class="right" style="color:${c};font-weight:600">${sign}${FMT_INT.format(Math.round(r.delta))}</td></tr>`;
-  }).join('');
-}
-
-function renderForecast(f) {
-  const sc = f.escenarios;
-  const mix = f.escenario_mixto;
-
-  // KPIs del forecast
-  const pCentral = sc.central.p_rla_supera_sanchez;
-  const pMix = mix.p_rla_supera_sanchez;
-  const kpis = document.getElementById('forecast-kpis');
-  kpis.innerHTML = `
-    <div class="kpi"><div class="lbl">P(RLA supera Sánchez) · central</div>
-      <div class="val">${(pCentral*100).toFixed(1)}%</div>
-      <div class="updated">tasa integración JEE 50%</div></div>
-    <div class="kpi"><div class="lbl">P(RLA supera Sánchez) · mixto</div>
-      <div class="val">${(pMix*100).toFixed(1)}%</div>
-      <div class="updated">incertidumbre máxima sobre JEE</div></div>
-    <div class="kpi"><div class="lbl">Margen final p50 (central)</div>
-      <div class="val">${(sc.central.margen_final.p50>=0?'+':'')+FMT_INT.format(Math.round(sc.central.margen_final.p50))}</div>
-      <div class="updated">mediana de 10k simulaciones</div></div>
-    <div class="kpi"><div class="lbl">Banda 90% margen (central)</div>
-      <div class="val" style="font-size:1.1rem">${FMT_INT.format(Math.round(sc.central.margen_final.p5))} — ${FMT_INT.format(Math.round(sc.central.margen_final.p95))}</div>
-      <div class="updated">p5 — p95</div></div>
-  `;
-
-  // Tabla escenarios
-  const rows = Object.entries(sc).map(([k, v]) => {
-    const m = v.margen_final;
-    const p = v.p_rla_supera_sanchez;
-    const color = p > 0.45 ? 'var(--red)' : p > 0.30 ? 'var(--orange)' : 'var(--green)';
-    return `<tr><td><strong>${k}</strong></td>
-      <td class="right">${(v.beta_params.mean_integration*100).toFixed(0)}%</td>
-      <td class="right" style="color:${color};font-weight:700">${(p*100).toFixed(1)}%</td>
-      <td class="right">${FMT_INT.format(Math.round(m.p5))}</td>
-      <td class="right"><strong>${(m.p50>=0?'+':'')+FMT_INT.format(Math.round(m.p50))}</strong></td>
-      <td class="right">${FMT_INT.format(Math.round(m.p95))}</td></tr>`;
-  }).join('');
-  document.getElementById('forecast-scenarios').innerHTML = rows;
-
-  // Rango P(cruce)
-  const ps = Object.values(sc).map(v => v.p_rla_supera_sanchez);
-  const lo = Math.min(...ps)*100, hi = Math.max(...ps)*100;
-  document.getElementById('forecast-range').textContent = `${lo.toFixed(0)}-${hi.toFixed(0)}%`;
-
-  // Histograma del margen (escenario central)
-  const ctx = document.getElementById('chart-forecast').getContext('2d');
-  const h = f.histograma_central;
-  if (window._chartFcast) window._chartFcast.destroy();
-  window._chartFcast = new Chart(ctx, {
-    type: 'bar',
-    data: {
-      labels: h.map(p => FMT_INT.format(Math.round(p.center))),
-      datasets: [{
-        label: 'Margen Sánchez − RLA (10k simulaciones, central)',
-        data: h.map(p => p.count),
-        backgroundColor: h.map(p => p.center >= 0 ? '#0B2A4A' : '#B4332B'),
-      }]
-    },
-    options: {
-      responsive: true, maintainAspectRatio: false,
-      scales: { x: { ticks: { maxRotation: 45, minRotation: 45 } }, y: { title: { display: true, text: 'frecuencia' } } },
-      plugins: { legend: { display: false },
-        annotation: {} },
-    }
-  });
-
-  // Tabla regiones pivote
-  if (f.regiones_pivote) {
-    document.querySelector('#tbl-pivote tbody').innerHTML = f.regiones_pivote.map(r => {
-      const d = Math.round(r.delta_esperado);
-      const c = d > 0 ? 'var(--green)' : d < 0 ? 'var(--red)' : 'var(--muted)';
-      const sign = d >= 0 ? '+' : '';
-      return `<tr><td>${r.region}</td>
-        <td class="right">${FMT_INT.format(r.actas_fuera)}</td>
-        <td class="right">${FMT_INT.format(r.votos_fuera)}</td>
-        <td class="right">${(r.share_sanch*100).toFixed(1)}%</td>
-        <td class="right">${(r.share_rla*100).toFixed(1)}%</td>
-        <td class="right" style="color:${c};font-weight:700">${sign}${FMT_INT.format(d)}</td></tr>`;
-    }).join('');
-  }
-}
-
-// FCAST-INT-01 — forecast interactivo (interpolación lineal entre 3 escenarios).
-function renderForecastInteractive(f) {
-  const sc = f.escenarios || {};
-  if (!sc.pesimista || !sc.central || !sc.optimista) return;
-  const pts = ['pesimista','central','optimista'].map(k => ({
-    x: sc[k].beta_params.mean_integration,
-    p: sc[k].p_rla_supera_sanchez,
-    m50: sc[k].margen_final.p50,
-    m5: sc[k].margen_final.p5,
-    m95: sc[k].margen_final.p95,
-  })).sort((a,b) => a.x - b.x);
-  const lerp = (x, key) => {
-    if (x <= pts[0].x) return pts[0][key];
-    if (x >= pts[pts.length-1].x) return pts[pts.length-1][key];
-    for (let i=0; i<pts.length-1; i++) {
-      if (x >= pts[i].x && x <= pts[i+1].x) {
-        const t = (x - pts[i].x) / (pts[i+1].x - pts[i].x);
-        return pts[i][key] + t * (pts[i+1][key] - pts[i][key]);
-      }
-    }
-    return pts[1][key];
-  };
-  const slider = document.getElementById('fcast-slider');
-  const label = document.getElementById('fcast-rate-label');
-  const kpis = document.getElementById('fcast-int-kpis');
-  const draw = () => {
-    const x = parseInt(slider.value) / 100;
-    label.textContent = `${(x*100).toFixed(0)}%`;
-    const p = lerp(x, 'p'), m50 = lerp(x, 'm50'),
-          m5 = lerp(x, 'm5'), m95 = lerp(x, 'm95');
-    const color = p > 0.45 ? 'var(--red)' : p > 0.30 ? 'var(--orange)' : 'var(--green)';
-    const sign = m50 >= 0 ? '+' : '';
-    kpis.innerHTML = `
-      <div class="kpi"><div class="lbl">P(RLA supera Sánchez)</div>
-        <div class="val" style="color:${color}">${(p*100).toFixed(1)}%</div></div>
-      <div class="kpi"><div class="lbl">Margen mediano (S−RLA)</div>
-        <div class="val">${sign}${FMT_INT.format(Math.round(m50))}</div></div>
-      <div class="kpi"><div class="lbl">IC 90% del margen</div>
-        <div class="val mono" style="font-size:1rem">[${FMT_INT.format(Math.round(m5))}, ${FMT_INT.format(Math.round(m95))}]</div></div>`;
-  };
-  slider.oninput = draw;
-  draw();
-}
-
-function normDep(s) {
-  return (s||'').normalize('NFKD').replace(/[\u0300-\u036f]/g,'').toUpperCase().trim();
-}
-function marginColor(m, vmax) {
-  // Diverging red(-) → white(0) → green(+). vmax = max(|margin|) para escala.
-  if (vmax <= 0) return '#FFFFFF';
-  const t = Math.max(-1, Math.min(1, m / vmax));
-  // Interpolación lineal en RGB.
-  const lerp = (a,b,k) => Math.round(a + (b-a)*k);
-  let r,g,b;
-  if (t >= 0) {
-    const k = Math.pow(t, 0.6);                       // sesgo: tonos más visibles en márgenes pequeños
-    r = lerp(255,46,k); g = lerp(255,107,k); b = lerp(255,63,k);   // → #2E6B3F
-  } else {
-    const k = Math.pow(-t, 0.6);
-    r = lerp(255,180,k); g = lerp(255,51,k); b = lerp(255,43,k);   // → #B4332B
-  }
-  return `rgb(${r},${g},${b})`;
-}
-async function renderMap(regions) {
-  if (_mapInstance) { _mapInstance.remove(); _mapInstance = null; }
-  const byName = {};
-  for (const r of regions) byName[r.name_norm] = r;
-  const vmax = Math.max(...regions.filter(r => r.name_norm !== 'EXTRANJERO')
-                                 .map(r => Math.abs(r.margin)), 1);
-
-  const map = L.map('map-peru', { zoomControl: true, attributionControl: false })
-               .setView([-9.2, -75.0], 5);
-  _mapInstance = map;
-
-  let geo;
-  try {
-    const resp = await fetch('peru-departamentos.geojson');
-    geo = await resp.json();
-  } catch (e) {
-    document.getElementById('map-peru').innerHTML =
-      '<div class="alert critical" style="margin:1rem">No se pudo cargar peru-departamentos.geojson</div>';
-    return;
-  }
-
-  const layer = L.geoJSON(geo, {
-    style: f => {
-      const key = normDep(f.properties.NOMBDEP || f.properties.nombdep || '');
-      const r = byName[key];
-      return {
-        fillColor: r ? marginColor(r.margin, vmax) : '#EEE',
-        fillOpacity: 0.85,
-        color: '#0B2A4A',
-        weight: 0.8,
-      };
-    },
-    onEachFeature: (f, lyr) => {
-      const key = normDep(f.properties.NOMBDEP || f.properties.nombdep || '');
-      const r = byName[key];
-      const fmt = new Intl.NumberFormat('es-PE');
-      const html = r ? `
-        <strong>${r.name}</strong><br>
-        Margen S−RLA: <strong>${r.margin>=0?'+':''}${fmt.format(r.margin)}</strong> votos<br>
-        Sánchez: ${r.sanch_pct.toFixed(2)}% · RLA: ${r.rla_pct.toFixed(2)}%<br>
-        Escrutado: ${r.pct_actas.toFixed(2)}% · Actas fuera: ${fmt.format(r.actas_fuera)}
-      ` : `<strong>${f.properties.NOMBDEP}</strong><br>(sin data)`;
-      lyr.bindTooltip(html, { className: 'region-tip', sticky: true });
-      lyr.on('mouseover', e => e.target.setStyle({ weight: 2.5, color: '#C8A24B' }));
-      lyr.on('mouseout',  e => layer.resetStyle(e.target));
-    },
-  }).addTo(map);
-  map.fitBounds(layer.getBounds(), { padding: [10, 10] });
-
-  // Leyenda divergente.
-  const legend = L.control({ position: 'bottomright' });
-  legend.onAdd = () => {
-    const div = L.DomUtil.create('div', 'map-legend');
-    const fmt = new Intl.NumberFormat('es-PE');
-    div.innerHTML = `
-      <strong>Margen Sánchez − RLA (votos)</strong>
-      <div class="scale">
-        <span class="swatch" style="background:${marginColor(-vmax,vmax)}"></span>
-        <span>−${fmt.format(vmax)}</span>
-        <span class="swatch" style="background:#FFFFFF"></span>
-        <span>0</span>
-        <span class="swatch" style="background:${marginColor(vmax,vmax)}"></span>
-        <span>+${fmt.format(vmax)}</span>
-      </div>
-      <div style="color:var(--muted);margin-top:.3rem">Escala γ=0.6 — destaca márgenes pequeños</div>
-    `;
-    return div;
-  };
-  legend.addTo(map);
-}
-
-// DIFF — comparador de cortes (national).
-const CAND_LABELS = {fujimori:'Keiko Fujimori', sanchez:'Roberto Sánchez',
-  rla:'López Aliaga', nieto:'Nieto', belmont:'Belmont'};
-function renderDiff(series) {
-  const slider = document.getElementById('diff-slider');
-  const last = series[series.length - 1];
-  slider.max = series.length - 2;
-  if (parseInt(slider.value) > slider.max) slider.value = 0;
-  const draw = () => {
-    const a = series[parseInt(slider.value)];
-    document.getElementById('diff-ts').textContent =
-      a.ts.substring(0,16).replace('T',' ');
-    const rows = Object.keys(CAND_LABELS).map(k => {
-      const av = a[k], bv = last[k], d = bv - av;
-      const cls = Math.abs(d) < 0.01 ? 'neutral' : (d > 0 ? 'up' : 'down');
-      const sign = d >= 0 ? '+' : '';
-      return `<tr><td>${CAND_LABELS[k]}</td>
-        <td class="right mono">${av.toFixed(3)}%</td>
-        <td class="right mono">${bv.toFixed(3)}%</td>
-        <td class="right mono delta ${cls}"><strong>${sign}${d.toFixed(3)}</strong></td></tr>`;
-    }).join('');
-    document.querySelector('#diff-table tbody').innerHTML = rows;
-  };
-  slider.oninput = draw;
-  draw();
-}
-
-// Findings — sort/filter/search.
-let _findings = [];
-let _findingsSev = new Set();   // vacío = todas
-let _findingsSearch = '';
-let _findingsSort = {key: 'severity', dir: 1};
-const SEV_RANK = {'CRÍTICO': 0, 'MEDIA': 1, 'BAJA': 2, 'INFO': 3};
-const SEV_CLS = {'CRÍTICO': 'crit', 'MEDIA': 'med', 'BAJA': 'baja', 'INFO': 'info'};
-
-function renderPrimeHero(fp) {
-  const wrap = document.getElementById('prime-hero-wrap');
-  if (!wrap) return;
-  const F1 = fp.findings.find(f => f.id === 'PRIME-F1-RANKING');
-  const F2 = fp.findings.find(f => f.id === 'PRIME-F2-MESAS-FALTANTES');
-  const F3 = fp.findings.find(f => f.id === 'PRIME-F3-DESFASE-AGRUPACION');
-  if (!F1 || !F2 || !F3) return;
-  const delta2 = F1.top10_mesa_a_mesa[1][0];
-  const oficial2 = F1.top10_oficial[1][0];
-  const mesas_falt = F2.delta_universo.toLocaleString('es-PE');
-  const desfase = F3.delta_total.toLocaleString('es-PE');
-  const jpp_pct = F3.top_agrupaciones_por_desfase[0].pct_del_desfase.toFixed(1);
-  wrap.innerHTML = `
-    <section class="card" style="border-left:6px solid #dc2626;background:#fef2f2">
-      <h2 style="margin-top:0;color:#991b1b">🚨 Hallazgos mesa-a-mesa (replica independiente Prime Institute)</h2>
-      <div class="kpi-grid" style="margin-top:.6rem">
-        <div class="kpi" style="border-left-color:#dc2626">
-          <div class="lbl">2° puesto suma mesa-a-mesa</div>
-          <div class="val" style="color:#dc2626;font-size:1.3rem">${delta2}</div>
-          <div class="updated">Oficial dice: ${oficial2}</div>
-        </div>
-        <div class="kpi" style="border-left-color:#dc2626">
-          <div class="lbl">Mesas faltantes vs universo oficial</div>
-          <div class="val" style="color:#dc2626">${mesas_falt}</div>
-          <div class="updated">de 92,766 actas</div>
-        </div>
-        <div class="kpi" style="border-left-color:#dc2626">
-          <div class="lbl">Votos de desfase válidos</div>
-          <div class="val" style="color:#dc2626">${desfase}</div>
-          <div class="updated">${jpp_pct}% concentrados en JPP</div>
-        </div>
-      </div>
-      <p style="margin:.8rem 0 0;font-size:.9rem;color:#7f1d1d">
-        Captura forense <span class="mono">${fp.capture_mesa_ts}</span> · 88,063 mesas walker · SHA-256 en MANIFEST.
-        Detalle en <span class="mono">reports/findings_prime.json</span>.
-      </p>
-    </section>`;
-}
-
-function renderFindings() {
-  const filt = _findings.filter(f => {
-    if (_findingsSev.size > 0 && !_findingsSev.has(f.severity)) return false;
-    if (!_findingsSearch) return true;
-    const q = _findingsSearch.toLowerCase();
-    return (f.title||'').toLowerCase().includes(q) ||
-           (f.detail||'').toLowerCase().includes(q) ||
-           (f.id||'').toLowerCase().includes(q);
-  });
-  const k = _findingsSort.key;
-  filt.sort((a,b) => {
-    let av, bv;
-    if (k === 'severity') { av = SEV_RANK[a.severity] ?? 99; bv = SEV_RANK[b.severity] ?? 99; }
-    else { av = (a[k]||'').toString().toLowerCase(); bv = (b[k]||'').toString().toLowerCase(); }
-    return av < bv ? -_findingsSort.dir : av > bv ? _findingsSort.dir : 0;
-  });
-  document.querySelector('#findings tbody').innerHTML = filt.map(f => {
-    const cls = SEV_CLS[f.severity] || 'info';
-    const tagCls = cls === 'baja' ? 'info' : cls;  // tabla usa crit/med/info
-    return `<tr data-id="${f.id}">
-      <td><strong>${f.id}</strong></td>
-      <td><span class="tag ${tagCls}">${f.severity}</span></td>
-      <td>${f.title}</td>
-      <td class="right"><a href="#" class="finding-toggle" data-id="${f.id}" style="font-size:.8rem">detalle ▾</a></td>
-    </tr>` + (f.detail ? `<tr class="finding-row-detail" data-id="${f.id}" style="display:none">
-      <td colspan="4" class="finding-detail">${f.detail}</td></tr>` : '');
-  }).join('');
-  document.getElementById('findings-count').textContent =
-    `${filt.length} de ${_findings.length} hallazgos${_findingsSev.size?` · filtrado por ${[..._findingsSev].join(', ')}`:''}${_findingsSearch?` · "${_findingsSearch}"`:''}`;
-  // Toggle detalle.
-  document.querySelectorAll('.finding-toggle').forEach(a => a.onclick = e => {
-    e.preventDefault();
-    const id = a.dataset.id;
-    const row = document.querySelector(`.finding-row-detail[data-id="${id}"]`);
-    if (row) {
-      const open = row.style.display !== 'none';
-      row.style.display = open ? 'none' : 'table-row';
-      a.textContent = open ? 'detalle ▾' : 'cerrar ▴';
-    }
-  });
-  // Indicadores de sort.
-  document.querySelectorAll('th[data-sort]').forEach(th => {
-    const arr = th.querySelector('.sort-arr');
-    arr.textContent = th.dataset.sort === _findingsSort.key ? (_findingsSort.dir > 0 ? '▲' : '▼') : '';
-  });
-}
-
-(function initFindingsControls() {
-  // Chips de severidad.
-  const cont = document.getElementById('findings-filters');
-  const sevs = ['CRÍTICO', 'MEDIA', 'BAJA', 'INFO'];
-  cont.innerHTML = sevs.map(s =>
-    `<button class="chip ${SEV_CLS[s]}" data-sev="${s}">${s}</button>`
-  ).join('');
-  cont.querySelectorAll('.chip').forEach(c => c.onclick = () => {
-    const s = c.dataset.sev;
-    if (_findingsSev.has(s)) _findingsSev.delete(s); else _findingsSev.add(s);
-    c.classList.toggle('active');
-    renderFindings();
-  });
-  document.getElementById('findings-search').oninput = e => {
-    _findingsSearch = e.target.value.trim();
-    renderFindings();
-  };
-  document.querySelectorAll('th[data-sort]').forEach(th => th.onclick = () => {
-    const k = th.dataset.sort;
-    if (_findingsSort.key === k) _findingsSort.dir *= -1;
-    else { _findingsSort.key = k; _findingsSort.dir = 1; }
-    renderFindings();
-  });
-})();
-
-function setDelta(id, v, inverted) {
-  const e = document.getElementById(id);
-  if (v == null) { e.textContent = ''; return; }
-  const sign = v >= 0 ? '↑' : '↓';
-  e.textContent = sign + ' ' + (Math.abs(v)).toFixed(3) + 'pp';
-  const good = inverted ? v < 0 : v > 0;
-  e.className = 'delta ' + (v===0 ? 'neutral' : (good ? 'down' : 'up'));
-}
-
-load();
-// Auto-refresh cada 5 min
-setInterval(load, 5 * 60 * 1000);
 </script>
 
 </body>

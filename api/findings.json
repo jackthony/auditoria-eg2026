@@ -1,103 +1,218 @@
 {
   "findings": [
     {
-      "severity": "INFO",
-      "id": "R1",
-      "title": "Reconciliación Σ regional vs nacional: coincide dentro de redondeo",
-      "detail": "Diferencias entre la suma de votos por región y el total nacional publicado: todas menores a 0.01%. Descarta hipótesis de manipulación agregada entre niveles."
-    },
-    {
-      "severity": "MEDIA",
-      "id": "A1",
-      "title": "Regiones con tasa de impugnación anómala (|z|>2): Extranjero (26.35%, z=+3.90)",
-      "detail": "1 región(es) fuera de ±2σ respecto al promedio regional de 7.29% (σ=4.88%)."
-    },
-    {
-      "severity": "MEDIA",
-      "id": "A2",
-      "title": "Diferencia de tasa de impugnación Lima+Callao vs resto del país",
-      "detail": "Lima+Callao: 4.32% · Resto: 7.22% · Diferencia: -2.89pp (z=-17.38, p=0). Estadísticamente significativa al 1%. La asimetría NO es perjudicial para candidatos con mayor votación en Lima+Callao."
-    },
-    {
-      "severity": "INFO",
-      "id": "C1",
-      "title": "Benford (primer dígito, agregado) conforme",
-      "detail": "Pool de 5 candidatos × 26 regiones (n=130): χ²=11.91, p=0.155. No se rechaza H0 de conformidad con Benford. Recordar: este test tiene limitaciones en datos electorales."
-    },
-    {
-      "severity": "INFO",
-      "id": "D1",
-      "title": "Artefactos técnicos de caché en tracking: 72 eventos",
-      "detail": "Se detectaron 72 oscilaciones donde pct baja y sube al mismo valor. Es condición de carrera típica del proxy caché, NO movimiento real de la data ONPE primaria. Se documenta para evitar mala interpretación pública."
-    },
-    {
-      "severity": "INFO",
-      "id": "D2",
-      "title": "Sin saltos anómalos en el conteo temporal",
-      "detail": "Ningún delta entre cortes consecutivos supera 0.5pp para ningún candidato en 117 cortes analizados."
-    },
-    {
-      "severity": "INFO",
-      "id": "D3",
-      "title": "Cruce Sánchez↔RLA único, consistente con flujo natural",
-      "detail": "Se registró 1 cambio de signo entre Sánchez y RLA, atribuible al ingreso progresivo de actas rurales (donde Sánchez tiene ventaja) posterior al procesamiento inicial de Lima y extranjero (donde RLA tiene ventaja)."
-    },
-    {
+      "id": "HALL-0420-H1",
       "severity": "CRÍTICO",
-      "id": "E1",
-      "title": "Pase a 2ª vuelta depende de la resolución del JEE",
-      "detail": "Margen Sánchez−RLA (+13,624 votos, +0.086pp) es aproximadamente 81× menor que los votos contenidos en actas impugnadas + pendientes (~1,100,045). Bajo distribución proporcional al nacional, el margen final sería +14,570. Para empatar, RLA requiere 52.59% del subgrupo RLA+Sánchez en disputa (vs 49.82% histórico)."
+      "test": "Sesgo geográfico impugnadas por depto_real",
+      "h0": "Tasa impugnación homogénea across deptos (~6.16% global)",
+      "statistic": 42.18,
+      "p_value": null,
+      "threshold": 2.0,
+      "method": "Proporción binomial + z-score contra tasa global. Mapping prefix→depto ONPE alfabético con Callao=24.",
+      "interpretation": "Extranjero 26.27% (z=42.18), Loreto 14.87% (z=18.82), Ucayali 12.02% (z=9.64), Madre de Dios 10.65% (z=4.21), Ica 9.41% (z=6.69). Piso: Arequipa 1.83% (z=-11.7), Puno 3.03% (z=-7.58).",
+      "limitations": "Impugnación es recurso procesal; concentración no implica fraude. Universo v2 incluye 4,703 mesas 900k+ recuperadas tras fix walker.",
+      "top_deptos_alto": [
+        "Extranjero",
+        "Loreto",
+        "Ucayali",
+        "Madre de Dios",
+        "Ica"
+      ],
+      "top_deptos_bajo": [
+        "Arequipa",
+        "Puno",
+        "Junín",
+        "Apurímac",
+        "Cusco"
+      ],
+      "n_mesas_universo": 92766,
+      "source_file": "reports/hallazgos_20260420/findings_0420_v2.json"
     },
     {
-      "id": "G1",
+      "id": "HALL-0420-H2",
       "severity": "MEDIA",
-      "title": "Asociación positiva entre tasa_impugnación y share_RLA por región (Pearson r=0.506, p=0.0083). Si TODAS las actas fuera se integran al ratio regional actual, margen final proyectado = +5,883 votos (vs margen actual +13,624). Empate estadístico. NOTA: correlación sensible a outliers (Spearman r=0.14 p=0.49 NO significativo; bootstrap CI95 incluye 0). La asociación es real en media pero está dominada por Lima y Extranjero."
+      "test": "Share por partido en locales ALTA vs BAJA tasa impugnación (mesas D)",
+      "h0": "Share partido independiente de tasa impugnación del local",
+      "statistic": 2.073,
+      "p_value": null,
+      "threshold": 1.0,
+      "method": "Quintiles tasa_imp por local (Q80≥12.5%, Q20≤0%); delta share ALTO−BAJO partidos 1-38, mesas estado D.",
+      "interpretation": "FUERZA POPULAR +2.073pp en locales alta impugnación; JPP +0.88pp; PAÍS PARA TODOS +0.52pp. Bajan: BUEN GOBIERNO -1.62pp, AHORA NACIÓN -0.91pp, RENOVACIÓN POPULAR -0.64pp.",
+      "limitations": "Asociación descriptiva, no causal. Sensible a clusters Lima/Extranjero.",
+      "partidos_suben": [
+        "FUERZA POPULAR",
+        "JUNTOS POR EL PERÚ",
+        "PARTIDO PAÍS PARA TODOS"
+      ],
+      "partidos_bajan": [
+        "PARTIDO DEL BUEN GOBIERNO",
+        "AHORA NACIÓN - AN",
+        "RENOVACIÓN POPULAR"
+      ],
+      "n_mesas_universo": 92766,
+      "source_file": "reports/hallazgos_20260420/findings_0420_v2.json"
     },
     {
-      "id": "H1",
+      "id": "HALL-0420-H3",
       "severity": "MEDIA",
-      "title": "Cambio significativo en velocidad de acumulación de actas JEE alrededor del cruce Sánchez>RLA (ventana ±6h): +182.6 actas/h antes vs +92.4 después (Mann-Whitney p=0.0127). La inflexión puede reflejar procesamiento natural o cambio de política de impugnaciones; requiere explicación formal."
+      "test": "Outliers nulos/blancos por mesa (estado D)",
+      "h0": "pct_nulos ≤ 15% AND pct_blancos ≤ 25% en toda mesa D",
+      "statistic": 5.72,
+      "p_value": null,
+      "threshold": 1.0,
+      "method": "Cuenta mesas D con pct_nulos>15% OR pct_blancos>25% sobre 92,766 mesas.",
+      "interpretation": "5,304 mesas outlier (5.72%). Global D: 11.64% blancos, 5.0% nulos. San Martín 19.62% blancos #1, Piura 7.22% nulos #1. Top mesas extremas: 4 mesas Loreto 900k+ con >90% blancos (903472-903475).",
+      "limitations": "Umbrales 15/25% discrecionales; falta baseline EG2021/2016. Mesas 900k+ dominan extremos.",
+      "outliers_total": 5304,
+      "outliers_pct": 5.72,
+      "n_mesas_universo": 92766,
+      "source_file": "reports/hallazgos_20260420/findings_0420_v2.json"
     },
     {
-      "id": "H2",
-      "severity": "MEDIA",
-      "title": "Velocidad de acumulación de actas JEE desaceleró tras el cruce (ventana ±12h): +169.0/h antes vs +76.4/h después (ratio 0.45x). Acumuladas pre-cruce: +1522 actas; post-cruce: +556 actas."
+      "id": "HALL-0420-H4",
+      "severity": "CRÍTICO",
+      "test": "JPP concentra votos en mesas especiales 900k+ (vs normales)",
+      "h0": "p(JPP) en mesas 900k+ == p(JPP) en mesas normales",
+      "statistic": 698.0016,
+      "p_value": 0.0,
+      "threshold": 0.05,
+      "method": "z-test 2 proporciones (Newcombe 1998) + Cohen h + Bootstrap IC95 (B=10,000) + Mann-Whitney U.",
+      "interpretation": "JPP 41.65% en 4,700 mesas especiales 900k+ vs 10.91% en 87,812 mesas normales. Ratio 3.8183x. z=698, p≈0, Cohen h=0.7298 (grande). Bootstrap IC95 diff: [0.2945, 0.3076].",
+      "limitations": "No prueba causalidad ni intencionalidad. | Mesas 900k+ tienen padrones reducidos; varianza por mesa mayor. | Universo 900k+ caracterizado como mesas regulares de IE distribuidas geográficamente, no necesariamente militar/penal/extranjero.",
+      "ratio_esp_vs_norm": 3.8183,
+      "n_mesas_universo": 92766,
+      "source_file": "reports/h4_stats.json",
+      "metodologia_cita": [
+        "Newcombe (1998). Two-sided confidence intervals for the single proportion. Statistics in Medicine.",
+        "Cohen (1988). Statistical Power Analysis for the Behavioral Sciences.",
+        "Efron & Tibshirani (1993). An Introduction to the Bootstrap. CRC Press."
+      ]
     },
     {
-      "id": "F1",
-      "severity": "MEDIA",
-      "title": "Modelo bayesiano: P(RLA supera Sánchez) = 26.9% central / 28.9% mixto (n=10,000 simulaciones)"
+      "id": "HALL-0420-H9",
+      "severity": "CRÍTICO",
+      "test": "Locales con 100% mesas impugnadas — binomial exacto hero",
+      "h0": "Impugnacion distribuida aleatoriamente con p=tasa_global (6.1585%)",
+      "statistic": 58,
+      "p_value": 4.833139479423409e-14,
+      "threshold": 1e-06,
+      "method": "Conteo locales con SUM(estado_acta='I') == COUNT(*). P-value hero = p_global^n para n mesas del local 100% impugnado (binomial exacto).",
+      "interpretation": "58 locales con 100% mesas impugnadas. 5 con >=3 mesas, 1 con >=5 mesas. Top: COMPLEJO DEPORTIVO BERBÉS (Extranjero, 11 mesas todas impugnadas). Bajo H0 binomial con p=0.061585 (tasa global impugnacion), P(11/11 | aleatorio) = 4.833e-14 (equivalente ~ 1 entre 20,690,485,020,293).",
+      "top_locales": [
+        {
+          "local_votacion": "COMPLEJO DEPORTIVO BERBÉS",
+          "depto_real": "Extranjero",
+          "total": 11
+        },
+        {
+          "local_votacion": "IE APARICIO POMARES HILARIO",
+          "depto_real": "Huánuco",
+          "total": 3
+        },
+        {
+          "local_votacion": "CONSULADO DEL PERÚ EN SALTA",
+          "depto_real": "Extranjero",
+          "total": 3
+        },
+        {
+          "local_votacion": "IE NUESTRO SEÑOR DE LOCUMBA",
+          "depto_real": "Tacna",
+          "total": 3
+        },
+        {
+          "local_votacion": "IE PRIMARIA 16255",
+          "depto_real": "Amazonas",
+          "total": 3
+        },
+        {
+          "local_votacion": "IEI 056 VIRGEN DE FATIMA",
+          "depto_real": "Lima",
+          "total": 2
+        },
+        {
+          "local_votacion": "IEI 213",
+          "depto_real": "Amazonas",
+          "total": 2
+        },
+        {
+          "local_votacion": "IE 64553 TICUMPINIA",
+          "depto_real": "Cusco",
+          "total": 2
+        },
+        {
+          "local_votacion": "IEI 164 SANTA CLOTILDE",
+          "depto_real": "Loreto",
+          "total": 2
+        },
+        {
+          "local_votacion": "IE 22441 SANTA ANA",
+          "depto_real": "Ica",
+          "total": 2
+        }
+      ],
+      "n_locales_100pct_imp": 58,
+      "n_locales_3plus_mesas": 5,
+      "n_locales_5plus_mesas": 1,
+      "tasa_global_imp": 0.061585,
+      "hero_local": {
+        "local_votacion": "COMPLEJO DEPORTIVO BERBÉS",
+        "depto_real": "Extranjero",
+        "n_mesas": 11,
+        "p_value_binomial": 4.833139479423409e-14,
+        "equiv_1_entre": 20690485020293
+      },
+      "limitations": "Impugnacion es recurso procesal legitimo; cluster no implica fraude pero requiere explicacion formal de ONPE. Locales con 1-2 mesas pueden ser impugnacion total por problema puntual; el hero BERBES (11/11) escapa esa explicacion trivial.",
+      "n_mesas_universo": 92766,
+      "metodologia_cita": [
+        "Binomial exacto bajo H0 p=tasa_global. No requiere paper (probabilidad pura).",
+        "Newcombe (1998). Two-sided confidence intervals for the single proportion. Statistics in Medicine 17:857-872."
+      ],
+      "source_file": "reports/hallazgos_20260420/eg2026.duckdb"
     },
     {
-      "id": "M1",
-      "severity": "INFO",
-      "title": "Último dígito de vote counts regional conforme a uniforme"
-    },
-    {
-      "id": "M2",
-      "severity": "MEDIA",
-      "title": "Clustering espacial positivo significativo en: tasa_impugnacion, share_rla, pct_fuera"
-    },
-    {
-      "id": "M3",
-      "severity": "MEDIA",
-      "test": "IsolationForest saltos temporales",
-      "title": "ML-ANOM: 30 saltos atipicos detectados en serie temporal (contamination=0.05, n=117)",
-      "h0": "Todos los saltos provienen de la misma distribucion generativa",
-      "method": "IsolationForest (n_estimators=200) sobre features [delta_pct, delta_t_min, velocity, delta_jee] por candidato",
-      "interpretation": "Senal complementaria para revision manual. No afirma fraude, identifica cortes con perfil estadisticamente inusual.",
-      "limitations": "Contamination fija 5%; no-supervisado, no identifica causa. Requiere n>=20 cortes."
-    },
-    {
-      "id": "A0",
-      "severity": "INFO",
-      "title": "Reconciliacion interna ONPE OK: nacional == suma regiones.",
-      "description": "Reconciliacion interna entre el agregado nacional publicado por ONPE y la suma desagregada de las 26 regiones (25 departamentos + Extranjero). No prueba error en conteo de votos; demuestra inconsistencia de la capa de presentacion/agregacion. Requiere explicacion formal de ONPE."
+      "id": "HALL-0420-H12",
+      "severity": "CRÍTICO",
+      "test": "Blowout extremo mesa 018146 Cusco (JPP 90.43%)",
+      "h0": "Votos JPP en mesa 018146 son extraccion aleatoria con p=tasa_JPP_global",
+      "statistic": 90.43,
+      "p_value": 1.6000854842067144e-171,
+      "threshold": 1e-06,
+      "method": "Binomial exacto: P(X>=k_jpp | n=votos_validos, p=tasa_JPP_global_normales) + conteo unicidad mesas normales winner>=90% sobre universo estado D, validos>=100.",
+      "interpretation": "Mesa 018146 Cusco (normal, no 900k+): JPP 208 votos de 230 validos = 90.43%. 2do lugar: PARTIDO CÍVICO OBRAS 10 votos (4.35%). Es la UNICA mesa normal con winner >=90% entre 78,706 normales con >=100 validos estado D (0.0013%). Bajo H0 binomial con p=0.1091 (tasa JPP global normales), P(X>=208 | n=230) = 1.600e-171. Robusto a sensibilidad: aun con p=0.30, P(X>=208) = 2.043e-82.",
+      "mesa_emblematica": {
+        "codigo": "018146",
+        "depto": "Cusco",
+        "local": "IE SEÑOR DE CCOYLLOR RITTY",
+        "votos_validos": 230,
+        "mesa_especial": false,
+        "ganador": "JUNTOS POR EL PERÚ",
+        "ganador_votos": 208,
+        "pct_ganador": 90.43,
+        "segundo": "PARTIDO CÍVICO OBRAS",
+        "segundo_votos": 10,
+        "pct_segundo": 4.35
+      },
+      "universo_normales_validos_100plus": 78706,
+      "n_normales_winner_90plus": 1,
+      "p_jpp_global_normales": 0.109073,
+      "p_value_robusto_30pct": 2.042568360645098e-82,
+      "limitations": "No prueba causalidad ni intencionalidad. Umbral votos_validos>=100 es discrecional (tambien aparece como unica normal con 50, 80). Subset extremo de H4; mesa 018146 requiere inspeccion fisica del acta original por ONPE/JNE.",
+      "n_mesas_universo": 92766,
+      "metodologia_cita": [
+        "Binomial exacto (probabilidad pura) con prueba de sensibilidad p=0.30.",
+        "Newcombe (1998). Two-sided confidence intervals for the single proportion. Statistics in Medicine 17:857-872.",
+        "Subset extremo del framework H4; mismo z-test 2-prop aplica al agregado."
+      ],
+      "source_file": "reports/hallazgos_20260420/eg2026.duckdb"
     }
   ],
   "meta": {
-    "generated_at": "2026-04-19T05:13:59.698724+00:00",
+    "generated_at": "2026-04-20T23:27:35.853386+00:00",
+    "updated_at": "2026-04-20T23:27:35.853386+00:00",
     "source": "ONPE vía proxy CORS + captura atómica con SHA-256",
-    "repo": "https://github.com/neuracode/auditoria-eg2026"
+    "repo": "https://github.com/neuracode/auditoria-eg2026",
+    "universo_ts_utc": "20260420T074202Z",
+    "total_mesas": 92766,
+    "consolidado_0420": "reports/hallazgos_20260420/findings_consolidado_0420.json"
   }
 }
