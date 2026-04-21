@@ -7,3 +7,21 @@
 {"event": "pipeline_start", "finding_id": "H12", "ts": "20260421T220631Z", "ts_utc": "2026-04-21T22:06:31.941754+00:00"}
 {"event": "stage_start", "stage": "data-forensic", "finding_id": "H12", "ts_utc": "2026-04-21T22:06:31.941833+00:00"}
 {"event": "pipeline_blocked", "reason": "no raw_finding, ejecutar data-forensic local", "ts_utc": "2026-04-21T22:06:31.942008+00:00"}
+{"event": "pipeline_start", "finding_id": "H12", "ts": "20260421T221334Z", "ts_utc": "2026-04-21T22:13:34.559032+00:00"}
+{"event": "stage_start", "stage": "data-forensic", "finding_id": "H12", "ts_utc": "2026-04-21T22:13:34.559198+00:00"}
+{"event": "stage_done", "stage": "data-forensic", "artifact": "reports/raw_findings/raw_h12_stratified_20260421T153803Z.json", "ts_utc": "2026-04-21T22:13:34.559592+00:00"}
+{"event": "stage_start", "stage": "stats-expert", "ts_utc": "2026-04-21T22:13:34.559659+00:00"}
+{"event": "stage_done", "stage": "stats-expert", "artifact": "reports/stat_findings/stat_h12_20260421T153931Z.json", "ts_utc": "2026-04-21T22:13:34.559994+00:00"}
+{"event": "stage_start", "stage": "forensic-challenger", "ts_utc": "2026-04-21T22:13:34.560057+00:00"}
+{"event": "stage_done", "stage": "forensic-challenger", "artifact": "reports/challenges/H12_20260421T221334Z.md", "ts_utc": "2026-04-21T22:14:51.768070+00:00"}
+{"event": "stage_start", "stage": "confidence_scorer", "ts_utc": "2026-04-21T22:14:51.768155+00:00"}
+{"event": "stage_done", "stage": "confidence_scorer", "score": 0.85, "tier": "PENDING-JACK", "ts_utc": "2026-04-21T22:14:51.794957+00:00"}
+{"event": "stage_done", "stage": "hitl_router", "tier": "PENDING-JACK", "publish": true, "ts_utc": "2026-04-21T22:14:51.825016+00:00"}
+{"event": "stage_start", "stage": "narrator-technical", "ts_utc": "2026-04-21T22:14:51.825110+00:00"}
+{"event": "stage_start", "stage": "narrator-market", "ts_utc": "2026-04-21T22:16:01.024605+00:00"}
+{"event": "stage_done", "stage": "narratives", "path": "reports/narratives/H12", "ts_utc": "2026-04-21T22:16:29.824228+00:00"}
+{"event": "stage_start", "stage": "virality-engine", "ts_utc": "2026-04-21T22:16:29.824310+00:00"}
+{"event": "stage_done", "stage": "virality-engine", "ts_utc": "2026-04-21T22:17:47.852534+00:00"}
+{"event": "stage_start", "stage": "publishing-guard", "ts_utc": "2026-04-21T22:17:47.852608+00:00"}
+{"event": "stage_done", "stage": "publishing-guard", "verdict": null, "ts_utc": "2026-04-21T22:18:06.467499+00:00"}
+{"event": "pipeline_halt", "reason": "guard_vetoed", "violations": [], "ts_utc": "2026-04-21T22:18:06.467570+00:00"}
