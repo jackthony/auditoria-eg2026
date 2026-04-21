@@ -111,15 +111,15 @@
 
 ## SECUENCIA LANZAMIENTO (1/día, no batch)
 
-| Día | Canal | Finding | Agente | Estado |
-|-----|-------|---------|--------|--------|
-| **1 (HOY)** | Hilo X | H4 + H7A | storytelling-pe ✅ listo | Pieza 2 publicable |
-| **2** | TikTok 60s | H4 visual | storytelling-pe | Pieza 3 en cola |
-| **3** | Carrusel IG | H12 mesa Cusco | storytelling-pe | Pieza 4 en cola |
-| **4** | Tweet único | H9 BERBÉS | storytelling-pe | Pieza 5 en cola |
-| **5** | Hilo X corto | H1 geográfico | storytelling-pe | Pieza 6 en cola |
-| **6** | LinkedIn longform | 4 findings + papers | manual | pendiente |
-| **7** | Paper draft + HF update | todos + limitaciones | manual | pendiente |
+| Día | Canal | Finding | Agente | Estado | Primitiva web |
+|-----|-------|---------|--------|--------|---------------|
+| **1 (HOY)** | Hilo X | H4 + H7A | storytelling-pe ✅ listo | Pieza 2 publicable | Bento Grid `.blood` |
+| **2** | TikTok 60s | H4 visual | storytelling-pe | Pieza 3 en cola | Scrollama dots reveal |
+| **3** | Carrusel IG | H12 mesa Cusco | storytelling-pe | Pieza 4 en cola | Bento Grid (w3 hero) |
+| **4** | Tweet único | H9 BERBÉS | storytelling-pe | Pieza 5 en cola | Dots seeded + ASCII Hero |
+| **5** | Hilo X corto | H1 geográfico | storytelling-pe | Pieza 6 en cola | Bento Grid (mapa tile) |
+| **6** | LinkedIn longform | 4 findings + papers | manual | pendiente | Timeline 8 hitos |
+| **7** | Paper draft + HF update | todos + limitaciones | manual | pendiente | Dual-Voice toggle |
 
 ---
 

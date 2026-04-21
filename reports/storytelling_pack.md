@@ -1,4 +1,4 @@
-# Storytelling Pack — EG2026 · Hero H4 · v2-92k
+# Storytelling Pack — EG2026 · Hero H4 · v2.1-92k + primitivas web
 
 **Fecha:** 2026-04-20 · **Autor:** Jack Aguilar · Agentic AI Builder · Claude Code · Founder Neuracode · **Marca:** Neuracode
 **Universo:** 92,766 mesas (88,063 normales + 4,703 especiales 900k+)
@@ -10,6 +10,31 @@
 - `CID-FINDINGS` = `QmUopL1zep7UkJACBUVpBVKdAU6zcsPqwgbUwY97jLwPPp` (H1-H4 JSON)
 
 Prefix gateway: `https://ipfs.filebase.io/ipfs/<CID>`.
+
+---
+
+## Primitivas visuales disponibles
+
+| Primitiva | Ruta preview | YAML shape (1 línea) | Cuándo usar (≤8 palabras) |
+|-----------|--------------|----------------------|----------------------------|
+| Dual-Voice Toggle | `web/dual-voice-preview/` | `{voice_pop, voice_tech}` por scene | Bilingüe TV/redes vs técnico/Fiscalía |
+| Bento Grid | `web/bento-preview/` | `{size, tone, kicker, big_number, label, body, cta_link}` | Cadena custodia, 12 data-points |
+| Scrollama | `web/scrollama-preview/` | `{step, data-total, data-off, data-stat, data-label, data-alert}` | Reveal progresivo 800 dots |
+| Timeline | `web/timeline-preview/` | `{ts, title, body, stack_tags, state, metric_highlight}` | Cronología 8 hitos método |
+| Dots Grid seeded | `web/_assets/storytelling.js` | `data-dots-seed="42"` | 41 rojos SIEMPRE iguales (TV cita) |
+| ASCII Hero legible | `web/_assets/ascii-hero.css` | `min 11px mobile 375px` | Hero legible sin fallback mobile |
+
+---
+
+## Mapeo piezas → primitivas
+
+| Pieza | Finding | Primitiva | Por qué (1 línea) |
+|-------|---------|-----------|-------------------|
+| Hook viral 3s + Pitch TV 30s | H4 | Dots Grid seeded | 41 dots rojos siempre iguales. Guion TV cita "mira esos dots". |
+| Pieza 2 Hilo X H4 | H4 | Bento Grid `.blood` | 12 data-points del hilo en grid asimétrico, tone blood en JPP 41.65%. |
+| Pieza 3 TikTok H4 60s | H4 | Scrollama dots reveal | 5 steps = 5 escenas. Step 1 = 0 rojos → Step 5 = 41 rojos + stat vira blood. |
+| Pieza 4 Carrusel IG H12 | H12 | Bento Grid (w3 hero) | Slide 1 hero big_number 90.4% + tiles cadena custodia. |
+| Pieza 5 Tweet BERBÉS H9 | H9 | Dots seeded + ASCII Hero | 1 dot rojo destaca sobre 58 default. Periodista ve siempre el mismo. |
 
 ---
 
@@ -1588,3 +1613,174 @@ Firma: Jack Aguilar · @JackTonyAC · Founder Neuracode.
 **Papers:** Newcombe 1998 · Cohen 1988 · Efron-Tibshirani 1993 · Deckert 2011 (refutación Benford)
 **Cadena custodia:** GitHub `26b4cde` · tag `v2-mesas-900k` · IPFS `QmUopL1zep7UkJACBUVpBVKdAU6zcsPqwgbUwY97jLwPPp`
 **Métricas open-source · Código reproducible · SHA-256 · neuracode.academy**
+
+---
+
+## Pieza 7 — Landing H4 scroll-driven bilingüe (Scrollama + Dual-Voice)
+
+**Finding:** HALL-0420-H4 · **Primitivas:** Scrollama dots reveal + Dual-Voice Toggle
+**Regla oro:** jamás "fraude". Siempre "anomalía que ONPE debe explicar".
+**voice_pop:** ≤15 palabras, TV/redes/WhatsApp. **voice_tech:** con paper + stat, prensa/Fiscalía.
+
+### Scene 1 — 0 rojos (universo completo)
+
+- `voice_pop`: "92,766 mesas contadas."
+- `voice_tech`: "Universo v2-92k: 88,063 normales + 4,703 especiales 900k+."
+- `data-total=92766, data-off=0, data-stat=0, data-label="mesas", data-alert=0`
+
+### Scene 2 — 10 rojos reveal
+
+- `voice_pop`: "En 5 de cada 100 mesas algo cambia."
+- `voice_tech`: "Subpoblación 900k+ = 5.07%. H0: p(JPP) homogéneo across tipos."
+- `data-total=92766, data-off=10, data-stat=5.07, data-label="% especiales", data-alert=0`
+
+### Scene 3 — 25 rojos
+
+- `voice_pop`: "Un partido saca 4× más votos ahí."
+- `voice_tech`: "JPP 41.65% en 4,703 especiales vs 10.91% en 88,063 normales. Ratio 3.8183×."
+- `data-total=92766, data-off=25, data-stat=3.82, data-label="ratio JPP", data-alert=0`
+
+### Scene 4 — 41 rojos + stat vira `.blood`
+
+- `voice_pop`: "La probabilidad por azar: 1 entre billones."
+- `voice_tech`: "z=698 (Newcombe 1998), Cohen h=0.73, bootstrap IC95 [29.46%, 30.79%]."
+- `data-total=92766, data-off=41, data-stat=41.65, data-label="JPP 900k+", data-alert=1`
+
+### Scene 5 — CTA
+
+- `voice_pop`: "ONPE: explícalo."
+- `voice_tech`: "Datos, código MIT, CIDs IPFS: audítalo tú mismo."
+- `data-total=92766, data-off=41, data-stat=41.65, data-label="CTA", data-alert=1`
+
+### YAML shape ejecutable (agente Claude Design)
+
+```yaml
+piece: pieza_7_landing_h4
+finding: HALL-0420-H4
+primitives:
+  - scrollama
+  - dual_voice_toggle
+scenes:
+  - step: 1
+    data_total: 92766
+    data_off: 0
+    data_stat: 0
+    data_label: "mesas"
+    data_alert: 0
+    voice_pop: "92,766 mesas contadas."
+    voice_tech: "Universo v2-92k: 88,063 normales + 4,703 especiales 900k+."
+  - step: 2
+    data_total: 92766
+    data_off: 10
+    data_stat: 5.07
+    data_label: "% especiales"
+    data_alert: 0
+    voice_pop: "En 5 de cada 100 mesas algo cambia."
+    voice_tech: "Subpoblación 900k+ = 5.07%. H0: p(JPP) homogéneo across tipos."
+  - step: 3
+    data_total: 92766
+    data_off: 25
+    data_stat: 3.82
+    data_label: "ratio JPP"
+    data_alert: 0
+    voice_pop: "Un partido saca 4× más votos ahí."
+    voice_tech: "JPP 41.65% en 4,703 especiales vs 10.91% en 88,063 normales. Ratio 3.8183×."
+  - step: 4
+    data_total: 92766
+    data_off: 41
+    data_stat: 41.65
+    data_label: "JPP 900k+"
+    data_alert: 1
+    voice_pop: "La probabilidad por azar: 1 entre billones."
+    voice_tech: "z=698 (Newcombe 1998), Cohen h=0.73, bootstrap IC95 [29.46%, 30.79%]."
+  - step: 5
+    data_total: 92766
+    data_off: 41
+    data_stat: 41.65
+    data_label: "CTA"
+    data_alert: 1
+    voice_pop: "ONPE: explícalo."
+    voice_tech: "Datos, código MIT, CIDs IPFS: audítalo tú mismo."
+```
+
+---
+
+## Pieza 8 — Cronología forense EG2026 (Timeline 8 hitos)
+
+**Primitiva:** Timeline · **Shape:** `{ts, title, body, stack_tags, state, metric_highlight}`
+**Uso:** LinkedIn longform Día 6 · landing técnica · memorial fiscal anexo cronológico.
+
+| # | ts | title | body | stack_tags | state | metric_highlight |
+|---|-----|-------|------|------------|-------|-------------------|
+| 1 | 2026-04-12 | Captura 1 ONPE | Backend agregado + MANIFEST SHA-256 | Polars · DuckDB | default | 88,063 mesas |
+| 2 | 2026-04-16 | Detectado gap 4,703 mesas | Walker mesa-a-mesa no cubría rangos 900k+ | Walker async · DuckDB | alert | gap confirmado |
+| 3 | 2026-04-18 | Fix walker default ranges | DEFAULT_RANGES incluye 900k+ obligatorio | Walker async | alert | +4,703 recuperadas |
+| 4 | 2026-04-19 | H4 detectado z=698 | Diferencia JPP 900k+ vs normales brutal | Newcombe · Cohen · Bootstrap | alert | 41.65% vs 10.91% |
+| 5 | 2026-04-20 | Universo v2-92k cerrado | 88,063 + 4,703 validado, boundary probe OK | Polars · DuckDB | success | 92,766 mesas |
+| 6 | 2026-04-20 | 6 findings consolidados H1-H12 | findings_consolidado_0420.json autoritativo | Newcombe · Klimek · Binomial | success | 6 findings |
+| 7 | 2026-04-20 | Pin IPFS Filebase 3 CIDs | MANIFEST + Parquet + Findings pinned | Filebase · Pinata backup | success | cadena custodia nivel 4 |
+| 8 | 2026-04-20 | Publicación pública | HuggingFace + GitHub + IPFS live | HF · GitHub · IPFS | default | HF + GitHub + IPFS |
+
+### YAML shape ejecutable (agente Claude Design)
+
+```yaml
+piece: pieza_8_timeline_forense
+primitive: timeline
+hitos:
+  - ts: 2026-04-12
+    title: "Captura 1 ONPE"
+    body: "Backend agregado + MANIFEST SHA-256."
+    stack_tags: [Polars, DuckDB]
+    state: default
+    metric_highlight: "88,063 mesas"
+  - ts: 2026-04-16
+    title: "Detectado gap 4,703 mesas"
+    body: "Walker mesa-a-mesa no cubría rangos 900k+."
+    stack_tags: [Walker async, DuckDB]
+    state: alert
+    metric_highlight: "gap confirmado"
+  - ts: 2026-04-18
+    title: "Fix walker default ranges"
+    body: "DEFAULT_RANGES incluye 900k+ obligatorio."
+    stack_tags: [Walker async]
+    state: alert
+    metric_highlight: "+4,703 recuperadas"
+  - ts: 2026-04-19
+    title: "H4 detectado z=698"
+    body: "Diferencia JPP 900k+ vs normales brutal."
+    stack_tags: [Newcombe, Cohen, Bootstrap]
+    state: alert
+    metric_highlight: "41.65% vs 10.91%"
+  - ts: 2026-04-20
+    title: "Universo v2-92k cerrado"
+    body: "88,063 + 4,703 validado, boundary probe OK."
+    stack_tags: [Polars, DuckDB]
+    state: success
+    metric_highlight: "92,766 mesas"
+  - ts: 2026-04-20
+    title: "6 findings consolidados H1-H12"
+    body: "findings_consolidado_0420.json autoritativo."
+    stack_tags: [Newcombe, Klimek, Binomial]
+    state: success
+    metric_highlight: "6 findings"
+  - ts: 2026-04-20
+    title: "Pin IPFS Filebase 3 CIDs"
+    body: "MANIFEST + Parquet + Findings pinned."
+    stack_tags: [Filebase, Pinata backup]
+    state: success
+    metric_highlight: "cadena custodia nivel 4"
+  - ts: 2026-04-20
+    title: "Publicación pública"
+    body: "HuggingFace + GitHub + IPFS live."
+    stack_tags: [HF, GitHub, IPFS]
+    state: default
+    metric_highlight: "HF + GitHub + IPFS"
+```
+
+---
+
+**Firma pack v2.1:** Jack Aguilar · @JackTonyAC · Agentic AI Builder · Claude Code · Founder Neuracode / Anthropic Academy · En camino a Claude Certified Architect
+**Versión:** v2.1-92k + primitivas web · **Fecha:** 2026-04-20
+**Universo:** 92,766 mesas · **Findings vivos:** H1, H4, H9, H12 (+ H7A anti-ataque)
+**Cadena custodia:** GitHub + HuggingFace + IPFS Filebase (3 CIDs) + Pinata backup
+**Licencia:** MIT · **Datos:** ONPE públicos CC-BY-4.0
