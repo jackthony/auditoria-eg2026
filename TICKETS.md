@@ -57,6 +57,7 @@ Marcar `[x]` al completar. `/ecc:plan <ID>` para iniciar.
 
 ## ✅ Completados
 
+- [x] **UX-AUDIT-1b/3/7/12** · ✓ 2026-04-20. Webinar separator + disclaimer (`web/index.html:510-511`), ascii-hero clamp 11px min (`web/_assets/ascii-hero.css:38`), podios sin inline `grid-template-columns` (`web/storytelling-preview/index.html`), dots grid mulberry32 seed 42 determinista (`web/_assets/storytelling.js:20,84`). Verificado no-op en commits previos.
 - [x] **DATA-MARKET** · ✓ 2026-04-20. Dataset 3.6M filas en https://huggingface.co/datasets/Neuracode/onpe-eg2026-mesa-a-mesa · parquet 10.6MB · CC-BY-4.0.
 - [x] **HALL-0420** · ✓ 2026-04-20. H1 sesgo geográfico, H2 partidos vs imp, H3 outliers nb. DB `eg2026.duckdb` + `findings_consolidado_0420.json`. Mapping prefix→depto ONPE corregido (alfabético + Callao=24).
 - [x] **MESA-02** · Reconcile contable cross-endpoint (7 checks, 0 findings). ✓ 2026-04-18 · captura 20260419T025134Z.
