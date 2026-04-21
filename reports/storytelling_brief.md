@@ -120,7 +120,7 @@ Ver `.claude/agents/storytelling-pe.md` §"Estructura de entrega":
 ## 8. Branding
 
 - **Marca:** Neuracode Academy
-- **Autor técnico:** Jack Aguilar (Tony) — Perito técnico IA, CEO Neuracode
+- **Autor técnico:** Jack Aguilar (Tony) — Agentic AI Builder · Founder Neuracode
 - **Redes Jack:** [@JackTonyAC](https://x.com/JackTonyAC) · [LinkedIn](https://www.linkedin.com/in/jackaguilarc/) · TikTok `@jack.de.neura.code`
 - **Colores:** `#0a0e1a` (bg), `#ffb800` (amber), `#ef4444` (critical), `#10b981` (verified)
 - **Fonts:** JetBrains Mono (data/hash), Inter (body)
