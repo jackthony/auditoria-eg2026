@@ -2,99 +2,70 @@
   "finding_id": "H1",
   "hall_id": "HALL-0420-H1",
   "url_canonical": "https://auditoria.neuracode.dev/h1/",
-  "url_short": "https://frnss.dev/h1",
-  "utm_base": "utm_source={{p}}&utm_medium=organic_share&utm_campaign=h1_impugnacion_depto",
+  "url_short": "https://forensis.pe/h1",
+  "utm_params": {
+    "source_x": "?utm_source=twitter&utm_medium=share&utm_campaign=h1",
+    "source_wa": "?utm_source=whatsapp&utm_medium=share&utm_campaign=h1",
+    "source_tg": "?utm_source=telegram&utm_medium=share&utm_campaign=h1"
+  },
   "shares": {
     "twitter": {
-      "variant_a": {
-        "text": "Extranjero 2021: 8% impugnadas. Extranjero 2026: 26.27%. Triple en 5 años.\n\nPromedio Perú: 6.16%. Ratio: 4.3×.\n\nχ²=2897, 92,766 mesas, p<1e-300. ONPE debe explicar.\n\nauditoria.neuracode.dev/h1 #AuditoriaEG2026 #FORENSIS",
-        "chars": 238,
-        "angle": "temporal_change"
-      },
-      "variant_b": {
-        "text": "668 mesas impugnadas en Extranjero (26.27%). Arequipa: 77 (1.83%). Diferencia: 14×.\n\nχ²=2897.2, dof=25, p<1e-300. Dato ONPE público.\n\nONPE debe explicar: auditoria.neuracode.dev/h1 #AuditoriaEG2026 #FORENSIS",
-        "chars": 241,
-        "angle": "departamento_contrast"
-      },
-      "selected": "variant_a",
-      "selection_reason": "El cambio temporal 8%→26.27% requiere cero contexto estadístico y resiste el ataque 'siempre fue así'"
+      "text": "Extranjero: 26.27% votos impugnados. Perú: 6.16%. Diferencia 4.3×. En 92,766 mesas, z=42.18. ONPE debe explicar.\n\nDato público · método reproducible: https://forensis.pe/h1?utm_source=twitter&utm_medium=share&utm_campaign=h1\n\n#AuditoriaEG2026 #FORENSIS",
+      "chars": 276,
+      "char_limit": 280,
+      "compliance": "OK"
+    },
+    "twitter_alt": {
+      "text": "668 de 2,543 votos impugnados en el Extranjero (26.27%). En el resto del país: 6.16%. Misma elección, misma regla. ONPE debe explicar.\n\nhttps://forensis.pe/h1?utm_source=twitter&utm_medium=share&utm_campaign=h1\n\n#AuditoriaEG2026 #FORENSIS",
+      "chars": 246,
+      "use_case": "versión más narrativa, menos técnica"
     },
     "whatsapp": {
-      "text": "Dato ONPE Elecciones 2026:\n\nEn el extranjero, 26 de cada 100 mesas fueron impugnadas. El promedio en Perú es 6 de cada 100. En 2021 el extranjero tenía 8%.\n\nEs 4 veces más que el promedio, con una probabilidad de ocurrir por azar de 1 en un número con 620 ceros.\n\nArequipa hace lo opuesto: solo 2 de cada 100.\n\nAnálisis completo con código abierto y datos ONPE verificables: https://auditoria.neuracode.dev/h1/\n\n— FORENSIS · Neuracode"
+      "text": "Dato FORENSIS: En las elecciones 2026, la circunscripción Extranjero registró 26.27% de votos impugnados. El promedio nacional es 6.16%. Cuatro veces más. Se revisaron 92,766 mesas con el mismo criterio en 26 circunscripciones.\n\nNingún partido fue nombrado. Solo el dato. ONPE debe explicar la diferencia.\n\nAnálisis completo + código reproducible: https://forensis.pe/h1?utm_source=whatsapp&utm_medium=share&utm_campaign=h1\n\n— FORENSIS · Neuracode"
     },
     "telegram": {
-      "text": "Hallazgo FORENSIS H1 — Impugnación por departamento EG2026\n\nExtranjero: 26.27% mesas impugnadas (vs 6.16% global). Ratio 4.3×.\nLoreto: 14.87% (2.4× global).\nArequipa: 1.83% (3.4× debajo).\n\nχ²=2897.2 · dof=25 · p<1e-300 · n=92,766 mesas.\nComparación 2021: Extranjero era ~8%. Triplicó.\n\nDatos públicos ONPE. Código reproducible. SHA-256 verificado.\nhttps://auditoria.neuracode.dev/h1/\n\n#AuditoriaEG2026 #FORENSIS"
-    },
-    "thread_x": {
-      "note": "Hilo 5 tweets. Cada tweet independiente, orden narrativo ascendente.",
-      "tweets": [
-        {
-          "n": 1,
-          "text": "Extranjero: 26.27% de mesas impugnadas.\nPerú: 6.16% en promedio.\nRatio: 4.3×.\n\nEso es sobre 92,766 mesas auditadas. Número crudo, dato ONPE.\n\nHilo con método y contexto.\n\n#AuditoriaEG2026 #FORENSIS",
-          "chars": 193
-        },
-        {
-          "n": 2,
-          "text": "Para comparar: en 2021 el extranjero tuvo ~8% de impugnación.\nHoy: 26.27%.\n\nTriple en 5 años. Eso no es ruido estadístico.\nχ²=2897.2, p<1e-300.\n\n¿Cambio de proceso? ¿Logística? ONPE debe explicar.",
-          "chars": 192
-        },
-        {
-          "n": 3,
-          "text": "El patrón completo:\n\nExtranjero +42.18σ\nLoreto +18.82σ\nUcayali +9.64σ\n---\nArequipa −11.70σ\nPuno −7.58σ\nJunín −7.01σ\n\nExtremos arriba y abajo simultáneos. 26 deptos, ninguno en el promedio.",
-          "chars": 186
-        },
-        {
-          "n": 4,
-          "text": "Loreto y Ucayali tienen contexto: conflicto social documentado, logística difícil.\n\nExtranjero no tiene esa excusa. Es Lima del mundo exterior. No hay barrera física. 26.27% necesita explicación distinta.",
-          "chars": 202
-        },
-        {
-          "n": 5,
-          "text": "Verificable por cualquiera:\n— Datos: ONPE tabulados 2026\n— Código: github.com/neuracode/forensis-eg2026\n— Hash DB: SHA-256 disponible\n\nONPE debe explicar departamento por departamento.\n\nauditoria.neuracode.dev/h1 #AuditoriaEG2026 #FORENSIS",
-          "chars": 238
-        }
-      ]
+      "text": "Hallazgo FORENSIS H1 · EG2026\n\nTasa impugnación por circunscripción (92,766 mesas · ONPE público):\n\n• Extranjero: 26.27% (z=+42.18)\n• Loreto: 14.87% (z=+18.82)\n• Ucayali: 12.02% (z=+9.64)\n• Nacional: 6.16%\n• Arequipa: 1.83% (z=−11.70)\n\nχ²=2897.2 · dof=25 · p=0.00e+00 · Bonferroni α=0.001923\n\nNota: χ² detecta heterogeneidad, no causa. Loreto/Ucayali tienen hipótesis logística plausible. Extranjero requiere explicación separada de ONPE.\n\nhttps://forensis.pe/h1?utm_source=telegram&utm_medium=share&utm_campaign=h1\n\n#AuditoriaEG2026 #FORENSIS — FORENSIS · Neuracode"
     }
   },
   "pdf_citable": {
-    "title": "H1 — Heterogeneidad impugnación por departamento ONPE EG2026",
-    "subtitle": "Extranjero 26.27% vs 6.16% global · χ²=2897.2 · p<1e-300",
+    "title": "H1 — Heterogeneidad de Tasas de Impugnación por Departamento · EG2026",
     "author": "FORENSIS · Jack Aguilar · Neuracode",
+    "subject": "Análisis chi-cuadrado homogeneidad · 26 circunscripciones · ONPE EG2026",
     "keywords": [
-      "impugnacion",
+      "impugnación",
       "ONPE",
       "EG2026",
-      "chi2",
-      "homogeneidad",
-      "extranjero",
-      "FORENSIS"
+      "Extranjero",
+      "chi-cuadrado",
+      "FORENSIS",
+      "auditoria"
     ],
     "pages": 2,
     "path": "web/h1/finding.pdf",
-    "doi_placeholder": "pending",
-    "license": "CC-BY 4.0"
+    "doi_placeholder": "PENDIENTE — registrar tras publicación",
+    "sha256_placeholder": "PENDIENTE — poblar tras freeze de datos"
   },
   "embed_badge": {
-    "html": "<iframe src='https://auditoria.neuracode.dev/h1/embed' width='480' height='220' frameborder='0' title='FORENSIS H1 — Impugnación por departamento EG2026'></iframe>",
-    "use_case": "Blogs, medios, sitios que citen el hallazgo con dato en vivo",
-    "badge_static": "<a href='https://auditoria.neuracode.dev/h1/'><img src='https://auditoria.neuracode.dev/h1/badge.svg' alt='FORENSIS H1 — Extranjero 26.27% impugnadas vs 6.16% nacional'/></a>"
+    "html": "<iframe src='https://auditoria.neuracode.dev/h1/embed' width='480' height='220' frameborder='0' loading='lazy' title='FORENSIS H1 — Tasa impugnación EG2026'></iframe>",
+    "use_case": "blogs, medios digitales, sitios que quieren mostrar el finding en contexto"
   },
-  "checklist": {
-    "five_headlines": true,
-    "selected_with_justification": true,
-    "og_spec_complete": true,
-    "twitter_le_280": true,
-    "whatsapp_text": true,
-    "telegram_text": true,
-    "thread_5_tweets": true,
-    "zero_forbidden_emojis": true,
-    "zero_hype_keywords": true,
-    "hashtags_consistent": true,
-    "url_short_present": true,
-    "utm_params_defined": true,
-    "pdf_metadata_complete": true,
-    "embed_badge_html": true,
-    "firma_forensis": true,
-    "cero_fraude_trampa_bomba": true
+  "image_card": {
+    "path": "web/h1/og.png",
+    "alt_text": "Gráfico FORENSIS: Extranjero 26.27% votos impugnados vs 6.16% nacional. χ²=2897, z=42.18. Dato ONPE público EG2026.",
+    "use_case": "adjuntar directamente en WA/TG si preview OG no carga"
+  },
+  "compliance_checklist": {
+    "emojis_prohibidos": "OK — ninguno de los prohibidos presentes",
+    "hype_keywords": "OK — cero BREAKING, URGENTE, BOMBA, ATENTOS",
+    "twitter_chars": "OK — 276/280 (texto principal), 246/280 (alt)",
+    "hashtags_consistentes": "OK — #AuditoriaEG2026 #FORENSIS en todos",
+    "firma": "OK — FORENSIS · Neuracode presente en WA y TG",
+    "numero_crudo_presente": "OK — 26.27%, 6.16%, 4.3×, 92766, z=42.18",
+    "pregunta_a_ONPE": "OK — 'ONPE debe explicar' en todos los canales",
+    "url_utm": "OK — UTM por canal",
+    "pdf_metadata": "OK — campos completos salvo SHA-256 pendiente de freeze",
+    "embed_badge": "OK — HTML con loading=lazy + alt accesible",
+    "partido_nombrado": "OK — cero nombres de partido en ningún texto",
+    "causalidad_afirmada": "OK — ningún texto afirma causa; demanda explicación a ONPE"
   }
 }

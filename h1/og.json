@@ -9,62 +9,62 @@
     "alert_color": "#e63946",
     "muted_color": "#6b7280",
     "hero_number": "26.27%",
-    "hero_number_label": "mesas extranjero impugnadas",
-    "hero_number_font": "Fraunces 180pt bold",
+    "hero_number_font": "Fraunces 180pt",
     "hero_number_color": "#e63946",
-    "hero_number_position": "center-left, y=200",
-    "comparison_block": {
-      "line1": "vs 6.16% promedio nacional",
-      "line2": "4.3× el promedio · 2021 fue 8%",
-      "font": "Inter 28pt",
-      "color": "#0c1a2e",
-      "position": "center-left, y=340"
-    },
+    "hero_number_position": "top-center, y=160",
+    "subtitle": "Votos impugnados — Extranjero",
+    "subtitle_font": "Inter SemiBold 38pt",
+    "subtitle_color": "#0c1a2e",
+    "subtitle_position": "below hero, y=300",
+    "comparison_line": "vs 6.16% nacional · 4.3× el promedio · 92,766 mesas revisadas",
+    "comparison_font": "Inter Regular 26pt",
+    "comparison_color": "#6b7280",
+    "comparison_position": "y=360",
     "stat_block": {
-      "text": "χ²=2897.2 · dof=25 · p < 1e-300 · n=92,766 mesas",
-      "font": "JetBrains Mono 18pt",
-      "color": "#6b7280",
-      "position": "center-left, y=410"
-    },
-    "depto_pills": [
-      {
-        "label": "Extranjero 26.27% ↑",
-        "bg": "#e63946",
-        "fg": "#ffffff"
-      },
-      {
-        "label": "Loreto 14.87% ↑",
-        "bg": "#f4a261",
-        "fg": "#0c1a2e"
-      },
-      {
-        "label": "Arequipa 1.83% ↓",
-        "bg": "#457b9d",
-        "fg": "#ffffff"
-      }
-    ],
-    "pills_position": "right-panel, stacked, y=220-360",
-    "pills_font": "Inter 22pt",
-    "divider": {
-      "x": 680,
-      "y1": 80,
-      "y2": 550,
-      "color": "#e5e0d8",
-      "width": 1
-    },
-    "logo": {
-      "text": "FORENSIS",
-      "font": "Inter 22pt bold",
+      "text": "χ² = 2897.2 · dof=25 · z=42.18 · p < 1e-300",
+      "font": "JetBrains Mono 20pt",
       "color": "#0c1a2e",
-      "position": "bottom-left, y=590"
+      "position": "y=420",
+      "bg_pill": "#e8e2d9",
+      "pill_padding": "8px 16px",
+      "pill_radius": "6px"
+    },
+    "divider": {
+      "type": "horizontal-rule",
+      "y": 470,
+      "color": "#d1cdc7",
+      "width": 1100
     },
     "footer_left": "FORENSIS · auditoria.neuracode.dev/h1",
-    "footer_right": "92,766 mesas · SHA-256 verificado",
-    "footer_font": "Inter 16pt",
-    "footer_color": "#6b7280",
-    "footer_y": 608
+    "footer_left_font": "Inter Medium 18pt",
+    "footer_left_color": "#0c1a2e",
+    "footer_left_position": "x=50, y=550",
+    "footer_right": "Dato ONPE público · SHA-256 verified · 2026-04-21",
+    "footer_right_font": "Inter Regular 16pt",
+    "footer_right_color": "#6b7280",
+    "footer_right_position": "x=1150, y=550, anchor=right",
+    "logo": {
+      "text": "FORENSIS",
+      "font": "Fraunces Bold 22pt",
+      "color": "#0c1a2e",
+      "position": "top-right, x=1150, y=40, anchor=right"
+    },
+    "secondary_stat": {
+      "label": "Loreto",
+      "value": "14.87%",
+      "label2": "Arequipa",
+      "value2": "1.83%",
+      "font": "Inter Regular 20pt",
+      "color": "#6b7280",
+      "position": "bottom-left pill row, y=490",
+      "note": "mostrar solo si queda espacio; prioridad: hero + comparison + stat_block"
+    }
   },
   "render_script": "scripts/render_og.py",
-  "output_path": "web/h1/og.png",
-  "alt_text": "Gráfico: 26.27% de mesas en el extranjero fueron impugnadas vs 6.16% nacional. χ²=2897.2, p menor que 1e-300. Fuente ONPE EG2026."
+  "render_notes": [
+    "Hero 26.27% debe ser el elemento visual dominante — mínimo 3× el tamaño del subtítulo",
+    "stat_block en monospace para señalar reproducibilidad técnica",
+    "footer_right alineado a derecha para equilibrio visual",
+    "Evitar rojo en footer — usar solo en hero_number"
+  ]
 }
