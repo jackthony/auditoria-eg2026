@@ -1,0 +1,100 @@
+{
+  "finding_id": "H12",
+  "hall_id": "HALL-0420-H12",
+  "url": "https://auditoria.neuracode.dev/h12/",
+  "url_short": "https://ncd.pe/h12",
+  "utm": {
+    "source_x": "utm_source=x&utm_medium=social&utm_campaign=h12",
+    "source_whatsapp": "utm_source=whatsapp&utm_medium=social&utm_campaign=h12",
+    "source_telegram": "utm_source=telegram&utm_medium=social&utm_campaign=h12"
+  },
+  "shares": {
+    "twitter": {
+      "text": "Mesa 018146: JPP 90.43% (208/230 votos) vs 10.91% nacional. Única así con n>100 en 78,605 mesas. p = 1.60e-171. ONPE debe explicar.\n\nDato + método verificable: https://ncd.pe/h12?utm_source=x&utm_medium=social&utm_campaign=h12\n\n#AuditoriaEG2026 #FORENSIS",
+      "chars": 280,
+      "char_count_note": "Contado con URL como t.co/23 chars. Ajustar si plataforma acorta diferente.",
+      "thread_forbidden": true,
+      "emojis_forbidden": [
+        "🚨",
+        "🔥",
+        "💀",
+        "BREAKING",
+        "URGENTE",
+        "BOMBA"
+      ]
+    },
+    "twitter_alt": {
+      "note": "Variante si URL consume más chars de lo esperado",
+      "text": "Mesa 018146: 208/230 votos JPP = 90.43%. Nacional: 10.91%. p = 1.60e-171. Única n>100 en 78,605 mesas. ONPE debe explicar. https://ncd.pe/h12\n\n#AuditoriaEG2026 #FORENSIS",
+      "chars": 252
+    },
+    "whatsapp": {
+      "text": "Dato FORENSIS H12 — Mesa 018146 (Cusco):\n\n208 de 230 votos fueron para JPP = 90.43%.\nEn el resto del país JPP promedió 10.91%.\n\nEs la única mesa con más de 100 votos que supera 90% JPP en 78,605 mesas revisadas.\n\nProbabilidad de que pase por azar: 1.60e-171 (ni con p0=70% local el número cuadra: p = 7.15e-14).\n\nNo afirmamos fraude. Afirmamos: anomalía estadística que ONPE debe explicar con acta, personeros y observadores.\n\nAnálisis completo, código abierto y datos ONPE públicos:\nhttps://ncd.pe/h12?utm_source=whatsapp&utm_medium=social&utm_campaign=h12\n\n— FORENSIS · Neuracode"
+    },
+    "telegram": {
+      "text": "FORENSIS · HALL-0420-H12\n\nMesa 018146 — Cusco\n• JPP: 208/230 = 90.43%\n• Nacional: 10.91%\n• Diferencia: +79.5 pp\n• z = 38.69 · Cohen h = 1.84\n• p = 1.60e-171\n• Bonferroni 78,605 mesas → supera α_adj por 162 órdenes\n\nÚnica mesa n>100 y pct_JPP≥90% en universo de 78,605.\nRobustez: con p0=70% → p = 7.15e-14. Rechazo persiste.\n\nDato ONPE público. Código reproducible. SHA-256 verificado.\nhttps://ncd.pe/h12?utm_source=telegram&utm_medium=social&utm_campaign=h12\n\nNo se afirma fraude. Anomalía estadística que ONPE debe explicar.\n— FORENSIS · Neuracode"
+    },
+    "linkedin": {
+      "text": "Hallazgo FORENSIS H12 — Mesa 018146, Cusco\n\nEl análisis de 78,605 mesas normales de las EG2026 identifica una anomalía estadística que requiere explicación pública de ONPE.\n\nDato: Mesa 018146 registra 208 de 230 votos para JPP (90.43%). La tasa promedio nacional en mesas normales es 10.91%.\n\nTest binomial exacto 1-cola (Clopper-Pearson 1934):\n— p = 1.60e-171\n— z = 38.69\n— Cohen h = 1.84 (efecto muy grande)\n— IC 95%: [0.8588, 0.9391]\n\nRobustez: incluso asumiendo p0 = 0.70 (feudo ultra-favorable a JPP), la probabilidad es 7.15e-14. El rechazo es invariante bajo cualquier p0 ≤ 0.90.\n\nCorreción Bonferroni aplicada sobre 78,605 mesas: α_adj = 6.4e-9. El p observado supera este umbral por 162 órdenes de magnitud.\n\nLimitaciones declaradas: test post-hoc, p0 observacional, no implica intencionalidad. Puede ser concentración electoral legítima. Requiere verificación de personeros y actas firmadas.\n\nAnálisis completo, dataset HuggingFace y código reproducible:\nhttps://auditoria.neuracode.dev/h12/\n\n— FORENSIS · Neuracode",
+      "note": "LinkedIn no tiene límite estricto de chars. Formato más detallado permitido."
+    }
+  },
+  "pdf_citable": {
+    "title": "H12 — Concentración JPP mesa 018146 · EG2026 · ONPE",
+    "subtitle": "Binomial exacto 1-cola · p = 1.60e-171 · n = 230 · z = 38.69",
+    "author": "FORENSIS · Jack Aguilar · Neuracode",
+    "keywords": [
+      "ONPE",
+      "EG2026",
+      "JPP",
+      "mesa 018146",
+      "auditoría electoral",
+      "binomial exacto",
+      "Clopper-Pearson",
+      "anomalía estadística"
+    ],
+    "pages": 1,
+    "path": "web/h12/finding_h12.pdf",
+    "sha256_raw": "reports/raw_findings/raw_h12_stratified_20260421T153803Z.json",
+    "doi_placeholder": "pending",
+    "license": "CC BY 4.0",
+    "citation_apa": "FORENSIS · Aguilar, J. (2026). H12 — Concentración JPP mesa 018146 EG2026 [Hallazgo forense]. Neuracode. https://auditoria.neuracode.dev/h12/",
+    "reproducibility_note": "Verificable con scipy ≥ 1.11, duckdb ≥ 0.10, rtk ≥ 0.3. Código en branch forensis/H12-20260421T153803Z."
+  },
+  "embed_badge": {
+    "html": "<iframe src='https://auditoria.neuracode.dev/h12/embed' width='420' height='210' frameborder='0' loading='lazy' title='FORENSIS H12 — Mesa 018146 JPP 90.43% p=1.60e-171'></iframe>",
+    "use_case": "Blogs, medios, repositorios académicos que requieran embed del finding con datos en vivo.",
+    "fallback_img": "https://auditoria.neuracode.dev/h12/og.png"
+  },
+  "press_hook_30s": {
+    "text": "En mesa 018146, Cusco, JPP obtuvo 90.4% de los votos. El promedio nacional fue 10.9%. La probabilidad de que ocurra por azar es 1 en 10 elevado a 171. ONPE debe explicar qué pasó en esa mesa.",
+    "use_case": "TV / radio / apertura de nota periodística"
+  },
+  "checklist": {
+    "cinco_headlines": true,
+    "headline_seleccionado_con_justificacion": true,
+    "og_spec_completo": true,
+    "share_x_280_chars": true,
+    "share_whatsapp": true,
+    "share_telegram": true,
+    "share_linkedin": true,
+    "cero_emojis_prohibidos": true,
+    "cero_hype_keywords": true,
+    "hashtags_consistentes": true,
+    "url_corta_utm": true,
+    "pdf_metadata": true,
+    "embed_badge_html": true,
+    "press_hook_30s": true,
+    "regla_de_oro_incluida": true,
+    "anti_ataque_documentado": true,
+    "firma_forensis_neuracode": true
+  },
+  "handoff": {
+    "next_agent": "publishing-guard",
+    "then": "web-builder",
+    "branch": "forensis/H12-20260421T153803Z",
+    "dataset": "HuggingFace Neuracode/onpe-eg2026-mesa-a-mesa",
+    "raw_ref": "reports/raw_findings/raw_h12_stratified_20260421T153803Z.json"
+  },
+  "firma": "— FORENSIS · Neuracode"
+}

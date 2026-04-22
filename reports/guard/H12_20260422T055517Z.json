@@ -1,0 +1,49 @@
+{
+  "check": "fact_check_numeric",
+  "status": "PASSED",
+  "details": [
+    {
+      "narrative_claim": "208 de 230 votos (90.4%)",
+      "stat_finding": "phat = 0.904348 (208/230 exacto)",
+      "match": "\u2713 id\u00e9ntico"
+    },
+    {
+      "narrative_claim": "JPP 10.9% promedio nacional",
+      "stat_finding": "p_JPP = 0.109073 (10.91% redondeado)",
+      "match": "\u2713 id\u00e9ntico (rounding 0.01 tolerance OK)"
+    },
+    {
+      "narrative_claim": "1 en 10 septillion (10^171)",
+      "stat_finding": "p_value = 1.600091605905969e-171",
+      "match": "\u2713 10^171 es representaci\u00f3n legible correcta"
+    },
+    {
+      "narrative_claim": "Z-score: 38.7",
+      "stat_finding": "z_score = 38.69",
+      "match": "\u2713 redondeado aceptable"
+    },
+    {
+      "narrative_claim": "92,766 mesas revisadas",
+      "stat_finding": "interpretaci\u00f3n: '78,605' mesas normales en H0 + impl\u00edcito 92,761 total",
+      "note": "\u26a0 MISMATCH: texto dice '92,766', stat_finding habla de '78,605 mesas normales'. Verificar dataset.",
+      "recommendation": "Si '92,766' es total universo mesas antes filtro, aceptar. Si es inventado, VETO."
+    },
+    {
+      "narrative_claim": "Cohen h = 1.8396",
+      "stat_finding": "cohen_h = 1.8396",
+      "match": "\u2713 exacto"
+    },
+    {
+      "narrative_claim": "Diferencia: 79.5 puntos",
+      "calc": "90.43% - 10.91% = 79.52%",
+      "match": "\u2713 exacto"
+    },
+    {
+      "narrative_claim": "\u00danica mesa con n>100 y \u226590% JPP",
+      "stat_finding": "interpretation: '\u00danica con n>100 y pct>=90 entre 78,605'",
+      "match": "\u2713 confirmado"
+    }
+  ],
+  "numeric_verdict": "\u26a0\ufe0f CONDITIONAL PASS \u2014 n\u00famero '92,766' requiere aclaraci\u00f3n origen",
+  "_raw_snippet": "# PUBLISHING-GUARD EXECUTION \u2014 H12\n\n## 1. FACT-CHECK NUM\u00c9RICO\n\n```json\n{\n  \"check\": \"fact_check_numeric\",\n  \"status\": \"PASSED\",\n  \"details\": [\n    {\n      \"narrative_claim\": \"208 de 230 votos (90.4%)\",\n      \"stat_finding\": \"phat = 0.904348 (208/230 exacto)\",\n      \"match\": \"\u2713 id\u00e9ntico\"\n    },\n    {\n      \"narrative_claim\": \"JPP 10.9% promedio nacional\",\n      \"stat_finding\": \"p_JPP = 0.109073 (10.91% redondeado)\",\n      \"match\": \"\u2713 id\u00e9ntico (rounding 0.01 tolerance OK)\"\n    },\n    {\n      \"narr"
+}

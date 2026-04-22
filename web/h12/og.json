@@ -1,0 +1,121 @@
+{
+  "finding_id": "H12",
+  "hall_id": "HALL-0420-H12",
+  "dimensions": "1200x630",
+  "format": "svg",
+  "layout": {
+    "bg_color": "#faf7f2",
+    "accent_color": "#0c1a2e",
+    "alert_color": "#e63946",
+    "mono_color": "#1d3557",
+    "hero_number": "90.43%",
+    "hero_number_font": "Fraunces 188pt bold",
+    "hero_number_color": "#e63946",
+    "hero_number_position": {
+      "x": "50%",
+      "y": "44%",
+      "anchor": "center"
+    },
+    "subtitle": "JPP · Mesa 018146 · Cusco",
+    "subtitle_font": "Inter 38pt semibold",
+    "subtitle_color": "#0c1a2e",
+    "subtitle_position": {
+      "x": "50%",
+      "y": "57%",
+      "anchor": "center"
+    },
+    "comparison": "vs 10.91% nacional · 208 de 230 votos · z = 38.69",
+    "comparison_font": "Inter 24pt regular",
+    "comparison_color": "#1d3557",
+    "comparison_position": {
+      "x": "50%",
+      "y": "65%",
+      "anchor": "center"
+    },
+    "probability": "p = 1.60e-171",
+    "probability_font": "JetBrains Mono 22pt",
+    "probability_color": "#e63946",
+    "probability_position": {
+      "x": "50%",
+      "y": "73%",
+      "anchor": "center"
+    },
+    "bonferroni_note": "Bonferroni 78,605 mesas → supera α_adj por 162 órdenes",
+    "bonferroni_font": "JetBrains Mono 14pt",
+    "bonferroni_color": "#457b9d",
+    "bonferroni_position": {
+      "x": "50%",
+      "y": "79%",
+      "anchor": "center"
+    },
+    "divider_top": {
+      "type": "rect",
+      "x": 0,
+      "y": 0,
+      "width": 1200,
+      "height": 8,
+      "fill": "#e63946"
+    },
+    "footer_bar": {
+      "type": "rect",
+      "x": 0,
+      "y": 590,
+      "width": 1200,
+      "height": 40,
+      "fill": "#0c1a2e"
+    },
+    "footer_left": "FORENSIS · auditoria.neuracode.dev/h12",
+    "footer_left_font": "Inter 15pt",
+    "footer_left_color": "#faf7f2",
+    "footer_left_position": {
+      "x": 32,
+      "y": 615
+    },
+    "footer_center": "HALL-0420-H12 · SHA-256 verified",
+    "footer_center_font": "JetBrains Mono 13pt",
+    "footer_center_color": "#a8dadc",
+    "footer_center_position": {
+      "x": "50%",
+      "y": 615,
+      "anchor": "center"
+    },
+    "footer_right": "78,605 mesas normales auditadas",
+    "footer_right_font": "Inter 15pt",
+    "footer_right_color": "#faf7f2",
+    "footer_right_position": {
+      "x": 1168,
+      "y": 615,
+      "anchor": "end"
+    },
+    "logo": {
+      "text": "FORENSIS",
+      "font": "Fraunces 18pt bold",
+      "color": "#faf7f2",
+      "position": {
+        "x": 32,
+        "y": 34
+      }
+    },
+    "regla_de_oro_badge": {
+      "text": "No se afirma fraude · Anomalía estadística que ONPE debe explicar",
+      "font": "Inter 13pt italic",
+      "color": "#457b9d",
+      "position": {
+        "x": "50%",
+        "y": "87%",
+        "anchor": "center"
+      }
+    }
+  },
+  "alt_text": "Tarjeta FORENSIS H12: 90.43% JPP en mesa 018146 versus 10.91% nacional. 208 de 230 votos. p = 1.60e-171. ONPE debe explicar.",
+  "render_script": "scripts/render_og.py",
+  "render_args": {
+    "finding": "H12",
+    "output": "web/h12/og.png",
+    "formats": [
+      "png",
+      "webp"
+    ],
+    "webp_quality": 90
+  }
+}
