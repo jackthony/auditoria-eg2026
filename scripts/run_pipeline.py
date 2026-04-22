@@ -341,11 +341,16 @@ def _render_landing(finding_id: str, vir_dir: Path, narr_dir: Path, decision: di
 
     def _md_safe(text: str) -> str:
         """Escapa para template literal JS: backticks y ${ """
+        import re
         lines = text.splitlines()
         # strip primera línea si es solo el nombre del archivo
         if lines and lines[0].strip().lower().endswith('.md'):
             lines = lines[1:]
         text = "\n".join(lines).strip()
+        # strip outer ```markdown ... ``` or ``` ... ``` fences
+        text = re.sub(r'^```(?:markdown)?\s*\n', '', text)
+        text = re.sub(r'\n```\s*$', '', text)
+        text = text.strip()
         return text.replace("\\", "\\\\").replace("`", "\\`").replace("${", "\\${")
 
     replacements = {
