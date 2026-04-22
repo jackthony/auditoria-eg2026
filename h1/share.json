@@ -1,0 +1,104 @@
+{
+  "finding_id": "H1",
+  "finding_ref": "HALL-0420-H1",
+  "url": "https://auditoria.neuracode.dev/h1/",
+  "url_utm": "https://auditoria.neuracode.dev/h1/?utm_source=share&utm_medium=social&utm_campaign=H1-impugnacion",
+  "shares": {
+    "twitter": {
+      "primary": {
+        "text": "Extranjero: 26.27% de actas impugnadas. Nacional: 6.16%. Ratio 4.3x. 668 de 2,543 mesas. χ²=2897, dof=25. ONPE debe explicar este número.\n\nDato + código + SHA-256: https://auditoria.neuracode.dev/h1/\n\n#AuditoriaEG2026 #FORENSIS",
+        "chars": 234,
+        "note": "< 280 chars con URL. Números exactos del stat. Sin predicciones."
+      },
+      "thread": [
+        {
+          "n": 1,
+          "text": "26 de cada 100 actas del extranjero fueron impugnadas en EG2026. En el resto del país: 6. El extranjero impugna 4 veces más. ONPE debe explicar.\n\nhttps://auditoria.neuracode.dev/h1/\n\n#AuditoriaEG2026 #FORENSIS",
+          "chars": 211
+        },
+        {
+          "n": 2,
+          "text": "El número exacto: 668 impugnaciones de 2,543 actas en embajadas y consulados. Promedio nacional: 6.16%. Extranjero: 26.27%. No es variación estadística normal.\n\n#AuditoriaEG2026 #FORENSIS",
+          "chars": 192
+        },
+        {
+          "n": 3,
+          "text": "En 2021, el extranjero impugnó ~8% de actas. En 2026: 26.27%. La tasa se triplicó en la misma región. Esto es post-hoc — lo declaramos. Pero el número de 2026 sigue siendo 4.3x el promedio actual.\n\n#AuditoriaEG2026 #FORENSIS",
+          "chars": 228
+        },
+        {
+          "n": 4,
+          "text": "Loreto (14.87%) y Ucayali (12.02%) también se desvían. Pero tienen conflicto social documentado. El extranjero no tiene esa explicación natural. 3 de 26 deptos no tienen causa obvia.\n\n#AuditoriaEG2026 #FORENSIS",
+          "chars": 212
+        },
+        {
+          "n": 5,
+          "text": "Dato público ONPE. 92,766 mesas auditadas. Código en GitHub. SHA-256 verificable. Cualquiera reproduce los números.\n\nNo decimos fraude. Decimos: el número no cuadra. ONPE explique.\n\nhttps://auditoria.neuracode.dev/h1/\n\n#AuditoriaEG2026 #FORENSIS",
+          "chars": 249
+        }
+      ]
+    },
+    "whatsapp": {
+      "text": "Mira este dato de las elecciones 2026:\n\nEn el extranjero (embajadas y consulados), el 26.27% de las actas fueron impugnadas. En el resto del país, solo el 6.16%. Es 4.3 veces más.\n\n668 actas impugnadas de 2,543 mesas en el exterior.\n\nEsto no pasa por azar. ONPE tiene que explicar por qué el extranjero impugna tanto más que el promedio nacional.\n\nAnálisis completo, datos abiertos y código verificable:\nhttps://auditoria.neuracode.dev/h1/\n\n— FORENSIS · Neuracode"
+    },
+    "telegram": {
+      "text": "Hallazgo FORENSIS H1 — EG2026\n\nImpugnaciones por departamento: χ²=2897.2, dof=25 — los 26 deptos no son homogéneos.\n\nExtranjero: 26.27% (z=42.18) vs 6.16% nacional → ratio 4.3x\nLoreto: 14.87% (z=18.82)\nUcayali: 12.02% (z=9.64)\nArequipa: 1.83% (z=−11.70)\n\n668 / 2,543 mesas · Extranjero\n92,766 mesas totales · SHA-256 verificado\n\nLimitaciones declaradas: Loreto/Ucayali tienen confounder geográfico. Comparación 2021 es post-hoc.\n\nNúcleo publicable: Extranjero + χ² global.\n\nhttps://auditoria.neuracode.dev/h1/\n\n— FORENSIS · Neuracode"
+    },
+    "linkedin": {
+      "text": "Publicamos el primer hallazgo de FORENSIS sobre EG2026.\n\nTasa de impugnación de actas por departamento:\n\n• Extranjero: 26.27% — 668 de 2,543 mesas\n• Nacional (promedio): 6.16%\n• Ratio: 4.3x\n• χ²=2897.2, dof=25\n\nLas limitaciones están declaradas: Loreto y Ucayali tienen conflicto social documentado que puede explicar sus desvíos. La comparación temporal 2021→2026 es exploratoria.\n\nEl núcleo es robusto: el extranjero se desvía 4.3x del promedio con una señal estadística que no atribuimos a azar.\n\nONPE debe explicar.\n\nDatos, código y metodología abiertos:\nhttps://auditoria.neuracode.dev/h1/\n\n— FORENSIS · Jack Aguilar · Neuracode\n#AuditoriaEG2026 #FORENSIS"
+    }
+  },
+  "pdf_citable": {
+    "title": "H1 — Heterogeneidad Tasa Impugnación por Departamento · EG2026",
+    "subtitle": "Extranjero 26.27% vs 6.16% nacional · χ²=2897.2 · z=42.18",
+    "author": "FORENSIS · Jack Aguilar · Neuracode",
+    "keywords": [
+      "impugnación",
+      "actas",
+      "ONPE",
+      "EG2026",
+      "extranjero",
+      "chi-cuadrado",
+      "auditoría"
+    ],
+    "doi_placeholder": "10.xxxx/forensis-h1-eg2026",
+    "version": "1.0",
+    "date": "2026-04-21",
+    "pages": 2,
+    "path": "web/h1/finding.pdf",
+    "sha256_field": "included",
+    "license": "CC BY 4.0"
+  },
+  "embed_badge": {
+    "html": "<iframe src='https://auditoria.neuracode.dev/h1/embed' width='480' height='220' frameborder='0' title='FORENSIS H1 — Impugnación Extranjero EG2026'></iframe>",
+    "use_case": "blogs, medios, observatorios electorales, sitios que quieren mostrar el finding con datos en vivo",
+    "fallback_static": "https://auditoria.neuracode.dev/h1/badge.png"
+  },
+  "qr": {
+    "url": "https://auditoria.neuracode.dev/h1/",
+    "size": "200x200",
+    "use_case": "materiales impresos, flyers, presentaciones presenciales",
+    "render_script": "scripts/render_qr.py"
+  },
+  "checklist": {
+    "5_headlines": true,
+    "1_seleccionado_con_justificacion": true,
+    "og_spec_completo": true,
+    "twitter_primary_le_280": true,
+    "twitter_chars": 234,
+    "thread_5_tweets": true,
+    "whatsapp_text": true,
+    "telegram_text": true,
+    "cero_emojis_prohibidos": true,
+    "cero_hype_keywords": true,
+    "hashtags_consistentes": true,
+    "url_utm": true,
+    "pdf_metadata": true,
+    "embed_badge": true,
+    "qr": true,
+    "firma_forensis_neuracode": true,
+    "limitaciones_declaradas_en_telegram": true,
+    "cero_predicciones": true,
+    "cero_fraude_trampa_robo": true
+  }
+}

@@ -1,0 +1,21 @@
+{
+  "finding_id": "H1",
+  "finding_ref": "HALL-0420-H1",
+  "headlines": [
+    "Extranjero: 26.27% de actas impugnadas vs 6.16% nacional · 4.3x el promedio",
+    "668 de 2,543 actas impugnadas en el extranjero — ONPE debe explicar el 4.3x",
+    "χ²=2897, dof=25: los 26 departamentos no son homogéneos en impugnaciones",
+    "Tasa impugnación Extranjero: 26.27% — triple que en 2021, 4 veces el promedio",
+    "z=42.18 en mesas del extranjero: la anomalía de impugnación más alta del universo"
+  ],
+  "hook_hero": "26.27% · Extranjero · 4.3x el promedio nacional",
+  "subtitle": "668 actas impugnadas de 2,543. ONPE debe explicar.",
+  "hashtags": ["#AuditoriaEG2026", "#FORENSIS"],
+  "selected_headline_index": 0,
+  "selection_reason": "Contiene número crudo (26.27%), comparación explícita (6.16% nacional), ratio directo (4.3x) y sujeto concreto (Extranjero). Cabe en tweet sin truncar. No requiere contexto previo para entenderse.",
+  "secondary_headline_index": 3,
+  "secondary_reason": "Versión con dimensión temporal (2021→2026) para audiencia que ya vio el headline principal. Útil para hilo o segundo tweet."
+}
+```
+
+---
