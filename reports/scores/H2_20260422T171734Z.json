@@ -1,0 +1,15 @@
+{
+  "finding_id": "HALL-0420-H2",
+  "score": 0.5,
+  "breakdown": {
+    "p_factor": 0.5,
+    "effect_factor": 0.5,
+    "challenger_factor": 0.5
+  },
+  "inputs": {
+    "p_value": null,
+    "effect_size": null,
+    "challenger_verdict": "DEBIL"
+  },
+  "tier": "DRAFT"
+}

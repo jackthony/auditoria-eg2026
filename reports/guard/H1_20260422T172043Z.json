@@ -1,0 +1,61 @@
+{
+  "finding_id": "H1",
+  "verdict": "VETOED",
+  "ts_utc": "2026-04-21T14:35:22Z",
+  "violations": [
+    {
+      "check": "fact_check",
+      "severity": "CRITICAL",
+      "detail": "N\u00famero 'triple en 5 a\u00f1os' (8% \u2192 26.27%) no existe en stat_finding. Stat report muestra 26.2682% actual pero NO reporta dato 2021 de 8%. Narrativa asume comparaci\u00f3n temporal que no est\u00e1 validada en stat_H1.",
+      "location": "mercado.md l\u00ednea 14; tweets 2/5",
+      "action": "ELIMINAR o SOURCING externo obligatorio"
+    },
+    {
+      "check": "fact_check",
+      "severity": "CRITICAL",
+      "detail": "Frase 'Probabilidad que esto ocurra por azar: 1 en 10 sextillones (620 ceros)' no derivable de stat_finding. p_chi2=0.0 (flotante, no infinito). Conversion a '10 sextillones' es dramatizaci\u00f3n sin base matem\u00e1tica clara. Chi2=2897 con dof=25 da p muy peque\u00f1o pero NO justifica '620 ceros'.",
+      "location": "mercado.md 'Hook 30 segundos'; tweets 4/5",
+      "action": "REESCRIBIR como: 'Probabilidad por azar: incompatible con H0 (p<0.001)'"
+    },
+    {
+      "check": "tone",
+      "severity": "MEDIUM",
+      "detail": "Frase 'n\u00fameros no cuadran solos' (l\u00ednea mercado.md) es ambigua + sugiere conspiraci\u00f3n suave. Aprobado: 'incompatible con H0'. Rechazado: 'no cuadran solos'.",
+      "location": "mercado.md 'No decimos que fue trampa'",
+      "action": "Cambiar a: 'incompatible con hip\u00f3tesis H0 (homogeneidad)'"
+    },
+    {
+      "check": "regla_oro",
+      "severity": "HIGH",
+      "detail": "Frase 'ONPE debe explicar' aparece 2 veces. Frase aprobada 'anomal\u00eda que ONPE debe explicar' NO aparece ni una vez. Regla oro requiere EXACTAMENTE una ocurrencia de frase can\u00f3nica o equivalente expl\u00edcito.",
+      "location": "mercado.md + tweets",
+      "action": "Agregar p\u00e1rrafo: 'Esta es una anomal\u00eda que ONPE debe explicar por departamento' (una sola vez, final de secci\u00f3n)"
+    },
+    {
+      "check": "fact_check",
+      "severity": "MEDIUM",
+      "detail": "Afirmaci\u00f3n 'Extranjero 2021 fue ~8%' requiere sourcing. Stat_finding cita 'Extranjero 2021 fue ~8%' en anti_ataque pero NO en stat_finding principal. Si es dato p\u00fablico ONPE 2021 \u2192 validar con Perplexity. Si es asunci\u00f3n \u2192 eliminar.",
+      "location": "mercado.md l\u00ednea 14; meta selection_reason",
+      "action": "Fact-check externo: 'ONPE 2021 extranjero 8% impugnaci\u00f3n' o REMOVER"
+    },
+    {
+      "check": "length",
+      "severity": "LOW",
+      "detail": "Bullet 'Probabilidad que esto pase por azar: 1 en 10 sextillones (n\u00famero con 620 ceros)' = 15 palabras. Preferente \u22648. Aceptable en contexto especial pero cercano l\u00edmite.",
+      "location": "mercado.md 'El dato crudo'",
+      "action": "Considerar split: 'Probabilidad por azar: 1 en 10 sextillones. (620 ceros.)' = 2 bullets"
+    }
+  ],
+  "checks_status": {
+    "fact_check": "FAILED - 2 n\u00fameros no sourced + 1 derivaci\u00f3n matem\u00e1tica dudosa",
+    "tone": "FAILED - 'n\u00fameros no cuadran solos' ambiguo",
+    "regla_oro": "FAILED - 'anomal\u00eda que ONPE debe explicar' ausente (1/1 required)",
+    "wcag": "PASSED - (a\u00fan no hay assets visuales, pero structura markdown OK)",
+    "length": "PASSED with WARNING - un bullet en borde superior"
+  },
+  "action": "BLOQUEADA \u00b7 issue creada: publishing-veto-H1",
+  "retry_hint": "1) Fact-check 8% 2021 ONPE o eliminar. 2) Reescribir '1 en 10 sext' con derivaci\u00f3n matem\u00e1tica o usar p-value directo. 3) Cambiar 'n\u00fameros no cuadran' \u2192 'incompatible con H0'. 4) Agregar UNA VEZ: 'Esta es una anomal\u00eda que ONPE debe explicar'. 5) Re-test.",
+  "issue_url": "publishing-veto-H1",
+  "time_to_resolution_est_hours": 2,
+  "_raw_snippet": "```json\n{\n  \"finding_id\": \"H1\",\n  \"verdict\": \"VETOED\",\n  \"ts_utc\": \"2026-04-21T14:35:22Z\",\n  \"violations\": [\n    {\n      \"check\": \"fact_check\",\n      \"severity\": \"CRITICAL\",\n      \"detail\": \"N\u00famero 'triple en 5 a\u00f1os' (8% \u2192 26.27%) no existe en stat_finding. Stat report muestra 26.2682% actual pero NO reporta dato 2021 de 8%. Narrativa asume comparaci\u00f3n temporal que no est\u00e1 validada en stat_H1.\",\n      \"location\": \"mercado.md l\u00ednea 14; tweets 2/5\",\n      \"action\": \"ELIMINAR o SOURCING externo obl"
+}

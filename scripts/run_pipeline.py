@@ -387,6 +387,47 @@ def _render_landing(finding_id: str, vir_dir: Path, narr_dir: Path, decision: di
     out_path.parent.mkdir(parents=True, exist_ok=True)
     out_path.write_text(out, encoding="utf-8")
 
+    # Update main index.html with card for this finding
+    _update_index_card(finding_id, meta, decision)
+
+
+def _update_index_card(finding_id: str, meta: dict, decision: dict) -> None:
+    """Inserta o actualiza card del finding en web/index.html"""
+    import re
+    index_path = ROOT / "web" / "index.html"
+    if not index_path.exists():
+        return
+
+    html = index_path.read_text(encoding="utf-8")
+    fid_lower = finding_id.lower()
+
+    # Generar card HTML
+    headline = meta.get("headlines", ["Hallazgo"])[0]
+    # Extraer número simple del headline o usar score
+    hero = meta.get("hook_hero", decision.get("score", ""))
+    subtitle = meta.get("subtitle", "")[:120]
+    tier = decision.get("tier", "AUTO")
+    severity = "crítico" if tier in ("AUTO", "PENDING-JACK") else "medio"
+
+    card_html = f'''    <a class="finding-card" href="{fid_lower}/" role="listitem" aria-label="{finding_id}: {headline[:50]}">
+      <div class="fc-tag">{finding_id} · {severity} · live</div>
+      <div class="fc-num">{hero}</div>
+      <div class="fc-body">{subtitle}</div>
+      <div class="fc-arrow">ver análisis →</div>
+    </a>'''
+
+    # Buscar si ya existe card para este finding
+    pattern = rf'<a class="finding-card" href="{fid_lower}/"[^>]*>.*?</a>'
+    if re.search(pattern, html, re.DOTALL):
+        # Ya existe, no sobrescribir (preservar ediciones manuales)
+        return
+    else:
+        # Insertar antes del cierre de findings-grid
+        html = html.replace('  </div>\n\n  <div class="proof-bar"',
+                           f'{card_html}\n  </div>\n\n  <div class="proof-bar"')
+
+    index_path.write_text(html, encoding="utf-8")
+
 
 def main() -> int:
     parser = argparse.ArgumentParser()
