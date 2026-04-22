@@ -62,3 +62,24 @@
 {"event": "stage_start", "stage": "publishing-guard", "ts_utc": "2026-04-22T05:50:44.002977+00:00"}
 {"event": "stage_done", "stage": "publishing-guard", "verdict": "VETOED", "violations": [{"check": "parse", "detail": "no pude parsear guard output"}], "ts_utc": "2026-04-22T05:51:04.940527+00:00"}
 {"event": "pipeline_halt", "reason": "guard_vetoed", "violations": [{"check": "parse", "detail": "no pude parsear guard output"}], "ts_utc": "2026-04-22T05:51:04.940598+00:00"}
+{"event": "pipeline_start", "finding_id": "H12", "ts": "20260422T055517Z", "ts_utc": "2026-04-22T05:55:17.335771+00:00"}
+{"event": "stage_start", "stage": "data-forensic", "finding_id": "H12", "ts_utc": "2026-04-22T05:55:17.335900+00:00"}
+{"event": "stage_done", "stage": "data-forensic", "artifact": "reports/raw_findings/raw_h12_stratified_20260421T153803Z.json", "ts_utc": "2026-04-22T05:55:17.336210+00:00"}
+{"event": "stage_start", "stage": "stats-expert", "ts_utc": "2026-04-22T05:55:17.336270+00:00"}
+{"event": "stage_done", "stage": "stats-expert", "artifact": "reports/stat_findings/stat_h12_20260421T153931Z.json", "ts_utc": "2026-04-22T05:55:17.336555+00:00"}
+{"event": "stage_start", "stage": "forensic-challenger", "ts_utc": "2026-04-22T05:55:17.336614+00:00"}
+{"event": "stage_done", "stage": "forensic-challenger", "artifact": "reports/challenges/H12_20260422T055517Z.md", "ts_utc": "2026-04-22T05:56:27.851581+00:00"}
+{"event": "stage_start", "stage": "confidence_scorer", "ts_utc": "2026-04-22T05:56:27.851661+00:00"}
+{"event": "stage_done", "stage": "confidence_scorer", "score": 0.85, "tier": "PENDING-JACK", "ts_utc": "2026-04-22T05:56:27.877509+00:00"}
+{"event": "stage_done", "stage": "hitl_router", "tier": "PENDING-JACK", "publish": true, "ts_utc": "2026-04-22T05:56:27.906863+00:00"}
+{"event": "stage_start", "stage": "narrator-technical", "ts_utc": "2026-04-22T05:56:27.906932+00:00"}
+{"event": "stage_start", "stage": "narrator-market", "ts_utc": "2026-04-22T05:57:48.288371+00:00"}
+{"event": "stage_done", "stage": "narratives", "path": "reports/narratives/H12", "ts_utc": "2026-04-22T05:58:04.499533+00:00"}
+{"event": "stage_start", "stage": "virality-engine", "ts_utc": "2026-04-22T05:58:04.499610+00:00"}
+{"event": "stage_done", "stage": "virality-engine", "ts_utc": "2026-04-22T05:59:14.336390+00:00"}
+{"event": "stage_start", "stage": "publishing-guard", "ts_utc": "2026-04-22T05:59:14.336460+00:00"}
+{"event": "stage_done", "stage": "publishing-guard", "verdict": null, "ts_utc": "2026-04-22T05:59:32.025060+00:00"}
+{"event": "guard_warn", "verdict": null, "raw": "# PUBLISHING-GUARD EXECUTION — H12\n\n## 1. FACT-CHECK NUMÉRICO\n\n```json\n{\n  \"check\": \"fact_check_numeric\",\n  \"status\": \"PASSED\",\n  \"details\": [\n    {\n      \"narrative_claim\": \"208 de 230 votos (90.4%)\"", "ts_utc": "2026-04-22T05:59:32.025131+00:00"}
+{"event": "stage_start", "stage": "web-builder", "ts_utc": "2026-04-22T05:59:32.025187+00:00"}
+{"event": "stage_done", "stage": "web-builder", "path": "web/h12/index.html", "ts_utc": "2026-04-22T05:59:32.026448+00:00"}
+{"event": "pipeline_complete", "finding_id": "H12", "branch": "forensis/HALL-0420-H12-20260422T055627Z", "tier": "PENDING-JACK", "ts_utc": "2026-04-22T05:59:32.026508+00:00"}
