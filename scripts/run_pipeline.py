@@ -329,8 +329,8 @@ def _render_landing(finding_id: str, vir_dir: Path, narr_dir: Path, decision: di
     mercado_path = narr_dir / "mercado.md"
     tech_path = narr_dir / "tech.md"
 
-    meta = json.loads(meta_path.read_text(encoding="utf-8")) if meta_path.exists() else {}
-    share = json.loads(share_path.read_text(encoding="utf-8")) if share_path.exists() else {}
+    meta = json.loads(_extract_json_block(meta_path.read_text(encoding="utf-8"))) if meta_path.exists() else {}
+    share = json.loads(_extract_json_block(share_path.read_text(encoding="utf-8"))) if share_path.exists() else {}
     mercado = mercado_path.read_text(encoding="utf-8") if mercado_path.exists() else ""
     tech = tech_path.read_text(encoding="utf-8") if tech_path.exists() else ""
 
