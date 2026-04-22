@@ -1,0 +1,90 @@
+{
+  "id": "HALL-0420-H1",
+  "severity": "CRITICO",
+  "raw_ref": "reports\\raw_findings\\raw_h1_20260421T155339Z.json",
+  "h0": "Tasa impugnación homogénea entre deptos = p_global",
+  "h1": "Al menos un depto se desvía significativamente",
+  "test": "chi² homogeneidad + z-test 1-prop Newcombe + Bonferroni",
+  "statistic": {
+    "chi2": 2897.2,
+    "dof": 25,
+    "p_chi2": 0.0,
+    "bonferroni_alpha": 0.001923,
+    "n_deptos": 26
+  },
+  "p_value": 0.0,
+  "top_desviaciones": [
+    {
+      "depto": "Extranjero",
+      "n": 2543,
+      "n_imp": 668,
+      "pct": 26.2682,
+      "z": 42.18,
+      "p_val": 0.0
+    },
+    {
+      "depto": "Loreto",
+      "n": 2697,
+      "n_imp": 401,
+      "pct": 14.8684,
+      "z": 18.82,
+      "p_val": 0.0
+    },
+    {
+      "depto": "Ucayali",
+      "n": 1564,
+      "n_imp": 188,
+      "pct": 12.0205,
+      "z": 9.64,
+      "p_val": 0.0
+    }
+  ],
+  "bottom_desviaciones": [
+    {
+      "depto": "Arequipa",
+      "n": 4215,
+      "n_imp": 77,
+      "pct": 1.8268,
+      "z": -11.7,
+      "p_val": 0.0
+    },
+    {
+      "depto": "Puno",
+      "n": 3397,
+      "n_imp": 103,
+      "pct": 3.0321,
+      "z": -7.58,
+      "p_val": 3.4638958368304884e-14
+    },
+    {
+      "depto": "Junín",
+      "n": 3691,
+      "n_imp": 125,
+      "pct": 3.3866,
+      "z": -7.01,
+      "p_val": 2.468469872951573e-12
+    }
+  ],
+  "method_citation": [
+    "newcombe1998",
+    "fisher1925 (χ² homogeneidad)",
+    "bonferroni1936"
+  ],
+  "assumptions_checked": {
+    "n_suficiente": "todos los deptos n>100",
+    "esperados_ge_5": "validado por chi2_contingency",
+    "independencia": "asumida entre deptos"
+  },
+  "interpretation": "χ²=2897, dof=25, p=0.00e+00. Top: Extranjero 26.2682% (z=42.18). Global 6.16%.",
+  "limitations": [
+    "Heterogeneidad geográfica esperada (infraestructura, logística, conflicto social). χ² detecta sin explicar causa.",
+    "Bonferroni conservador — Benjamini-Hochberg daría más poder.",
+    "No distingue entre impugnación legal (observadores, personeros) vs error logístico."
+  ],
+  "anti_ataque": [
+    "'Extranjero siempre es raro' → Sí, pero 26.27% vs 6.16% global es 4.3x. Extranjero 2021 fue ~8%.",
+    "'χ² infla en n grandes' → Por eso reportamos z-score por depto + effect size.",
+    "'Correlación con conflicto social' → Posible en Loreto/Ucayali. No explica Extranjero."
+  ],
+  "regla_oro": "anomalía que ONPE debe explicar por depto"
+}

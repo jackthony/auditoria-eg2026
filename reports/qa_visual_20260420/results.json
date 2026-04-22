@@ -1,0 +1,456 @@
+{
+  "config": {
+    "configFile": "C:\\Users\\jaaguilar\\Documents\\elecciones2026\\auditoria-eg2026\\reports\\qa_visual_20260420\\playwright.config.ts",
+    "rootDir": "C:/Users/jaaguilar/Documents/elecciones2026/auditoria-eg2026/reports/qa_visual_20260420",
+    "forbidOnly": false,
+    "fullyParallel": false,
+    "globalSetup": null,
+    "globalTeardown": null,
+    "globalTimeout": 0,
+    "grep": {},
+    "grepInvert": null,
+    "maxFailures": 0,
+    "metadata": {
+      "actualWorkers": 1
+    },
+    "preserveOutput": "always",
+    "projects": [
+      {
+        "outputDir": "C:/Users/jaaguilar/Documents/elecciones2026/auditoria-eg2026/reports/qa_visual_20260420/test-results",
+        "repeatEach": 1,
+        "retries": 1,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "",
+        "name": "",
+        "testDir": "C:/Users/jaaguilar/Documents/elecciones2026/auditoria-eg2026/reports/qa_visual_20260420",
+        "testIgnore": [],
+        "testMatch": [
+          "**/*.spec.ts"
+        ],
+        "timeout": 60000
+      }
+    ],
+    "quiet": false,
+    "reporter": [
+      [
+        "list",
+        null
+      ],
+      [
+        "json",
+        {
+          "outputFile": "C:/Users/jaaguilar/Documents/elecciones2026/auditoria-eg2026/reports/qa_visual_20260420/results.json"
+        }
+      ]
+    ],
+    "reportSlowTests": {
+      "max": 5,
+      "threshold": 300000
+    },
+    "runAgents": "none",
+    "shard": null,
+    "tags": [],
+    "updateSnapshots": "missing",
+    "updateSourceMethod": "patch",
+    "version": "1.58.2",
+    "workers": 4,
+    "webServer": null
+  },
+  "suites": [
+    {
+      "title": "visual_qa.spec.ts",
+      "file": "visual_qa.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "[h1] desktop",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 60000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 2060,
+                  "errors": [],
+                  "stdout": [
+                    {
+                      "text": "[h1][desktop] overlap: {\"headerBottom\":-1,\"toggleTop\":-1,\"gap\":-1,\"overlap\":false,\"error\":\"missing: header=false toggle=true\"}\n"
+                    },
+                    {
+                      "text": "[h1][desktop] leaks: NONE\n"
+                    },
+                    {
+                      "text": "[h1][desktop] toggle: {\"techResult\":true,\"popResult\":true,\"buttonCount\":2}\n"
+                    },
+                    {
+                      "text": "[h1][desktop] screenshot: C:\\Users\\jaaguilar\\Documents\\elecciones2026\\auditoria-eg2026\\reports\\qa_visual_20260420\\h1_desktop.png\n"
+                    }
+                  ],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-04-21T02:18:11.075Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "470e7b30de794cc0ce98-8a4f520cf89fece28a3e",
+          "file": "visual_qa.spec.ts",
+          "line": 114,
+          "column": 7
+        },
+        {
+          "title": "[h1] mobile",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 60000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 1254,
+                  "errors": [],
+                  "stdout": [
+                    {
+                      "text": "[h1][mobile] overlap: {\"headerBottom\":-1,\"toggleTop\":-1,\"gap\":-1,\"overlap\":false,\"error\":\"missing: header=false toggle=true\"}\n"
+                    },
+                    {
+                      "text": "[h1][mobile] leaks: NONE\n"
+                    },
+                    {
+                      "text": "[h1][mobile] toggle: {\"techResult\":true,\"popResult\":true,\"buttonCount\":2}\n"
+                    },
+                    {
+                      "text": "[h1][mobile] screenshot: C:\\Users\\jaaguilar\\Documents\\elecciones2026\\auditoria-eg2026\\reports\\qa_visual_20260420\\h1_mobile.png\n"
+                    }
+                  ],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-04-21T02:18:13.673Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "470e7b30de794cc0ce98-768e4bae5e7573c3296d",
+          "file": "visual_qa.spec.ts",
+          "line": 146,
+          "column": 7
+        },
+        {
+          "title": "[h4] desktop",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 60000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 1383,
+                  "errors": [],
+                  "stdout": [
+                    {
+                      "text": "[h4][desktop] overlap: {\"headerBottom\":-1,\"toggleTop\":-1,\"gap\":-1,\"overlap\":false,\"error\":\"missing: header=false toggle=true\"}\n"
+                    },
+                    {
+                      "text": "[h4][desktop] leaks: NONE\n"
+                    },
+                    {
+                      "text": "[h4][desktop] toggle: {\"techResult\":true,\"popResult\":true,\"buttonCount\":2}\n"
+                    },
+                    {
+                      "text": "[h4][desktop] screenshot: C:\\Users\\jaaguilar\\Documents\\elecciones2026\\auditoria-eg2026\\reports\\qa_visual_20260420\\h4_desktop.png\n"
+                    }
+                  ],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-04-21T02:18:14.943Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "470e7b30de794cc0ce98-812fd130937ae7a9fe52",
+          "file": "visual_qa.spec.ts",
+          "line": 114,
+          "column": 7
+        },
+        {
+          "title": "[h4] mobile",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 60000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 1260,
+                  "errors": [],
+                  "stdout": [
+                    {
+                      "text": "[h4][mobile] overlap: {\"headerBottom\":-1,\"toggleTop\":-1,\"gap\":-1,\"overlap\":false,\"error\":\"missing: header=false toggle=true\"}\n"
+                    },
+                    {
+                      "text": "[h4][mobile] leaks: NONE\n"
+                    },
+                    {
+                      "text": "[h4][mobile] toggle: {\"techResult\":true,\"popResult\":true,\"buttonCount\":2}\n"
+                    },
+                    {
+                      "text": "[h4][mobile] screenshot: C:\\Users\\jaaguilar\\Documents\\elecciones2026\\auditoria-eg2026\\reports\\qa_visual_20260420\\h4_mobile.png\n"
+                    }
+                  ],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-04-21T02:18:16.341Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "470e7b30de794cc0ce98-5a864d049f841e5f7000",
+          "file": "visual_qa.spec.ts",
+          "line": 146,
+          "column": 7
+        },
+        {
+          "title": "[h9] desktop",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 60000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 1280,
+                  "errors": [],
+                  "stdout": [
+                    {
+                      "text": "[h9][desktop] overlap: {\"headerBottom\":-1,\"toggleTop\":-1,\"gap\":-1,\"overlap\":false,\"error\":\"missing: header=false toggle=true\"}\n"
+                    },
+                    {
+                      "text": "[h9][desktop] leaks: NONE\n"
+                    },
+                    {
+                      "text": "[h9][desktop] toggle: {\"techResult\":true,\"popResult\":true,\"buttonCount\":2}\n"
+                    },
+                    {
+                      "text": "[h9][desktop] screenshot: C:\\Users\\jaaguilar\\Documents\\elecciones2026\\auditoria-eg2026\\reports\\qa_visual_20260420\\h9_desktop.png\n"
+                    }
+                  ],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-04-21T02:18:17.617Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "470e7b30de794cc0ce98-3f97a16e6e45b9f9430d",
+          "file": "visual_qa.spec.ts",
+          "line": 114,
+          "column": 7
+        },
+        {
+          "title": "[h9] mobile",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 60000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 1266,
+                  "errors": [],
+                  "stdout": [
+                    {
+                      "text": "[h9][mobile] overlap: {\"headerBottom\":-1,\"toggleTop\":-1,\"gap\":-1,\"overlap\":false,\"error\":\"missing: header=false toggle=true\"}\n"
+                    },
+                    {
+                      "text": "[h9][mobile] leaks: NONE\n"
+                    },
+                    {
+                      "text": "[h9][mobile] toggle: {\"techResult\":true,\"popResult\":true,\"buttonCount\":2}\n"
+                    },
+                    {
+                      "text": "[h9][mobile] screenshot: C:\\Users\\jaaguilar\\Documents\\elecciones2026\\auditoria-eg2026\\reports\\qa_visual_20260420\\h9_mobile.png\n"
+                    }
+                  ],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-04-21T02:18:18.911Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "470e7b30de794cc0ce98-7a89c7c7467e618ca6dd",
+          "file": "visual_qa.spec.ts",
+          "line": 146,
+          "column": 7
+        },
+        {
+          "title": "[h12] desktop",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 60000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 1414,
+                  "errors": [],
+                  "stdout": [
+                    {
+                      "text": "[h12][desktop] overlap: {\"headerBottom\":-1,\"toggleTop\":-1,\"gap\":-1,\"overlap\":false,\"error\":\"missing: header=false toggle=true\"}\n"
+                    },
+                    {
+                      "text": "[h12][desktop] leaks: NONE\n"
+                    },
+                    {
+                      "text": "[h12][desktop] toggle: {\"techResult\":true,\"popResult\":true,\"buttonCount\":2}\n"
+                    },
+                    {
+                      "text": "[h12][desktop] screenshot: C:\\Users\\jaaguilar\\Documents\\elecciones2026\\auditoria-eg2026\\reports\\qa_visual_20260420\\h12_desktop.png\n"
+                    }
+                  ],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-04-21T02:18:20.193Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "470e7b30de794cc0ce98-b8b454cc86bdd9659dd2",
+          "file": "visual_qa.spec.ts",
+          "line": 114,
+          "column": 7
+        },
+        {
+          "title": "[h12] mobile",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 60000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 1287,
+                  "errors": [],
+                  "stdout": [
+                    {
+                      "text": "[h12][mobile] overlap: {\"headerBottom\":-1,\"toggleTop\":-1,\"gap\":-1,\"overlap\":false,\"error\":\"missing: header=false toggle=true\"}\n"
+                    },
+                    {
+                      "text": "[h12][mobile] leaks: NONE\n"
+                    },
+                    {
+                      "text": "[h12][mobile] toggle: {\"techResult\":true,\"popResult\":true,\"buttonCount\":2}\n"
+                    },
+                    {
+                      "text": "[h12][mobile] screenshot: C:\\Users\\jaaguilar\\Documents\\elecciones2026\\auditoria-eg2026\\reports\\qa_visual_20260420\\h12_mobile.png\n"
+                    }
+                  ],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-04-21T02:18:21.628Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "470e7b30de794cc0ce98-d9c250ab080cbb03ee1f",
+          "file": "visual_qa.spec.ts",
+          "line": 146,
+          "column": 7
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "stats": {
+    "startTime": "2026-04-21T02:18:08.242Z",
+    "duration": 14882.019999999999,
+    "expected": 8,
+    "skipped": 0,
+    "unexpected": 0,
+    "flaky": 0
+  }
+}

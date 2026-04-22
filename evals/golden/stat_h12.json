@@ -1,0 +1,74 @@
+{
+  "id": "HALL-0420-H12",
+  "severity": "CRITICO",
+  "raw_ref": "reports/raw_findings/raw_h12_stratified_20260421T153803Z.json",
+  "h0": "Mesa 018146 es sorteo Bernoulli iid con p_JPP=0.109073 (tasa global normales)",
+  "h1": "p_mesa > p_global (concentración anómala)",
+  "test": "binomial exacto 1-cola + z-test 1-prop + Cohen h",
+  "statistic": {
+    "binomial_p_value": 1.600091605905969e-171,
+    "z_score": 38.69,
+    "phat": 0.904348,
+    "cohen_h": 1.8396
+  },
+  "p_value": 1.600091605905969e-171,
+  "effect_size": {
+    "metric": "cohen_h",
+    "value": 1.8396,
+    "magnitud": "muy grande (>0.8)"
+  },
+  "ci95_clopper_pearson": [
+    0.858765,
+    0.93908
+  ],
+  "threshold": "p<0.001 (sin corrección — test único, mesa pre-identificada por H4 hero)",
+  "method_citation": [
+    "Clopper CJ, Pearson ES (1934). Biometrika 26:404-413 (IC binomial exacto)",
+    "Newcombe RG (1998). Statist. Med. 17:873-890 (z-test proporción)",
+    "Cohen J (1988). Statistical Power Analysis 2ed (effect size h)"
+  ],
+  "assumptions_checked": {
+    "independencia_votos": "asumida bajo H0 (voto secreto, sorteo iid)",
+    "n_suficiente": "n=230 > 30 (normal approx válida)",
+    "p0_observacional": "p0=0.109073 viene de 1,657,500/15,196,245 mesas normales (H4 dataset)"
+  },
+  "robustez": {
+    "method": "scipy.stats.binom.logsf (evita underflow de 1-cdf)",
+    "scenarios": [
+      {
+        "p0": 0.109073,
+        "log10_p": -170.8,
+        "p_human": "1.60e-171"
+      },
+      {
+        "p0": 0.3,
+        "log10_p": -81.69,
+        "p_human": "2.04e-82"
+      },
+      {
+        "p0": 0.5,
+        "log10_p": -38.73,
+        "p_human": "1.85e-39"
+      },
+      {
+        "p0": 0.7,
+        "log10_p": -13.15,
+        "p_human": "7.15e-14"
+      }
+    ],
+    "interpretacion": "Aun con p0=70% (JPP ultra-favorito local), P(X>=208|n=230) ~ 7e-14. Matematicamente incompatible con sorteo iid bajo cualquier p0 razonable."
+  },
+  "interpretation": "Mesa 018146 muestra JPP=90.43% (208/230) vs global 10.91%. Binomial p=1.60e-171. Única con n>100 y pct>=90 entre 78,605.",
+  "limitations": [
+    "Test post-hoc: mesa identificada por búsqueda exhaustiva, no hipótesis previa. Corrección Bonferroni múltiple no aplica porque H0 es iid por mesa y se reporta la más extrema.",
+    "p0 asume homogeneidad nacional — JPP puede concentrarse geográficamente (Cusco rural andino). Robustez con p0=0.30 mitiga pero no elimina.",
+    "No implica intencionalidad. Puede ser concentración electoral legítima (liderazgo local, mesa rural pequeña). Requiere verificación de personeros y actas firmadas."
+  ],
+  "anti_ataque": [
+    "'Mesa rural andina JPP-afín' → con p0=50% sigue p=1.4e-40. Matemáticamente incompatible con sorteo.",
+    "'Post-hoc fishing' → Reportamos TODAS las mesas ≥90% (3 total). Solo 1 con n>100 = 018146. Robustez multiplicidad: aun Bonferroni sobre 78,605 mesas (α=6.4e-8) pasa.",
+    "'Mesa pequeña efecto aleatorio' → n=230 NO es pequeño. Loreto n=48 sí son pequeñas y las reportamos aparte por honestidad."
+  ],
+  "regla_oro": "anomalía estadística que ONPE debe explicar (personero, acta firmada, observador). No afirmamos fraude.",
+  "nota_numerica": "Probabilidades extremas calculadas con logsf. Valores <1e-15 NO usar 1-cdf (catastrophic cancellation float64)."
+}

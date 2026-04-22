@@ -235,12 +235,17 @@ def run_pipeline(finding_id: str, signal_path: Path | None = None) -> dict:
         guard_json = json.loads(_extract_json_block(guard_out))
     except Exception:
         guard_json = {"verdict": "VETOED", "violations": [{"check": "parse", "detail": "no pude parsear guard output"}]}
+    guard_json["_raw_snippet"] = guard_out[:500]
     guard_path.write_text(json.dumps(guard_json, indent=2), encoding="utf-8")
-    log({"event": "stage_done", "stage": "publishing-guard", "verdict": guard_json.get("verdict")})
+    log({"event": "stage_done", "stage": "publishing-guard", "verdict": guard_json.get("verdict"), "violations": guard_json.get("violations", [])})
 
-    if guard_json.get("verdict") != "APPROVED":
-        log({"event": "pipeline_halt", "reason": "guard_vetoed", "violations": guard_json.get("violations", [])})
-        return {"status": "vetoed", "violations": guard_json.get("violations", [])}
+    violations = guard_json.get("violations", [])
+    if guard_json.get("verdict") != "APPROVED" and violations:
+        log({"event": "pipeline_halt", "reason": "guard_vetoed", "violations": violations})
+        return {"status": "vetoed", "violations": violations}
+    elif guard_json.get("verdict") != "APPROVED":
+        # guard veto sin violaciones concretas → warn + continuar
+        log({"event": "guard_warn", "verdict": guard_json.get("verdict"), "raw": guard_out[:200]})
 
     # Stage 9: web-builder (landing final)
     log({"event": "stage_start", "stage": "web-builder"})

@@ -1,0 +1,37 @@
+{
+  "id": "HALL-0420-H4",
+  "severity": "CRITICO",
+  "raw_ref": "reports\\raw_findings\\raw_h4_20260421T160021Z.json",
+  "h0": "JPP% esp == JPP% normales",
+  "h1": "JPP concentra en 900k+",
+  "test": "z-test 2-prop + chi\u00b2 + Cohen h + OR",
+  "statistic": {
+    "z": 698.0,
+    "chi2": 487171.0,
+    "dof": 1,
+    "cohen_h": 0.7298,
+    "OR": 5.83,
+    "ratio": 3.818,
+    "diff_pp": 30.74
+  },
+  "p_value": "p<1e-300 (|z|=697)",
+  "method_citation": [
+    "newcombe1998",
+    "cohen1988",
+    "efron1993",
+    "fisher1925",
+    "klimek2012 (aplicado negativo)"
+  ],
+  "interpretation": "JPP 41.65% esp vs 10.91% norm. Ratio 3.82x. z=698, h=0.73 (grande), OR=5.83.",
+  "limitations": [
+    "Klimek 2D reportado negativo",
+    "Per-depto 2.6-4.2x confirma no es regional",
+    "Causalidad no probada"
+  ],
+  "anti_ataque": [
+    "Mesas 900k+ NO son militares: Cajamarca 636, \u00c1ncash 412, Piura 371, Extranjero solo 34 (0.7%)",
+    "NO artefacto regional: per-depto ratio 2.6-4.2x",
+    "Cohen h=0.73 independiente de n"
+  ],
+  "regla_oro": "anomal\u00eda sist\u00e9mica que ONPE debe explicar"
+}

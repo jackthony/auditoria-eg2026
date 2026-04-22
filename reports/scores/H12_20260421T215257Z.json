@@ -1,0 +1,15 @@
+{
+  "finding_id": "HALL-0420-H12",
+  "score": 1.0,
+  "breakdown": {
+    "p_factor": 1.0,
+    "effect_factor": 1.0,
+    "challenger_factor": 1.0
+  },
+  "inputs": {
+    "p_value": 1.600091605905969e-171,
+    "effect_size": 1.8396,
+    "challenger_verdict": "SOBREVIVE"
+  },
+  "tier": "AUTO"
+}
