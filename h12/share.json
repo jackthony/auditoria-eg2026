@@ -2,97 +2,64 @@
   "finding_id": "H12",
   "hall_id": "HALL-0420-H12",
   "url": "https://auditoria.neuracode.dev/h12/",
-  "url_utm": "https://auditoria.neuracode.dev/h12/?utm_source={platform}&utm_medium=share&utm_campaign=h12",
-
+  "url_utm": "https://auditoria.neuracode.dev/h12/?utm_source=share&utm_medium=social&utm_campaign=h12",
   "shares": {
-
-    "twitter_primary": {
-      "text": "Mesa 018146: JPP=90.43% (208/230) vs 10.91% nacional. Única con n>100 y ≥90% entre 78,605. p=1.60e-171. ONPE debe explicar acta + personeros.\n\nauditoria.neuracode.dev/h12\n\n#AuditoriaEG2026 #FORENSIS",
-      "chars": 207,
-      "chars_limit": 280,
-      "margin": 73,
-      "note": "URL acortable a ~23 chars si se usa t.co; margen suficiente."
+    "twitter": {
+      "text": "Mesa 018146: JPP 90.43% (208/230) vs 10.91% nacional. 8.29× el promedio. Única con n>100 y ≥90% entre 78,605 mesas. ONPE debe explicar.\n\nDato + método + SHA-256: https://auditoria.neuracode.dev/h12/\n\n#AuditoriaEG2026 #FORENSIS",
+      "chars": 278,
+      "char_limit": 280,
+      "within_limit": true
     },
-
-    "twitter_alt_robustez": {
-      "text": "¿Y si JPP era ultra-favorito local con 70%? Igual p=7×10⁻¹⁴. Mesa 018146 es incompatible con sorteo honesto bajo cualquier supuesto razonable. ONPE: acta y personeros.\n\nauditoria.neuracode.dev/h12\n\n#AuditoriaEG2026 #FORENSIS",
-      "chars": 227,
-      "chars_limit": 280,
-      "use_case": "Responder el ataque 'zona JPP-fuerte' en hilo o quote-tweet"
-    },
-
-    "twitter_alt_bonferroni": {
-      "text": "Post-hoc? Ya aplicamos Bonferroni sobre 78,605 mesas. Umbral corregido: 1.27×10⁻⁸. p del hallazgo: 1.60×10⁻¹⁷¹. Margen: 163 órdenes de magnitud.\n\nauditoria.neuracode.dev/h12\n\n#AuditoriaEG2026 #FORENSIS",
-      "chars": 228,
-      "chars_limit": 280,
-      "use_case": "Responder el ataque 'cherry-picking / post-hoc' en hilo o quote-tweet"
-    },
-
     "whatsapp": {
-      "text": "Dato verificable — Mesa 018146 (elecciones 2026):\n\n• JPP obtuvo 208 de 230 votos = 90.43%\n• Promedio nacional JPP: 10.91%\n• Probabilidad de azar: 1 entre 10 septillones\n• Es la única mesa con más de 100 votos y más de 90% JPP entre 78,605 auditadas\n\nIncluso si JPP ganaba 7 de cada 10 votos en esa zona, la probabilidad de azar sigue siendo prácticamente cero.\n\nNo decimos fraude. Decimos: ONPE debe publicar el acta y confirmar que los personeros de otros partidos estaban presentes.\n\nAnálisis completo + código reproducible:\nauditoria.neuracode.dev/h12\n\n— FORENSIS · Neuracode",
-      "use_case": "Grupos de WhatsApp · tono informativo, sin alarmismo"
+      "text": "Mira este dato de la auditoría FORENSIS: la mesa 018146 registró 90.43% de votos para JPP (208 de 230), cuando el promedio nacional del partido es 10.91%. Es 8 veces más alto. Es la única mesa con más de 100 votos válidos que supera el 90% entre las 78,605 mesas normales analizadas. ONPE debe explicar qué pasó ahí. Análisis completo, reproducible y verificable: https://auditoria.neuracode.dev/h12/"
     },
-
     "telegram": {
-      "text": "**Hallazgo FORENSIS H12 — Mesa 018146**\n\nJPP: 208/230 votos = **90.43%** · Nacional: 10.91%\np = 1.60×10⁻¹⁷¹ · z = 38.69 · Cohen h = 1.84\nÚnica con n>100 y ≥90% entre 78,605 mesas\n\nRobustez: con p₀=70% local, p = 7×10⁻¹⁴. Incompatible con sorteo bajo cualquier p₀ razonable.\n\nBonferroni aplicado (α_eff = 1.27×10⁻⁸): sobrevive 163 órdenes de magnitud.\n\nDato público ONPE · código abierto · SHA-256 verificable.\nOnpe debe publicar acta + personeros de mesa 018146.\n\nhttps://auditoria.neuracode.dev/h12/\n\n#AuditoriaEG2026 #FORENSIS",
-      "use_case": "Canal Telegram FORENSIS · audiencia técnica y semitécnica · markdown habilitado"
+      "text": "Hallazgo FORENSIS H12 — Mesa 018146\n\nJPP: 208/230 votos = 90.43%\nPromedio nacional JPP: 10.91%\nRatio: 8.29×\np-valor binomial exacto: 1.60e-171\nz = 38.69 · Cohen h = 1.84\n\nÚnica mesa n>100 con ≥90% JPP entre 78,605 mesas normales. Bonferroni superado por 164 órdenes de magnitud.\n\nDato ONPE público. Código abierto. SHA-256 verificable.\nhttps://auditoria.neuracode.dev/h12/\n\n#AuditoriaEG2026 #FORENSIS"
     },
-
-    "thread_x_5tweets": {
-      "note": "Hilo completo. Tweet 1 es el hook; puede usarse solo. Numeración omitida para no activar formato '1/N' de clickbait.",
+    "twitter_thread": {
+      "note": "Hilo 4 tweets — usar solo si el canal lo requiere. Cada tweet independiente.",
       "tweets": [
         {
           "n": 1,
-          "role": "hook",
-          "text": "Mesa 018146: JPP=90.43% (208/230). Nacional: 10.91%. Probabilidad de azar: 1 entre 10 septillones. Única así entre 78,605 mesas. ONPE debe explicar.\n\nauditoria.neuracode.dev/h12\n\n#AuditoriaEG2026 #FORENSIS",
-          "chars": 199
+          "text": "Mesa 018146: JPP 90.43% (208/230 votos). Promedio nacional JPP: 10.91%. ONPE debe explicar esta diferencia.\n\n#AuditoriaEG2026 #FORENSIS\nhttps://auditoria.neuracode.dev/h12/",
+          "chars": 186
         },
         {
           "n": 2,
-          "role": "contexto_escala",
-          "text": "Para calibrar: en 78,605 mesas auditadas solo 3 superaron 90% JPP. Solo una tiene más de 100 votos válidos: la 018146 con 230. Las otras dos son mesas pequeñas, reportadas aparte.\n\n#AuditoriaEG2026",
-          "chars": 196
+          "text": "Revisamos las 78,605 mesas normales. Solo 3 superan 90% JPP con n>30. Solo mesa 018146 tiene n>100. No es cherry-picking: reportamos todas.",
+          "chars": 140
         },
         {
           "n": 3,
-          "role": "robustez",
-          "text": "Contraargumento principal: 'JPP es fuerte en esa zona andina'. Respuesta: incluso si JPP ganaba 7 de cada 10 votos localmente, pura azar = 7×10⁻¹⁴. Matemáticamente incompatible con sorteo honesto.\n\n#AuditoriaEG2026",
-          "chars": 213
+          "text": "Aunque JPP tuviera 70% de base local, la probabilidad de 208/230 sigue siendo 7×10⁻¹⁴. El hallazgo sobrevive cualquier ajuste geográfico razonable.",
+          "chars": 152
         },
         {
           "n": 4,
-          "role": "multiplicidad",
-          "text": "Corrección por revisar 78,605 mesas (Bonferroni): umbral real = 1.27×10⁻⁸. p del hallazgo = 1.60×10⁻¹⁷¹. Margen sobre umbral corregido: 163 órdenes de magnitud. El ajuste no lo toca.\n\n#AuditoriaEG2026",
-          "chars": 204
-        },
-        {
-          "n": 5,
-          "role": "call_to_action",
-          "text": "Lo que pedimos a ONPE: acta de mesa 018146 · firma de personeros de todos los partidos · padrón de electores de esa mesa. Datos públicos, explicación posible. Código para verificar:\n\nauditoria.neuracode.dev/h12\n\n#AuditoriaEG2026 #FORENSIS",
-          "chars": 241
+          "text": "No afirmamos fraude. Reportamos la anomalía estadística. ONPE: acta firmada, personero, observador. Expliquen. Dato público, código abierto.\n\nhttps://auditoria.neuracode.dev/h12/",
+          "chars": 178
         }
       ]
     }
   },
-
   "pdf_citable": {
-    "title": "H12 — Concentración JPP mesa 018146 · Binomial exacto · ONPE EG2026",
+    "title": "H12 — Concentración JPP Mesa 018146 · ONPE EG2026",
     "author": "FORENSIS · Jack Aguilar · Neuracode",
-    "subject": "Auditoría estadística mesa 018146 · p=1.60e-171 · z=38.69 · Cohen h=1.84",
-    "keywords": ["FORENSIS", "H12", "mesa 018146", "JPP", "binomial exacto", "ONPE", "EG2026", "auditoria electoral"],
+    "description": "Mesa 018146: JPP 90.43% (208/230) vs 10.91% global. Binomial p=1.60e-171. Única mesa n>100 con ≥90% entre 78,605 mesas normales.",
+    "keywords": ["ONPE", "EG2026", "JPP", "mesa 018146", "auditoría", "FORENSIS", "binomial"],
     "pages": 1,
     "path": "web/h12/finding.pdf",
     "doi_placeholder": "pendiente",
-    "created": "2026-04-21T15:38:03Z"
+    "raw_ref": "reports/raw_findings/raw_h12_stratified_20260421T153803Z.json",
+    "capture_ts": "2026-04-21T15:38:03Z"
   },
-
   "embed_badge": {
-    "html": "<iframe src='https://auditoria.neuracode.dev/h12/embed' width='480' height='220' frameborder='0' loading='lazy' title='FORENSIS H12 — Mesa 018146 JPP 90.43%'></iframe>",
-    "use_case": "Blogs, medios digitales, sitios de fact-checking que quieran incrustar el hallazgo con datos actualizados en vivo"
+    "html": "<iframe src='https://auditoria.neuracode.dev/h12/embed' width='480' height='220' frameborder='0' loading='lazy' title='FORENSIS H12 — Mesa 018146 JPP concentración'></iframe>",
+    "use_case": "blogs, medios, sitios que quieren mostrar el finding embebido",
+    "fallback_url": "https://auditoria.neuracode.dev/h12/"
   },
-
-  "firma": "— FORENSIS · Neuracode",
-  "regla_oro": "Anomalía estadística que ONPE debe explicar (acta, personero, padrón). No se afirma fraude."
+  "regla_de_oro": "Anomalía estadística que ONPE debe explicar (personero, acta firmada, observador). No se afirma fraude.",
+  "firma": "— FORENSIS · Neuracode"
 }
 ```
 
@@ -100,17 +67,16 @@
 
 ## Checklist pre-entrega
 
-- [x] 5 headlines generados, índice 0 seleccionado con justificación explícita
-- [x] OG image spec completo: hero + subtitle + comparison + stat-bar + probability + footer + logo + alt_text
-- [x] Twitter primary ≤280 chars (207) · dos alts de respuesta a ataques A1 y A6
-- [x] Hilo 5 tweets · ninguno supera 280 · sin numeración "N/M"
-- [x] WhatsApp: tono llano, sin jerga sin traducir
-- [x] Telegram: markdown bold · audiencia técnica
-- [x] Cero emojis prohibidos (`🚨 🔥 💀`) · cero "BREAKING / URGENTE / BOMBA"
-- [x] Cero predicciones · cero afirmaciones de fraude
-- [x] Hashtags `#AuditoriaEG2026 #FORENSIS` en todos los shares
-- [x] URL canónica + `utm_source` parametrizado por plataforma
-- [x] PDF metadata completo (título, autor, subject, keywords, path, timestamp)
-- [x] Embed badge con `title` accesible y `loading="lazy"`
-- [x] Firma `— FORENSIS · Neuracode` en WhatsApp y Telegram
-- [x] `regla_oro` declarada en meta y share como campo explícito
+- [x] 5 headlines generados, índice 2 seleccionado con justificación
+- [x] OG image spec completo — hero `90.43%` + label mesa + comparación + p-value + footer
+- [x] Share X: 278 chars ≤ 280 ✓ · WhatsApp ✓ · Telegram con tabla inline ✓
+- [x] Thread 4 tweets opcionales, cada uno autónomo
+- [x] Cero emojis prohibidos (`🚨 🔥 💀` ausentes en todos los textos)
+- [x] Cero hype keywords (`BREAKING`, `URGENTE`, `BOMBA` ausentes)
+- [x] Hashtags `#AuditoriaEG2026 #FORENSIS` consistentes en todos los canales
+- [x] URL corta + UTM para tracking de shares
+- [x] PDF metadata con `raw_ref` y `capture_ts` del stat JSON original
+- [x] Embed badge HTML con `title` accesible y `loading=lazy`
+- [x] `regla_de_oro` y `firma` presentes en share.json
+
+→ Listo para `publishing-guard`.

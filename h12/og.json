@@ -1,85 +1,39 @@
 {
   "finding_id": "H12",
+  "hall_id": "HALL-0420-H12",
   "dimensions": "1200x630",
   "format": "svg",
   "layout": {
+    "hero_number": "90.43%",
+    "hero_number_label": "JPP · Mesa 018146",
+    "hero_number_font": "Fraunces 180pt bold",
+    "hero_number_color": "#e63946",
+    "subtitle": "208 de 230 votos válidos",
+    "subtitle_font": "Inter 36pt",
+    "subtitle_color": "#0c1a2e",
+    "comparison_line_1": "vs 10.91% promedio nacional · 8.29× el promedio",
+    "comparison_line_2": "Única mesa n>100 con ≥90% entre 78,605 mesas normales",
+    "comparison_font": "Inter 24pt",
+    "comparison_color": "#3a3a3a",
+    "probability_label": "Probabilidad azar:",
+    "probability_value": "p = 1.60 × 10⁻¹⁷¹",
+    "probability_font": "JetBrains Mono 20pt",
+    "probability_color": "#6b7280",
+    "divider": "horizontal rule 2px #e5e0d8 · posición y=520",
+    "footer_left": "FORENSIS · auditoria.neuracode.dev/h12",
+    "footer_right": "78,605 mesas · SHA-256 verified · ONPE EG2026",
+    "footer_font": "Inter 16pt",
+    "footer_color": "#9ca3af",
     "bg_color": "#faf7f2",
     "accent_color": "#0c1a2e",
-    "alert_color": "#e63946",
-    "grid": "12col · margin 60px · row_gap 24px",
-    "zone_top": {
-      "label": "HALLAZGO H12 · MESA 018146",
-      "label_font": "JetBrains Mono 16pt",
-      "label_color": "#0c1a2e",
-      "label_opacity": 0.55,
-      "position": "top-left · y=60"
-    },
-    "zone_hero": {
-      "hero_number": "90.43%",
-      "hero_number_font": "Fraunces 192pt bold",
-      "hero_number_color": "#e63946",
-      "hero_number_position": "x=60 y=100",
-      "subtitle": "JPP · mesa 018146",
-      "subtitle_font": "Inter 38pt semibold",
-      "subtitle_color": "#0c1a2e",
-      "subtitle_position": "x=60 y=330"
-    },
-    "zone_comparison": {
-      "line1": "vs 10.91% nacional · 8.3× el promedio",
-      "line1_font": "Inter 26pt",
-      "line1_color": "#0c1a2e",
-      "line2": "208 / 230 votos · única mesa n>100 con ≥90% entre 78,605",
-      "line2_font": "Inter 22pt",
-      "line2_color": "#0c1a2e",
-      "line2_opacity": 0.75,
-      "position": "x=60 y=400"
-    },
-    "zone_stat_bar": {
-      "type": "horizontal_rule",
-      "color": "#e63946",
-      "opacity": 0.25,
-      "y": 480,
-      "width": "1080px"
-    },
-    "zone_probability": {
-      "label": "p = 1.60 × 10",
-      "exponent": "−171",
-      "label_font": "JetBrains Mono 22pt",
-      "exponent_font": "JetBrains Mono 14pt superscript",
-      "label_color": "#e63946",
-      "note": "Binomial exacto · z = 38.69 · Cohen h = 1.84",
-      "note_font": "JetBrains Mono 16pt",
-      "note_color": "#0c1a2e",
-      "note_opacity": 0.6,
-      "position": "x=60 y=510"
-    },
-    "zone_footer": {
-      "left": "FORENSIS · auditoria.neuracode.dev/h12",
-      "left_font": "Inter 15pt",
-      "left_color": "#0c1a2e",
-      "left_opacity": 0.55,
-      "right": "92,766 mesas · SHA-256 verified · ONPE datos públicos",
-      "right_font": "Inter 15pt",
-      "right_color": "#0c1a2e",
-      "right_opacity": 0.45,
-      "y": 590
-    },
-    "zone_logo": {
-      "text": "FORENSIS",
-      "font": "Fraunces 20pt",
-      "color": "#0c1a2e",
-      "position": "top-right · x=1100 y=60",
-      "anchor": "end"
-    }
+    "logo_position": "top-right · 48px desde borde · width=120px",
+    "layout_notes": "Hero number ocupa cuadrante izquierdo. Comparación y stats en columna derecha. Footer anclado al fondo."
   },
-  "alt_text": "Tarjeta de hallazgo H12: Mesa 018146 muestra JPP 90.43% frente al 10.91% nacional. p = 1.60e-171. Única mesa con n mayor a 100 votos y resultado mayor o igual a 90% entre 78,605 mesas. FORENSIS — auditoria.neuracode.dev/h12.",
   "render_script": "scripts/render_og.py",
   "render_args": {
     "finding": "h12",
-    "output": "web/h12/og.png",
-    "export_also": [
-      "web/h12/og.svg",
-      "web/h12/og.webp"
-    ]
+    "output": "web/h12/og.svg",
+    "export_png": true,
+    "png_output": "web/h12/og.png"
   }
 }

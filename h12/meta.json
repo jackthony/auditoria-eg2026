@@ -1,22 +1,19 @@
 {
   "finding_id": "H12",
   "hall_id": "HALL-0420-H12",
-  "severity": "CRITICO",
   "headlines": [
-    "Mesa 018146: JPP 90.43% vs 10.91% nacional · p = 1.60e-171",
-    "208 de 230 votos JPP en una mesa · única con n>100 entre 78,605",
-    "Probabilidad azar: 1 entre 10 septillones · ONPE debe explicar",
-    "90.43% vs 10.91%: diferencia de 8.3x · Cohen h = 1.84",
-    "Bonferroni 78,605 mesas aplicado · 163 órdenes de margen · sigue en pie"
+    "Mesa 018146: JPP 90.43% vs 10.91% nacional · p=1.60e-171",
+    "208 de 230 votos para JPP en mesa con promedio nacional de 10.91%",
+    "Una mesa, 90.43% JPP. El resto del país: 10.91%. ONPE debe explicar",
+    "Única mesa n>100 con ≥90% JPP entre 78,605 mesas normales",
+    "z=38.69 · Cohen h=1.84 · Bonferroni: 164 órdenes de margen"
   ],
-  "hook_hero": "90.43% JPP · 1 mesa · p = 1.60e-171",
-  "subtitle": "vs 10.91% nacional · única con n>100 entre 78,605 · ONPE debe explicar.",
+  "hook_hero": "90.43% JPP · mesa 018146 · p=1.60e-171",
+  "subtitle": "208/230 votos vs 10.91% nacional. ONPE debe explicar.",
   "hashtags": [
     "#AuditoriaEG2026",
     "#FORENSIS"
   ],
-  "selected_headline_index": 0,
-  "selection_reason": "Contiene los tres elementos mínimos verificables: identificador de mesa, porcentaje crudo, p-value. No requiere contexto adicional para ser chequeado. Cabe en tweet con URL.",
-  "content_warnings": [],
-  "regla_oro": "Anomalía estadística que ONPE debe explicar. No se afirma fraude."
+  "selected_headline_index": 2,
+  "selection_reason": "Contraste inmediato (90.43% vs 10.91%), interpela directamente a ONPE, cabe en tweet con URL+hashtags, cero hype"
 }
