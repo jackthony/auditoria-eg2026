@@ -1,0 +1,9 @@
+{
+  "phat": 0.904348,
+  "p_global": 0.109073,
+  "n": 230,
+  "votos_jpp": 208,
+  "p_value": 1.600091605905969e-171,
+  "cohen_h": 1.8396,
+  "_raw_snippet": "# PUBLISHING-GUARD EXECUTION \u2014 H12\n\n## Chequeo 1: Fact-check num\u00e9rico\n\n```python\n# Stat findings vs narrativa\nSTAT = {\n    \"phat\": 0.904348,\n    \"p_global\": 0.109073,\n    \"n\": 230,\n    \"votos_jpp\": 208,\n    \"p_value\": 1.600091605905969e-171,\n    \"cohen_h\": 1.8396\n}\n\nNARRATIVA = {\n    \"phat\": \"90.43%\",  # 0.9043 \u00d7 100 \u2705\n    \"global\": \"10.91%\",  # 0.109073 \u00d7 100 \u2705\n    \"n\": 230,  # \u2705\n    \"votos_jpp\": 208,  # \u2705\n    \"p_value\": \"1.60e-171\",  # logsf 1.600091605905969e-171 \u2705\n    \"cohen_h\": \"1.84\",  # 1"
+}

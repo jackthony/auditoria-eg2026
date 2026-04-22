@@ -323,6 +323,55 @@ def _write_split_json(out_dir: Path, text: str, filenames: list[str]) -> None:
                 (out_dir / fname).write_text(body, encoding="utf-8")
 
 
+def _extract_observed(stat: dict) -> str:
+    """Extrae dato observado del stat_finding."""
+    s = stat.get("statistic", {})
+    if "phat" in s:
+        return f"{s['phat']*100:.2f}% observado"
+    if "chi2" in s:
+        return f"χ² = {s['chi2']:.1f}"
+    return stat.get("id", "N/A")
+
+
+def _format_pvalue(p) -> str:
+    """Formatea p-value para display."""
+    if p is None:
+        return "N/A"
+    if p == 0:
+        return "< 1e-300 (underflow)"
+    if p < 1e-100:
+        return f"{p:.2e}"
+    if p < 0.001:
+        return f"{p:.2e}"
+    return f"{p:.4f}"
+
+
+def _format_effect(effect: dict) -> str:
+    """Formatea effect size."""
+    if not effect:
+        return "N/A"
+    metric = effect.get("metric", "")
+    value = effect.get("value", 0)
+    mag = effect.get("magnitud", "")
+    return f"{metric} = {value:.2f} ({mag})"
+
+
+def _format_papers(citations: list) -> str:
+    """Formatea lista de papers."""
+    if not citations:
+        return "N/A"
+    return "<br>".join(citations[:3])
+
+
+def _format_limitations(items: list) -> str:
+    """Formatea limitaciones como lista HTML."""
+    if not items:
+        return "<li>Ver stat_finding.json para detalles</li>"
+    if isinstance(items, dict):
+        items = [f"{k}: {v}" for k, v in items.items()]
+    return "".join(f"<li>{item if isinstance(item, str) else item.get('limitacion', str(item))}</li>" for item in items[:5])
+
+
 def _render_landing(finding_id: str, vir_dir: Path, narr_dir: Path, decision: dict, stat: dict) -> None:
     """Render simple landing desde template."""
     tpl_path = ROOT / "web" / "_tpl" / "finding.html"
@@ -377,6 +426,15 @@ def _render_landing(finding_id: str, vir_dir: Path, narr_dir: Path, decision: di
         "{{SHARE_TG}}": share.get("shares", {}).get("telegram", {}).get("text", ""),
         "{{URL}}": f"https://auditoria.neuracode.dev/{finding_id.lower()}/",
         "{{TS}}": datetime.now(timezone.utc).isoformat(),
+        # Sustentación técnica
+        "{{SUST_OBSERVED}}": _extract_observed(stat),
+        "{{SUST_UNIVERSE}}": stat.get("assumptions_checked", {}).get("n_suficiente", "92,766 mesas"),
+        "{{SUST_COMPARISON}}": f"H0: {stat.get('h0', 'N/A')}",
+        "{{SUST_TEST}}": stat.get("test", "N/A"),
+        "{{SUST_PVALUE}}": _format_pvalue(stat.get("p_value")),
+        "{{SUST_EFFECT}}": _format_effect(stat.get("effect_size", {})),
+        "{{SUST_PAPER}}": _format_papers(stat.get("method_citation", [])),
+        "{{SUST_LIMITATIONS}}": _format_limitations(stat.get("limitaciones", stat.get("anti_ataque", []))),
     }
 
     out = tpl

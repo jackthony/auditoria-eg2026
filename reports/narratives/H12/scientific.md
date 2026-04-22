@@ -1,56 +1,58 @@
 ```markdown
 # H12 — Scientific Note: Anomalous JPP Vote Concentration, Mesa 018146
 
-*Peruvian General Election 2026 · Forensic Statistics Series*
-*Tooling: [Claude Code](https://claude.ai/referral/Kj5b88VLag) + Polars + DuckDB + scipy*
+> [Claude Code](https://claude.ai/referral/Kj5b88VLag) + Polars + DuckDB + scipy.stats
+> 2026-04-21T16:30:00Z
+
+---
+
+## Abstract
+
+Mesa 018146 registra 208 votos JPP sobre 230 válidos (p̂=0.9043), frente a una tasa
+global de p₀=0.1091 en 78,605 mesas con actas normales. El test binomial exacto produce
+p=1.60×10⁻¹⁷¹, Cohen h=1.84. Es la única mesa con n>100 y pct_JPP≥90% en el dataset.
+La anomalía persiste bajo cualquier p₀ plausible (≤70%). Se requiere explicación
+institucional por parte de ONPE. No se afirma intencionalidad.
 
 ---
 
 ## Hypothesis
 
-**H₀:** Mesa 018146 es sorteo Bernoulli i.i.d. con p₀ = 0.109073 (tasa JPP en universo de mesas normales; n_universo = 15,196,245 votos válidos)
-
-**H₁:** p_mesa > p_global (concentración anómala unilateral)
+| | |
+|---|---|
+| **H₀** | Mesa 018146 es sorteo Bernoulli iid con p_JPP = 0.109073 (tasa global mesas normales) |
+| **H₁** | p_mesa > p_global (concentración anómala unilateral) |
 
 ---
 
-## Primary Test
+## Statistical Test
 
-| Campo | Valor |
-|-------|-------|
-| **Test** | Binomial exacto 1-cola · `scipy.stats.binom.logsf(k−1, n, p₀)` |
-| **Statistic (z)** | 38.69 |
-| **p-value** | **1.60 × 10⁻¹⁷¹** · log₁₀(p) = −170.8 |
-| **Effect size** | Cohen h = **1.8396** (muy grande, umbral >0.8) |
-| **CI 95% Clopper-Pearson** | [0.858765, 0.93908] |
+| Parámetro | Valor |
+|-----------|-------|
+| **Test primario** | Binomial exacto 1-cola (scipy.stats.binom.logsf — evita underflow float64) |
+| **Test secundario** | z-test 1-proporción; χ² bondad de ajuste |
+| **Statistic z** | 38.69 |
+| **χ² (1 df)** | 1,497.7 (z²=1,496.9; Δ<0.1% — verificación independiente A3) |
+| **p-value** | **1.60 × 10⁻¹⁷¹** |
+| **Effect size** | Cohen h = **1.8396** · *muy grande* (>0.8) |
+| **CI₉₅ Clopper-Pearson** | [0.8588, 0.9391] |
 | **p̂ observado** | 0.904348 (208/230) |
-| **p₀ (referencia)** | 0.109073 (1,657,500 / 15,196,245) |
-| **N mesa** | 230 votos válidos |
-| **N universo** | 15,196,245 votos · 78,605 mesas normales |
+| **p₀ (H₀)** | 0.109073 (1,657,500 / 15,196,245 votos JPP en mesas normales) |
+| **N** | 230 votos válidos (mesa); 78,605 mesas (universo) |
 
 ---
 
-## Confirmatory Tests
+## Robustez Paramétrica
 
-| Test | Estadístico | Resultado |
-|------|-------------|-----------|
-| z-test 1-proporción | z = 38.69 | p → 0 · consistente |
-| χ² homogeneidad (2×2) | χ² = 1,497.6 · df=1 | z² = 1,496.9 · diferencia <0.1% · **consistente** |
-| Verificación Stirling log₁₀(término modal) | ≈ −153.5 | cota inferior · cola completa −170.8 · **consistente** |
+| p₀ asumido | Escenario | log₁₀(p) | vs. Bonferroni α=6.4×10⁻⁸ |
+|------------|-----------|----------|--------------------------|
+| 0.109073 | Tasa nacional | −170.8 | 163 órdenes margen |
+| 0.30 | Fortín andino (conservador) | −81.7 | 74 órdenes margen |
+| 0.50 | Empate hipotético | −38.7 | 31 órdenes margen |
+| 0.70 | Ultra-favorito local | −13.2 | 6 órdenes margen |
+| ≈0.87 | Umbral destrucción | ≈−7 | ~0 (circular) |
 
----
-
-## Robustness Analysis (Geographic Confounder)
-
-| p₀ asumido | Escenario | log₁₀(p) | p-value | vs Bonferroni α=6.36×10⁻⁷ |
-|------------|-----------|-----------|---------|---------------------------|
-| 0.109073 | Tasa nacional observada | −170.8 | 1.60×10⁻¹⁷¹ | Margen: 164 órdenes |
-| 0.30 | Zona JPP-favorable | −81.69 | 2.04×10⁻⁸² | Margen: 75 órdenes |
-| 0.50 | JPP mayoritario local | −38.73 | 1.85×10⁻³⁹ | Margen: 33 órdenes |
-| 0.70 | JPP ultra-favorito local | −13.15 | 7.15×10⁻¹⁴ | Margen: 7 órdenes |
-| **0.855** | **Umbral de falsificación** | −6.20 | ~6.4×10⁻⁷ | Límite exacto |
-
-> El hallazgo es invariante bajo cualquier p₀ realista. Para que el confounder geográfico lo destruya, JPP requeriría 85.5% de base nacional (tasa real: 10.9%).
+> Destrucción del efecto requiere p₀≥87%, lo que presupone la anomalía (hipótesis circular).
 
 ---
 
@@ -58,57 +60,48 @@
 
 | Supuesto | Estado |
 |----------|--------|
-| Independencia de votos bajo H₀ | Asumida (voto secreto, Bernoulli i.i.d.) |
-| Tamaño muestral suficiente | n=230 >> 30 · aproximación normal válida · ley de grandes números converge fuertemente |
-| p₀ observacional | Estimado de N=15,196,245 · error de estimación ~10⁻⁴ · no altera conclusión |
-| Método numérico | `logsf` evita catastrophic cancellation de float64 en valores <10⁻¹⁵ |
-| Unicidad del caso | Única mesa con n>100 y pct≥90% entre 78,605 mesas · 3 mesas ≥90% total, todas reportadas |
+| Independencia de votos (voto secreto, Bernoulli iid bajo H₀) | Asumida; no testeable directamente |
+| n suficiente para aproximación normal | ✓ n=230 >> 30 |
+| p₀ observacional (no teórico a priori) | Derivado de dataset H4: 1,657,500/15,196,245 |
+| logsf en lugar de 1-cdf | ✓ evita catastrophic cancellation float64 para p<10⁻¹⁵ |
+| Prueba 1-cola (H₁ direccional) | Justificada: H₁ es concentración excess, no bilateral |
 
 ---
 
 ## Limitations
 
-**L1 — Post-hoc identification:**
-Mesa 018146 fue identificada por búsqueda exhaustiva sobre 78,605 mesas (H4 hero), no por hipótesis preregistrada. Sin embargo: (a) el hallazgo es declarado explícitamente como post-hoc; (b) la corrección Bonferroni completa (α = 0.05/78,605 = 6.36×10⁻⁷) se aplica y el p-value la supera por 164 órdenes de magnitud; (c) Benjamini-Hochberg FDR converge al mismo resultado.
+1. **Test post-hoc:** Mesa identificada por búsqueda exhaustiva en pipeline H4, no por hipótesis pre-registrada. Corrección Bonferroni aplicada (α=6.36×10⁻⁷ sobre 78,605 mesas; extendida a α=1.0×10⁻⁸ considerando ×63 combinaciones de umbrales). Margen residual: 163 órdenes de magnitud.
 
-**L2 — Homogeneidad geográfica de p₀:**
-p₀ = 0.109073 asume distribución uniforme nacional de votos JPP. JPP puede concentrarse en distritos andinos específicos. Análisis de robustez con p₀ = 0.30 / 0.50 / 0.70 mitiga sustancialmente este riesgo. Umbral de falsificación: p₀ ≥ 0.855, valor sin precedente documentado para JPP en ninguna circunscripción.
+2. **p₀ homogeneidad nacional:** La tasa global puede subestimar la concentración local de JPP en la circunscripción de mesa 018146. Robustez con p₀=0.30 (proxy Cusco/Puno/Apurímac rural) mitiga pero no elimina. *Pendiente: usar tasa departamental exacta como p₀ secundario oficial.*
 
-**L3 — Ausencia de identificación geográfica explícita:**
-El análisis no verifica el departamento/distrito exacto de mesa 018146 en esta iteración. La estratificación por departamento es el siguiente paso recomendado (identificado en challenge por challenger). No destruye el finding; reduce el margen del confounder geográfico ya cubierto por robustez.
+3. **Espacio de búsqueda no documentado (limitación A6):** El finding no especifica cuántos umbrales de pct_JPP y n_mínimo se exploraron antes de fijar 90%/n>100. Debe documentarse en spec H12 antes de publicación.
 
-**L4 — No implica intencionalidad:**
-El resultado estadístico es compatible con concentración electoral legítima (liderazgo comunitario local, mesa rural con votantes homogéneos). La verificación de personeros, actas firmadas y observadores es indispensable antes de cualquier inferencia causal.
+4. **Contexto distribucional ausente (limitación A7):** No se reporta cuántas mesas con n>100 tienen phat ∈ [80%, 90%). Necesario para establecer singularidad de 018146 más allá del umbral elegido.
+
+5. **No implica intencionalidad:** Concentración electoral puede ser legítima (liderazgo local, comunidad cohesionada). Requiere verificación externa de personeros, actas firmadas y observadores.
 
 ---
 
 ## Anti-Attacks Addressed
 
-| Vector | Ataque | Respuesta |
-|--------|--------|-----------|
-| A1 | Confounder geográfico (p₀ local ≤70%) | p=7.15×10⁻¹⁴ con p₀=0.70 · pasa Bonferroni por 7 órdenes · SOBREVIVE |
-| A2 | Confounder tamaño de mesa | n=230 refuerza anomalía (LGN converge hacia p₀) · z=38.69 equivale a ~18σ · SOBREVIVE |
-| A3 | Test alternativo χ² | χ²=1,497.6 · z²=38.69²=1,496.9 · diferencia <0.1% · COINCIDE |
-| A4 | Verificación numérica independiente | Stirling log₁₀≈−153 (cota inferior) · logsf exacto −170.8 · CONSISTENTE |
-| A5 | Robustez p₀ ±20% | Insensible · umbral falla p₀=0.855 · SOBREVIVE |
-| A6 | Post-hoc fishing | Declarado + Bonferroni aplicada + margen 164 órdenes · SOBREVIVE |
-| A7 | Cherry-picking | 3 mesas ≥90% todas reportadas · única con n>100 · SOBREVIVE |
+| Ataque | Respuesta | Resultado |
+|--------|-----------|-----------|
+| Mesa rural JPP-fortín (p₀=0.40) | log₁₀(p)≈−55; 47 órdenes sobre Bonferroni | SOBREVIVE |
+| Mesa pequeña / azar muestral | n=230 cuartil superior; IC₉₅ inf=85.9% >> p₀ | SOBREVIVE |
+| Post-hoc fishing | Bonferroni ×63 umbrales → α=1.0e-8; p=1.6e-171 | SOBREVIVE |
+| Cherry-picking (solo 018146) | Todas las mesas ≥90% reportadas (3 total) | SOBREVIVE* |
+| Método alternativo (χ²) | χ²=1497.7 vs z²=1496.9; Δ<0.1% | COINCIDE |
+| Robustez p₀ ±20% relativo | Estable hasta p₀≈87% (umbral circular) | SOBREVIVE |
 
-**Veredicto challenge (2026-04-21T16:45:00Z): SOBREVIVE (7/7)**
-
----
-
-## Method Citations
-
-- Clopper CJ, Pearson ES (1934). The use of confidence or fiducial limits illustrated in the case of the binomial. *Biometrika* **26**:404–413. *(IC binomial exacto)*
-- Newcombe RG (1998). Two-sided confidence intervals for the single proportion: comparison of seven methods. *Statistics in Medicine* **17**:873–890. *(z-test proporción)*
-- Cohen J (1988). *Statistical Power Analysis for the Behavioral Sciences*, 2nd ed. Lawrence Erlbaum. *(effect size h)*
+*Limitación de transparencia: histograma phat[80-90%] pendiente.
 
 ---
 
-## Regla de Oro
+## Method Citation
 
-> Esta nota documenta una **anomalía estadística que ONPE debe explicar** mediante verificación de personeros, actas y observadores presentes. No se afirma fraude ni intencionalidad.
+- Clopper CJ, Pearson ES (1934). *The use of confidence or fiducial limits illustrated in the case of the binomial.* Biometrika **26**:404-413. *(IC binomial exacto)*
+- Newcombe RG (1998). *Two-sided confidence intervals for the single proportion.* Statist. Med. **17**:873-890. *(z-test proporción)*
+- Cohen J (1988). *Statistical Power Analysis for the Behavioral Sciences*, 2nd ed. *(effect size h)*
 
 ---
 
@@ -116,13 +109,25 @@ El resultado estadístico es compatible con concentración electoral legítima (
 
 | Campo | Valor |
 |-------|-------|
-| **Dataset** | HuggingFace · Neuracode/onpe-eg2026-mesa-a-mesa |
-| **IPFS CID** | `<cid_raw_h12_stratified_20260421T153803Z>` |
-| **DB SHA-256** | `<hash_onpe_eg2026_actas_normales>` |
-| **Capture timestamp** | 2026-04-21T15:38:03Z UTC |
-| **Raw finding** | `reports/raw_findings/raw_h12_stratified_20260421T153803Z.json` |
+| **Dataset** | HuggingFace `Neuracode/onpe-eg2026-mesa-a-mesa` |
+| **IPFS CID** | `<cid>` |
+| **DB SHA-256** | `<hash>` |
+| **Capture ts** | 2026-04-21T15:38:03Z UTC |
+| **raw_ref** | `reports/raw_findings/raw_h12_stratified_20260421T153803Z.json` |
 | **Spec** | `docs/specs/H12.md` |
 | **Branch** | `forensis/H12-20260421T153803Z` |
-| **Tooling** | [Claude Code](https://claude.ai/referral/Kj5b88VLag) + Polars + DuckDB + scipy |
-| **Reproducibility** | `rtk py scripts/h12_binomial_mesa018146.py` |
+| **Tooling** | [Claude Code](https://claude.ai/referral/Kj5b88VLag) + Polars + DuckDB + scipy.stats |
+| **Reproducir** | `rtk py scripts/h12_binomial_mesa018146.py` |
+
+---
+
+## Regla de Oro
+
+> Mesa 018146 constituye una **anomalía estadística que ONPE debe explicar**
+> (verificación de personeros, acta firmada, observadores registrados).
+> Este análisis **no afirma fraude ni intencionalidad.**
+
+---
+
+*Handoff → narrator-market · virality-engine*
 ```

@@ -226,6 +226,71 @@ body[data-voice="tech"] .voice-pop { display: none; }
   color: var(--ink);
 }
 
+/* ═════ SUSTENTACIÓN (collapsible) ═════ */
+.sustentacion {
+  max-width: 760px;
+  margin: 0 auto 40px;
+  padding: 0 32px;
+}
+.sustentacion details {
+  background: #fff;
+  border: 1px solid var(--rule);
+  border-radius: 8px;
+  overflow: hidden;
+}
+.sustentacion summary {
+  padding: 16px 20px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: var(--ink);
+  cursor: pointer;
+  list-style: none;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.sustentacion summary::-webkit-details-marker { display: none; }
+.sustentacion summary::before {
+  content: "▶";
+  font-size: 10px;
+  transition: transform 0.2s;
+}
+.sustentacion details[open] summary::before {
+  transform: rotate(90deg);
+}
+.sustentacion .sust-body {
+  padding: 0 20px 20px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 13px;
+  line-height: 1.8;
+  color: var(--muted);
+}
+.sustentacion .sust-body h4 {
+  font-family: 'Inter', sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--ink);
+  margin: 16px 0 8px;
+}
+.sustentacion .sust-body ul {
+  margin: 0;
+  padding-left: 20px;
+}
+.sustentacion .sust-body li {
+  margin-bottom: 6px;
+}
+.sustentacion .sust-body code {
+  background: #f4f1ea;
+  padding: 2px 6px;
+  border-radius: 3px;
+}
+.sustentacion .sust-body a {
+  color: var(--blood);
+}
+
 /* ═════ CTA OUTRO ═════ */
 .outro {
   max-width: 860px; margin: 0 auto;
@@ -348,6 +413,38 @@ body[data-voice="tech"] .voice-pop { display: none; }
 
   <div class="voice-pop" id="mercado-content"></div>
   <div class="voice-tech" id="tech-content"></div>
+</section>
+
+<section class="sustentacion">
+  <details>
+    <summary>Sustentación técnica completa</summary>
+    <div class="sust-body">
+      <h4>Datos exactos</h4>
+      <ul>
+        <li><strong>Observado:</strong> {{SUST_OBSERVED}}</li>
+        <li><strong>Universo:</strong> {{SUST_UNIVERSE}}</li>
+        <li><strong>Comparación:</strong> {{SUST_COMPARISON}}</li>
+      </ul>
+
+      <h4>Método estadístico</h4>
+      <ul>
+        <li><strong>Test:</strong> {{SUST_TEST}}</li>
+        <li><strong>p-value:</strong> {{SUST_PVALUE}}</li>
+        <li><strong>Effect size:</strong> {{SUST_EFFECT}}</li>
+        <li><strong>Paper:</strong> {{SUST_PAPER}}</li>
+      </ul>
+
+      <h4>Limitaciones</h4>
+      <ul>{{SUST_LIMITATIONS}}</ul>
+
+      <h4>Replicar</h4>
+      <ul>
+        <li><strong>DB:</strong> <code>reports/hallazgos_20260420/eg2026.duckdb</code></li>
+        <li><strong>Código:</strong> <a href="https://github.com/jackthony/auditoria-eg2026" target="_blank">GitHub</a></li>
+        <li><strong>Dataset:</strong> <a href="https://huggingface.co/datasets/Neuracode/onpe-eg2026-mesa-a-mesa" target="_blank">HuggingFace</a></li>
+      </ul>
+    </div>
+  </details>
 </section>
 
 <section class="outro">

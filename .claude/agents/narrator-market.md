@@ -52,6 +52,13 @@ Objetivo: que una señora del mercado de Gamarra entienda el hallazgo en 30 segu
 ## Hook 30 segundos (para TV/radio)
 <una frase, número dentro, impacto>
 
+### Ejemplos de ganchos que SÍ enganchan:
+- "208 de 230 votos. Una sola mesa. Un solo partido. ¿Coincidencia?"
+- "Imagina lanzar una moneda 230 veces y que salga cara 208. Eso pasó aquí."
+- "En todo el Perú, 92,766 mesas. Solo UNA votó así. Esta."
+- "4 de cada 10 votos en hospitales y prisiones. 1 de cada 10 en tu barrio."
+- "11 mesas. 11 anuladas. Un solo local. Ningún otro igual en el país."
+
 ## Hilo X 5 tweets
 1. <hook>
 2. <dato crudo>
