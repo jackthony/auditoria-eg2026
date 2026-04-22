@@ -183,10 +183,10 @@
         <button class="tab" data-target="tech">Técnico/científico</button>
       </div>
       <div class="panel active" id="mercado">
-        <pre>{{MERCADO_BODY}}</pre>
+        <div id="mercado-content" class="md-body"></div>
       </div>
       <div class="panel" id="tech">
-        <pre>{{TECH_BODY}}</pre>
+        <div id="tech-content" class="md-body"></div>
       </div>
     </section>
 
@@ -218,7 +218,15 @@
     </footer>
   </main>
 
+  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
   <script>
+    // render markdown content
+    const mercadoMd = `{{MERCADO_BODY}}`;
+    const techMd = `{{TECH_BODY}}`;
+    document.getElementById('mercado-content').innerHTML = marked.parse(mercadoMd);
+    document.getElementById('tech-content').innerHTML = marked.parse(techMd);
+
+    // tabs
     document.querySelectorAll('.tab').forEach(tab => {
       tab.addEventListener('click', () => {
         document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));

@@ -339,6 +339,15 @@ def _render_landing(finding_id: str, vir_dir: Path, narr_dir: Path, decision: di
     hero = meta.get("hook_hero", "")
     sub = meta.get("subtitle", "")
 
+    def _md_safe(text: str) -> str:
+        """Escapa para template literal JS: backticks y ${ """
+        lines = text.splitlines()
+        # strip primera línea si es solo el nombre del archivo
+        if lines and lines[0].strip().lower().endswith('.md'):
+            lines = lines[1:]
+        text = "\n".join(lines).strip()
+        return text.replace("\\", "\\\\").replace("`", "\\`").replace("${", "\\${")
+
     replacements = {
         "{{FINDING_ID}}": finding_id,
         "{{BADGE_LABEL}}": badge["label"],
@@ -346,8 +355,8 @@ def _render_landing(finding_id: str, vir_dir: Path, narr_dir: Path, decision: di
         "{{HEADLINE}}": headline,
         "{{HERO}}": hero,
         "{{SUBTITLE}}": sub,
-        "{{MERCADO_BODY}}": mercado,
-        "{{TECH_BODY}}": tech,
+        "{{MERCADO_BODY}}": _md_safe(mercado),
+        "{{TECH_BODY}}": _md_safe(tech),
         "{{SCORE}}": str(decision["score"]),
         "{{TIER}}": decision["tier"],
         "{{SHARE_X}}": share.get("shares", {}).get("twitter", {}).get("text", ""),
