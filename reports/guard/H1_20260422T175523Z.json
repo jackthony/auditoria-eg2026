@@ -1,0 +1,3 @@
+{
+  "_raw_snippet": "# PUBLISHING-GUARD: H1 VERDICT\n\n## Ejecuci\u00f3n de chequeos\n\n### \u2705 CHEQUEO 1: Fact-check num\u00e9rico\n\n| N\u00famero en narrativa | Stat_finding.json | Status |\n|---|---|---|\n| 26.27% (Extranjero) | 26.2682% | \u2705 Match (\u00b10.01 tolerance) |\n| 6.16% (global) | \"Global 6.16%\" en interpretation | \u2705 Match |\n| 4.3x | (26.2682 / 6.16) = 4.264... | \u2705 Match (4.3 redondeado) |\n| 2,543 (n Extranjero) | \"n\": 2543 | \u2705 Match |\n| 668 (n_imp Extranjero) | \"n_imp\": 668 | \u2705 Match |\n| 42.18 (z-score) | \"z\": 42.18 | \u2705 Match |\n| "
+}

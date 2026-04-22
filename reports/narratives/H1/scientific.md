@@ -1,103 +1,85 @@
 ```markdown
-# H1 — Scientific Note: Heterogeneidad de Tasa de Impugnación por Departamento
-<!-- reports/narratives/H1/scientific.md -->
-<!-- Tooling: [Claude Code](https://claude.ai/referral/Kj5b88VLag) + Polars + DuckDB -->
-
----
+# H1 — Scientific Note: Heterogeneidad de Tasas de Impugnación por Circunscripción, Elecciones Generales Perú 2026
 
 **Hypothesis:**
-- H₀: La tasa de impugnación de actas es homogénea entre los 26 departamentos (incluyendo Extranjero) — equivalente a p_i = p_global ∀i.
-- H₁: Al menos un departamento se desvía significativamente de p_global.
+- H0: La tasa de impugnación de actas es homogénea entre las 26 circunscripciones (p_depto = p_global ∀ depto)
+- H1: Al menos una circunscripción se desvía significativamente de p_global = 6.16%
 
-**Test:** χ² de homogeneidad (Fisher 1925) + z-test 1-proporción Newcombe (1998) con corrección Bonferroni (1936)
+**Test:** χ² de homogeneidad (Fisher 1925) + z-test 1-proporción Newcombe (1998) + corrección Bonferroni (1936)
 
-**Statistic:** χ² = 2897.2 · dof = 25
+**Statistic:** χ² = 2897.2
 
-**p-value:** < 1×10⁻³⁰⁰ (log₁₀p ≈ −620 vía `chi2.logsf`; reportado como `0.0` en raw_finding por underflow numérico — ver nota técnica)
+**p-value:** p ≈ 0.00e+00 (< 1e−15; representado como 0.0 en float64 — correcto bajo `norm.sf` / `chi2.sf`)
 
-**Effect size:** Cohen h (Extranjero vs global) ≈ 0.61 [grande]; ratio directo = 4.3× (26.27% vs 6.16%)
+**Degrees of freedom:** 25
 
-**CI95 Newcombe — Extranjero:** ≈ [24.5%, 28.1%] (n=2,543; intervalo estrecho confirma estabilidad)
+**Bonferroni α:** 0.001923 (= 0.05 / 26 circunscripciones)
 
-**N:** ~92,766 actas · 26 departamentos
+**Effect size (z individuales como proxy):**
 
----
+| Circunscripción | pct% | z | Dirección |
+|---|---|---|---|
+| Extranjero | 26.2682 | +42.18 | ↑ exceso |
+| Loreto | 14.8684 | +18.82 | ↑ exceso |
+| Ucayali | 12.0205 | +9.64 | ↑ exceso |
+| Junín | 3.3866 | −7.01 | ↓ déficit |
+| Puno | 3.0321 | −7.58 | ↓ déficit |
+| Arequipa | 1.8268 | −11.70 | ↓ déficit |
 
-## Resultados por departamento (extremos)
+> p_global referencia: 6.16%. Extranjero = 4.3× la media nacional.
 
-| Departamento | n | n_imp | Tasa | z | p (Bonf. α=0.001923) |
-|---|---|---|---|---|---|
-| Extranjero | 2,543 | 668 | 26.27% | +42.18 | << α |
-| Loreto | 2,697 | 401 | 14.87% | +18.82 | << α |
-| Ucayali | 1,564 | 188 | 12.02% | +9.64 | << α |
-| Arequipa | 4,215 | 77 | 1.83% | −11.70 | << α |
-| Puno | 3,397 | 103 | 3.03% | −7.58 | 3.5×10⁻¹⁴ << α |
-| Junín | 3,691 | 125 | 3.39% | −7.01 | 2.5×10⁻¹² << α |
-| **Global** | ~92,766 | — | **6.16%** | — | — |
+**CI95 (bootstrap):** No reportado en esta versión — pendiente bootstrap percentile n=10,000 iteraciones.
 
-*Los 20 departamentos intermedios no se reportan en esta nota — ver limitación L4.*
+**N:** 92,766 actas (estimado de conjunto total); mesas por depto: 1,564–4,215.
 
----
+**Assumptions checked:**
+- n suficiente: todos los deptos n > 100 ✓
+- Esperados ≥ 5: validado por `chi2_contingency` ✓
+- Independencia entre circunscripciones: asumida estructuralmente ✓
 
-## Assumptions checked
+**Limitations:**
+1. Heterogeneidad geográfica estructuralmente esperada (ruralidad, logística, conflicto social). El χ² detecta desviación estadística — **no establece causa**.
+2. La circunscripción Extranjero opera bajo condiciones no comparables con departamentos nacionales (ONPE exterior, infraestructura de fiscalización diferente). Su inclusión en el χ² viola comparabilidad estructural; su z=42.18 contribuye ~1,779/2,897 = **61% del estadístico global**. Análisis sin Extranjero requerido para magnitud honesta.
+3. Corrección Bonferroni conservadora — Benjamini-Hochberg daría mayor poder estadístico.
+4. No se distingue entre impugnación legal (observadores, personeros) y error logístico operativo.
+5. Confounder tamaño de mesa intra-depto no verificado: si distribución de n_validos/mesa difiere sistemáticamente entre circunscripciones, el χ² agregado puede absorber varianza muestral diferencial.
+6. Tabla completa de 26 circunscripciones no publicada en finding primario — solo top-3 y bottom-3. Los 20 deptos intermedios requieren reporte explícito para auditoría de cobertura.
 
-- `n_suficiente`: todos los departamentos n > 100; outliers n > 1,500
-- `esperados_ge_5`: validado vía `chi2_contingency` (celdas esperadas >> 5 en todos los casos)
-- `independencia_entre_deptos`: asumida (ver limitación L3)
-- `robustez_p0`: conclusión estable bajo variación ±20% de p₀ global
+**Anti-attacks addressed:**
 
----
+| Ataque | Respuesta | Estado |
+|---|---|---|
+| A1: Confounder geográfico (Loreto/Ucayali) | Plausible para esas regiones; **no explica Extranjero** (4.3× media, vs ~8% en EG2021) | DÉBIL — corrección requerida |
+| A2: Confounder tamaño mesa | No verificable con datos actuales; limitación no declarada en v1 | DÉBIL — corrección requerida |
+| A3: z recalculado independientemente | z_Extranjero calculado = 42.16 vs 42.18 reportado (Δ=0.02) ✓ | SOBREVIVE |
+| A4: Verificación numérica % | Todos los porcentajes verificados aritméticamente: idénticos ✓ | SOBREVIVE |
+| A5: Robustez p0 ±20% | z varía <±12%; ninguna conclusión se invierte ✓ | SOBREVIVE |
+| A6: Post-hoc fishing | Test prueba conjunto de 26; top/bottom son descriptivos de ranking, no selección a priori | SOBREVIVE |
+| A7: Cherry-picking cosmético | 20 deptos intermedios sin reportar; cobertura no auditable | DÉBIL — tabla completa requerida |
 
-## Limitations
+**Challenge verdict:** DÉBIL — hallazgo numéricamente correcto y robusto; requiere correcciones de alcance (Extranjero separado, tabla completa, control tamaño mesa) antes de publicación peer-review.
 
-- **L1 — Confounder geográfico-logístico:** Loreto y Ucayali tienen historial documentado de conflicto social e infraestructura deficiente. El χ² detecta desviación pero no establece causa. Extranjero no es explicado por este confounder (ver anti-ataque AA1).
-- **L2 — Bonferroni conservador:** Corrección de Bonferroni es conservadora; Benjamini-Hochberg (1995) daría mayor poder estadístico sin inflar error tipo I.
-- **L3 — Independencia entre deptos asumida:** Personeros de partidos nacionales operan en múltiples departamentos simultáneamente; impugnaciones coordinadas violarían este supuesto. No se dispone de datos para testearlo.
-- **L4 — Distribución completa de 26 deptos no publicada:** Esta nota reporta los 6 extremos. El patrón completo (sistémico vs localizado) no puede evaluarse externamente sin la tabla de los 26 departamentos.
-- **L5 — No distingue tipo de impugnación:** Impugnación legal (personeros, observadores) vs error logístico (actas mal llenadas) no son diferenciables en los datos disponibles.
+**Lo que NO cae bajo ningún ataque:**
+- χ² = 2897.2 matemáticamente correcto y verificado
+- Heterogeneidad real e incontestable estadísticamente
+- Extranjero 26.27% vs 6.16% global = **anomalía que ONPE debe explicar**
+- p-values correctos y verificados independientemente
 
----
+**Method citation:**
+- Newcombe, R.G. (1998). Two-sided confidence intervals for the single proportion. *Statistics in Medicine*, 17, 857–872.
+- Fisher, R.A. (1925). *Statistical Methods for Research Workers*. Edinburgh: Oliver & Boyd. [χ² homogeneidad]
+- Bonferroni, C.E. (1936). Teoria statistica delle classi e calcolo delle probabilità. *Pubblicazioni del R. Istituto Superiore di Scienze Economiche e Commerciali di Firenze*, 8, 3–62.
 
-## Anti-attacks addressed
+**Data:** HuggingFace `Neuracode/onpe-eg2026-mesa-a-mesa` · IPFS CID: `PENDIENTE — ipfs add post-freeze` · DB SHA-256: `PENDIENTE — post-freeze`
 
-| Ataque | Respuesta |
-|---|---|
-| AA1 "Extranjero siempre es outlier" | Extranjero 2026 = 26.27% vs Extranjero 2021 ≈ 8% → ratio 3.3× intra-circunscripción. Confounder estructural no explica variación temporal. |
-| AA2 "χ² infla con n grande" | Reportamos z-score por departamento + Cohen h = 0.61. Effect size no depende de n. |
-| AA3 "Correlación con conflicto social" | Plausible para Loreto/Ucayali. No disponible para Extranjero. Confounder parcial, no total. |
-| AA4 "Varianza muestral en deptos pequeños" | Todos los outliers reportados n > 1,500. IC95 de Extranjero = [24.5%, 28.1%]. Varianza no explica. |
-| AA5 "p₀ global sensible a outliers" | Robustez testada con p₀ ± 20%: z Extranjero ≥ 39.7 en todos los escenarios. |
+**Capture timestamp:** `2026-04-21T15:53:39Z`
 
----
-
-## Regla oro
-
-> Anomalía que ONPE debe explicar por departamento.
-> La tasa de impugnación en la circunscripción Extranjero (26.27%) es 4.3× el promedio nacional (6.16%) y 3.3× la tasa de la misma circunscripción en las elecciones generales de 2021 (~8%). El test χ²=2897.2 (dof=25) descarta homogeneidad entre departamentos con p < 10⁻³⁰⁰.
-
----
-
-## Method citation
-
-- Newcombe, R.G. (1998). *Two-sided confidence intervals for the single proportion.* Statistics in Medicine, 17(8), 857–872.
-- Fisher, R.A. (1925). *Statistical Methods for Research Workers.* (χ² homogeneidad)
-- Bonferroni, C.E. (1936). *Teoria statistica delle classi e calcolo delle probabilità.*
-
----
-
-## Data & reproducibility
-
-| Campo | Valor |
-|---|---|
-| Dataset | HuggingFace `Neuracode/onpe-eg2026-mesa-a-mesa` |
-| IPFS CID | `<cid_pendiente>` |
-| DB SHA-256 | `<hash_db_pendiente>` |
-| Capture timestamp | 2026-04-21T15:53:39Z |
-| Raw finding | `reports/raw_findings/raw_h1_20260421T155339Z.json` |
-| Spec | `docs/specs/H1.md` |
-| Branch | `forensis/H1-20260421T155339Z` |
-
-**Reproducibility:** `rtk py scripts/h1_impugnacion_depto.py`
+**Raw finding:** `reports/raw_findings/raw_h1_20260421T155339Z.json`
 
 **Tooling:** [Claude Code](https://claude.ai/referral/Kj5b88VLag) + Polars + DuckDB
+
+**Reproducibility:** Spec `docs/specs/H1.md` · Branch `forensis/H1-20260421T155339Z` · Script `scripts/h1_homogeneidad_impugnacion.py`
+
+---
+*Nota editorial: Este documento es un borrador técnico de análisis estadístico. No establece ni insinúa conducta fraudulenta. Las anomalías detectadas constituyen desviaciones estadísticas que requieren explicación institucional por parte de ONPE.*
 ```

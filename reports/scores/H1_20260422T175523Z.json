@@ -1,0 +1,15 @@
+{
+  "finding_id": "HALL-0420-H1",
+  "score": 0.7,
+  "breakdown": {
+    "p_factor": 1.0,
+    "effect_factor": 0.5,
+    "challenger_factor": 0.5
+  },
+  "inputs": {
+    "p_value": 0.0,
+    "effect_size": null,
+    "challenger_verdict": "DEBIL"
+  },
+  "tier": "PENDING-JACK"
+}

@@ -2,24 +2,23 @@
   "finding_id": "H1",
   "hall_id": "HALL-0420-H1",
   "headlines": [
-    "Extranjero: 26.27% impugnadas vs 6.16% nacional (χ²=2897, p<1e-300)",
-    "4.3× el promedio: mesas extranjero impugnan como ningún depto peruano",
-    "668 de 2,543 mesas extranjero impugnadas. Arequipa: 77 de 4,215. ONPE debe explicar",
-    "Tasa impugnación extranjero triplicó en 5 años: 8% en 2021, 26.27% en 2026",
-    "26 departamentos, χ²=2897.2: heterogeneidad de impugnación no es ruido estadístico"
+    "Extranjero: 26.27% impugnados vs 6.16% nacional. ONPE debe explicar 4.3x",
+    "668 de 2,543 votos impugnados en el exterior. El resto del país: 6 de cada 100",
+    "26 departamentos, una regla. Extranjero sale 42 veces fuera de lo normal",
+    "Arequipa 1.83% — Extranjero 26.27%. Misma elección. ONPE debe explicar",
+    "χ²=2897 · 26 circunscripciones · p=0.00e+00 · Extranjero z=42.18"
   ],
-  "hook_hero": "26.27% impugnadas · Extranjero · 4.3× el promedio nacional",
-  "subtitle": "χ²=2897.2 · dof=25 · p < 1e-300. ONPE debe explicar.",
+  "hook_hero": "26.27% vs 6.16% · Extranjero · z = 42.18",
+  "subtitle": "Tasa impugnación 4.3x el promedio nacional. ONPE debe explicar.",
   "hashtags": [
     "#AuditoriaEG2026",
     "#FORENSIS"
   ],
-  "selected_headline_index": 3,
-  "selection_reason": "La comparación temporal 2021→2026 (8%→26.27%, triple) convierte el dato en tendencia verificable y no requiere contexto estadístico previo para impactar. Cabe en tweet con espacio para URL+hashtags. Resiste el ataque 'siempre fue raro' porque pone base de comparación concreta.",
-  "utm_params": {
-    "utm_source": "{{platform}}",
-    "utm_medium": "organic_share",
-    "utm_campaign": "h1_impugnacion_depto",
-    "utm_content": "{{variant}}"
-  }
+  "selected_headline_index": 0,
+  "selection_reason": "Dos números crudos + comparación directa + actor responsable + cabe en tweet. Evita jerga, no nombra partido, no afirma causa.",
+  "caveats_embedded": [
+    "Extranjero no es departamento geográfico — circunscripción con reglas distintas",
+    "χ² detecta sin explicar causa; Loreto/Ucayali tienen hipótesis estructural plausible",
+    "Tabla completa 26/26 requerida antes de publicación definitiva"
+  ]
 }
