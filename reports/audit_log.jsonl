@@ -83,3 +83,24 @@
 {"event": "stage_start", "stage": "web-builder", "ts_utc": "2026-04-22T05:59:32.025187+00:00"}
 {"event": "stage_done", "stage": "web-builder", "path": "web/h12/index.html", "ts_utc": "2026-04-22T05:59:32.026448+00:00"}
 {"event": "pipeline_complete", "finding_id": "H12", "branch": "forensis/HALL-0420-H12-20260422T055627Z", "tier": "PENDING-JACK", "ts_utc": "2026-04-22T05:59:32.026508+00:00"}
+{"event": "pipeline_start", "finding_id": "H12", "ts": "20260422T061654Z", "ts_utc": "2026-04-22T06:16:54.424079+00:00"}
+{"event": "stage_start", "stage": "data-forensic", "finding_id": "H12", "ts_utc": "2026-04-22T06:16:54.424190+00:00"}
+{"event": "stage_done", "stage": "data-forensic", "artifact": "reports/raw_findings/raw_h12_stratified_20260421T153803Z.json", "ts_utc": "2026-04-22T06:16:54.424531+00:00"}
+{"event": "stage_start", "stage": "stats-expert", "ts_utc": "2026-04-22T06:16:54.424591+00:00"}
+{"event": "stage_done", "stage": "stats-expert", "artifact": "reports/stat_findings/stat_h12_20260421T153931Z.json", "ts_utc": "2026-04-22T06:16:54.424902+00:00"}
+{"event": "stage_start", "stage": "forensic-challenger", "ts_utc": "2026-04-22T06:16:54.424964+00:00"}
+{"event": "stage_done", "stage": "forensic-challenger", "artifact": "reports/challenges/H12_20260422T061654Z.md", "ts_utc": "2026-04-22T06:18:07.738133+00:00"}
+{"event": "stage_start", "stage": "confidence_scorer", "ts_utc": "2026-04-22T06:18:07.738214+00:00"}
+{"event": "stage_done", "stage": "confidence_scorer", "score": 1.0, "tier": "AUTO", "ts_utc": "2026-04-22T06:18:07.764681+00:00"}
+{"event": "stage_done", "stage": "hitl_router", "tier": "AUTO", "publish": true, "ts_utc": "2026-04-22T06:18:07.796057+00:00"}
+{"event": "stage_start", "stage": "narrator-technical", "ts_utc": "2026-04-22T06:18:07.796134+00:00"}
+{"event": "stage_start", "stage": "narrator-market", "ts_utc": "2026-04-22T06:19:15.480996+00:00"}
+{"event": "stage_done", "stage": "narratives", "path": "reports/narratives/H12", "ts_utc": "2026-04-22T06:19:37.904700+00:00"}
+{"event": "stage_start", "stage": "virality-engine", "ts_utc": "2026-04-22T06:19:37.904796+00:00"}
+{"event": "stage_done", "stage": "virality-engine", "ts_utc": "2026-04-22T06:20:38.331863+00:00"}
+{"event": "stage_start", "stage": "publishing-guard", "ts_utc": "2026-04-22T06:20:38.331959+00:00"}
+{"event": "stage_done", "stage": "publishing-guard", "verdict": null, "ts_utc": "2026-04-22T06:20:55.662476+00:00"}
+{"event": "guard_warn", "verdict": null, "raw": "```json\n{\n  \"finding_id\": \"H12\",\n  \"verdict\": \"APPROVED\",\n  \"ts_utc\": \"2026-04-21T14:32:47Z\",\n  \"checks_passed\": [\n    \"fact_check_numeric\",\n    \"tone_guard\",\n    \"regla_oro\",\n    \"wcag_basic\",\n    \"l", "ts_utc": "2026-04-22T06:20:55.662547+00:00"}
+{"event": "stage_start", "stage": "web-builder", "ts_utc": "2026-04-22T06:20:55.662608+00:00"}
+{"event": "stage_done", "stage": "web-builder", "path": "web/h12/index.html", "ts_utc": "2026-04-22T06:20:55.663952+00:00"}
+{"event": "pipeline_complete", "finding_id": "H12", "branch": "forensis/HALL-0420-H12-20260422T061807Z", "tier": "AUTO", "ts_utc": "2026-04-22T06:20:55.664014+00:00"}
