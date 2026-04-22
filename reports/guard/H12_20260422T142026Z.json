@@ -1,0 +1,46 @@
+{
+  "finding_id": "H12",
+  "verdict": "VETOED",
+  "ts_utc": "2026-04-21T15:38:03Z",
+  "violations": [
+    {
+      "check": "fact_check",
+      "severity": "CRITICAL",
+      "detail": "N\u00famero '1 septill\u00f3n' en tweet #3 y narrativa es lenguaje aproximado sin referente en stat_finding. Stat reporta p=1.60e-171 (1.60 \u00d7 10^-171), NO un septill\u00f3n legible. Septill\u00f3n en escala corta = 10^24. Esto es 10^-171, incomparable. Eliminaci\u00f3n necesaria o aclaraci\u00f3n: 'probabilidad astron\u00f3mica' sin n\u00famero exacto."
+    },
+    {
+      "check": "fact_check",
+      "severity": "HIGH",
+      "detail": "Headline #5 dice 'Bonferroni: 164 \u00f3rdenes de margen' pero stat_finding reporta en robustez/anti_ataque '\u03b1=6.4e-8' (threshold Bonferroni sobre 78,605 mesas). '164 \u00f3rdenes' es no verificable. Debe ser: 'Bonferroni \u03b1=6.4e-8' o 'pasa Bonferroni 78,605 mesas'."
+    },
+    {
+      "check": "length",
+      "severity": "MEDIUM",
+      "detail": "Tweet #3 supera 280 chars. Conteo: 'Matem\u00e1tica: Probabilidad de ocurrir por azar = 1 en 10,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000 (1 septill\u00f3n)' = 328 chars. Requiere reducci\u00f3n a \u2264280."
+    },
+    {
+      "check": "tone",
+      "severity": "MEDIUM",
+      "detail": "Mercado.md l\u00ednea ~22: 'Es como que en una rifa de 230 bolitas, salga la misma bolita 208 veces. Imposible sin truco.' \u2014 Palabra 'truco' es l\u00edmite de tone-guard. Aunque contexto es anal\u00f3gico (no acusatorio), recomendar cambiar a 'sin manipulaci\u00f3n' o eliminar frase. Current risk: ~40% lectores interpreta como insinuaci\u00f3n fraude."
+    },
+    {
+      "check": "regla_oro",
+      "severity": "INFO",
+      "detail": "Regla oro CUMPLIDA: 'ONPE debe explicar' presente l\u00ednea 10 mercado.md + l\u00ednea 5 tweet. Paper cite falta en mercado.md (solo menciona 'Claude Code' referral). Debe incluir citaci\u00f3n completa stat_finding registry o DOI paper. SHA-256 '`a7f3c2e1...`' es fake (mostrado truncado sin verificabilidad). Requiere SHA real de reports/raw_findings/raw_h12_stratified_20260421T153803Z.json."
+    }
+  ],
+  "critical_blocker": true,
+  "action": "issue_created: publishing-veto-H12",
+  "issue_summary": {
+    "title": "publishing-veto-H12: fact_check septill\u00f3n + Bonferroni + tweet overflow",
+    "body": "**VETO CAUSAS:**\n\n1. **Septill\u00f3n no verificable** (check:fact_check)\n   - Stat dice p=1.60e-171\n   - Mercado/tweet dice '1 septill\u00f3n'\n   - Septill\u00f3n (10^24) \u2260 10^-171\n   - FIX: Remover n\u00famero 'septill\u00f3n' o usar '1.60\u00d710^-171 (probabilidad astron\u00f3mica)'\n\n2. **Bonferroni '164 \u00f3rdenes' sin fuente** (check:fact_check)\n   - Headline #5 cita '164 \u00f3rdenes de margen'\n   - Stat reporta \u03b1_Bonf=6.4e-8, no '164 \u00f3rdenes'\n   - FIX: Cambiar a 'pasa threshold Bonferroni 78,605 mesas' o remover headline\n\n3. **Tweet #3 exceeds 280 chars** (check:length)\n   - Current: 328 chars\n   - FIX: Comprimir a \u2264280 o dividir en 2 tweets\n\n4. **Tone: palabra 'truco'** (check:tone)\n   - Mercado.md 'Imposible sin truco' roza l\u00edmite\n   - Context anal\u00f3gico, pero 40% riesgo de malinterpretaci\u00f3n como acusaci\u00f3n\n   - FIX: Cambiar a 'sin manipulaci\u00f3n' o 'sin alteraci\u00f3n'\n\n5. **Regla oro: SHA-256 + paper cite incompleta** (check:regla_oro)\n   - SHA mostrado como truncado fake '`a7f3c2e1...`'\n   - Paper cite presente (Claude referral) pero falta DOI/registry link\n   - IPFS link tambi\u00e9n fake '`QmX9f2k8...`'\n   - FIX: Incluir SHA real, DOI paper stat H12, IPFS real si aplica\n\n**RETRY HINT:** Regenerar narrativas mercado.md + meta.md con:\n- Septill\u00f3n \u2192 'astronomicamente improbable'\n- Tweet #3 dividido en 2 (ej: tweet 3a p-value, 3b analog\u00eda)\n- 'Truco' \u2192 'manipulaci\u00f3n'\n- SHA-256 real de raw_h12_stratified_20260421T153803Z.json\n- Headline #5 reescrita o removida\n\n**OWNER:** forensis-orchestrator \u2192 regenera \u2192 re-test con publishing-guard"
+  },
+  "checks_status": {
+    "fact_check_numerico": "FAILED (septill\u00f3n, Bonferroni 164)",
+    "tone_guard": "WARNING (truco)",
+    "regla_oro": "WARNING (SHA fake, paper cite incomplete)",
+    "wcag_aa": "PASSED (alt text OK, contraste visible, body 16px+)",
+    "length_maxima": "FAILED (tweet #3 328 chars > 280)"
+  },
+  "_raw_snippet": "```json\n{\n  \"finding_id\": \"H12\",\n  \"verdict\": \"VETOED\",\n  \"ts_utc\": \"2026-04-21T15:38:03Z\",\n  \"violations\": [\n    {\n      \"check\": \"fact_check\",\n      \"severity\": \"CRITICAL\",\n      \"detail\": \"N\u00famero '1 septill\u00f3n' en tweet #3 y narrativa es lenguaje aproximado sin referente en stat_finding. Stat reporta p=1.60e-171 (1.60 \u00d7 10^-171), NO un septill\u00f3n legible. Septill\u00f3n en escala corta = 10^24. Esto es 10^-171, incomparable. Eliminaci\u00f3n necesaria o aclaraci\u00f3n: 'probabilidad astron\u00f3mica' sin n\u00famero e"
+}

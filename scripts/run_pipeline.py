@@ -33,6 +33,12 @@ from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any
 
+# Windows cp1252 safety — allow Unicode in stdout
+if hasattr(sys.stdout, "reconfigure"):
+    sys.stdout.reconfigure(encoding="utf-8")
+if hasattr(sys.stderr, "reconfigure"):
+    sys.stderr.reconfigure(encoding="utf-8")
+
 ROOT = Path(__file__).resolve().parents[1]
 AGENTS_DIR = ROOT / ".claude" / "agents"
 AUDIT_LOG = ROOT / "reports" / "audit_log.jsonl"
