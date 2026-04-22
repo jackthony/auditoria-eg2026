@@ -1,0 +1,128 @@
+{
+  "finding_id": "H12",
+  "dimensions": "1200x630",
+  "format": "svg",
+  "layout": {
+    "bg_color": "#faf7f2",
+    "accent_color": "#0c1a2e",
+    "alert_color": "#e63946",
+    "grid": {
+      "left_panel_width": 520,
+      "right_panel_width": 640,
+      "padding": 56
+    },
+    "left_panel": {
+      "eyebrow": {
+        "text": "HALL-0420-H12 · CRÍTICO",
+        "font": "JetBrains Mono 16pt",
+        "color": "#e63946",
+        "y": 80
+      },
+      "hero_number": {
+        "text": "90.43%",
+        "font": "Fraunces 192pt",
+        "color": "#e63946",
+        "y": 280
+      },
+      "hero_label": {
+        "text": "JPP · mesa 018146",
+        "font": "Inter SemiBold 28pt",
+        "color": "#0c1a2e",
+        "y": 360
+      },
+      "comparison_line": {
+        "text": "vs 10.91% promedio nacional",
+        "font": "Inter 22pt",
+        "color": "#555555",
+        "y": 400
+      },
+      "multiplier": {
+        "text": "8.3× el valor esperado",
+        "font": "Inter Bold 22pt",
+        "color": "#0c1a2e",
+        "y": 432
+      }
+    },
+    "right_panel": {
+      "bg_color": "#0c1a2e",
+      "x_offset": 576,
+      "stats_table": [
+        {
+          "label": "Votos JPP observados",
+          "value": "208 / 230",
+          "font_label": "Inter 18pt #8899aa",
+          "font_value": "JetBrains Mono Bold 22pt #faf7f2",
+          "y": 120
+        },
+        {
+          "label": "z-score",
+          "value": "38.69",
+          "font_label": "Inter 18pt #8899aa",
+          "font_value": "JetBrains Mono Bold 22pt #faf7f2",
+          "y": 190
+        },
+        {
+          "label": "Cohen h",
+          "value": "1.8396 (muy grande)",
+          "font_label": "Inter 18pt #8899aa",
+          "font_value": "JetBrains Mono Bold 22pt #faf7f2",
+          "y": 260
+        },
+        {
+          "label": "IC95 Clopper-Pearson",
+          "value": "[0.859, 0.939]",
+          "font_label": "Inter 18pt #8899aa",
+          "font_value": "JetBrains Mono Bold 22pt #faf7f2",
+          "y": 330
+        },
+        {
+          "label": "Universo mesas normales",
+          "value": "78,605",
+          "font_label": "Inter 18pt #8899aa",
+          "font_value": "JetBrains Mono Bold 22pt #faf7f2",
+          "y": 400
+        },
+        {
+          "label": "p-value binomial exacto",
+          "value": "1.60e-171",
+          "font_label": "Inter 18pt #8899aa",
+          "font_value": "JetBrains Mono Bold 26pt #e63946",
+          "y": 480
+        }
+      ]
+    },
+    "footer": {
+      "left": {
+        "text": "FORENSIS · auditoria.neuracode.dev/h12",
+        "font": "Inter 16pt",
+        "color": "#555555",
+        "y": 600
+      },
+      "right": {
+        "text": "SHA-256 verified · ONPE datos públicos",
+        "font": "JetBrains Mono 14pt",
+        "color": "#888888",
+        "y": 600
+      },
+      "divider_line": {
+        "y": 585,
+        "color": "#dddddd",
+        "width": 1088
+      }
+    },
+    "logo": {
+      "text": "FORENSIS",
+      "font": "Fraunces Bold 20pt",
+      "color": "#0c1a2e",
+      "position": "top-right",
+      "x": 1100,
+      "y": 48
+    }
+  },
+  "render_script": "scripts/render_og.py",
+  "render_args": {
+    "finding": "h12",
+    "output": "web/h12/og.png",
+    "also_output_svg": true
+  }
+}

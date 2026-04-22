@@ -1,0 +1,3 @@
+{
+  "_raw_snippet": "# PUBLISHING GUARD EXECUTION \u2014 H12\n\n## 1. FACT-CHECK NUM\u00c9RICO\n\n| Campo | Narrativa | Stat Finding | Delta | \u2713 |\n|---|---|---|---|---|\n| Votos JPP mesa | 208 | (208/230 inferred) | \u2713 | \u2713 |\n| Total votos mesa | 230 | (n=230) | \u2713 | \u2713 |\n| % JPP mesa | 90.43% | phat=0.904348 | \u2713 (rounding OK) | \u2713 |\n| % JPP nacional | 10.91% | p_JPP=0.109073 | \u2713 | \u2713 |\n| Ratio multiplicativo | 8.3x | 0.904348/0.109073=8.289x | \u2713 | \u2713 |\n| p-value | 1.60e-171 | binomial_p_value=1.600091605905969e-171 | \u2713 | \u2713 |\n| z-score |"
+}

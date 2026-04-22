@@ -1,0 +1,25 @@
+{
+  "finding_id": "H12",
+  "hall_id": "HALL-0420-H12",
+  "headlines": [
+    "Mesa 018146: JPP 90.43% vs 10.91% nacional — única con n>100 entre 78,605",
+    "208 de 230 votos JPP en una mesa. Probabilidad de azar: 1.60e-171",
+    "90.43% JPP vs 10.91% promedio: 8.3x el valor esperado. ONPE debe explicar",
+    "Bonferroni sobre 78,605 mesas: mesa 018146 pasa con 163 órdenes de margen",
+    "z-score 38.69 — única mesa n>100 con pct_JPP≥90% en todo el dataset ONPE"
+  ],
+  "hook_hero": "90.43% JPP · mesa 018146 · p = 1.60e-171",
+  "subtitle": "208/230 votos. Única mesa n>100 con ≥90% JPP entre 78,605. ONPE debe explicar.",
+  "hashtags": [
+    "#AuditoriaEG2026",
+    "#FORENSIS"
+  ],
+  "selected_headline_index": 0,
+  "selection_reason": "Identifica la mesa específica + las dos tasas en conflicto + el universo de comparación. No predice, no acusa. Cabe en tweet con hashtags.",
+  "url_canonical": "https://auditoria.neuracode.dev/h12/",
+  "utms": {
+    "twitter": "?utm_source=twitter&utm_medium=share&utm_campaign=h12",
+    "whatsapp": "?utm_source=whatsapp&utm_medium=share&utm_campaign=h12",
+    "telegram": "?utm_source=telegram&utm_medium=share&utm_campaign=h12"
+  }
+}
