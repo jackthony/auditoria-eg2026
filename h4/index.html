@@ -465,6 +465,62 @@ body[data-voice="tech"] .voice-pop { display: none; }
   </div>
 </section>
 
+<!-- ══ SUSTENTACIÓN ══ -->
+<section style="max-width:760px;margin:0 auto;padding:0 32px 40px;">
+  <details style="background:#fff;border:1px solid #d4ccbd;border-radius:8px;overflow:hidden;">
+    <summary style="padding:16px 20px;font-family:'JetBrains Mono',monospace;font-size:12px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:#0c1a2e;cursor:pointer;list-style:none;display:flex;align-items:center;gap:8px;">
+      ▶ Sustentación técnica completa
+    </summary>
+    <div style="padding:0 20px 20px;font-family:'JetBrains Mono',monospace;font-size:13px;line-height:1.8;color:#5a5a5a;">
+      <h4 style="font-family:'Inter',sans-serif;font-size:14px;font-weight:600;color:#0c1a2e;margin:16px 0 8px;">Datos exactos</h4>
+      <ul>
+        <li><strong>Observado:</strong> JPP 41.65% (235,331/565,060) en mesas especiales 900k+</li>
+        <li><strong>Comparación:</strong> JPP 10.91% (1,657,500/15,196,245) en mesas normales</li>
+        <li><strong>Universo:</strong> 92,766 mesas · 4,703 especiales · 88,063 normales</li>
+      </ul>
+      <h4 style="font-family:'Inter',sans-serif;font-size:14px;font-weight:600;color:#0c1a2e;margin:16px 0 8px;">Método estadístico</h4>
+      <ul>
+        <li><strong>Test:</strong> z-test 2 proporciones + χ² homogeneidad + bootstrap IC95</li>
+        <li><strong>z:</strong> 698 · <strong>χ²:</strong> 487,171 · <strong>p:</strong> &lt; 10⁻³⁰⁰</li>
+        <li><strong>Effect size:</strong> Cohen h = 0.73 (grande) · OR = 5.83</li>
+        <li><strong>IC95 bootstrap:</strong> [29.46%, 30.79%]</li>
+        <li><strong>Papers:</strong> Newcombe 1998 · Cohen 1988 · Efron-Tibshirani 1993</li>
+      </ul>
+      <h4 style="font-family:'Inter',sans-serif;font-size:14px;font-weight:600;color:#0c1a2e;margin:16px 0 8px;">Limitaciones</h4>
+      <ul>
+        <li>Mesas 900k+ agrupa tipos heterogéneos (militar, policial, penal, exterior)</li>
+        <li>No se puede inferir causalidad — solo concentración estadística</li>
+        <li>Análisis por partido: solo JPP, no comparativa completa</li>
+      </ul>
+      <h4 style="font-family:'Inter',sans-serif;font-size:14px;font-weight:600;color:#0c1a2e;margin:16px 0 8px;">Replicar</h4>
+      <ul>
+        <li><strong>DB:</strong> <code style="background:#f4f1ea;padding:2px 6px;border-radius:3px;">reports/hallazgos_20260420/eg2026.duckdb</code></li>
+        <li><strong>Código:</strong> <a href="https://github.com/jackthony/auditoria-eg2026" target="_blank" style="color:#e63946;">GitHub</a></li>
+        <li><strong>Dataset:</strong> <a href="https://huggingface.co/datasets/Neuracode/onpe-eg2026-mesa-a-mesa" target="_blank" style="color:#e63946;">HuggingFace</a></li>
+      </ul>
+    </div>
+  </details>
+</section>
+
+<!-- ══ FORENSIS INFO ══ -->
+<section style="max-width:760px;margin:0 auto;padding:0 32px 60px;">
+  <div style="background:#fff;border:1px solid #d4ccbd;border-radius:8px;padding:24px;">
+    <h3 style="font-family:'Fraunces',serif;font-size:22px;margin:0 0 16px;color:#0c1a2e;">¿Quién audita esto?</h3>
+    <p style="font-size:15px;line-height:1.7;color:#5a5a5a;margin:0 0 14px;">
+      <strong style="color:#0c1a2e;">FORENSIS</strong> es un agente de inteligencia artificial creado por <a href="https://x.com/JackTonyAC" target="_blank" style="color:#e63946;">Jack Aguilar</a> (Neuracode) para auditar datos electorales públicos de ONPE.
+    </p>
+    <p style="font-size:14px;line-height:1.7;color:#5a5a5a;margin:0 0 14px;">
+      <strong style="color:#0c1a2e;">¿Cómo funciona?</strong> 7 agentes especializados trabajan en cadena: extracción de datos → validación estadística con papers peer-reviewed → red-team adversarial → narrativa dual (pueblo + técnica) → revisión de tono → publicación.
+    </p>
+    <p style="font-size:14px;line-height:1.7;color:#5a5a5a;margin:0 0 14px;">
+      <strong style="color:#0c1a2e;">¿La IA decide?</strong> No. Cada hallazgo requiere aprobación humana antes de publicar.
+    </p>
+    <p style="font-size:14px;line-height:1.7;color:#5a5a5a;margin:0;">
+      <strong style="color:#0c1a2e;">¿Puedo verificar?</strong> Sí. <a href="https://github.com/jackthony/auditoria-eg2026" target="_blank" style="color:#e63946;">MIT open source</a> · <a href="https://huggingface.co/datasets/Neuracode/onpe-eg2026-mesa-a-mesa" target="_blank" style="color:#e63946;">Dataset HuggingFace</a> · <a href="https://claude.ai/referral/Kj5b88VLag" target="_blank" style="color:#e63946;">Hecho con Claude Code</a>
+    </p>
+  </div>
+</section>
+
 </main>
 
 <!-- Scrollama CDN (2.5 KB) -->
