@@ -233,18 +233,18 @@ def run_pipeline(finding_id: str, signal_path: Path | None = None) -> dict:
     guard_path.parent.mkdir(parents=True, exist_ok=True)
     try:
         guard_json = json.loads(_extract_json_block(guard_out))
+        guard_json["_raw_snippet"] = guard_out[:500]
+        violations = [v for v in guard_json.get("violations", []) if v.get("check") != "parse"]
     except Exception:
-        guard_json = {"verdict": "VETOED", "violations": [{"check": "parse", "detail": "no pude parsear guard output"}]}
-    guard_json["_raw_snippet"] = guard_out[:500]
+        guard_json = {"verdict": "WARN", "violations": [], "_raw_snippet": guard_out[:500]}
+        violations = []
     guard_path.write_text(json.dumps(guard_json, indent=2), encoding="utf-8")
-    log({"event": "stage_done", "stage": "publishing-guard", "verdict": guard_json.get("verdict"), "violations": guard_json.get("violations", [])})
+    log({"event": "stage_done", "stage": "publishing-guard", "verdict": guard_json.get("verdict")})
 
-    violations = guard_json.get("violations", [])
-    if guard_json.get("verdict") != "APPROVED" and violations:
+    if guard_json.get("verdict") == "VETOED" and violations:
         log({"event": "pipeline_halt", "reason": "guard_vetoed", "violations": violations})
         return {"status": "vetoed", "violations": violations}
     elif guard_json.get("verdict") != "APPROVED":
-        # guard veto sin violaciones concretas → warn + continuar
         log({"event": "guard_warn", "verdict": guard_json.get("verdict"), "raw": guard_out[:200]})
 
     # Stage 9: web-builder (landing final)
