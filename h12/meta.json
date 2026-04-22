@@ -1,0 +1,30 @@
+{
+  "finding_id": "H12",
+  "hall_id": "HALL-0420-H12",
+  "severity": "CRITICO",
+  "headlines": [
+    "Mesa 018146: JPP 90.43% (208/230) vs 10.91% nacional — p = 1.60e-171",
+    "Única mesa n>100 con JPP ≥90% en 78,605 mesas normales. ONPE debe explicar",
+    "90.43% vs 10.91%: 79.5 puntos de diferencia, z = 38.69, n = 230",
+    "Mesa 018146: probabilidad azar 1.60e-171 — Cohen h = 1.84 (muy grande)",
+    "208 de 230 votos JPP en una mesa. En 78,604 restantes: ninguna parecida con n>100"
+  ],
+  "hook_hero": "90.43% JPP · mesa 018146 · p = 1.60e-171",
+  "subtitle": "Única mesa n>100 con ≥90% JPP en universo de 78,605. ONPE debe explicar.",
+  "hashtags": [
+    "#AuditoriaEG2026",
+    "#FORENSIS"
+  ],
+  "selected_headline_index": 0,
+  "selection_reason": "Número crudo (90.43%) + denominador concreto (208/230) + comparación directa (10.91% nacional) + p-value legible. Cabe en tweet con espacio para URL y hashtags. No predice, no acusa, pregunta al dato.",
+  "anti_ataque_inline": [
+    "p0=0.70 (feudo ultra-favorito) → p = 7.15e-14. Rechazo persiste.",
+    "Bonferroni 78,605 mesas → α_adj = 6.4e-9. p observado supera por 162 órdenes.",
+    "3 mesas ≥90% reportadas íntegramente. 018146 es la única con n>100."
+  ],
+  "regla_oro": "Anomalía estadística que ONPE debe explicar (personero, acta firmada, observador). No se afirma fraude.",
+  "timestamp_finding": "2026-04-21T15:38:03Z",
+  "timestamp_challenge": "2026-04-21T16:45:00Z",
+  "challenge_verdict": "SOBREVIVE",
+  "firma": "— FORENSIS · Neuracode"
+}
