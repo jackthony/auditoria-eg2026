@@ -1,19 +1,21 @@
 {
   "finding_id": "H12",
-  "hall_id": "HALL-0420-H12",
+  "raw_ref": "HALL-0420-H12",
+  "mesa_id": "018146",
   "headlines": [
-    "Mesa 018146: JPP 90.43% vs 10.91% nacional · p=1.60e-171",
-    "208 de 230 votos para JPP en mesa con promedio nacional de 10.91%",
-    "Una mesa, 90.43% JPP. El resto del país: 10.91%. ONPE debe explicar",
-    "Única mesa n>100 con ≥90% JPP entre 78,605 mesas normales",
-    "z=38.69 · Cohen h=1.84 · Bonferroni: 164 órdenes de margen"
+    "Mesa 018146: JPP 90.43% vs 10.91% nacional. p=1.60e-171",
+    "208 de 230 votos para JPP en una mesa. Tasa nacional: 1 de cada 9",
+    "Única mesa n>100 con ≥90% JPP en 78,605 revisadas. ONPE debe explicar",
+    "90.43% vs 10.91%: Cohen h=1.84. Mesa 018146, Cusco. Acta pública",
+    "Bonferroni: 163 órdenes de magnitud de margen. Mesa 018146 no cuadra"
   ],
-  "hook_hero": "90.43% JPP · mesa 018146 · p=1.60e-171",
-  "subtitle": "208/230 votos vs 10.91% nacional. ONPE debe explicar.",
+  "hook_hero": "90.43% JPP · mesa 018146 · p = 1.60e-171",
+  "subtitle": "Tasa nacional JPP: 10.91%. Una sola mesa entre 78,605 con n>100 llega a este extremo.",
   "hashtags": [
     "#AuditoriaEG2026",
     "#FORENSIS"
   ],
-  "selected_headline_index": 2,
-  "selection_reason": "Contraste inmediato (90.43% vs 10.91%), interpela directamente a ONPE, cabe en tweet con URL+hashtags, cero hype"
+  "selected_headline_index": 0,
+  "selection_reason": "Contiene los tres números clave (90.43%, 10.91%, p-value), nombra la mesa concreta, cabe en tweet con margen para hashtags. Sin hype, sin predicción.",
+  "nota_editorial": "Headline 2 es respaldo para formatos sin notación científica (radio, señora del mercado). Headline 3 es respaldo para audiencia técnica que valora unicidad estadística."
 }

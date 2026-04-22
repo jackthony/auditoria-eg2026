@@ -1,39 +1,97 @@
 {
   "finding_id": "H12",
-  "hall_id": "HALL-0420-H12",
+  "mesa_id": "018146",
   "dimensions": "1200x630",
   "format": "svg",
   "layout": {
-    "hero_number": "90.43%",
-    "hero_number_label": "JPP · Mesa 018146",
-    "hero_number_font": "Fraunces 180pt bold",
-    "hero_number_color": "#e63946",
-    "subtitle": "208 de 230 votos válidos",
-    "subtitle_font": "Inter 36pt",
-    "subtitle_color": "#0c1a2e",
-    "comparison_line_1": "vs 10.91% promedio nacional · 8.29× el promedio",
-    "comparison_line_2": "Única mesa n>100 con ≥90% entre 78,605 mesas normales",
-    "comparison_font": "Inter 24pt",
-    "comparison_color": "#3a3a3a",
-    "probability_label": "Probabilidad azar:",
-    "probability_value": "p = 1.60 × 10⁻¹⁷¹",
-    "probability_font": "JetBrains Mono 20pt",
-    "probability_color": "#6b7280",
-    "divider": "horizontal rule 2px #e5e0d8 · posición y=520",
-    "footer_left": "FORENSIS · auditoria.neuracode.dev/h12",
-    "footer_right": "78,605 mesas · SHA-256 verified · ONPE EG2026",
-    "footer_font": "Inter 16pt",
-    "footer_color": "#9ca3af",
     "bg_color": "#faf7f2",
     "accent_color": "#0c1a2e",
-    "logo_position": "top-right · 48px desde borde · width=120px",
-    "layout_notes": "Hero number ocupa cuadrante izquierdo. Comparación y stats en columna derecha. Footer anclado al fondo."
+    "alert_color": "#e63946",
+    "mono_color": "#2d6a4f",
+    "band_top": {
+      "text": "HALLAZGO H12 · MESA 018146 · CUSCO",
+      "font": "JetBrains Mono 16pt",
+      "color": "#0c1a2e",
+      "bg": "#e9e4dc",
+      "height_px": 48
+    },
+    "hero_number": {
+      "value": "90.43%",
+      "font": "Fraunces 192pt",
+      "color": "#e63946",
+      "position": "left-column",
+      "x_pct": 8,
+      "y_pct": 20
+    },
+    "hero_label": {
+      "text": "JPP · mesa 018146",
+      "font": "Inter SemiBold 34pt",
+      "color": "#0c1a2e"
+    },
+    "comparison_block": {
+      "line1": "vs 10.91% tasa nacional JPP",
+      "line2": "208 de 230 votos · única mesa n>100",
+      "font": "Inter 26pt",
+      "color": "#0c1a2e"
+    },
+    "divider": {
+      "orientation": "vertical",
+      "x_pct": 58,
+      "color": "#c9c3ba",
+      "width_px": 1
+    },
+    "right_column": {
+      "stats": [
+        {
+          "label": "p-value binomial exacto",
+          "value": "1.60 × 10⁻¹⁷¹",
+          "font_label": "Inter 18pt",
+          "font_value": "JetBrains Mono 22pt Bold",
+          "value_color": "#e63946"
+        },
+        {
+          "label": "z-score",
+          "value": "38.69",
+          "font_label": "Inter 18pt",
+          "font_value": "JetBrains Mono 22pt",
+          "value_color": "#0c1a2e"
+        },
+        {
+          "label": "Cohen h (efecto)",
+          "value": "1.84 — muy grande",
+          "font_label": "Inter 18pt",
+          "font_value": "JetBrains Mono 22pt",
+          "value_color": "#0c1a2e"
+        },
+        {
+          "label": "IC 95% Clopper-Pearson",
+          "value": "[85.9% — 93.9%]",
+          "font_label": "Inter 18pt",
+          "font_value": "JetBrains Mono 22pt",
+          "value_color": "#0c1a2e"
+        },
+        {
+          "label": "Mesas revisadas",
+          "value": "78,605",
+          "font_label": "Inter 18pt",
+          "font_value": "JetBrains Mono 22pt",
+          "value_color": "#0c1a2e"
+        }
+      ]
+    },
+    "footer": {
+      "left": "FORENSIS · auditoria.neuracode.dev/h12",
+      "right": "SHA-256 verificable · datos ONPE públicos",
+      "font": "Inter 15pt",
+      "color": "#6b6560",
+      "bg": "#e9e4dc",
+      "height_px": 44
+    }
+  },
+  "accessibility": {
+    "alt_text": "Imagen estadística: Mesa 018146 muestra JPP 90.43% (208/230 votos) vs tasa nacional 10.91%. p-value binomial 1.60e-171. Cohen h=1.84. FORENSIS auditoria EG2026.",
+    "lang": "es"
   },
   "render_script": "scripts/render_og.py",
-  "render_args": {
-    "finding": "h12",
-    "output": "web/h12/og.svg",
-    "export_png": true,
-    "png_output": "web/h12/og.png"
-  }
+  "render_notes": "Hero number en columna izquierda amplia (58% ancho). Columna derecha contiene tabla de 5 stats con JetBrains Mono para legibilidad en miniatura. Evitar degradados — fondo plano #faf7f2 para impresión y modo oscuro de Twitter."
 }
