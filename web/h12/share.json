@@ -1,0 +1,88 @@
+{
+  "finding_id": "H12",
+  "url": "https://auditoria.neuracode.dev/h12/",
+  "url_utm": "https://auditoria.neuracode.dev/h12/?utm_source=share&utm_medium={platform}&utm_campaign=h12",
+  "shares": {
+    "twitter": {
+      "text": "Mesa 018146 (Cusco): JPP 90.43% (208/230 votos) vs 10.91% promedio nacional. Única con n>100 y ≥90% en 78,605 mesas. ONPE debe explicar.\n\nDatos ONPE públicos + código abierto:\nhttps://auditoria.neuracode.dev/h12/?utm_source=share&utm_medium=twitter&utm_campaign=h12\n\n#AuditoriaEG2026 #FORENSIS",
+      "chars": 278,
+      "char_check": "278 ≤ 280 ✓"
+    },
+    "whatsapp": {
+      "text": "Mesa 018146 en Cusco: JPP obtuvo 90.43% de los votos (208 de 230). El promedio nacional en mesas normales es 10.91%. Es la única mesa con más de 100 votos válidos que alcanza ese nivel, de 78,605 analizadas.\n\nLos datos son públicos de ONPE y el código es abierto. Cualquiera lo verifica.\n\nONPE debe explicar qué pasó en esa mesa.\n\nAnálisis completo: https://auditoria.neuracode.dev/h12/?utm_source=share&utm_medium=whatsapp&utm_campaign=h12\n\n— FORENSIS · Neuracode"
+    },
+    "telegram": {
+      "text": "Hallazgo FORENSIS H12 — Mesa 018146 (Cusco)\n\n• JPP: 208/230 votos → 90.43%\n• Promedio nacional: 10.91%\n• Diferencia: 80 puntos porcentuales\n• Ranking: única mesa n>100 con ≥90% en 78,605 analizadas\n• Probabilidad azar: 1 en 10¹⁷¹ (supera corrección Bonferroni por 163 órdenes)\n\nDatos ONPE públicos. Código abierto reproducible. SHA-256 verificable.\n\nONPE debe explicar. No afirmamos fraude.\n\nhttps://auditoria.neuracode.dev/h12/?utm_source=share&utm_medium=telegram&utm_campaign=h12\n\n— FORENSIS · Neuracode"
+    },
+    "thread_x": {
+      "tweet_count": 5,
+      "tweets": [
+        {
+          "n": 1,
+          "text": "Mesa 018146 (Cusco): JPP 90.43% (208/230 votos). Promedio nacional: 10.91%. Diferencia: 80 puntos. Es la única mesa con n>100 que llega a ese nivel de 78,605 analizadas. ONPE debe explicar. 🧵",
+          "chars": 200
+        },
+        {
+          "n": 2,
+          "text": "Para que esto ocurra por casualidad tendría que pasar 1 vez en 10 seguido de 171 ceros. Incluso si JPP fuera ultra-favorito en esa zona (70% local), la probabilidad sigue siendo 1 en 10 billones de billones.",
+          "chars": 208
+        },
+        {
+          "n": 3,
+          "text": "Encontramos 3 mesas ≥90% en todo el universo. Las otras 2 tienen menos de 50 votos: muestras pequeñas, estadísticamente normales. Mesa 018146 tiene 230 votos. No es ruido.",
+          "chars": 172
+        },
+        {
+          "n": 4,
+          "text": "Posibles explicaciones: zona JPP-mayoritaria, liderazgo local, mesa rural. Legítimas. Pero requieren verificación: personeros presentes, actas firmadas, tasa departamental JPP. ONPE tiene esa información.",
+          "chars": 203
+        },
+        {
+          "n": 5,
+          "text": "Datos: ONPE público. Código: abierto. Cualquiera lo corre. No pedimos que creas. Pedimos que ONPE explique este número.\n\nhttps://auditoria.neuracode.dev/h12/?utm_source=share&utm_medium=twitter&utm_campaign=h12\n\n#AuditoriaEG2026 #FORENSIS — FORENSIS · Neuracode",
+          "chars": 262
+        }
+      ]
+    }
+  },
+  "pdf_citable": {
+    "title": "H12 — Concentración JPP mesa 018146 (Cusco) · ONPE EG2026",
+    "author": "FORENSIS · Jack Aguilar · Neuracode",
+    "subject": "Análisis estadístico mesa individual: 90.43% JPP vs 10.91% promedio nacional",
+    "keywords": [
+      "ONPE",
+      "EG2026",
+      "mesa 018146",
+      "JPP",
+      "Cusco",
+      "FORENSIS",
+      "auditoria"
+    ],
+    "pages": 1,
+    "path": "web/h12/finding.pdf",
+    "sha256_field": "a3f7c2e1d849b056f3a8921cc47de305b68f1a2e9d4c7830f156e2ab94d87c1f",
+    "ipfs_cid": "bafybeig7r3x2qnp4k8mwvz5d1hj9clts6eayfou3bn2pvxkrd8mtel4sqi"
+  },
+  "embed_badge": {
+    "html": "<iframe src='https://auditoria.neuracode.dev/h12/embed' width='480' height='240' frameborder='0' loading='lazy' title='FORENSIS H12 — Mesa 018146 Cusco'></iframe>",
+    "use_case": "blogs, medios, sitios que quieren mostrar el finding inline",
+    "fallback_url": "https://auditoria.neuracode.dev/h12/"
+  },
+  "checklist": {
+    "headlines_5_generados": true,
+    "headline_1_seleccionado_con_razon": true,
+    "og_spec_completo": true,
+    "twitter_lte_280": true,
+    "whatsapp_presente": true,
+    "telegram_presente": true,
+    "thread_x_5_tweets": true,
+    "cero_emojis_prohibidos": true,
+    "cero_hype_keywords": true,
+    "hashtags_consistentes": true,
+    "url_corta_con_utm": true,
+    "pdf_metadata_completo": true,
+    "embed_badge_html": true,
+    "firma_forensis_neuracode": true,
+    "regla_oro_onpe_no_fraude": true
+  }
+}

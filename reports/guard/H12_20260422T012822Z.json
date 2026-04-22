@@ -1,0 +1,3 @@
+{
+  "_raw_snippet": "# PUBLISHING-GUARD EXECUTION \u2014 H12\n\n## Chequeo 1: Fact-Check Num\u00e9rico\n\n### Mapeo narrativa \u2194 stat_finding\n\n| Narrativa | stat_finding | Delta | Status |\n|---|---|---|---|\n| 208 de 230 votos JPP | phat=0.904348 \u2192 208.00/230 \u2713 | 0.00% | \u2705 |\n| 90.43% | 0.904348 \u00d7 100 = 90.4348% | \u22120.0048pp | \u2705 (rounding 2dec) |\n| 10.91% nacional | p0=0.109073 \u00d7 100 = 10.9073% | \u22120.0027pp | \u2705 (rounding 2dec) |\n| 80 puntos diferencia | 90.43 \u2212 10.91 = 79.52pp | \u22120.48pp | \u26a0\ufe0f CORRECCI\u00d3N REQUERIDA |\n| \"1 en 10 billones "
+}

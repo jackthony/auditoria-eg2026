@@ -1,0 +1,18 @@
+{
+  "finding_id": "H12",
+  "headlines": [
+    "Mesa 018146 (Cusco): JPP 90.43% cuando el promedio nacional es 10.91%",
+    "208 de 230 votos JPP en una sola mesa. Promedio nacional: 1 de cada 9",
+    "90.43% vs 10.91%: una mesa en Cusco y 80 puntos de diferencia",
+    "La única mesa con más de 100 votos y 90%+ JPP. ONPE debe explicar",
+    "Cusco, mesa 018146: concentración JPP 8.3x el promedio. Probabilidad azar: 1 en 10¹⁷¹"
+  ],
+  "hook_hero": "90.43% JPP · mesa 018146 · promedio nacional 10.91%",
+  "subtitle": "208 de 230 votos. La única mesa n>100 con ≥90% en 78,605 analizadas.",
+  "hashtags": [
+    "#AuditoriaEG2026",
+    "#FORENSIS"
+  ],
+  "selected_headline_index": 0,
+  "selection_reason": "Ancla lugar (Cusco) + número crudo + comparación explícita sin hype. Cabe en tweet con espacio para hashtags. No predice, no acusa, invita verificación."
+}

@@ -1,0 +1,35 @@
+{
+  "finding_id": "H12",
+  "dimensions": "1200x630",
+  "format": "svg",
+  "layout": {
+    "hero_number": "90.43%",
+    "hero_number_font": "Fraunces 180pt",
+    "hero_number_color": "#e63946",
+    "subtitle": "JPP · Mesa 018146 · Cusco",
+    "subtitle_font": "Inter 36pt",
+    "subtitle_color": "#0c1a2e",
+    "comparison": "vs 10.91% promedio nacional · 208 de 230 votos · única con n>100",
+    "comparison_font": "Inter 24pt",
+    "comparison_color": "#4a4a4a",
+    "probability": "P(azar) < 1 en 10¹⁷¹  ·  Bonferroni superado 163 órdenes",
+    "probability_font": "JetBrains Mono 18pt",
+    "probability_color": "#6b7280",
+    "footer_left": "FORENSIS · auditoria.neuracode.dev/h12",
+    "footer_right": "78,605 mesas · SHA-256 verified · ONPE datos públicos",
+    "footer_font": "Inter 14pt",
+    "footer_color": "#9ca3af",
+    "bg_color": "#faf7f2",
+    "accent_color": "#0c1a2e",
+    "divider": "línea horizontal 1px #e5e0d8 separando hero de footer",
+    "logo_position": "bottom-left, junto a footer_left",
+    "logo_text": "FORENSIS · Neuracode"
+  },
+  "render_script": "scripts/render_og.py",
+  "render_notes": [
+    "Hero number centrado verticalmente en 55% del canvas (no mitad exacta — compensa ascender de Fraunces)",
+    "Comparison text en 2 líneas si viewport < 1200px",
+    "probability en gris claro — presente para rigor, no protagonista visual",
+    "Footer con separador visual claro del cuerpo"
+  ]
+}

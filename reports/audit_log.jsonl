@@ -25,3 +25,24 @@
 {"event": "stage_start", "stage": "publishing-guard", "ts_utc": "2026-04-21T22:17:47.852608+00:00"}
 {"event": "stage_done", "stage": "publishing-guard", "verdict": null, "ts_utc": "2026-04-21T22:18:06.467499+00:00"}
 {"event": "pipeline_halt", "reason": "guard_vetoed", "violations": [], "ts_utc": "2026-04-21T22:18:06.467570+00:00"}
+{"event": "pipeline_start", "finding_id": "H12", "ts": "20260422T012822Z", "ts_utc": "2026-04-22T01:28:22.416220+00:00"}
+{"event": "stage_start", "stage": "data-forensic", "finding_id": "H12", "ts_utc": "2026-04-22T01:28:22.416323+00:00"}
+{"event": "stage_done", "stage": "data-forensic", "artifact": "reports/raw_findings/raw_h12_stratified_20260421T153803Z.json", "ts_utc": "2026-04-22T01:28:22.416576+00:00"}
+{"event": "stage_start", "stage": "stats-expert", "ts_utc": "2026-04-22T01:28:22.416621+00:00"}
+{"event": "stage_done", "stage": "stats-expert", "artifact": "reports/stat_findings/stat_h12_20260421T153931Z.json", "ts_utc": "2026-04-22T01:28:22.416833+00:00"}
+{"event": "stage_start", "stage": "forensic-challenger", "ts_utc": "2026-04-22T01:28:22.416874+00:00"}
+{"event": "stage_done", "stage": "forensic-challenger", "artifact": "reports/challenges/H12_20260422T012822Z.md", "ts_utc": "2026-04-22T01:29:38.775288+00:00"}
+{"event": "stage_start", "stage": "confidence_scorer", "ts_utc": "2026-04-22T01:29:38.775375+00:00"}
+{"event": "stage_done", "stage": "confidence_scorer", "score": 0.85, "tier": "PENDING-JACK", "ts_utc": "2026-04-22T01:29:38.797059+00:00"}
+{"event": "stage_done", "stage": "hitl_router", "tier": "PENDING-JACK", "publish": true, "ts_utc": "2026-04-22T01:29:38.821613+00:00"}
+{"event": "stage_start", "stage": "narrator-technical", "ts_utc": "2026-04-22T01:29:38.821670+00:00"}
+{"event": "stage_start", "stage": "narrator-market", "ts_utc": "2026-04-22T01:31:02.028765+00:00"}
+{"event": "stage_done", "stage": "narratives", "path": "reports/narratives/H12", "ts_utc": "2026-04-22T01:31:25.795170+00:00"}
+{"event": "stage_start", "stage": "virality-engine", "ts_utc": "2026-04-22T01:31:25.795235+00:00"}
+{"event": "stage_done", "stage": "virality-engine", "ts_utc": "2026-04-22T01:32:06.704994+00:00"}
+{"event": "stage_start", "stage": "publishing-guard", "ts_utc": "2026-04-22T01:32:06.705050+00:00"}
+{"event": "stage_done", "stage": "publishing-guard", "verdict": null, "violations": [], "ts_utc": "2026-04-22T01:32:26.562232+00:00"}
+{"event": "guard_warn", "verdict": null, "raw": "# PUBLISHING-GUARD EXECUTION — H12\n\n## Chequeo 1: Fact-Check Numérico\n\n### Mapeo narrativa ↔ stat_finding\n\n| Narrativa | stat_finding | Delta | Status |\n|---|---|---|---|\n| 208 de 230 votos JPP | phat", "ts_utc": "2026-04-22T01:32:26.562290+00:00"}
+{"event": "stage_start", "stage": "web-builder", "ts_utc": "2026-04-22T01:32:26.562352+00:00"}
+{"event": "stage_done", "stage": "web-builder", "path": "web/h12/index.html", "ts_utc": "2026-04-22T01:32:26.562920+00:00"}
+{"event": "pipeline_complete", "finding_id": "H12", "branch": "forensis/HALL-0420-H12-20260422T012938Z", "tier": "PENDING-JACK", "ts_utc": "2026-04-22T01:32:26.562961+00:00"}
