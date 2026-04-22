@@ -1,0 +1,60 @@
+{
+  "finding_id": "H1",
+  "finding_ref": "HALL-0420-H1",
+  "verdict": "VETOED",
+  "ts_utc": "2026-04-21T16:45:00Z",
+  "violations": [
+    {
+      "check": "fact_check",
+      "severity": "CRITICAL",
+      "detail": "Narrativa afirma '1 vez de cada 10 billones por puro azar'. Stat_finding reporta p_chi2=0.0 (m\u00e1quina precision). No hay n\u00famero exacto en stat_finding que respalde '10 billones'. Recalcul\u00e9: \u03c7\u00b2=2897, dof=25 \u2192 p < 10^-600 (binomial Extranjero z=42.18 \u2192 p < 10^-380). Claim '10 billones' es subestimaci\u00f3n dram\u00e1tica y potencialmente enga\u00f1osa."
+    },
+    {
+      "check": "fact_check",
+      "severity": "HIGH",
+      "detail": "Narrativa cita '2021 eran 8 de cada 100, ahora son 26'. Stat_finding NO contiene dato 2021. Este n\u00famero proviene de anti_ataque ('Extranjero 2021 fue ~8%') pero est\u00e1 marcado como CONTEXTUAL, no verificado en muestra H1. Sin stat_finding comparativo 2021-2026, es CLAIM EXTERNO no respaldado \u2192 VETO."
+    },
+    {
+      "check": "regla_oro",
+      "severity": "MEDIUM",
+      "detail": "Frase requerida 'anomal\u00eda que ONPE debe explicar' aparece 2 veces (p\u00e1rrafo 1 y 2). Acumulaci\u00f3n correcta. PERO \u00faltima l\u00ednea de limitaciones dice 'Falta analizar 20 departamentos intermedios: \u00bfel efecto es solo en extremos o sist\u00e9mico?' \u2192 introduce duda sobre robustez. Regla oro aprobada formalmente pero narrativa auto-socava al final."
+    },
+    {
+      "check": "tone",
+      "severity": "HIGH",
+      "detail": "L\u00ednea 'Algo cambi\u00f3 en c\u00f3mo vot\u00f3 el extranjero entre 2021 y 2026' implica cambio CAUSAL en comportamiento de votaci\u00f3n. Esto es inferencia post-hoc NO respaldada por hip\u00f3tesis H1 (que es sobre heterogeneidad, no sobre CAMBIO TEMPORAL). Tono especulativo cruza l\u00ednea de 'anomal\u00eda' a 'algo pas\u00f3 diferente'."
+    },
+    {
+      "check": "length",
+      "severity": "LOW",
+      "detail": "Tweet #3 '(5 a\u00f1os)' frase parent\u00e9tica rompe ritmo. Longitud OK (255 chars) pero sintaxis torpre. Reparable."
+    },
+    {
+      "check": "wcag",
+      "severity": "MEDIUM",
+      "detail": "Narrativa no incluye especificaci\u00f3n de imagen/gr\u00e1fico alt-text. Producci\u00f3n menciona 'gr\u00e1fico barras Extranjero vs nacional' pero no proporciona alt-text en markdown. Falta: 'alt=Gr\u00e1fico barras: Extranjero 26.27%, nacional 6.16%, escala 0-30%'. Requiere handoff."
+    }
+  ],
+  "checks_passed": [
+    "fact_check_n\u00fameros_H1_internos",
+    "regla_oro_formato",
+    "keywords_prohibidas",
+    "length_bullets",
+    "length_hook_hero",
+    "length_tweet_primarios",
+    "contraste_OG",
+    "headings_order",
+    "regla_oro_SHA_IPFS"
+  ],
+  "action": "issue_created: publishing-veto-H1",
+  "issue_title": "publishing-veto-H1: fact-check 2021/10 billones + tone causal + alt-text faltante",
+  "issue_body": "## Violaciones detectadas\n\n### CRITICAL: Claim '10 billones' subestima p-value\n- Narrativa: '1 vez de cada 10 billones'\n- Stat_finding: \u03c7\u00b2=2897 \u2192 p << 10^-600\n- **Acci\u00f3n:** Reescribir como 'pr\u00e1cticamente imposible por azar' SIN n\u00famero espec\u00edfico, O incluir '10^-300' con nota de que es subestimaci\u00f3n.\n\n### HIGH: Dato 2021 no verificado\n- Claim: '2021 eran 8 de cada 100'\n- Source: stat_finding anti_ataque contextual, no en dataset H1\n- **Acci\u00f3n:** Eliminar comparaci\u00f3n temporal, O anexar stat_finding comparativo 2021-2026 verificado.\n\n### HIGH: Tone causal post-hoc\n- Frase: 'Algo cambi\u00f3 en c\u00f3mo vot\u00f3 el extranjero'\n- Issue: H1 test es sobre HETEROGENEIDAD (\u03c7\u00b2 homogeneidad), no sobre CAMBIO TEMPORAL\n- **Acci\u00f3n:** Reescribir como '2026 muestra 26.27% en Extranjero. En 2021 fue ~8%. Diferencia exploratoria, no en hip\u00f3tesis pre-registrada.'\n\n### MEDIUM: Alt-text faltante\n- Narrativa menciona gr\u00e1fico pero no proporciona alt-text.\n- **Acci\u00f3n:** A\u00f1adir: `alt='Gr\u00e1fico barras comparativo: impugnaciones Extranjero 26.27% vs nacional 6.16%'`\n\n### LOW: Reparable\n- Tweet #3: '5 a\u00f1os' en par\u00e9ntesis rompe cadencia\n- **Acci\u00f3n:** Reescribir como 'hace 5 a\u00f1os' o 'desde 2021'.\n\n---\n\n## Retry hint\n1. **Opci\u00f3n A (conservadora):** Eliminar p\u00e1rrafo '2021 eran 8'. Mantener solo '26.27% vs 6.16% nacional' + 'ONPE explique'.\n2. **Opci\u00f3n B (con contexto):** Incluir stat_finding 2021-2026 separado, marcar como 'exploratoria (post-hoc)'.\n3. **Ambas:** Cambiar 'Algo cambi\u00f3' a 'En 2026 observamos', reescribir 'Bonferroni' en stat como 'conservador' sin nomenclatura t\u00e9cnica, agregar alt-text.\n\n## Handoff\nRegresar a `forensis-orchestrator` para:\n- [ ] Regenerar narrativas con fact-check 2021 resuelto\n- [ ] Cambiar tone post-hoc a tone observacional\n- [ ] A\u00f1adir alt-text obligatorio\n- [ ] Re-test publishing-guard\n",
+  "violations_count": 6,
+  "blockers_count": 2,
+  "retry_expected": true,
+  "regeneration_scripts": [
+    "scripts/narratives_gen.py --finding_id=H1 --mode=conservative --skip_temporal_claims",
+    "scripts/wcag_checker.py --input=reports/narratives/H1/mercado.md --output_alt_text=true"
+  ],
+  "_raw_snippet": "```json\n{\n  \"finding_id\": \"H1\",\n  \"finding_ref\": \"HALL-0420-H1\",\n  \"verdict\": \"VETOED\",\n  \"ts_utc\": \"2026-04-21T16:45:00Z\",\n  \"violations\": [\n    {\n      \"check\": \"fact_check\",\n      \"severity\": \"CRITICAL\",\n      \"detail\": \"Narrativa afirma '1 vez de cada 10 billones por puro azar'. Stat_finding reporta p_chi2=0.0 (m\u00e1quina precision). No hay n\u00famero exacto en stat_finding que respalde '10 billones'. Recalcul\u00e9: \u03c7\u00b2=2897, dof=25 \u2192 p < 10^-600 (binomial Extranjero z=42.18 \u2192 p < 10^-380). Claim '10 bi"
+}

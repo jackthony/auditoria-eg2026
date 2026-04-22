@@ -1,0 +1,88 @@
+{
+  "finding_id": "H1",
+  "finding_ref": "HALL-0420-H1",
+  "dimensions": "1200x630",
+  "format": "svg",
+  "layout": {
+    "bg_color": "#faf7f2",
+    "accent_color": "#0c1a2e",
+    "alert_color": "#e63946",
+    "muted_color": "#6b7280",
+
+    "hero_number": "26.27%",
+    "hero_number_font": "Fraunces 180pt bold",
+    "hero_number_color": "#e63946",
+    "hero_number_position": "top-center, y=160",
+
+    "hero_label": "actas impugnadas · Extranjero",
+    "hero_label_font": "Inter 34pt",
+    "hero_label_color": "#0c1a2e",
+    "hero_label_position": "below hero_number, y=290",
+
+    "comparison_bar": {
+      "enabled": true,
+      "layout": "horizontal two-bar",
+      "bar_a": {
+        "label": "Extranjero",
+        "value": "26.27%",
+        "fill": "#e63946",
+        "width_pct": 100
+      },
+      "bar_b": {
+        "label": "Nacional",
+        "value": "6.16%",
+        "fill": "#0c1a2e",
+        "width_pct": 23
+      },
+      "position": "y=360, x=80 to x=760",
+      "bar_height": "28px",
+      "label_font": "Inter 20pt",
+      "value_font": "JetBrains Mono 20pt bold"
+    },
+
+    "ratio_callout": "4.3x el promedio",
+    "ratio_callout_font": "Fraunces 40pt",
+    "ratio_callout_color": "#e63946",
+    "ratio_callout_position": "right panel, x=820, y=340",
+
+    "stat_block": {
+      "lines": [
+        "668 / 2,543 mesas · Extranjero",
+        "χ² = 2897.2 · dof = 25",
+        "z = 42.18 · p < 1e-300"
+      ],
+      "font": "JetBrains Mono 17pt",
+      "color": "#6b7280",
+      "position": "right panel, x=820, y=420"
+    },
+
+    "footer_left": "FORENSIS · auditoria.neuracode.dev/h1",
+    "footer_right": "92,766 mesas · SHA-256 verified",
+    "footer_font": "Inter 16pt",
+    "footer_color": "#6b7280",
+    "footer_position": "y=598",
+
+    "logo": {
+      "text": "FORENSIS",
+      "font": "Fraunces 22pt",
+      "color": "#0c1a2e",
+      "position": "bottom-left, x=80, y=598"
+    },
+
+    "divider": {
+      "type": "vertical line",
+      "x": 800,
+      "y1": 310,
+      "y2": 510,
+      "stroke": "#d1cfc9",
+      "stroke_width": 1
+    }
+  },
+
+  "alt_text": "Gráfico comparativo: 26.27% impugnaciones Extranjero vs 6.16% nacional. FORENSIS EG2026.",
+  "render_script": "scripts/render_og.py",
+  "template_var": "H1_IMPUGNACION_EXTRANJERO"
+}
+```
+
+---
