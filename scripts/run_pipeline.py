@@ -356,6 +356,8 @@ def _render_landing(finding_id: str, vir_dir: Path, narr_dir: Path, decision: di
         # strip outer ```markdown ... ``` or ``` ... ``` fences
         text = re.sub(r'^```(?:markdown)?\s*\n', '', text)
         text = re.sub(r'\n```\s*$', '', text)
+        # strip internal production notes (## Notas de producción or --- followed by notes)
+        text = re.split(r'\n---\s*\n## Notas de producci[oó]n|\n## Notas de producci[oó]n', text, maxsplit=1)[0]
         text = text.strip()
         return text.replace("\\", "\\\\").replace("`", "\\`").replace("${", "\\${")
 
