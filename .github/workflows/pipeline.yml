@@ -152,6 +152,7 @@ jobs:
             --label "forensis,finding-$FINDING,$TIER"
 
       - name: Auto-merge si tier AUTO y score >= 0.95
+        continue-on-error: true
         if: steps.result.outputs.tier == 'AUTO'
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -180,6 +181,7 @@ jobs:
           fi
 
       - name: Notify Jack si PENDING-JACK
+        continue-on-error: true
         if: steps.result.outputs.tier == 'PENDING-JACK'
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
