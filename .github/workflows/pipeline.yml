@@ -139,12 +139,17 @@ jobs:
           EOF
           )
 
+          # crear labels si no existen
+          gh label create "forensis" --color "0075ca" 2>/dev/null || true
+          gh label create "finding-$FINDING" --color "e4e669" 2>/dev/null || true
+          gh label create "$TIER" --color "d93f0b" 2>/dev/null || true
+
           gh pr create \
-            --title "forensis: ${{ steps.result.outputs.finding }} (${{ steps.result.outputs.tier }})" \
+            --title "forensis: $FINDING ($TIER)" \
             --body "$BODY" \
-            --head "${{ steps.result.outputs.branch }}" \
+            --head "$BRANCH" \
             --base "main" \
-            --label "forensis,finding-${{ steps.result.outputs.finding }},${{ steps.result.outputs.tier }}"
+            --label "forensis,finding-$FINDING,$TIER"
 
       - name: Auto-merge si tier AUTO y score >= 0.95
         if: steps.result.outputs.tier == 'AUTO'
