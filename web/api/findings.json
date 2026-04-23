@@ -10,7 +10,7 @@
       "threshold": 2.0,
       "method": "Proporción binomial + z-score contra tasa global. Mapping prefix→depto ONPE alfabético con Callao=24.",
       "interpretation": "Extranjero 26.27% (z=42.18), Loreto 14.87% (z=18.82), Ucayali 12.02% (z=9.64), Madre de Dios 10.65% (z=4.21), Ica 9.41% (z=6.69). Piso: Arequipa 1.83% (z=-11.7), Puno 3.03% (z=-7.58).",
-      "limitations": "Impugnación es recurso procesal; concentración no implica fraude. Universo v2 incluye 4,703 mesas 900k+ recuperadas tras fix walker.",
+      "limitations": "Impugnación es recurso procesal; concentración requiere explicación formal de ONPE. Universo v2 incluye 4,703 mesas 900k+ recuperadas tras fix walker.",
       "top_deptos_alto": [
         "Extranjero",
         "Loreto",
@@ -161,7 +161,7 @@
         "p_value_binomial": 4.833139479423409e-14,
         "equiv_1_entre": 20690485020293
       },
-      "limitations": "Impugnacion es recurso procesal legitimo; cluster no implica fraude pero requiere explicacion formal de ONPE. Locales con 1-2 mesas pueden ser impugnacion total por problema puntual; el hero BERBES (11/11) escapa esa explicacion trivial.",
+      "limitations": "Impugnacion es recurso procesal legitimo; cluster requiere explicacion formal de ONPE. Locales con 1-2 mesas pueden ser impugnacion total por problema puntual; el hero BERBES (11/11) escapa esa explicacion trivial.",
       "n_mesas_universo": 92766,
       "metodologia_cita": [
         "Binomial exacto bajo H0 p=tasa_global. No requiere paper (probabilidad pura).",

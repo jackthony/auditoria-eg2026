@@ -1,0 +1,196 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=1200">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,700;9..144,900&family=JetBrains+Mono:wght@500;700&family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+  width: 1200px; height: 630px; overflow: hidden;
+  background: #faf7f2;
+  font-family: 'Inter', sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ── FONDO LÍNEAS SUTILES ── */
+.bg {
+  position: absolute; inset: 0;
+  background-image:
+    repeating-linear-gradient(0deg, transparent, transparent 39px, #e8e4dc 39px, #e8e4dc 40px);
+  opacity: 0.5;
+}
+
+/* ── BANDA ROJA IZQUIERDA ── */
+.stripe {
+  position: absolute; left: 0; top: 0; bottom: 0;
+  width: 8px; background: #e63946;
+}
+
+/* ── CONTENEDOR PRINCIPAL ── */
+.card {
+  position: relative;
+  width: 1200px; height: 630px;
+  padding: 52px 72px 48px 80px;
+  display: flex; flex-direction: column; justify-content: space-between;
+}
+
+/* ── CABECERA ── */
+.header {
+  display: flex; align-items: center; justify-content: space-between;
+}
+.source {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 13px; font-weight: 700;
+  letter-spacing: 2px; text-transform: uppercase;
+  color: #e63946;
+  border: 1.5px solid #e63946;
+  padding: 5px 12px; border-radius: 3px;
+}
+.date {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 12px; color: #7a7a7a;
+  letter-spacing: 1px;
+}
+
+/* ── HEADLINE ── */
+.headline {
+  margin: 0;
+}
+.kicker {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 13px; font-weight: 700;
+  letter-spacing: 3px; text-transform: uppercase;
+  color: #5a5a5a; margin-bottom: 12px;
+}
+.title {
+  font-family: 'Fraunces', Georgia, serif;
+  font-weight: 900;
+  font-size: 62px;
+  line-height: 1.0;
+  letter-spacing: -0.02em;
+  color: #0c1a2e;
+}
+.title .hl { color: #e63946; }
+.subtitle {
+  font-family: 'Fraunces', serif;
+  font-style: italic;
+  font-size: 22px;
+  color: #5a5a5a;
+  margin-top: 14px;
+  line-height: 1.4;
+}
+
+/* ── FINDINGS PILLS ── */
+.findings {
+  display: flex; gap: 10px; flex-wrap: wrap;
+}
+.finding {
+  display: flex; align-items: center; gap: 8px;
+  background: #fff;
+  border: 1px solid #d4ccbd;
+  border-radius: 4px;
+  padding: 8px 14px;
+}
+.finding .badge {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px; font-weight: 700;
+  letter-spacing: 1.5px; text-transform: uppercase;
+  background: #e63946; color: #fff;
+  padding: 2px 6px; border-radius: 2px;
+}
+.finding .badge.warn { background: #b45309; }
+.finding .text {
+  font-family: 'Inter', sans-serif;
+  font-size: 13px; font-weight: 600;
+  color: #0c1a2e;
+}
+
+/* ── FOOTER ── */
+.footer {
+  display: flex; align-items: center; justify-content: space-between;
+  border-top: 1px solid #d4ccbd;
+  padding-top: 16px;
+}
+.footer-left {
+  display: flex; align-items: center; gap: 14px;
+}
+.logo-text {
+  font-family: 'Fraunces', serif;
+  font-weight: 900; font-size: 18px;
+  color: #0c1a2e; letter-spacing: -0.01em;
+}
+.logo-text span { color: #e63946; }
+.forensis-tag {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px; color: #7a7a7a;
+  letter-spacing: 1px;
+}
+.footer-right {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px; color: #7a7a7a;
+  text-align: right; line-height: 1.6;
+}
+.url {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 13px; font-weight: 700;
+  color: #e63946;
+}
+</style>
+</head>
+<body>
+<div class="bg"></div>
+<div class="stripe"></div>
+<div class="card">
+
+  <!-- HEADER -->
+  <div class="header">
+    <div class="source">FORENSIS · Auditor IA</div>
+    <div class="date">Elecciones Generales Perú · Abril 2026</div>
+  </div>
+
+  <!-- HEADLINE -->
+  <div class="headline">
+    <div class="kicker">Auditoría independiente · 92,766 mesas · datos públicos ONPE</div>
+    <h1 class="title">
+      <span class="hl">6 anomalías</span> detectadas<br>
+      en las Elecciones 2026
+    </h1>
+    <p class="subtitle">Estadística peer-reviewed. Código abierto MIT. ONPE debe explicar.</p>
+  </div>
+
+  <!-- FINDINGS -->
+  <div class="findings">
+    <div class="finding">
+      <span class="badge">H4 CRÍTICO</span>
+      <span class="text">JPP 4× más votos en mesas especiales</span>
+    </div>
+    <div class="finding">
+      <span class="badge">H12 CRÍTICO</span>
+      <span class="text">Mesa 018146: 90.43% JPP · p=10⁻¹⁷¹</span>
+    </div>
+    <div class="finding">
+      <span class="badge">H9 CRÍTICO</span>
+      <span class="text">11 de 11 mesas impugnadas · un solo local</span>
+    </div>
+    <div class="finding">
+      <span class="badge warn">H1 MEDIA</span>
+      <span class="text">Extranjero: 4× más impugnaciones</span>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <div class="footer">
+    <div class="footer-left">
+      <div class="logo-text">Neura<span>code</span></div>
+      <div class="forensis-tag">Supervisado por Jack Aguilar · MIT · Sin afiliación política</div>
+    </div>
+    <div class="footer-right">
+      <div class="url">auditoria.neuracode.dev</div>
+      <div>SHA-256 · IPFS · reproducible</div>
+    </div>
+  </div>
+
+</div>
+</body>
+</html>

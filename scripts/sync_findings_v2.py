@@ -111,7 +111,7 @@ def build_h9(con, n_mesas: int) -> dict:
             "equiv_1_entre": int(1 / p_value_berbes) if p_value_berbes else None,
         },
         "limitations": (
-            "Impugnacion es recurso procesal legitimo; cluster no implica fraude pero requiere "
+            "Impugnacion es recurso procesal legitimo; cluster requiere "
             "explicacion formal de ONPE. Locales con 1-2 mesas pueden ser impugnacion total por "
             "problema puntual; el hero BERBES (11/11) escapa esa explicacion trivial."
         ),
@@ -290,7 +290,7 @@ def build_findings() -> tuple[list[dict], dict]:
             f"Madre de Dios 10.65% (z=4.21), Ica 9.41% (z=6.69). "
             f"Piso: Arequipa 1.83% (z=-11.7), Puno 3.03% (z=-7.58)."
         ),
-        "limitations": "Impugnación es recurso procesal; concentración no implica fraude. Universo v2 incluye 4,703 mesas 900k+ recuperadas tras fix walker.",
+        "limitations": "Impugnación es recurso procesal; concentración requiere explicación formal de ONPE. Universo v2 incluye 4,703 mesas 900k+ recuperadas tras fix walker.",
         "top_deptos_alto": top_alto,
         "top_deptos_bajo": top_bajo,
         "n_mesas_universo": n_mesas,

@@ -10,7 +10,7 @@
   "interpretation": "2320 mesas outlier (2.68%). Top depto blancos: San Martín 19.62%.",
   "limitations": [
     "Outliers pueden ser legítimos (analfabetismo, protesta, error logístico).",
-    "No implica fraude por sí sola."
+    "ONPE debe explicar concentración."
   ],
   "regla_oro": "anomalía descriptiva; requiere análisis por mesa"
 }

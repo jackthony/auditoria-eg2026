@@ -96,7 +96,7 @@ def build(meta: dict) -> dict:
                 f"Ratio {ratio_calag}× entre electores oficialmente afectados por CALAG/Galaga en Lima "
                 f"({CALAG_ELECTORES_AFECTADOS:,}) y margen Sánchez−RLA al corte {pct}% "
                 f"({margen:,}). Abre estándar Art. 363 Ley 26859 (nulidad parcial por evento "
-                "que altera resultado); no prueba fraude."
+                "que altera resultado); ONPE debe explicar."
             ),
         },
     ]
@@ -140,7 +140,7 @@ def build(meta: dict) -> dict:
         },
         "hallazgos_principales": findings,
         "caveat_honesto": (
-            "Este análisis NO prueba fraude. Establece (a) ausentismo 2026 vs 2016 pre-pandemia, "
+            "Establece (a) ausentismo 2026 vs 2016 pre-pandemia, "
             "(b) relación entre afectados oficiales por CALAG/Galaga y margen vigente. "
             "Causas multifactoriales (desconfianza, clima, protesta, fallas logísticas) requieren "
             "investigación adicional."

@@ -282,7 +282,7 @@ def build(root: Path, output: Path):
 
     add_paragraph(
         doc,
-        "Alcance declarado: este informe NO constituye prueba de fraude electoral. "
+        "Alcance declarado: este informe documenta anomalías estadísticas que ONPE debe explicar. "
         "Tampoco afirma que el proceso haya sido limpio. Es un análisis parcial "
         "con las limitaciones metodológicas detalladas en la §5, orientado a "
         "identificar áreas que ameritan indagación adicional y preguntas técnicas "
@@ -555,7 +555,7 @@ def build(root: Path, output: Path):
                   "interpretativos se etiquetan como tales.",
                   align=WD_ALIGN_PARAGRAPH.JUSTIFY)
     add_paragraph(doc,
-                  "El presente documento NO afirma la existencia de fraude electoral "
+                  "El presente documento documenta anomalías estadísticas que ONPE debe explicar. "
                   "ni descarta la posibilidad de irregularidades específicas en "
                   "niveles no accesibles desde la data pública agregada. Es un "
                   "insumo preliminar para la fiscalización ciudadana y partidaria, "

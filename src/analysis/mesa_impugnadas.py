@@ -151,7 +151,7 @@ def run(ts: str | None = None) -> dict:
             ),
             "limitations": (
                 "Electores hábiles ≠ votos efectivos (participación ~73%). "
-                "No implica fraude — impugnación es recurso procesal estándar."
+                "Impugnación es recurso procesal estándar. ONPE debe explicar concentración."
             ),
         })
 
@@ -172,7 +172,7 @@ def run(ts: str | None = None) -> dict:
         "hallazgos": findings,
         "caveat": (
             "estadoActa=I = acta enviada al JEE para resolución. "
-            "No implica fraude. Puede resolverse a favor o en contra de cualquier candidato."
+            "Puede resolverse a favor o en contra de cualquier candidato. ONPE debe explicar."
         ),
     }
 

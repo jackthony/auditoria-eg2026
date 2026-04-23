@@ -32,5 +32,5 @@
     "'Problema logístico del consulado' → Posible, pero ONPE debe explicar qué pasó específicamente.",
     "'Múltiples tests inflan p' → Aun Bonferroni sobre 58 locales (α=8.6e-4) pasa por 12 órdenes de magnitud."
   ],
-  "regla_oro": "anomalía que ONPE debe explicar — no afirmamos fraude"
+  "regla_oro": "anomalía que ONPE debe explicar"
 }

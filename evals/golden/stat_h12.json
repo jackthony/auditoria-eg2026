@@ -69,6 +69,6 @@
     "'Post-hoc fishing' → Reportamos TODAS las mesas ≥90% (3 total). Solo 1 con n>100 = 018146. Robustez multiplicidad: aun Bonferroni sobre 78,605 mesas (α=6.4e-8) pasa.",
     "'Mesa pequeña efecto aleatorio' → n=230 NO es pequeño. Loreto n=48 sí son pequeñas y las reportamos aparte por honestidad."
   ],
-  "regla_oro": "anomalía estadística que ONPE debe explicar (personero, acta firmada, observador). No afirmamos fraude.",
+  "regla_oro": "anomalía estadística que ONPE debe explicar (personero, acta firmada, observador).",
   "nota_numerica": "Probabilidades extremas calculadas con logsf. Valores <1e-15 NO usar 1-cdf (catastrophic cancellation float64)."
 }
