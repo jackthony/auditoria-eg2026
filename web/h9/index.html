@@ -374,7 +374,7 @@ body[data-voice="tech"] .voice-pop { display: none; }
   <span class="pill">CRÍTICO · H9 · VALIDACIÓN</span>
   <div class="kicker">HALL-0420-H9 · 2026-04-20</div>
   <h1>11 de 11 mesas <span class="hl">impugnadas</span>.</h1>
-  <p class="sub">Un solo local. Todas sus mesas. 1 entre 20 billones de probabilidad.</p>
+  <p class="sub">Un solo local de votación en el extranjero. Las 11 mesas fueron observadas por irregularidades. La probabilidad de que pase por azar: 1 entre 20 billones.</p>
 </section>
 
 <div class="voice-toggle-wrap">
@@ -387,10 +387,10 @@ body[data-voice="tech"] .voice-pop { display: none; }
 <section class="stat-block" aria-live="polite">
   <div class="stat-hero">
     <div class="big">11<span class="slash">/</span>11</div>
-    <div class="big-label">mesas impugnadas · 100%</div>
+    <div class="big-label">mesas observadas por irregularidades · 100%</div>
     <div class="big-sub voice-pop">
-      En Salta votaron 11 mesas. <strong>Las 11 quedaron impugnadas.</strong>
-      En el resto del país, solo <strong>6 de cada 100</strong> lo están.
+      En este local había 11 mesas de votación. <strong>En las 11 hubo problemas y fueron observadas.</strong>
+      En todo el país, solo <strong>6 de cada 100</strong> mesas tienen ese problema.
     </div>
     <div class="big-sub voice-tech">
       Binomial exacto unilateral · H0: p = 0.061585 (tasa global).
@@ -402,8 +402,9 @@ body[data-voice="tech"] .voice-pop { display: none; }
 <section class="context">
   <h2>El local: <span class="hl">Complejo Deportivo BERBÉS</span>.</h2>
   <p class="voice-pop">
-    Local de votación en el exterior (Extranjero).
-    11 mesas instaladas. Las 11 terminaron impugnadas.
+    Es un local de votación para peruanos en el extranjero (Salta, Argentina).
+    Tenía 11 mesas. En las 11 se detectaron irregularidades y sus actas fueron enviadas a revisión.
+    Eso no pasa por casualidad.
   </p>
   <p class="voice-tech">
     Local: <strong>COMPLEJO DEPORTIVO BERBÉS</strong>. Depto: <strong>Extranjero</strong>.
@@ -411,19 +412,19 @@ body[data-voice="tech"] .voice-pop { display: none; }
     SUM(estado_acta='I') == COUNT(*) = 11.
   </p>
   <ul>
-    <li>Universo: <strong>92,766</strong> mesas (88,063 normales + 4,703 especiales 900k+).</li>
-    <li>Tasa global impugnación: <strong>6.1585%</strong>.</li>
-    <li>Locales con 100% impugnadas: <strong>58</strong> · con ≥3 mesas: <strong>5</strong> · con ≥5 mesas: <strong>1</strong>.</li>
-    <li>Cadena custodia: <code>eg2026.duckdb</code> · MANIFEST SHA-256 · HF · IPFS Filebase.</li>
+    <li>En todo el Perú hay <strong>92,766</strong> mesas de votación.</li>
+    <li>De esas, solo el <strong>6.16%</strong> fueron observadas por irregularidades.</li>
+    <li>Solo <strong>1 local en todo el país</strong> con 5+ mesas tiene el 100% observadas: este.</li>
+    <li>Los datos son públicos y verificables: <code>eg2026.duckdb</code> · HuggingFace · IPFS.</li>
   </ul>
 </section>
 
 <section class="comparator" aria-live="polite">
-  <h3>BERBÉS vs tasa global</h3>
+  <h3>BERBÉS vs el resto del país</h3>
 
   <div class="bar-row global" data-reveal>
     <div class="bar-label">
-      <span class="name">Tasa global (92,766 mesas)</span>
+      <span class="name">Mesas con problemas en todo el país</span>
       <span class="pct">6.16%</span>
     </div>
     <div class="bar-track"><div class="bar-fill" data-pct="6.16"></div></div>
@@ -431,7 +432,7 @@ body[data-voice="tech"] .voice-pop { display: none; }
 
   <div class="bar-row berbes" data-reveal>
     <div class="bar-label">
-      <span class="name">BERBÉS · 11 mesas</span>
+      <span class="name">Local BERBÉS · Salta, Argentina</span>
       <span class="pct">100%</span>
     </div>
     <div class="bar-track"><div class="bar-fill" data-pct="100"></div></div>
@@ -441,10 +442,10 @@ body[data-voice="tech"] .voice-pop { display: none; }
 <section class="limits">
   <h3>Limitaciones honestas</h3>
   <ul>
-    <li>n=11 es una muestra pequeña — pero el binomial exacto no es asintótico, funciona con n pequeño.</li>
-    <li>Impugnación es recurso procesal legítimo. Este cluster requiere explicación formal de ONPE.</li>
-    <li>Locales con 1-2 mesas pueden ser impugnación total por problema puntual. BERBÉS (11/11) escapa esa explicación trivial.</li>
-    <li>Validación pendiente: cross-ref con actas físicas JNE y motivo específico de cada impugnación.</li>
+    <li>Son 11 mesas — pocas, pero la estadística funciona igual con números pequeños.</li>
+    <li>Que una mesa sea observada es normal y legal. Que las 11 de un mismo local lo sean, no.</li>
+    <li>Si un local tiene 1 o 2 mesas, puede pasar por un problema puntual. Con 11, no tiene explicación simple.</li>
+    <li>Falta cruzar con las actas físicas del JNE para saber el motivo exacto de cada observación.</li>
   </ul>
 </section>
 
